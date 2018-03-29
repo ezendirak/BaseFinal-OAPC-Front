@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{titulo}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+    <ul *ngIf="lista.length">
+        <li *ngFor="let item of lista">{{item}}</li>
+    </ul>
+
+  <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
+
+    <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+      <div class="form-group row margin-bottom">
+        <div>
+            <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.ref | translate }}</label>
+            <input type="text"  class="col-md-3 col-xs-12"    id="referencia"    name="referencia"    [(ngModel)]="id" value="{{datos_entrada?.id}}">
+        </div>
+    
+        <div>
+            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
+            <input type="text"  class="col-md-3 col-xs-12"    id="nouPeriode"    name="nouPeriode"    [(ngModel)]="nouPeriode" value="{{datos_entrada?.periode}}">
+        </div> 
+      </div>
+
+      <div class="form-group row margin-bottom">
+        <div >
+          <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
+          <input [attr.disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="eInformant"    name="eInformant"    [(ngModel)]="eInformant" value="{{datos_entrada?.empresaInformant}}">
+        </div>
+    
+        <div >
+          <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.usuIn | translate }}</label> 
+          <input [attr.disabled]="true" name="usuariActual"  type="text"  class="col-md-3 col-xs-12"    id="uInformant"  name="uInformant" placeholder="{{ usuariActual | translate}}">
+        </div>
+      </div>
+    <div class="form-group row margin-bottom">
+      <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tipPro | translate }}</label>
+    
+         <select class="col-md-3 col-xs-12" name="productes" [(ngModel)]="producteSelected" (change) = "changeSelesctedTipusProducteModal($event)" >
+            <option *ngFor="let c of productesModal" [ngValue]="c">{{ 'TIPUSPRODUCTE.' + c | translate }}</option>
+        </select>
+      
+        <ng-container *ngIf="comboInfoModal;then content"></ng-container>
+      <ng-template #content>
+      <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.colCa | translate }}</label>
+      <!-- <input type="text"  class="col-md-3 col-xs-12"    id="varietat"    name="varietat"    [(ngModel)]="varietat"> -->
+      
+          <select class="col-md-3 col-xs-12" name="colorsCarn" [(ngModel)]="colorCarnSelected" >
+            <option *ngFor="let v of comboInfoModal.colorsCarn" [ngValue]="v">{{ 'COLORCARN.' + v | translate }}</option>
+          </select>  
+      </ng-template>  
+    </div>
+      
+    
+    <div class="form-group row margin-bottom">
+        <ng-container *ngIf="comboInfoModal;then content2"></ng-container>
+        <ng-template #content2>
+        <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.qual | translate }}</label>
+        
+        <!-- <input type="text"  class="col-md-3 col-xs-12"    id="qualitat"    name="qualitat"    [(ngModel)]="qualitat"> -->
+           <select class="col-md-3 col-xs-12" name="qualitats" [(ngModel)]="qualitatSelected" >
+          <option *ngFor="let q of comboInfoModal.qualitats" [ngValue]="q">{{ 'QUALITAT.' + q | translate }}</option>
+        </select>   
+    </ng-template>
+    <ng-container *ngIf="comboInfoModal;then content3"></ng-container>
+    <ng-template #content3>  
+      <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.cali | translate }}</label>
+      
+      <!-- <input type="text"  class="col-md-3 col-xs-12"    id="calibre"    name="calibre"    [(ngModel)]="calibre"> -->
+          <select class="col-md-3 col-xs-12" name="calibres" [(ngModel)]="calibreSelected">
+        <option *ngFor="let k of comboInfoModal.calibres" [ngValue]="k">{{ 'CALIBRE.' + k | translate }}</option>
+      </select> 
+      </ng-template> 
+    </div>
+    
+    <div class="form-group row margin-bottom">
+      <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.quVe | translate }}</label>
+      <input type="number"  class="col-md-3 col-xs-12"    id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda">
+    
+      <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.peSo | translate }}</label>
+      <input type="number"  class="col-md-3 col-xs-12"    id="pSortida"    name="pSortida"    [(ngModel)]="pSortida">
+    </div>
+    
+    <div class="form-group row margin-bottom">
+      <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
+      <input type="text"  class="col-md-3 col-xs-12"    id="tancada"    name="tancada"    [(ngModel)]="tancada">
+    </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+  
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+  
+  <app-form-notes [titulo_form]="'Formulario de entrada notes2'"  
+                  (evento_form1)="onClickBuscarForm($event)"
+  >
+  </app-form-notes>     
+
+  <app-list-notes [items]="items" 
+                  (evento_list_put)="onClickPutList($event)" 
+                  (evento_list_delete)="onClickDeleteList($event)"
+  >
+  </app-list-notes>
+
+  <app-button-list-notes [pagination]="pagination" 
+                         (evento_list_pagination)="onClickPagination($event)"
+  >
+  </app-button-list-notes>
+
+</div>

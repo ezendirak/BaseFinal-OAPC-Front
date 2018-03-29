@@ -1,0 +1,65 @@
+<div class="container">
+    <h1>Estás en notes</h1>
+</div>
+
+<div class="container">
+    <hr>
+    <h2>Formulario Alta</h2>
+    <form #formulario="ngForm" (ngSubmit)="actionPostNote(formulario)">
+        <div class="form-group row margin-bottom">
+            <label for="titulo" class="col-md-2 col-xs-12">Título</label>
+            <input type="text"  class="col-md-6 col-xs-12"    id="titulo"    name="titulo"    [(ngModel)]="ftitulo"   required>
+        </div>
+
+        <div class="form-group row margin-bottom">
+            <label for="contenido" class="col-md-2 col-xs-12">Contenido</label>
+            <input type="text"     class="col-md-6 col-xs-12" id="contenido" name="contenido" [(ngModel)]="fcontenido" required>
+        </div>
+
+        <div class="form-group row margin-bottom">
+            <button type="submit" class="btn btn-primary" [disabled]="formulario.form.invalid">Crear</button>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <hr>
+    <h2>Consulta</h2>
+    <button class="btn btn-primary" (click)="actionGetNotes()">Consultar todo</button>
+</div>
+
+<div *ngIf="islogged;else else_code" class="container">
+    <hr>
+    <h2>Listado</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Contenido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let note of misnotes">
+                <td>{{note?.id}}</td>
+                <td>{{note?.title}}</td>
+                <td>{{note?.content}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="actionPutNote(note)">Modificar</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="actionDeleteNote(note)">Borrar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<ng-template #else_code>
+    <div class="container">
+        <p>No hay ningún usuario autentificado, por favor ves a la página de login</p>
+    </div>
+</ng-template>
+
+

@@ -1,0 +1,75 @@
+{
+    "usuariActual": "Pol Garcia",
+
+    "LITERALS_FORM" : {
+        "ref": "Referència: ",
+        "per": "Període: ",
+        "empIn": "Empressa Informant: ",
+        "usuIn": "Usuari Informant: ",
+        "tipPro": "Tipus de producte: ",
+        "colCa": "Color de Carn: ",
+        "qual": "Qualitat: ",
+        "cali": "Calibre: ",
+        "vari": "Varietat: ",
+        "quVe": "Quantitat Venuda: ",
+        "peSo": "Preu de Sortida: ",
+        "tan": "Tancada: ",
+        "quPe": "Quantitat per Preu: "
+    },
+
+    "LITERALS_COL" : {
+        "ref": "Referència",
+        "per": "Període",
+        "empIn": "Empressa Informant",
+        "usuIn": "Usuari Informant",
+        "tipPro": "Tipus de producte",
+        "colCa": "Color de Carn",
+        "qual": "Qualitat",
+        "cali": "Calibre",
+        "vari": "Varietat",
+        "quVe": "Quantitat Venuda",
+        "peSo": "Preu de Sortida",
+        "tan": "Tancada",
+        "quPe": "Quantitat per Preu"
+    },
+    
+	"COLORCARN" : {
+        "BL": "Blanca",
+        "GR": "Groga",
+
+        "": "-"
+    },
+
+    "TIPUSPRODUCTE" : {
+        "PR01": "Préssec",
+        "PR02": "Pàvia",
+
+        "": "Tots"
+    },
+
+    "CALIBRE" : {
+        "CA01": "AAAA (> 90 mm)",
+        "CA02": "AAA (80-90 mm)",
+        "CA03": "AA (73-80 mm)",
+        "CA04": "A (67-73 mm)",
+        "CA05": "B (61-67 mm)",
+        "CA06": "C (56-61 mm)",
+        "CA07": "D (51-56 mm)",
+
+        "": "-"
+    },
+
+    "QUALITAT" : {
+        "QU01": "I",
+        "QU02": "II",
+        "QU03": "Industrial",
+
+        "": "-"
+    },
+
+    "BOTTON" : {
+        "searchB": "Cercar",
+        "afegirB": "Afegir nou registre"
+    }
+    
+}

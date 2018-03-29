@@ -1,0 +1,19 @@
+<h2>FORM-COMPONENT</h2>
+<h3>{{titulo_form}}</h3>
+
+<form #formulario="ngForm" (ngSubmit)="onclick($event)">
+    <div class="form-group row margin-bottom">
+        <label for="campoA" class="col-md-2 col-xs-12">CampoA</label>
+        <input type="text"  class="col-md-6 col-xs-12"    id="campoA"    name="campoA"    [(ngModel)]="fcampoA">
+    </div>
+
+    <div class="form-group row margin-bottom">
+        <label for="campoB" class="col-md-2 col-xs-12">CampoB</label>
+        <input type="text"  class="col-md-6 col-xs-12"    id="campoB"    name="campoB"    [(ngModel)]="fcampoB">
+    </div>
+
+
+    <div class="form-group row margin-bottom">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>    
+</form>

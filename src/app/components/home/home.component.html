@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Estás en home</h1>
+</div>
+
+<div *ngIf="islogged;else else_code" class="container">
+    <h2>Hola {{user_name}}</h2>
+
+    <button (click)="userall()">userall</button>
+    <button (click)="refresh()">refresh token</button>
+
+    <hr>
+    <p> {{mitoken?.access_token}} </p>
+
+    <hr>
+    <p *ngFor="let mi1 of miuserall">
+        {{mi1.id}} - {{mi1.username}} - {{mi1.firstName}} - {{mi1.lastName}} - {{mi1.email}}
+        <li *ngFor="let mi2 of mi1.authorities">
+            {{mi2.authority}}
+        </li>
+    </p>
+</div>
+
+<ng-template #else_code>
+    <div class="container">
+        <p>No hay ningún usuario autentificado, por favor ves a la página de login</p>
+    </div>
+</ng-template>
+    
+

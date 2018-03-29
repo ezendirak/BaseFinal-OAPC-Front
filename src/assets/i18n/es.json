@@ -1,0 +1,75 @@
+{
+    "usuariActual": "Pol Garcia",
+    
+    "LITERALS_FORM" : {
+        "ref": "Referéncia: ",
+        "per": "Período: ",
+        "empIn": "Empresa Informante: ",
+        "usuIn": "Usuario Informante: ",
+        "tipPro": "Tipo de producto: ",
+        "colCa": "Color de Carne: ",
+        "qual": "Calidad: ",
+        "cali": "Calibre: ",
+        "vari": "Variedad: ",
+        "quVe": "Cantidad Vendida: ",
+        "peSo": "Precio de Salida: ",
+        "tan": "Cerrada: ",
+        "quPe": "Cantidad por Precio: "
+    },
+
+    "LITERALS_COL" : {
+        "ref": "Referéncia",
+        "per": "Período",
+        "empIn": "Empresa Informante",
+        "usuIn": "Usuario Informante",
+        "tipPro": "Tipo de producto",
+        "colCa": "Color de Carne",
+        "qual": "Calidad",
+        "cali": "Calibre",
+        "vari": "Variedad",
+        "quVe": "Cantidad Vendida",
+        "peSo": "Precio de Salida",
+        "tan": "Cerrada",
+        "quPe": "Cantidad por Precio"
+    },
+
+	"COLORCARN" : {
+        "BL": "Blanca",
+        "GR": "Amarilla",
+
+        "": "-"
+    },
+
+    "TIPUSPRODUCTE" : {
+        "PR01": "Melocotón",
+        "PR02": "Pavía",
+
+        "": "Todos"
+    },
+
+    "CALIBRE" : {
+        "CA01": "AAAA (> 90 mm)",
+        "CA02": "AAA (80-90 mm)",
+        "CA03": "AA (73-80 mm)",
+        "CA04": "A (67-73 mm)",
+        "CA05": "B (61-67 mm)",
+        "CA06": "C (56-61 mm)",
+        "CA07": "D (51-56 mm)",
+
+        "": "-"
+    },
+
+    "QUALITAT" : {
+        "QU01": "I",
+        "QU02": "II",
+        "QU03": "Industrial",
+
+        "": "-"
+    },
+
+    "BOTTON" : {
+        "searchB": "Buscar",
+        "afegirB": "AÑadir nuevo registro"
+    }
+    
+}

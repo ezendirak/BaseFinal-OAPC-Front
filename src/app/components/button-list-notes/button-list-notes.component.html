@@ -1,0 +1,52 @@
+<div *ngIf="pagination.total_items!=0;then content0 else else_content0"></div>
+<ng-template #content0>
+  <h2>BUTTON-LIST-COMPONENT-PAGINATION {{pagination?.page_actual}}</h2>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+
+      <div *ngIf="pagination.page_actual>1;then content1 else else_content1"></div>
+      <ng-template #content1>
+        <li class="page-item">
+          <a class="page-link" role="button" (click)="actionPagination(pagination.page_actual-1)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+      </ng-template>
+      <ng-template #else_content1>
+        <li class="disabled">
+          <a class="page-link" role="button" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+      </ng-template>
+
+
+      <li *ngFor="let page_item of pagination.page_list" class="page-item" [ngClass]="{'active': pagination.page_actual==+page_item}">
+        <a class="page-link" role="button" (click)="actionPagination(+page_item)">{{page_item}}</a>
+      </li>
+
+      <div *ngIf="pagination.page_actual!=pagination.page_max;then content2 else else_content2"></div>
+      <ng-template #content2>
+        <li class="page-item">
+          <a class="page-link" role="button" (click)="actionPagination(pagination.page_actual+1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ng-template>
+      <ng-template #else_content2>
+        <li class="disabled">
+          <a class="page-link" role="button" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ng-template>
+    </ul>
+  </nav>
+
+  {{pagination|json}}
+
+</ng-template>

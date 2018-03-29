@@ -1,0 +1,71 @@
+<!--
+<h1>{{title}}</h1>
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/notes">Notes</a>
+
+  <a *ngIf="!islogged" routerLink="/login">Login</a>
+  <a *ngIf="islogged"  routerLink="/logout">Logout</a>
+</nav>
+-->
+
+
+<div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" routerLink="/">OAPC</a>
+        </div>
+  
+        <div class="collapse navbar-collapse" [collapse]=isCollapsed>
+
+          <ul class="nav navbar-nav">
+            <li class="active"><a routerLink="/notes">Notes<span class="sr-only">(current)</span></a></li>
+            <li class="active"><a routerLink="/notes2">Notes2<span class="sr-only">(current)</span></a></li>
+            <li class="active"><a routerLink="/register">Registre de preus<span class="sr-only">(current)</span></a></li>
+
+            <li><a *ngIf="!(islogged)" routerLink="/login">Login</a></li>
+            <li><a *ngIf="(islogged)"  routerLink="/logout">Logout</a></li>
+            
+            <li class="dropdown" dropdown>
+                <a href="javascript:void(0)" dropdownToggle class="dropdown-toggle">Opciones A <span class="caret"></span></a>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a class="dropdown-item" href="/uno">Menu uno</a></li>
+                  <li role="menuitem"><a class="dropdown-item" href="/dos">Menu dos</a></li>
+                  <li role="menuitem"><a class="dropdown-item" href="/tres">Menu tres</a></li>
+                  <li class="divider dropdown-divider"></li>
+                  <li role="menuitem"><a class="dropdown-item" href="/cuatro">Menu cuatro</a></li>
+                </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/nueve">Menu nueve</a></li>
+
+            <li class="dropdown" dropdown>
+              <a href="javascript:void(0)" dropdownToggle class="dropdown-toggle">Opciones B <span class="caret"></span></a>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="/cinco">Menu cinco</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="/seis">Menu Seis</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="/siete">Menu siete</a></li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item" href="/ocho">Menu ocho</a></li>
+              </ul>
+            </li>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+
+    </nav>
+  </div>
+
+
+<router-outlet></router-outlet>

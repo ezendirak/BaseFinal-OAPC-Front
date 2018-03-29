@@ -1,0 +1,15 @@
+<div class="container">
+    <h1>Estás en login</h1>
+</div>
+
+<div class="container">
+    <input name="Usuario" type="email" placeholder="user/admin" #user>
+    <p></p>
+    <input name="Contraseña" type="password" placeholder="123" #password>
+    <p></p>
+        
+    <button (click)="login(user.value, password.value)">login</button>
+    <button (click)="refresh()">refresh</button>
+</div>  
+
+

@@ -1,0 +1,35 @@
+<div class="container">
+  
+  <app-form-register [titulo_form]="'Formulario de entrada Registre'"  
+                  (evento_form1)="onClickBuscarForm($event)"
+                  (evento_tProduct)="onClickParams($event)"
+                  [productes]="productes"
+                  [comboInfo]="comboInfo"
+                  [comboLleno]="comboLleno"
+                  (canviIdioma)="switchLanguage(language)"
+                  (evento_form_afegir)="afegirForm($event)"
+                  (item)="item"
+                  [comboGeneral]="comboGeneral"
+                  [productesModal]="productesModal"
+  >
+  </app-form-register>     
+
+  <app-taula-register [items]="items" 
+                  
+                  (evento_list_put)="onClickPutList($event)" 
+                  (evento_list_delete)="onClickDeleteList($event)"
+                  (evento_getCombos)="onClickGetCombos($event)"
+                  [comboInfoModal]="comboInfoModal"
+                  [comboLlenoModal]="comboLlenoModal"
+                  [productesModal]="productesModal"
+                  [comboGeneral]="comboGeneral"
+                  (evento_putRegistre)="putRegistre($event)"
+  >
+  </app-taula-register>
+
+  <app-button-taula-register [pagination]="pagination" 
+                         (evento_list_pagination)="onClickPagination($event)"
+  >
+  </app-button-taula-register>
+
+</div>
