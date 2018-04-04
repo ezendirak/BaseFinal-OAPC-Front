@@ -2,19 +2,19 @@
     "usuariActual": "Pol Garcia",
 
     "LITERALS_FORM" : {
-        "ref": "Referència: ",
-        "per": "Període: ",
-        "empIn": "Empressa Informant: ",
-        "usuIn": "Usuari Informant: ",
-        "tipPro": "Tipus de producte: ",
-        "colCa": "Color de Carn: ",
-        "qual": "Qualitat: ",
-        "cali": "Calibre: ",
-        "vari": "Varietat: ",
-        "quVe": "Quantitat Venuda: ",
-        "peSo": "Preu de Sortida: ",
-        "tan": "Tancada: ",
-        "quPe": "Quantitat per Preu: "
+        "ref": "Referència ",
+        "per": "Període ",
+        "empIn": "Empressa Informant ",
+        "usuIn": "Usuari Informant ",
+        "tipPro": "Tipus de producte ",
+        "colCa": "Color de Carn ",
+        "qual": "Qualitat ",
+        "cali": "Calibre ",
+        "vari": "Varietat ",
+        "quVe": "Quantitat Venuda ",
+        "peSo": "Preu de Sortida ",
+        "tan": "Tancada ",
+        "quPe": "Quantitat per Preu "
     },
 
     "LITERALS_COL" : {
@@ -42,7 +42,8 @@
 
     "TIPUSPRODUCTE" : {
         "PR01": "Préssec",
-        "PR02": "Pàvia",
+        "PA01": "Pàvia",
+        "PO01": "Poma",
 
         "": "Tots"
     },
@@ -63,6 +64,18 @@
         "QU01": "I",
         "QU02": "II",
         "QU03": "Industrial",
+        "QU04": "Extra",
+
+        "": "-"
+    },
+
+    "VARIETAT" : {
+        "VA01": "Golden Delicious",
+        "VA02": "Gala",
+        "VA03": "Granny Smith",
+        "VA04": "Fuji",
+        "VA05": "Cripps Pink",
+        "VA06": "Vermelles Americanes",
 
         "": "-"
     },
@@ -70,6 +83,9 @@
     "BOTTON" : {
         "searchB": "Cercar",
         "afegirB": "Afegir nou registre"
-    }
+    },
     
+    "TITOLS" : {
+        "OAPC": "Observatori Agroalimentari de Preus de Catalunya"
+    }
 }

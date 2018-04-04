@@ -1,17 +1,17 @@
 <h2>LIST-REGISTER</h2>
-<table class="table">
+<table class="table" style="text-align: center">
     <thead>
         <tr>
             <th>ID</th>
-            <th>{{ 'LITERALS_COL.' + literals.per | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.tipPro | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.vari | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.colCa | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.cali | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.qual | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.quVe | translate }} (Kg)</th>
-            <th>{{ 'LITERALS_COL.' + literals.peSo | translate }}</th>
-            <th>{{ 'LITERALS_COL.' + literals.quPe | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.per | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.tipPro | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.vari | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.colCa | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.cali | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.qual | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.quVe | translate }} (Kg)</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.peSo | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.quPe | translate }}</th>
         </tr>
     </thead>
     <tbody>
@@ -34,10 +34,10 @@
             <td>{{item?.preuSortida}}</td>
             <td>{{item?.quantitatVenuda * item?.preuSortida}} €</td>
             <td>
-                <button type="button" class="btn btn-primary" (click)="openModalToEdit(item)">Modificar</button>
+                <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
             </td>
             <td>
-                <button type="button" class="btn btn-primary" (click)="actionDelete(item)">Borrar</button>
+                <button type="button" class="btn-custom btn btnEnvio" (click)="actionDelete(item)">Borrar</button>
             </td>
         </tr>
     </tbody>

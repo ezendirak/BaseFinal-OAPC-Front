@@ -5,6 +5,8 @@ import { Component, OnInit }        from '@angular/core';
 import { AuthorizationService }     from '../../services/authorization.service';
 import { TrazaService }             from '../../services/traza.service';
 import { MessageService }           from './../../services/message.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -27,11 +29,15 @@ export class HeaderComponent implements OnInit {
   private islogged;
   private isCollapsed: boolean;
 
+  private literals = LiteralsRegistre;
   constructor(private AuthorizationService : AuthorizationService,
               private TrazaService         : TrazaService,
-              private MessageService       : MessageService
+              private MessageService       : MessageService,
+              private traductorService     : TranslateService
             ) 
-  { }
+  { 
+    traductorService.setDefaultLang('cat');
+  }
 
   ngOnInit() {
     // https://github.com/xpoveda/oapc/blob/master/docs/multinotificacion_asincrona_entre_controles.pdf
@@ -47,6 +53,10 @@ export class HeaderComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  switchLanguage(language: string){
+    this.traductorService.use(language);
+  }
+  
   ////////////////////////////////////////////////////////////////////////////////////////
 
 }

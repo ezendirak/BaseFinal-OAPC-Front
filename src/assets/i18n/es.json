@@ -2,19 +2,19 @@
     "usuariActual": "Pol Garcia",
     
     "LITERALS_FORM" : {
-        "ref": "Referéncia: ",
-        "per": "Período: ",
-        "empIn": "Empresa Informante: ",
-        "usuIn": "Usuario Informante: ",
-        "tipPro": "Tipo de producto: ",
-        "colCa": "Color de Carne: ",
-        "qual": "Calidad: ",
-        "cali": "Calibre: ",
-        "vari": "Variedad: ",
-        "quVe": "Cantidad Vendida: ",
-        "peSo": "Precio de Salida: ",
-        "tan": "Cerrada: ",
-        "quPe": "Cantidad por Precio: "
+        "ref": "Referéncia ",
+        "per": "Período ",
+        "empIn": "Empresa Informante ",
+        "usuIn": "Usuario Informante ",
+        "tipPro": "Tipo de producto ",
+        "colCa": "Color de Carne ",
+        "qual": "Calidad ",
+        "cali": "Calibre ",
+        "vari": "Variedad ",
+        "quVe": "Cantidad Vendida ",
+        "peSo": "Precio de Salida ",
+        "tan": "Cerrada ",
+        "quPe": "Cantidad por Precio "
     },
 
     "LITERALS_COL" : {
@@ -42,7 +42,8 @@
 
     "TIPUSPRODUCTE" : {
         "PR01": "Melocotón",
-        "PR02": "Pavía",
+        "PA01": "Pavía",
+        "PO01": "Manzana",
 
         "": "Todos"
     },
@@ -63,13 +64,29 @@
         "QU01": "I",
         "QU02": "II",
         "QU03": "Industrial",
+        "QU04": "Extra",
+
+        "": "-"
+    },
+
+    "VARIETAT" : {
+        "VA01": "Golden Delicious",
+        "VA02": "Gala",
+        "VA03": "Granny Smith",
+        "VA04": "Fuji",
+        "VA05": "Cripps Pink",
+        "VA06": "Rojas Americanas",
 
         "": "-"
     },
 
     "BOTTON" : {
         "searchB": "Buscar",
-        "afegirB": "AÑadir nuevo registro"
+        "afegirB": "Añadir nuevo registro"
+    },
+
+    "TITOLS" : {
+        "OAPC": "Observatorio Agroalimentario de Precios de Cataluña"
     }
     
 }

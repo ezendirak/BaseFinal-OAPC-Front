@@ -2,7 +2,7 @@ import { RegisterResponse } from './../../interfaces/register-response';
 import { LiteralsRegistre } from './../../literals-registre.enum';
 
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.css']
 })
-export class FormRegisterComponent implements OnInit {
+export class FormRegisterComponent implements OnInit, OnChanges {
 
   
   
@@ -26,6 +26,9 @@ export class FormRegisterComponent implements OnInit {
   @Input()  item: RegisterResponse;
   @Input()  comboGeneral: AtributsComboMap;
   @Input()  productesModal: string[];
+  @Input()  isPinyol: Boolean;
+  @Input()  isLlavor: Boolean;
+
 
   @Output() evento_form1: EventEmitter<any> = new EventEmitter();
   @Output() evento_tProduct: EventEmitter<any> = new EventEmitter();
@@ -74,6 +77,24 @@ export class FormRegisterComponent implements OnInit {
     
   }
 
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}){
+    // console.log("************ ngOnChanges ************");
+    
+    // if (this.comboInfo){
+        
+    //     let combos = this.comboGeneral[this.selectedTipusProducte];
+    //     if (combos.ColorsCarn.length > 0){
+    //       console.log("Tenim COLORS CARN");
+    //     }else {
+    //       console.log("Tenim VARIETATS");
+    //     }
+    //     // console.log(to.);
+    //     // console.log("********** FI **********");
+        
+      
+    // }
+    
+  }
 
   switchLanguage(language: string){
     this.traductorService.use(language);
@@ -192,18 +213,11 @@ export class FormRegisterComponent implements OnInit {
 
   changeSelectedTipusProducte($event)
   {
-    console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event);
+    console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte);
     this.evento_tProduct.emit(JSON.stringify(this.selectedTipusProducte));
     this.selectedColorCarn="";
     this.selectedQualitat="";
     this.selectedKalibre="";
-  }
-
-  changeSelectedQualitat($event)
-  {
-    this.selectedQualitat = $event;
-    console.log("Canvi de qualitat: "+ $event);
-    
   }
 
 

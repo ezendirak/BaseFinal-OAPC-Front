@@ -40,6 +40,9 @@ export class RegisterComponent implements OnInit {
   comboLleno:  Boolean;
   comboLlenoModal:  Boolean;
 
+  isPinyol: Boolean;
+  isLlavor: Boolean;
+
   registres:    RegisterResponse[];
 
   filtre: any;
@@ -138,6 +141,14 @@ export class RegisterComponent implements OnInit {
   onClickParams($event)
   {
     // console.log("controller: onClickParams " + $event);
+    
+    if ($event == "\"PA01\"" || $event == "\"PR01\""){
+      this.isPinyol = true;
+      this.isLlavor = false;
+    }else if ($event == "\"PO01\""){
+      this.isPinyol = false;
+      this.isLlavor = true;
+    }
     this.getCombos($event);
   }
 
