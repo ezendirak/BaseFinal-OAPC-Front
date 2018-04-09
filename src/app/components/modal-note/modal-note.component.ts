@@ -1,3 +1,4 @@
+import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
 import { RegisterResponse } from './../../interfaces/register-response';
 import { Component, OnInit, Output, EventEmitter }        from '@angular/core';
@@ -40,13 +41,15 @@ export class ModalNoteComponent implements  OnInit  {
 
   public onClose: Subject<boolean>;
  
+  isDisabled: boolean;
+
   id: number;
   
   qVenuda:  number;
   pSortida: number;
+
   varietat: string;
   comboLlenoModal: boolean;
-  nouRegistre: any;
   productesModal: string[];
   nouPeriode: string;
   producteSelected: string;
@@ -54,6 +57,9 @@ export class ModalNoteComponent implements  OnInit  {
   qualitatSelected: string;
   colorCarnSelected: string;
   varietatSelected: string;
+ 
+  isPinyol: boolean;
+  isLlavor: boolean;
 
   private literals = LiteralsRegistre;
   constructor(private traductorService: TranslateService,
@@ -66,7 +72,7 @@ export class ModalNoteComponent implements  OnInit  {
     // console.log("MODAL MODAL: ");
     // console.log(this.datos_entrada);
     // console.log("MODAL MODAL: 2 ");
-    
+    this.isDisabled = true;
     // this.producteSelected = this.datos_entrada.tipusProducte;
     // this.nouPeriode = this.datos_entrada.periode;
     // this.calibreSelected = this.datos_entrada.calibre;
@@ -86,9 +92,9 @@ export class ModalNoteComponent implements  OnInit  {
   //////////////////////////////////////////////////////////////////////////////////////
 
   public onConfirm(form) {
-    //console.log("ON CONFIRM");
+    console.log("ON CONFIRM");
     console.log(this.datos_salida);
-    console.log(form.controls['colorsCarn'].value);
+  console.log(this.datos_entrada);
     // this.datos_salida.id = this.id;
     // if (this.varietat){
     //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "varietat" : this.varietatSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
@@ -96,13 +102,18 @@ export class ModalNoteComponent implements  OnInit  {
     //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "colorCarn" : this.colorCarnSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
     // }
     // this.bsModalRef.content.datos_salida.colorCarn = form.controls['colorsCarn'].value
-    this.datos_salida.calibre = this.bsModalRef.content.calibreSelected;
-    this.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected
+    console.log(this.bsModalRef.content);
+    this.datos_salida.calibre = this.calibreSelected;
+    this.datos_salida.qualitat = this.qualitatSelected
     this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected;
-    this.datos_salida.colorCarn = this.bsModalRef.content.colorCarnSelected;
-    this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
+    this.datos_salida.colorCarn = this.colorCarnSelected;
+    this.datos_salida.varietat = this.varietatSelected;
+    console.log(this.nouPeriode + " - " + this.qVenuda + " - " +this.pSortida + " - " + this.calibreSelected + " - " + this.qualitatSelected + " - " + this.producteSelected + " - " + this.colorCarnSelected + " - " + this.varietatSelected);
+    console.log(this.datos_salida);
+
+    this.datos_salida.periode = this.nouPeriode;
     // this.datos_salida.varietat = this.bsModalRef.content.;
     // this.datos_salida.varietat = form.controls['eInformant'].value
     // console.log(form.controls['calibres'].value);
@@ -131,11 +142,47 @@ export class ModalNoteComponent implements  OnInit  {
 
   changeSelesctedTipusProducteModal($event)
   {
-    console.log("EMITIMOS EVENTO Cambio de tipusPro: (MODAL)" + $event);
+    let infoTest: any;
+    // console.log("MODAL EDIT: (MODAL)" + this.producteSelected);
     this.colorCarnSelected="";
     this.qualitatSelected="";
     this.calibreSelected="";
     this.varietatSelected="";
+    console.log("ComboInfoModal abans de canviar de producte: ");
+    console.log(this.comboInfoModal);
     this.comboInfoModal = this.comboGeneral[this.producteSelected];
+    console.log(JSON.stringify(this.comboInfoModal));
+    infoTest = JSON.parse(JSON.stringify(this.comboInfoModal)); 
+    console.log(infoTest.colorsCarn.length);
+    if (infoTest.colorsCarn.length > 1){
+      this.isPinyol = true;
+      this.isLlavor = false;
+      console.log("ES PINYOL");
+    } else if (infoTest.varietats.length > 1){
+      this.isPinyol = false;
+      this.isLlavor = true;
+      console.log("ES LLAVOR");
+    }
+  }
+
+  test(){
+    let infoTest: any;
+    console.log(this.comboInfoModal);
+    console.log(this.comboGeneral[this.producteSelected]);
+    this.comboInfoModal = this.comboGeneral[this.producteSelected];
+    this.isDisabled = false;
+    console.log(this.comboInfoModal);
+    infoTest = JSON.parse(JSON.stringify(this.comboInfoModal)); 
+    console.log(infoTest.colorsCarn.length);
+    if (infoTest.colorsCarn.length > 1){
+      this.isPinyol = true;
+      this.isLlavor = false;
+      console.log("ES PINYOL");
+    } else if (infoTest.varietats.length > 1){
+      this.isPinyol = false;
+      this.isLlavor = true;
+      console.log("ES LLAVOR");
+    }
+    console.log(this.isDisabled);
   }
 }

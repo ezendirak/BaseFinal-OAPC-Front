@@ -1,7 +1,9 @@
+import { LiteralsRegistre } from './../../literals-registre.enum';
+import { InfoKey } from './../../interfaces/info-key';
 import { RegisterResponse } from './../../interfaces/register-response';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AtributsComboMap } from './../../interfaces/atributs-combo-map';
-import { Component, OnInit, Input }    from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange }    from '@angular/core';
 
 import { AuthorizationService } from '../../services/authorization.service';
 import { NotesService }         from '../../services/notes.service';
@@ -31,8 +33,8 @@ export class RegisterComponent implements OnInit {
   items:      RegisterResponse[];
   item:       RegisterResponse;
 
-  productes:  String[];
-  productesModal: String[];
+  productes:  InfoKey[];
+  productesModal: InfoKey[];
 
   comboGeneral: AtributsComboMap;
 
@@ -43,12 +45,15 @@ export class RegisterComponent implements OnInit {
   isPinyol: Boolean;
   isLlavor: Boolean;
 
+  paginacio: number;
+
   registres:    RegisterResponse[];
 
   filtre: any;
 
   comboInfoModal: AtributsComboResponse;
 
+  literal: LiteralsRegistre;
   constructor( private AuthorizationService: AuthorizationService, 
                private RegisterService     : RegisterService, 
                private TrazaService        : TrazaService,
@@ -66,19 +71,20 @@ export class RegisterComponent implements OnInit {
     this.getProductes();
     
     this.filtroFake = "";
-    
+    this.paginacio = 5;
+
     this.pagination = new Pagination;
     this.pagination.page_actual = 1;
     this.pagination.page_max    = 0;
     this.pagination.total_items = 0;
     this.pagination.page_list   = [];
     // CONFIGURABLE
-    this.pagination.page_items  = 2;   
+    this.pagination.page_items  = this.paginacio;   
     
-    this.getRegistresPage(this.filtroFake);   
+    this.getRegistresPage(this.filtroFake); 
+
   }
 
-  
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,20 +146,39 @@ export class RegisterComponent implements OnInit {
 
   onClickParams($event)
   {
-    // console.log("controller: onClickParams " + $event);
-    
-    if ($event == "\"PA01\"" || $event == "\"PR01\""){
+    console.log("controller: onClickParams " + $event.subGrup);
+    console.log("*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*");
+    if ($event.subGrup == "PI"){
       this.isPinyol = true;
       this.isLlavor = false;
-    }else if ($event == "\"PO01\""){
+    }else if ($event.subGrup == "LL"){
       this.isPinyol = false;
       this.isLlavor = true;
+    } else {
+      this.isPinyol = false;
+      this.isLlavor = false;
     }
-    this.getCombos($event);
+    this.getCombos($event.clau);
+    // console.log(this.comboGeneral[$event.clau]);
+    // console.log(this.comboInfoModal);
+    // this.comboInfoModal = this.comboGeneral[$event.clau];
+    // this.comboLleno = true;
+  }
+
+  onClickNewPagination($event){
+    console.log("Desde Registre: "+$event);
+    this.pagination.page_items = $event;
+    console.log(this.pagination);
+    if (this.filtre){
+      // console.log(this.filtre);
+      this.getRegistresPage(this.filtre); 
+    }else{
+      this.getRegistresPage(""); 
+    }
   }
 
   onClickGetCombos($event){
-    // console.log("onclickgetcombosModal: " + $event);
+   console.log("onclickgetcombosModal: " + $event);
     // console.log($event);
     this.getCombosModal($event);
   }
@@ -191,7 +216,7 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged())
     {    
       // this.getRegistresCount(filtro);
-      console.log("abans del service "+filtro);
+      // console.log("abans del service "+filtro);
       this.getRegistresCountFiltrat(filtro);
       this.RegisterService.getRegistresPage(this.pagination.page_actual, this.pagination.page_items, filtro)
       .subscribe ( respuesta => { this.items = respuesta;  
@@ -216,7 +241,7 @@ export class RegisterComponent implements OnInit {
                                   this.refreshPaginationCounters();
                                   this.refreshPaginationList();
 
-                                  this.TrazaService.dato("NOTES", "API GETNOTESCOUNT OK", this.items);                                    
+                                  // this.TrazaService.dato("NOTES", "API GETNOTESCOUNT OK", this.items);                                    
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
@@ -267,10 +292,11 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged())
       this.RegisterService.getProductes()
       .subscribe ( respuesta => { this.productes = respuesta;
-
-                                  this.TrazaService.dato("Productes", "API GET Registres OK", this.productes);
+                                  // console.log("prrrrrrrrrrrrrrrrrrra");
+                                  // console.log(this.productes);
+                                  // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("Productes", "API GET Registres KO", error); } 
+                  error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
   }
 
@@ -280,7 +306,7 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
 
-                                  this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
+                                  // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
                                 },
                   error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
       );
@@ -365,10 +391,10 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getAllCombos()
       .subscribe ( respuesta => { this.comboGeneral = respuesta;
-
-                                  this.TrazaService.dato("Combo GENERALS", "API GET COMBOGENERALS OK", this.items);
-                                  console.log(this.comboGeneral);
-                                  console.log(this.comboGeneral["PR01"].Calibres);
+                                  // this.comboInfoModal = this.comboGeneral['PR01'];
+                                  // this.TrazaService.dato("Combo GENERALS", "API GET COMBOGENERALS OK", this.items);
+                                  // console.log(this.comboGeneral);
+                                  // console.log(this.comboGeneral["PR01"].Calibres);
                                 },
                   error =>      { this.TrazaService.error("Combo GENERALS", "API GET COMBOGENERALS KO", error); } 
       );

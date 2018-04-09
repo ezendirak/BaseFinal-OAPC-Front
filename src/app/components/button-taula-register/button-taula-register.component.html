@@ -1,9 +1,14 @@
 <div *ngIf="pagination.total_items!=0;then content0 else else_content0"></div>
 <ng-template #content0>
-  <h2>BUTTON-LIST-COMPONENT-PAGINATION {{pagination?.page_actual}}</h2>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
 
+    
+
+  <nav aria-label="Page navigation example">
+      <select class="littlePag col-md-3 col-xs-12" name="paginacio" [(ngModel)]="selectedPagination" (change) = "changeSelectedPagination($event)" >
+          <option *ngFor="let valor of valors" [ngValue]="valor">{{valor}}</option>
+        </select>
+    <ul class="pagination">
+        
       <div *ngIf="pagination.page_actual>1;then content1 else else_content1"></div>
       <ng-template #content1>
         <li class="page-item">
@@ -47,6 +52,6 @@
     </ul>
   </nav>
 
-  {{pagination|json}}
+  <!-- {{pagination|json}} -->
 
 </ng-template>

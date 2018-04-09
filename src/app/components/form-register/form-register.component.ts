@@ -1,8 +1,9 @@
+import { InfoKey } from './../../interfaces/info-key';
 import { RegisterResponse } from './../../interfaces/register-response';
 import { LiteralsRegistre } from './../../literals-registre.enum';
 
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,25 +16,26 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.css']
 })
-export class FormRegisterComponent implements OnInit, OnChanges {
+export class FormRegisterComponent implements OnInit {
 
   
   
-  @Input()  titulo_form:  string;
-  @Input()  productes:     string[];
-  @Input()  comboInfo:    AtributsComboResponse;
-  @Input()  comboLleno:   Boolean;
-  @Input()  item: RegisterResponse;
-  @Input()  comboGeneral: AtributsComboMap;
+  @Input()  titulo_form:    string;
+  @Input()  productes:      string[];
+  @Input()  comboInfo:      AtributsComboResponse;
+  @Input()  comboLleno:     Boolean;
+  @Input()  item:           RegisterResponse;
+  @Input()  comboGeneral:   AtributsComboMap;
+  @Input()  comboInfoModal: AtributsComboResponse;
   @Input()  productesModal: string[];
-  @Input()  isPinyol: Boolean;
-  @Input()  isLlavor: Boolean;
+  @Input()  isPinyol:       Boolean;
+  @Input()  isLlavor:       Boolean;
 
 
   @Output() evento_form1: EventEmitter<any> = new EventEmitter();
   @Output() evento_tProduct: EventEmitter<any> = new EventEmitter();
   @Output() evento_form_afegir: EventEmitter<any> = new EventEmitter();
-
+  @Output() evento_getCombos: EventEmitter<any> = new EventEmitter();
   
   filtros: any;
 
@@ -49,7 +51,7 @@ export class FormRegisterComponent implements OnInit, OnChanges {
   pSortida: number;
   tancada: string;
   
-  selectedTipusProducte:  string;
+  selectedTipusProducte:  InfoKey;
   selectedQualitat:       string;
   selectedKalibre:        string;
   selectedColorCarn:      string;
@@ -57,11 +59,6 @@ export class FormRegisterComponent implements OnInit, OnChanges {
   bsModalRefAdd: BsModalRef;
   
   usuariActual: String;
-
-  // @Input() calibresCombo:    String[];
-  // @Input() varietatsCombo:   String[];
-  // @Input() qualitatsCombo:   String[];
-  // @Input() colorsCarnCombo:  String[];
 
  private literals = LiteralsRegistre;
   constructor(private traductorService: TranslateService,
@@ -74,27 +71,8 @@ export class FormRegisterComponent implements OnInit, OnChanges {
   
   
   ngOnInit() {    
-    
   }
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}){
-    // console.log("************ ngOnChanges ************");
-    
-    // if (this.comboInfo){
-        
-    //     let combos = this.comboGeneral[this.selectedTipusProducte];
-    //     if (combos.ColorsCarn.length > 0){
-    //       console.log("Tenim COLORS CARN");
-    //     }else {
-    //       console.log("Tenim VARIETATS");
-    //     }
-    //     // console.log(to.);
-    //     // console.log("********** FI **********");
-        
-      
-    // }
-    
-  }
 
   switchLanguage(language: string){
     this.traductorService.use(language);
@@ -104,12 +82,13 @@ export class FormRegisterComponent implements OnInit, OnChanges {
   {
     console.log("CAPTURADO CLICK EN FORMULARIO");
     console.log("EMITIMOS EVENTO eventoRegistreClicked");
-    
     // this.filtros = { "referencia": this.referencia, "periode" : this.periode, "eInformant" : this.eInformant, "uInformant" : this.uInformant, "tipusProducte" : this.selectedTipusProducte,  "varietat" : this.varietat, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre, "qVenuda" : this.qVenuda, "pSortida" : this.pSortida, "tancada" : this.tancada};
      this.filtros = {"tipusProducte" : this.selectedTipusProducte,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre};
+     
+    
      let params = new HttpParams();
      if(this.selectedTipusProducte){
-      params = params.set('tipusProducte', this.selectedTipusProducte);
+      params = params.set('tipusProducte', this.selectedTipusProducte.clau);
      }
     // params = params.set('tipusProducte', this.selectedTipusProducte).set('colorCarn', this.selectedColorCarn).set('qualitat', this.selectedQualitat).set('calibre', this.selectedKalibre);
      if (this.selectedColorCarn){
@@ -125,6 +104,14 @@ export class FormRegisterComponent implements OnInit, OnChanges {
       console.log(params);
     this.evento_form1.emit(params);
   }
+
+  // provaOnChange($event){
+  //   this.tipusProducte = this.selectedTipusProducte.clau;
+  //   console.log("PROVA ON CHANGE: ");
+  //   console.log($event.Clau);
+  //   console.log(this.tipusProducte);
+  //   console.log("FI DE PROVA ON CHANGE");
+  // }
 
   afegirProd($event){
     console.log("Test event: "+ $event);
@@ -152,12 +139,20 @@ export class FormRegisterComponent implements OnInit, OnChanges {
     this.bsModalRefAdd = this.BsModalRefAdd.show(ModalToAddComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : 'PR01', eInformant : 'Nufri', colorCarn : 'GR', calibre : 'CA01', qualitat : 'QU01', varietat : null, quantitatVenuda: '2', preuSortida: '2'};
+    this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : null, eInformant : null, colorCarn : null, calibre : null, qualitat : null, varietat : null, quantitatVenuda: null, preuSortida: null};
     
-    console.log(this.bsModalRefAdd.content.datos_salida);
+    console.log("*/*/*/*/*/*/*/*/*/*");
+    console.log(this.comboGeneral);
     this.bsModalRefAdd.content.comboGeneral = this.comboGeneral;
+    this.bsModalRefAdd.content.comboInfoModal = this.comboInfoModal;
+    // this.bsModalRefAdd.content.isPinyol = this.isPinyol;
+    // this.bsModalRefAdd.content.isLlavor = this.isLlavor;
+    console.log("ComboInfoModal al abrir el popup: ");
+    console.log(this.bsModalRefAdd.content.comboInfoModal);
+    console.log(this.comboInfoModal);
     // this.bsModalRefAdd.content.comboInfoModal = this.comboGeneral[this.bsModalRefAdd.content.producteSelected];
     this.bsModalRefAdd.content.productesModal = this.productesModal;
+    console.log(this.bsModalRefAdd.content.comboGeneral);
     console.log(this.bsModalRefAdd.content.datos_entrada);
     // this.bsModalRef.content.datos_entrada = JSON.parse(this.bsModalRef.content.datos_entrada);
     // this.registreToEdit = this.bsModalRef.content.datos_entrada;
@@ -214,11 +209,16 @@ export class FormRegisterComponent implements OnInit, OnChanges {
   changeSelectedTipusProducte($event)
   {
     console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte);
-    this.evento_tProduct.emit(JSON.stringify(this.selectedTipusProducte));
+    this.evento_tProduct.emit(this.selectedTipusProducte);
     this.selectedColorCarn="";
     this.selectedQualitat="";
     this.selectedKalibre="";
   }
 
+  getCombos(tipusProducte: string){
+    console.log("getcombos al obrir modal del prod: " + tipusProducte);
+
+    this.evento_getCombos.emit(tipusProducte);
+  }
 
 }

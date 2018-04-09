@@ -1,3 +1,4 @@
+import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboMap } from './../../interfaces/atributs-combo-map';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
 import { RegisterResponse } from './../../interfaces/register-response';
@@ -16,13 +17,16 @@ export class TaulaRegisterComponent implements OnInit {
 
  
   @Input() items;
-  @Input() productesModal:     String[];
+  @Input() productesModal:     InfoKey[];
   @Input() comboInfoModal: AtributsComboResponse;
   
   @Input() comboGeneral: AtributsComboMap;
   @Input() nouRegistre;
   @Input() comboLlenoModal: boolean;
   
+  @Input() isPinyol: boolean;
+  @Input() isLlavor: boolean;
+
   @Output() evento_list_put:    EventEmitter<any> = new EventEmitter();
   @Output() evento_list_delete: EventEmitter<any> = new EventEmitter();
   @Output() evento_getCombos:   EventEmitter<any> = new EventEmitter();
@@ -44,7 +48,7 @@ export class TaulaRegisterComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log("LIST-COMPONENT");
+    // console.log("LIST-COMPONENT");
 
     
   }
@@ -66,11 +70,11 @@ export class TaulaRegisterComponent implements OnInit {
 
     // this.bsModalRef.content.comboInfoModal = 
     
-    this.getCombos(item.tipusProducte);
+    // this.getCombos(item.tipusProducte);
     this.bsModalRef = this.modalService.show(ModalNoteComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    
+    console.log(JSON.stringify(item));
     this.bsModalRef.content.datos_entrada = item;
     this.bsModalRef.content.datos_salida = item;
     this.bsModalRef.content.producteSelected = this.bsModalRef.content.datos_entrada.tipusProducte;
@@ -79,12 +83,48 @@ export class TaulaRegisterComponent implements OnInit {
     this.bsModalRef.content.qualitatSelected = this.bsModalRef.content.datos_entrada.qualitat;
     this.bsModalRef.content.varietatSelected = this.bsModalRef.content.datos_entrada.varietat;
     this.bsModalRef.content.comboGeneral = this.comboGeneral;
-    this.bsModalRef.content.comboInfoModal = this.comboGeneral[this.bsModalRef.content.producteSelected];
-  
+    this.bsModalRef.content.isLlavor = true;
+    // console.log(this.bsModalRef.content.isLlavor);
+    // console.log(this.bsModalRef.content.producteSelected);
+    
+    this.bsModalRef.content.comboInfoModal = this.comboGeneral[this.bsModalRef.content.producteSelected.clau];
+    // console.log(this.bsModalRef.content.comboInfoModal);
     this.bsModalRef.content.productesModal = this.productesModal;
+    // console.log(this.bsModalRef.content.productesModal);
+    // console.log("/////////////");
+    // let subGrup: string;
+    // for (let prod in this.bsModalRef.content.productesModal){
+    //   // console.log(Object(this.bsModalRef.content.productesModal[prod]));
+    //   // console.log(Object(this.bsModalRef.content.productesModal[prod].subGrup));
+    //   // console.log(Object(this.bsModalRef.content.productesModal[prod].nom));
+    //   // console.log(this.bsModalRef.content.producteSelected);
+    //   if (this.bsModalRef.content.producteSelected == Object(this.bsModalRef.content.productesModal[prod].clau)){
+        
+    //     if (Object(this.bsModalRef.content.productesModal[prod].subGrup) == "PI"){
+    //       this.bsModalRef.content.isPinyol = true;
+    //       this.bsModalRef.content.isLlavor = false;
+    //         console.log("ES UN PINYOL... isPinyol = " + this.bsModalRef.content.isPinyol);
+    //         console.log("isLlavor = " + this.bsModalRef.content.isLlavor);
+    //     }else if (Object(this.bsModalRef.content.productesModal[prod].subGrup) == "LL"){
+    //       this.bsModalRef.content.isPinyol = true;
+    //       this.bsModalRef.content.isLlavor = false;
+    //       console.log("ES UNA LLAVOR... isLlavor = " + this.bsModalRef.content.isLlavor);
+    //       console.log("isPinyol = " + this.bsModalRef.content.isPinyol);
+    //     }
+    //   }
     
+    // }
     
-    console.log("Productes Modal: " + this.productesModal);
+    // if (this.bsModalRef.content.productesModal[prod].clau == this.bsModalRef.content.producteSelected){
+    //   if(prod == "PI"){
+    //     this.bsModalRef.content.isPinyol = true;
+    //     this.bsModalRef.content.isLlavor = false;
+    //   }else if (prod == "LL"){
+    //     this.bsModalRef.content.isLlavor = true;
+    //     this.bsModalRef.content.isPinyol = false;
+    //   }
+    // }
+    console.log("Productes Modal: " + JSON.stringify(this.productesModal[0]));
     
     //console.log(this.bsModalRef.content.datos_entrada);
     // this.bsModalRef.content.datos_entrada = JSON.parse(this.bsModalRef.content.datos_entrada);

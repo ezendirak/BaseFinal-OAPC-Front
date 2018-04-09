@@ -1,3 +1,4 @@
+import { InfoKey } from './../interfaces/info-key';
 import { Injectable } from '@angular/core';
 import { ApiUrlConfigService }        from './api-url-config.service';
 import { AuthorizationService }       from './authorization.service'; 
@@ -93,16 +94,16 @@ getRegistres(): Observable<RegisterResponse[]>
                       .catch((error: any) => Observable.throw(error));
   }
 
-  getProductes(): Observable<string[]>
+  getProductes(): Observable<InfoKey[]>
 {
-  return this.http.get( this.ApiUrlConfigService._getProductesURL, 
+  return this.http.get( this.ApiUrlConfigService._provaTest, 
                         this.AuthorizationService.header_token()
                       )
                   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));  
 }
 
-getProductesModal(): Observable<string[]>
+getProductesModal(): Observable<InfoKey[]>
 {
   return this.http.get( this.ApiUrlConfigService._getProductesModalURL, 
                         this.AuthorizationService.header_token()

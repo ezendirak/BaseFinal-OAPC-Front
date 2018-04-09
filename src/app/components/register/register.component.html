@@ -13,6 +13,8 @@
                   [productesModal]="productesModal"
                   [isPinyol]="isPinyol"
                   [isLlavor]="isLlavor"
+                  [comboInfoModal]="comboInfoModal"
+                  (evento_getCombos)="onClickGetCombos($event)"
   >
   </app-form-register>     
 
@@ -26,11 +28,15 @@
                   [productesModal]="productesModal"
                   [comboGeneral]="comboGeneral"
                   (evento_putRegistre)="putRegistre($event)"
+                  [isPinyol]="isPinyol"
+                  [isLlavor]="isLlavor"
+                  (evento_canviProduct)="onClickParams($event)"
   >
   </app-taula-register>
 
   <app-button-taula-register [pagination]="pagination" 
                          (evento_list_pagination)="onClickPagination($event)"
+                         (evento_new_pagination)="onClickNewPagination($event)"
   >
   </app-button-taula-register>
 

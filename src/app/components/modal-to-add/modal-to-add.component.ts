@@ -1,3 +1,4 @@
+import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
 import { RegisterResponse } from './../../interfaces/register-response';
 import { Component, OnInit, Output, EventEmitter }        from '@angular/core';
@@ -10,6 +11,9 @@ import { LiteralsRegistre } from './../../literals-registre.enum';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateService } from '@ngx-translate/core';
 import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
+import { AuthorizationService } from '../../services/authorization.service';
+import { RegisterService } from '../../services/register.service';
+import { TrazaService } from '../../services/traza.service';
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +29,8 @@ import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
   //////////////////////////////////////////////////////////////////////////////////////
 
 export class ModalToAddComponent implements  OnInit  {
+
+  @Output() evento_canviProduct:    EventEmitter<any> = new EventEmitter();
 
   titulo         : string;
   lista          : any[] = [];
@@ -42,27 +48,33 @@ export class ModalToAddComponent implements  OnInit  {
   
   qVenuda:  number;
   pSortida: number;
-  varietat: string;
+
   comboLlenoModal: boolean;
   nouRegistre: RegisterResponse;
-  productesModal: string[];
+  productesModal: InfoKey[];
   nouPeriode: string;
-  producteSelected: string;
+  producteSelected: InfoKey;
   calibreSelected: string;
   qualitatSelected: string;
   colorCarnSelected: string;
   varietatSelected: string;
 
+  isPinyol: boolean;
+  isLlavor: boolean;
+
   private literals = LiteralsRegistre;
   constructor(private traductorService: TranslateService,
               public bsModalRef: BsModalRef,
+              private AuthorizationService: AuthorizationService, 
+               private RegisterService     : RegisterService, 
+               private TrazaService        : TrazaService
               ) 
   { }
  
 
   ngOnInit() {
-    // console.log("MODAL MODAL: ");
-    // console.log(this.datos_entrada);
+    console.log("MODAL MODAL: MODAL OBERT");
+    // console.log(this.producteSelected);
     
     this.onClose = new Subject();
   }
@@ -81,14 +93,15 @@ export class ModalToAddComponent implements  OnInit  {
     // } else {
     //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "colorCarn" : this.colorCarnSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
     // }
-    console.log(form.controls['colorsCarn'].value);
+    // console.log(form.controls['colorsCarn'].value);
     
     this.datos_salida.calibre = this.bsModalRef.content.calibreSelected;
     this.datos_salida.colorCarn = this.bsModalRef.content.colorCarnSelected;
     this.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected
+    this.datos_salida.varietat = this.bsModalRef.content.varietatSelected;
     this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
-    this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected;
+    this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.clau;
     this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
     // this.datos_salida.varietat = form.controls['eInformant'].value
     this.onClose.next(true);
@@ -108,15 +121,51 @@ export class ModalToAddComponent implements  OnInit  {
     this.bsModalRef.hide();
   }
 
-  changeSelesctedTipusProducteModal($event)
+  changeSelesctedTipusProducteModal()
   {
-    // console.log("EMITIMOS EVENTO Cambio de tipusPro: (MODAL | ADD)" + $event);
+    console.log("MODAL TO ADD: (MODAL | ADD)" + JSON.parse(JSON.stringify(this.producteSelected)));
     
+    let test: any;
+    test = this.producteSelected;
+    this.getCombosModal(test.clau);
     this.colorCarnSelected="";
     this.qualitatSelected="";
     this.calibreSelected="";
     this.varietatSelected="";
-    this.comboInfoModal = this.comboGeneral[this.producteSelected];
+
+    console.log(test.subGrup);
+    if (test.subGrup == 'PI'){
+      console.log("ES PINYOL");
+      this.isPinyol = true;
+      this.isLlavor = false;
+    }else if (test.subGrup == "LL"){
+      console.log("ES LLAVOR");
+      this.isPinyol = false;
+      this.isLlavor = true;
+    }
+
+    console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
+    // console.log(JSON.stringify(this.comboGeneral));
+    let comboEnModal: any;
+    comboEnModal = this.comboGeneral;
+    this.comboInfoModal = comboEnModal[test.clau];
+
+    console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
     
+    // comboInfoModal = comboEnModal[test.Clau];
+    
+  }
+
+  getCombosModal(tipusProducte: String)
+  {
+    console.log("getcombosModal en pare: (MODAL) " + tipusProducte);
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getCombos(tipusProducte)
+      .subscribe ( respuesta => { this.comboInfoModal = respuesta;
+                                  this.TrazaService.dato("Combos", "API GET Combo OK (ON MODAL)", this.comboInfoModal);
+                                  
+                                },
+                  error =>      { this.TrazaService.error("Combos", "API GET Combo KO (ON MODAL)", error); } 
+      );   
   }
 }

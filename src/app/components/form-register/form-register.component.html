@@ -34,7 +34,7 @@
 
   
     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="productes" [(ngModel)]="selectedTipusProducte" (change) = "changeSelectedTipusProducte($event)" >
-        <option *ngFor="let c of productes" [ngValue]="c">{{ 'TIPUSPRODUCTE.' + c | translate }}</option>
+        <option *ngFor="let c of productes" [ngValue]="c">{{ c.nom }}</option>
     </select>
   </div>
 
@@ -46,7 +46,7 @@
     
     
     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="colorsCarn" [(ngModel)]="selectedColorCarn" >
-      <option *ngFor="let v of comboInfo.colorsCarn" [ngValue]="v">{{ 'COLORCARN.' + v | translate }}</option>
+      <option *ngFor="let v of comboInfo.colorsCarn" [ngValue]="v.clau">{{ v.nom }}</option>
     </select>  
   </div>
 </ng-template> 
@@ -59,7 +59,7 @@
     
     
     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="colorsCarn" [(ngModel)]="selectedColorCarn" >
-      <option *ngFor="let v of comboInfo.varietats" [ngValue]="v">{{ 'VARIETAT.' + v | translate }}</option>
+      <option *ngFor="let v of comboInfo.varietats" [ngValue]="v.clau">{{ v.nom }}</option>
     </select>  
   </div>
 </ng-template>
@@ -72,7 +72,7 @@
     
     <!-- <input type="text"  class="col-md-3 col-xs-12"    id="qualitat"    name="qualitat"    [(ngModel)]="qualitat"> -->
       <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="qualitats" [(ngModel)]="selectedQualitat" >
-      <option *ngFor="let q of this.comboInfo.qualitats" [ngValue]="q">{{ 'QUALITAT.' + q | translate }}</option>
+      <option *ngFor="let q of this.comboInfo.qualitats" [ngValue]="q.clau">{{ q.nom }}</option>
     </select>   
     </div>
   </ng-template>
@@ -84,7 +84,7 @@
   
   <!-- <input type="text"  class="col-md-3 col-xs-12"    id="calibre"    name="calibre"    [(ngModel)]="calibre"> -->
      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="calibres" [(ngModel)]="selectedKalibre">
-    <option *ngFor="let k of this.comboInfo.calibres" [ngValue]="k">{{ 'CALIBRE.' + k | translate }}</option>
+    <option *ngFor="let k of this.comboInfo.calibres" [ngValue]="k.clau">{{ k.nom }}</option>
   </select> 
   </div>
 </ng-template>

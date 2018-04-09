@@ -1,5 +1,5 @@
-<h2>LIST-REGISTER</h2>
-<table class="table" style="text-align: center">
+
+<table class="table">
     <thead>
         <tr>
             <th>ID</th>
@@ -20,13 +20,13 @@
             <td>{{item?.periode}}</td>
             <td>{{ 'TIPUSPRODUCTE.' + item?.tipusProducte | translate }}</td>
             
-            <ng-container *ngIf="item?.varietat;then content else other_content"></ng-container>
-            <ng-template #content><td >{{ 'VARIETAT.' + item?.varietat | translate }}</td></ng-template>
-            <ng-template #other_content><td >-</td></ng-template>
+            <ng-container *ngIf="item?.varietat;then content1 else other_content1"></ng-container>
+            <ng-template #content1><td >{{ 'VARIETAT.' + item?.varietat | translate }}</td></ng-template>
+            <ng-template #other_content1><td >-</td></ng-template>
             
-            <ng-container *ngIf="item?.colorCarn;then content else other_content"></ng-container>
-            <ng-template #content><td >{{ 'COLORCARN.' + item?.colorCarn | translate}}</td></ng-template>
-            <ng-template #other_content><td >-</td></ng-template>
+            <ng-container *ngIf="item?.colorCarn;then content2 else other_content2"></ng-container>
+            <ng-template #content2><td >{{ 'COLORCARN.' + item?.colorCarn | translate}}</td></ng-template>
+            <ng-template #other_content2><td >-</td></ng-template>
             
             <td>{{ 'CALIBRE.' + item?.calibre | translate}}</td>
             <td>{{ 'QUALITAT.' + item?.qualitat | translate}}</td>

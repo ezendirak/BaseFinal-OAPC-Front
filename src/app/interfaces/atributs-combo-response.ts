@@ -1,6 +1,7 @@
+import { InfoKey } from './info-key';
 export interface AtributsComboResponse {
-    ColorsCarn: String[];
-    Qualitats:  String[];
-    Calibres:   String[];
-    Varietats:  String[];
+    ColorsCarn: InfoKey;
+    Qualitats:  InfoKey;
+    Calibres:   InfoKey;
+    Varietats:  InfoKey;
 }

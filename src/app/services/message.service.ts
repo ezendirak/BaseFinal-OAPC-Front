@@ -17,13 +17,18 @@ export class MessageService {
   ///////////////////////////////////////////////////////////////////////////////////////
 
   private subject_islogged = new Subject<boolean>();
+  private subject_haveModal = new Subject<boolean>();
+
   public obs_islogged$ = this.subject_islogged.asObservable();
+  public obs_haveModal$ = this.subject_haveModal.asObservable();
+  
 
   ///////////////////////////////////////////////////////////////////////////////////////
 
   login() {
     //console.log("message service login")
     this.subject_islogged.next(true);
+    this.subject_haveModal.next
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////
