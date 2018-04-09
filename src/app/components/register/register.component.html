@@ -16,8 +16,12 @@
                   [comboInfoModal]="comboInfoModal"
                   (evento_getCombos)="onClickGetCombos($event)"
   >
-  </app-form-register>     
+  </app-form-register>
 
+  <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
+  >
+  </app-lector-excel>
+  
   <app-taula-register [items]="items" 
                   
                   (evento_list_put)="onClickPutList($event)" 

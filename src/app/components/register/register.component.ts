@@ -187,6 +187,12 @@ export class RegisterComponent implements OnInit {
     console.log("tanquem el modal per editar!");
     console.log($event);
   }
+
+  SaveFromExcel($event){
+    console.log("Estem al pare enviant a spring!");
+    console.log($event);
+    this.postRegistre($event);
+  }
   // switchLanguage(language: string){
   //   console.log("Desde el pare: " + this.language);
   //   this.translate.use(this.language);

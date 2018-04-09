@@ -44,6 +44,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ModalToAddComponent } from './components/modal-to-add/modal-to-add.component';
+import { LectorExcelComponent } from './components/lector-excel/lector-excel.component';
 //import { TranslateLoader } from '@ngx-translate/core';
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +73,8 @@ export function HttpLoaderFactory(http: HttpClient){
     FormRegisterComponent,
     TaulaRegisterComponent,
     RegisterComponent,
-    ModalToAddComponent
+    ModalToAddComponent,
+    LectorExcelComponent
   ],
 
   entryComponents: [ModalNoteComponent, ModalToAddComponent],

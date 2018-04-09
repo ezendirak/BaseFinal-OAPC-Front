@@ -11,6 +11,7 @@ import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
 import { ModalToAddComponent } from '../modal-to-add/modal-to-add.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
+
 @Component({
   selector: 'app-form-register',
   templateUrl: './form-register.component.html',
@@ -116,7 +117,7 @@ export class FormRegisterComponent implements OnInit {
   afegirProd($event){
     console.log("Test event: "+ $event);
 
-    this.filtros = {"tipusProducte" : this.selectedTipusProducte,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre, "periode" : this.periode, "quantitatVenuda" : this.qVenuda, "preuSortida" : this.pSortida};
+    this.filtros = {"tipusProducte" : this.selectedTipusProducte.nom,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre, "periode" : this.periode, "quantitatVenuda" : this.qVenuda, "preuSortida" : this.pSortida};
     console.log(this.filtros);
     
 
@@ -220,5 +221,7 @@ export class FormRegisterComponent implements OnInit {
 
     this.evento_getCombos.emit(tipusProducte);
   }
+
+
 
 }
