@@ -21,6 +21,7 @@ export class TaulaRegisterComponent implements OnInit {
   @Input() comboInfoModal: AtributsComboResponse;
   
   @Input() comboGeneral: AtributsComboMap;
+  @Input() comboGeneralNoms: AtributsComboMap;
   @Input() nouRegistre;
   @Input() comboLlenoModal: boolean;
   
@@ -83,11 +84,13 @@ export class TaulaRegisterComponent implements OnInit {
     this.bsModalRef.content.qualitatSelected = this.bsModalRef.content.datos_entrada.qualitat;
     this.bsModalRef.content.varietatSelected = this.bsModalRef.content.datos_entrada.varietat;
     this.bsModalRef.content.comboGeneral = this.comboGeneral;
-    this.bsModalRef.content.isLlavor = true;
+    this.bsModalRef.content.comboGeneralNoms = this.comboGeneralNoms;
+    
     // console.log(this.bsModalRef.content.isLlavor);
     // console.log(this.bsModalRef.content.producteSelected);
     
-    this.bsModalRef.content.comboInfoModal = this.comboGeneral[this.bsModalRef.content.producteSelected.clau];
+    this.bsModalRef.content.comboInfoModal = this.comboGeneralNoms[this.bsModalRef.content.producteSelected.nom];
+    // console.log();
     // console.log(this.bsModalRef.content.comboInfoModal);
     this.bsModalRef.content.productesModal = this.productesModal;
     // console.log(this.bsModalRef.content.productesModal);

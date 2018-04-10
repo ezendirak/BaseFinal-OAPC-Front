@@ -83,6 +83,16 @@ getRegistres(): Observable<RegisterResponse[]>
                     .catch((error: any) => Observable.throw(error));
   } 
 
+  postRegistreFromExcel(filtre: any, para: HttpParams): Observable<RegisterResponse> {
+    console.log("Servei final EXCEL: " + filtre);
+    
+    return this.http.post(  this.ApiUrlConfigService._postRegistreFromExcelURL,
+                            filtre , {params: para},
+                          )
+                    .map(respuesta => respuesta)
+                    .catch((error: any) => Observable.throw(error));
+  } 
+
   //////////////////////////////////////////////////////////////////////////////////////
 
   putRegistre(registre: RegisterResponse): Observable<RegisterResponse>{
@@ -130,6 +140,13 @@ getCombosModalToAdd(tipusProducte: String): Observable<AtributsComboResponse>
 
 getAllCombos(){
   return this.http.get(this.ApiUrlConfigService._getAllCombos,
+                        this.AuthorizationService.header_token()
+                      )
+                      .catch((error: any) => Observable.throw(error));
+}
+
+getAllNamesCombos(){
+  return this.http.get(this.ApiUrlConfigService._getAllNamesCombos,
                         this.AuthorizationService.header_token()
                       )
                       .catch((error: any) => Observable.throw(error));

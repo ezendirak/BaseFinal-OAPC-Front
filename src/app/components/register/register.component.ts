@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { LiteralsRegistre } from './../../literals-registre.enum';
 import { InfoKey } from './../../interfaces/info-key';
 import { RegisterResponse } from './../../interfaces/register-response';
@@ -37,6 +38,7 @@ export class RegisterComponent implements OnInit {
   productesModal: InfoKey[];
 
   comboGeneral: AtributsComboMap;
+  comboGeneralNoms  : AtributsComboMap;
 
   comboInfo:    AtributsComboResponse;
   comboLleno:  Boolean;
@@ -68,6 +70,7 @@ export class RegisterComponent implements OnInit {
     this.comboLlenoModal = false;
     this.getProductesModal();
     this.getAllCombos();
+    this.getAllNamesCombos();
     this.getProductes();
     
     this.filtroFake = "";
@@ -191,7 +194,9 @@ export class RegisterComponent implements OnInit {
   SaveFromExcel($event){
     console.log("Estem al pare enviant a spring!");
     console.log($event);
-    this.postRegistre($event);
+    console.log($event.newRegistre);
+    console.log($event.params)
+    this.postRegistreFromExcel($event.newRegistre, $event.params);
   }
   // switchLanguage(language: string){
   //   console.log("Desde el pare: " + this.language);
@@ -377,6 +382,23 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  postRegistreFromExcel(filtro: any, params: HttpParams)
+  { 
+    if (this.AuthorizationService.is_logged()){
+      console.log("a la funcio del controlador: " + filtro);
+      console.log("abans del service: " + filtro.tipusProducte);
+      this.RegisterService.postRegistreFromExcel(filtro, params)
+      .subscribe ( respuesta => { this.item = respuesta;
+
+                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  this.getRegistresPage(this.filtroFake);
+                                },
+                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+      );
+    }
+
+  }
+
   putRegistreToService(registre: RegisterResponse)
   { 
     if (this.AuthorizationService.is_logged()){
@@ -403,6 +425,20 @@ export class RegisterComponent implements OnInit {
                                   // console.log(this.comboGeneral["PR01"].Calibres);
                                 },
                   error =>      { this.TrazaService.error("Combo GENERALS", "API GET COMBOGENERALS KO", error); } 
+      );
+    }
+  }
+
+  getAllNamesCombos() {
+    if (this.AuthorizationService.is_logged()){
+      this.RegisterService.getAllNamesCombos()
+      .subscribe ( respuesta => { this.comboGeneralNoms = respuesta;
+                                  // this.comboInfoModal = this.comboGeneral['PR01'];
+                                  // this.TrazaService.dato("Combo GENERALS", "API GET COMBOGENERALS OK", this.items);
+                                  console.log(this.comboGeneralNoms);
+                                  // console.log(this.comboGeneral["PR01"].Calibres);
+                                },
+                  error =>      { this.TrazaService.error("Combo GENERALS NOMS", "API GET COMBOGENERALS KO", error); } 
       );
     }
   }

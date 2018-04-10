@@ -3,6 +3,7 @@ import { RegisterResponse } from './../../interfaces/register-response';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import * as XLSX from 'xlsx';
+import { HttpParams } from '@angular/common/http';
 
 
 
@@ -51,20 +52,38 @@ export class LectorExcelComponent {
       let row: any;
       let fila: any;
       let atribut: any;
-      let posicio: any;
-      let registresAGravar: string[] = new Array<string>();
+      let posicio: number;
+      let isPinyol: boolean = false;
+      let isLlavor: boolean = false;
+
       
+      // console.log(this.data[0].length);
+      switch (this.data[0].length) {
+        case 7:
+          // isPinyol = true;
+          if (this.contains(this.data[0], 'Varietat')){
+            isLlavor = true;
+            console.log("TENIM VARIETAT; ES LLAVOR");
+          }else if(this.contains(this.data[0], 'Color')){
+            isPinyol = true;
+            console.log("TENIM COLOR DE CARN; ES PINYOL");
+          }
+          break;
       
+        default:
+          break;
+      }
       let index: number = 0;
       for (row in this.data) {
         
-        const newRegistre: Register = new Register();
+        let newRegistre = new Register();
         index += 1;
         for (fila in row){
           posicio = 0;
-          console.log(this.data[index]);
+          // console.log(this.data[index]);
           for (atribut in this.data[index]){
-            console.log(atribut);
+            // console.log(atribut);
+            
             switch (posicio) {
               case 0:
                 newRegistre.periode = this.data[index][posicio];
@@ -75,7 +94,12 @@ export class LectorExcelComponent {
                 break;
 
               case 2:
-                newRegistre.colorCarn = this.data[index][posicio];
+                if (isPinyol){
+                  newRegistre.colorCarn = this.data[index][posicio];
+                }
+                else if (isLlavor){
+                  newRegistre.varietat = this.data[index][posicio];
+                }
                 break;
 
               case 3:
@@ -97,11 +121,25 @@ export class LectorExcelComponent {
               default:
                 break;
             }
+            
+            
             posicio +=1;
           }
-          console.log("Registre guardat: ");
-          console.log(newRegistre);
-          this.saveFromExcel(newRegistre);
+          // console.log("Registre guardat: ");
+          // console.log(newRegistre);
+          if (newRegistre.tipusProducte != null){
+            let params = new HttpParams();
+            /////FAMILIA 1 => is PINYOL /////// FAMILIA 2 => is LLAVOR  ////// FAMILIA 3 => will be SECA
+            if(isPinyol){
+              params = params.set('Familia', "1");
+            }else if (isLlavor){
+              params = params.set('Familia', "2");
+            }
+            
+     
+            this.saveFromExcel(newRegistre, params);
+          }
+          
         }
         //console.log(newRegistre);
       }
@@ -123,9 +161,18 @@ export class LectorExcelComponent {
 		XLSX.writeFile(wb, this.fileName);
   }
   
-  saveFromExcel(newRegistre: Register){
+  saveFromExcel(newRegistre: Register, params:  HttpParams){
     console.log("Sortim del bucle");
-    this.evento_AfegirXLS.emit(newRegistre);
+    this.evento_AfegirXLS.emit({newRegistre, params});
+  }
+
+  contains(a, b) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === b) {
+            return true;
+        }
+    }
+    return false;
   }
   
 }

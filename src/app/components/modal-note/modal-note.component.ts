@@ -37,6 +37,7 @@ export class ModalNoteComponent implements  OnInit  {
   item: RegisterResponse;
 
   comboGeneral: AtributsComboMap;
+  comboGeneralNoms: AtributsComboMap;
   comboInfoModal: AtributsComboResponse;
 
   public onClose: Subject<boolean>;
@@ -83,7 +84,6 @@ export class ModalNoteComponent implements  OnInit  {
     // this.comboInfoModal = this.comboGeneral[this.producteSelected];
     // this.pSortida = this.datos_entrada.preuSortida;
     // this.qVenuda = this.datos_entrada.quantitatVenuda;
-
     this.onClose = new Subject();
   }
 
@@ -167,18 +167,21 @@ export class ModalNoteComponent implements  OnInit  {
 
   test(){
     let infoTest: any;
-    console.log(this.comboInfoModal);
-    console.log(this.comboGeneral[this.producteSelected]);
-    this.comboInfoModal = this.comboGeneral[this.producteSelected];
+    // console.log(this.productesModal);
+    // console.log(this.comboGeneral);
+    // console.log(this.comboGeneralNoms);
+    // console.log(this.comboGeneralNoms);
+    // console.log(this.comboGeneral[this.producteSelected]);
+    this.comboInfoModal = this.comboGeneralNoms[this.producteSelected];
     this.isDisabled = false;
-    console.log(this.comboInfoModal);
     infoTest = JSON.parse(JSON.stringify(this.comboInfoModal)); 
-    console.log(infoTest.colorsCarn.length);
-    if (infoTest.colorsCarn.length > 1){
+   
+    // console.log(infoTest.colorsCarn.length);
+    if (infoTest.colorsCarn.length > 0){
       this.isPinyol = true;
       this.isLlavor = false;
       console.log("ES PINYOL");
-    } else if (infoTest.varietats.length > 1){
+    } else if (infoTest.varietats.length > 0){
       this.isPinyol = false;
       this.isLlavor = true;
       console.log("ES LLAVOR");

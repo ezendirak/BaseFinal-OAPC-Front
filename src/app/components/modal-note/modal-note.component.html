@@ -41,8 +41,9 @@
       <div class="form-group row margin-bottom">
         <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tipPro | translate }}</label>
         
+
            <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="productes" [(ngModel)]="producteSelected" (change) = "changeSelesctedTipusProducteModal($event)">
-              <option *ngFor="let c of productesModal" [ngValue]="c.clau">{{ c.nom }}</option>
+              <option *ngFor="let c of productesModal" [ngValue]="c.nom">{{ c.nom }}</option>
           </select>
         
           <ng-container *ngIf="comboInfoModal && isPinyol;then content"></ng-container>
@@ -51,7 +52,7 @@
         <!-- <input type="text"  class="col-md-3 col-xs-12"    id="varietat"    name="varietat"    [(ngModel)]="varietat"> -->
         
             <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="colorsCarn" [(ngModel)]="colorCarnSelected" >
-              <option *ngFor="let v of comboInfoModal.colorsCarn" [ngValue]="v.clau">{{ v.nom }}</option>
+              <option *ngFor="let v of comboInfoModal.colorsCarn" [ngValue]="v.nom">{{ v.nom }}</option>
             </select>  
         </ng-template> 
         
@@ -62,7 +63,7 @@
     
     
     <select [disabled]="isDisabled" class="col-md-3 col-xs-12"  name="varietats" [(ngModel)]="varietatSelected" >
-      <option *ngFor="let y of comboInfoModal.varietats" [ngValue]="y.clau">{{ y.nom }}</option>
+      <option *ngFor="let y of comboInfoModal.varietats" [ngValue]="y.nom">{{ y.nom }}</option>
     </select>  
 </ng-template>
 
@@ -75,7 +76,7 @@
           
           <!-- <input type="text"  class="col-md-3 col-xs-12"    id="qualitat"    name="qualitat"    [(ngModel)]="qualitat"> -->
              <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="qualitats" [(ngModel)]="qualitatSelected" >
-            <option *ngFor="let q of comboInfoModal.qualitats" [ngValue]="q.clau">{{ q.nom }}</option>
+            <option *ngFor="let q of comboInfoModal.qualitats" [ngValue]="q.nom">{{ q.nom }}</option>
           </select>   
       </ng-template>
       <ng-container *ngIf="comboInfoModal;then content3"></ng-container>
@@ -84,7 +85,7 @@
         
         <!-- <input type="text"  class="col-md-3 col-xs-12"    id="calibre"    name="calibre"    [(ngModel)]="calibre"> -->
             <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="calibres" [(ngModel)]="calibreSelected">
-          <option *ngFor="let k of comboInfoModal.calibres" [ngValue]="k.clau">{{ k.nom }}</option>
+          <option *ngFor="let k of comboInfoModal.calibres" [ngValue]="k.nom">{{ k.nom }}</option>
         </select> 
         </ng-template> 
       </div>

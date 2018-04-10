@@ -33,6 +33,7 @@ export class ApiUrlConfigService {
 
   public _getRegistreURL         = '/api/v4/registres/';
   public _postRegistreURL        = '/api/v4/registres/';
+  public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres/';
   public _putRegistreURL         = '/api/v4/registres/';
   public _deleteRegistreURL      = '/api/v4/registres/';
   public _resultatFiltrat         = '/api/v4/filtro/';
@@ -42,6 +43,7 @@ export class ApiUrlConfigService {
   public _getCombosProd          = '/api/v3/pdu/combos/';
   public _getCombosProdModalToAdd         = '/api/v3/pdu/ModalCombosToAdd/';
   public _getAllCombos          = '/api/v3/pduCombos/';
+  public _getAllNamesCombos          = '/api/v3/pduNamedCombos/';
   public _provaTest             = '/api/v3/pdu/PROPDU/';
   
   public _getCombosProdColorCarn     = '/api/v3/pdu/colorcarn/';
