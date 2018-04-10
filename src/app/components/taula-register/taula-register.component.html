@@ -18,18 +18,18 @@
         <tr *ngFor="let item of items">
             <td>{{item?.id}}</td>
             <td>{{item?.periode}}</td>
-            <td>{{ 'TIPUSPRODUCTE.' + item?.tipusProducte | translate }}</td>
+            <td>{{ item?.tipusProducte }}</td>
             
             <ng-container *ngIf="item?.varietat;then content1 else other_content1"></ng-container>
-            <ng-template #content1><td >{{ 'VARIETAT.' + item?.varietat | translate }}</td></ng-template>
+            <ng-template #content1><td >{{ item?.varietat }}</td></ng-template>
             <ng-template #other_content1><td >-</td></ng-template>
             
             <ng-container *ngIf="item?.colorCarn;then content2 else other_content2"></ng-container>
-            <ng-template #content2><td >{{ 'COLORCARN.' + item?.colorCarn | translate}}</td></ng-template>
+            <ng-template #content2><td >{{ item?.colorCarn }}</td></ng-template>
             <ng-template #other_content2><td >-</td></ng-template>
             
-            <td>{{ 'CALIBRE.' + item?.calibre | translate}}</td>
-            <td>{{ 'QUALITAT.' + item?.qualitat | translate}}</td>
+            <td>{{ item?.calibre }}</td>
+            <td>{{ item?.qualitat }}</td>
             <td>{{item?.quantitatVenuda}}</td>
             <td>{{item?.preuSortida}}</td>
             <td>{{item?.quantitatVenuda * item?.preuSortida}} €</td>

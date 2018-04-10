@@ -46,7 +46,7 @@
     
     
     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="colorsCarn" [(ngModel)]="selectedColorCarn" >
-      <option *ngFor="let v of comboInfo.colorsCarn" [ngValue]="v.clau">{{ v.nom }}</option>
+      <option *ngFor="let v of comboInfo.colorsCarn" [ngValue]="v.nom">{{ v.nom }}</option>
     </select>  
   </div>
 </ng-template> 
@@ -59,7 +59,7 @@
     
     
     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="colorsCarn" [(ngModel)]="selectedColorCarn" >
-      <option *ngFor="let v of comboInfo.varietats" [ngValue]="v.clau">{{ v.nom }}</option>
+      <option *ngFor="let v of comboInfo.varietats" [ngValue]="v.nom">{{ v.nom }}</option>
     </select>  
   </div>
 </ng-template>
@@ -72,7 +72,7 @@
     
     <!-- <input type="text"  class="col-md-3 col-xs-12"    id="qualitat"    name="qualitat"    [(ngModel)]="qualitat"> -->
       <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="qualitats" [(ngModel)]="selectedQualitat" >
-      <option *ngFor="let q of this.comboInfo.qualitats" [ngValue]="q.clau">{{ q.nom }}</option>
+      <option *ngFor="let q of this.comboInfo.qualitats" [ngValue]="q.nom">{{ q.nom }}</option>
     </select>   
     </div>
   </ng-template>
@@ -84,7 +84,7 @@
   
   <!-- <input type="text"  class="col-md-3 col-xs-12"    id="calibre"    name="calibre"    [(ngModel)]="calibre"> -->
      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="calibres" [(ngModel)]="selectedKalibre">
-    <option *ngFor="let k of this.comboInfo.calibres" [ngValue]="k.clau">{{ k.nom }}</option>
+    <option *ngFor="let k of this.comboInfo.calibres" [ngValue]="k.nom">{{ k.nom }}</option>
   </select> 
   </div>
 </ng-template>

@@ -101,7 +101,7 @@ export class ModalToAddComponent implements  OnInit  {
     this.datos_salida.varietat = this.bsModalRef.content.varietatSelected;
     this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
-    this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.clau;
+    this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.nom;
     this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
     // this.datos_salida.varietat = form.controls['eInformant'].value
     this.onClose.next(true);
@@ -145,10 +145,10 @@ export class ModalToAddComponent implements  OnInit  {
     }
 
     console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
-    // console.log(JSON.stringify(this.comboGeneral));
-    let comboEnModal: any;
-    comboEnModal = this.comboGeneral;
-    this.comboInfoModal = comboEnModal[test.clau];
+    console.log(this.comboInfoModal);
+    // let comboEnModal: any;
+    // comboEnModal = this.comboGeneral;
+    // this.comboInfoModal = comboEnModal[test.clau];
 
     console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
     
@@ -160,7 +160,7 @@ export class ModalToAddComponent implements  OnInit  {
   {
     console.log("getcombosModal en pare: (MODAL) " + tipusProducte);
     if (this.AuthorizationService.is_logged())
-      this.RegisterService.getCombos(tipusProducte)
+      this.RegisterService.getCombosModalToAdd(tipusProducte)
       .subscribe ( respuesta => { this.comboInfoModal = respuesta;
                                   this.TrazaService.dato("Combos", "API GET Combo OK (ON MODAL)", this.comboInfoModal);
                                   

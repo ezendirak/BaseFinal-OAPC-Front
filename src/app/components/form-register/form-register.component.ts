@@ -27,6 +27,7 @@ export class FormRegisterComponent implements OnInit {
   @Input()  comboLleno:     Boolean;
   @Input()  item:           RegisterResponse;
   @Input()  comboGeneral:   AtributsComboMap;
+  @Input()  comboGeneralModalToAdd: AtributsComboMap;
   @Input()  comboInfoModal: AtributsComboResponse;
   @Input()  productesModal: string[];
   @Input()  isPinyol:       Boolean;
@@ -89,7 +90,7 @@ export class FormRegisterComponent implements OnInit {
     
      let params = new HttpParams();
      if(this.selectedTipusProducte){
-      params = params.set('tipusProducte', this.selectedTipusProducte.clau);
+      params = params.set('tipusProducte', this.selectedTipusProducte.nom);
      }
     // params = params.set('tipusProducte', this.selectedTipusProducte).set('colorCarn', this.selectedColorCarn).set('qualitat', this.selectedQualitat).set('calibre', this.selectedKalibre);
      if (this.selectedColorCarn){
@@ -144,7 +145,7 @@ export class FormRegisterComponent implements OnInit {
     
     console.log("*/*/*/*/*/*/*/*/*/*");
     console.log(this.comboGeneral);
-    this.bsModalRefAdd.content.comboGeneral = this.comboGeneral;
+    this.bsModalRefAdd.content.comboGeneral = this.comboGeneralModalToAdd;
     this.bsModalRefAdd.content.comboInfoModal = this.comboInfoModal;
     // this.bsModalRefAdd.content.isPinyol = this.isPinyol;
     // this.bsModalRefAdd.content.isLlavor = this.isLlavor;

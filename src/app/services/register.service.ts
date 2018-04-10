@@ -120,6 +120,14 @@ getCombos(tipusProducte: String): Observable<AtributsComboResponse>
                   .catch((error: any) => Observable.throw(error));  
 }
 
+getCombosModalToAdd(tipusProducte: String): Observable<AtributsComboResponse>
+{
+  return this.http.get( this.ApiUrlConfigService._getCombosProdModalToAdd + tipusProducte, 
+                        this.AuthorizationService.header_token()
+                      )
+                  .catch((error: any) => Observable.throw(error));  
+}
+
 getAllCombos(){
   return this.http.get(this.ApiUrlConfigService._getAllCombos,
                         this.AuthorizationService.header_token()
