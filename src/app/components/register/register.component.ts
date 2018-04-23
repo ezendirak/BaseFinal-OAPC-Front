@@ -16,7 +16,8 @@ import { Pagination }           from '../../model/pagination';
 import { RegisterService } from '../../services/register.service';
 import { AtributsComboResponse } from '../../interfaces/atributs-combo-response';
 import { TranslateService } from '@ngx-translate/core';
-import { empty } from 'rxjs/observable/empty';
+import { Register } from '../../model/register';
+import { Periode } from '../../model/periode';
 
 @Component({
   selector: 'app-register',
@@ -25,8 +26,6 @@ import { empty } from 'rxjs/observable/empty';
 })
 export class RegisterComponent implements OnInit {
 
- 
-
   filtroFake: any;
 
   pagination: Pagination;
@@ -34,8 +33,12 @@ export class RegisterComponent implements OnInit {
   items:      RegisterResponse[];
   item:       RegisterResponse;
 
+  items2: Register[];
+
   productes:  InfoKey[];
   productesModal: InfoKey[];
+
+  periodes: Periode[];
 
   comboGeneral: AtributsComboMap;
   comboGeneralNoms  : AtributsComboMap;
@@ -52,7 +55,7 @@ export class RegisterComponent implements OnInit {
   registres:    RegisterResponse[];
 
   filtre: any;
-
+  periodesModal:  Periode[];
   comboInfoModal: AtributsComboResponse;
 
   literal: LiteralsRegistre;
@@ -72,6 +75,8 @@ export class RegisterComponent implements OnInit {
     this.getAllCombos();
     this.getAllNamesCombos();
     this.getProductes();
+    this.getPeriodes();
+    this.getPeriodesModal();
     
     this.filtroFake = "";
     this.paginacio = 5;
@@ -97,34 +102,27 @@ export class RegisterComponent implements OnInit {
     console.log("controller: onClickBuscarForm " + $event);
     this.pagination.page_actual = 1;
     this.filtre = $event;
-    console.log(this.filtre);
-    // if (!this.filtre){
-    //   this.filtre = "";
-    // }
     this.getRegistresPage($event);    
-    // this.getResultatFiltrat($event);
   }
 
   afegirForm($event)
   {
-    // console.log("Controlador Pare: " + $event);
-    // console.log("Controlador Pare 2: " + this.item);
-    console.log($event);
+    
     this.postRegistre($event);
     
   }
 
   putRegistre($event)
   {
-    console.log("********************* controller: onClickPutList *******************"); 
-    console.log($event);
+    // console.log("********************* controller: onClickPutList *******************"); 
+    // console.log($event);
     this.putRegistreToService($event);
   }
 
   onClickDeleteList(item)
   {
-    console.log("controller: onClickDeleteList ");
-    console.log("Controlador: " + item.id);
+    // console.log("controller: onClickDeleteList ");
+    // console.log("Controlador: " + item.id);
 
     this.deleteRegistre(item.id, true)    
   }
@@ -149,8 +147,8 @@ export class RegisterComponent implements OnInit {
 
   onClickParams($event)
   {
-    console.log("controller: onClickParams " + $event.subGrup);
-    console.log("*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*");
+    // console.log("controller: onClickParams " + $event.subGrup);
+    // console.log("*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*");
     if ($event.subGrup == "PI"){
       this.isPinyol = true;
       this.isLlavor = false;
@@ -169,9 +167,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onClickNewPagination($event){
-    console.log("Desde Registre: "+$event);
+    // console.log("Desde Registre: "+$event);
     this.pagination.page_items = $event;
-    console.log(this.pagination);
+    // console.log(this.pagination);
     if (this.filtre){
       // console.log(this.filtre);
       this.getRegistresPage(this.filtre); 
@@ -186,22 +184,14 @@ export class RegisterComponent implements OnInit {
     this.getCombosModal($event);
   }
 
-  actionToEdit($event){
-    console.log("tanquem el modal per editar!");
-    console.log($event);
-  }
-
   SaveFromExcel($event){
-    console.log("Estem al pare enviant a spring!");
-    console.log($event);
-    console.log($event.newRegistre);
-    console.log($event.params)
+    // console.log("Estem al pare enviant a spring!");
+    // console.log($event);
+    // console.log($event.newRegistre);
+    // console.log($event.params)
     this.postRegistreFromExcel($event.newRegistre, $event.params);
   }
-  // switchLanguage(language: string){
-  //   console.log("Desde el pare: " + this.language);
-  //   this.translate.use(this.language);
-  // }
+
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////  
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,7 +201,6 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged())
       this.RegisterService.getRegistres()
       .subscribe ( respuesta => { this.items = respuesta;
-
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
                                 },
                   error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
@@ -225,9 +214,7 @@ export class RegisterComponent implements OnInit {
   getRegistresPage(filtro: any)
   {    
     if (this.AuthorizationService.is_logged())
-    {    
-      // this.getRegistresCount(filtro);
-      // console.log("abans del service "+filtro);
+    {
       this.getRegistresCountFiltrat(filtro);
       this.RegisterService.getRegistresPage(this.pagination.page_actual, this.pagination.page_items, filtro)
       .subscribe ( respuesta => { this.items = respuesta;  
@@ -243,6 +230,7 @@ export class RegisterComponent implements OnInit {
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////
+  
   getRegistresCountFiltrat(filtro: any)
   {
     if (this.AuthorizationService.is_logged())
@@ -253,21 +241,6 @@ export class RegisterComponent implements OnInit {
                                   this.refreshPaginationList();
 
                                   // this.TrazaService.dato("NOTES", "API GETNOTESCOUNT OK", this.items);                                    
-                                },
-                  error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
-      );
-  }
-
-  getRegistresCount()
-  {
-    if (this.AuthorizationService.is_logged())
-      this.RegisterService.getRegistresCount()
-      .subscribe ( respuesta => { this.pagination.total_items = respuesta;
-
-                                  this.refreshPaginationCounters();
-                                  this.refreshPaginationList();
-
-                                  this.TrazaService.dato("NOTES", "API GETNOTESCOUNT OK", this.items);                                    
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
@@ -323,6 +296,31 @@ export class RegisterComponent implements OnInit {
       );
   }
   
+  getPeriodes()
+  {
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getPeriodes()
+      .subscribe ( respuesta => { this.periodes = respuesta;
+
+                                   this.TrazaService.dato("Periodes DISPONIBLES", "API GET PERIODES OK", this.periodes);
+                                },
+                  error =>      { this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); } 
+      );
+  }
+  
+  getPeriodesModal()
+  {
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getPeriodesDisponibles()
+      .subscribe ( respuesta => { this.periodesModal = respuesta;
+
+                                   this.TrazaService.dato("Periodes MODAL DISPONIBLES", "API GET PERIODES OK", this.periodesModal);
+                                },
+                  error =>      { this.TrazaService.error("Periodes MODAL DISPONIBLES", "API GET PERIODES KO", error); } 
+      );
+  }
+
+
   getCombos(tipusProducte: String)
   {
     if (this.AuthorizationService.is_logged())
@@ -350,18 +348,18 @@ export class RegisterComponent implements OnInit {
 
 
   
-  getResultatFiltrat(filtro: any)
-  {
-    if (this.AuthorizationService.is_logged())
-    console.log("a la funcio del controlador: " + filtro);
-      this.RegisterService.getResultatFiltrat(filtro)
-      .subscribe ( respuesta => { this.items = respuesta;
+  // getResultatFiltrat(filtro: any)
+  // {
+  //   if (this.AuthorizationService.is_logged())
+  //   console.log("a la funcio del controlador: " + filtro);
+  //     this.RegisterService.getResultatFiltrat(filtro)
+  //     .subscribe ( respuesta => { this.items = respuesta;
 
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
-                                },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
-      );
-  }
+  //                                 this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+  //                               },
+  //                 error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+  //     );
+  // }
 
 
 

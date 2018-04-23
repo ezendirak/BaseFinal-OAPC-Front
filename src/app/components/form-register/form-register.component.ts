@@ -1,3 +1,4 @@
+import { Periode } from './../../model/periode';
 import { InfoKey } from './../../interfaces/info-key';
 import { RegisterResponse } from './../../interfaces/register-response';
 import { LiteralsRegistre } from './../../literals-registre.enum';
@@ -32,6 +33,8 @@ export class FormRegisterComponent implements OnInit {
   @Input()  productesModal: string[];
   @Input()  isPinyol:       Boolean;
   @Input()  isLlavor:       Boolean;
+  @Input()  periodes:       Periode[];
+  @Input()  periodesModal:  Periode[];
 
 
   @Output() evento_form1: EventEmitter<any> = new EventEmitter();
@@ -42,7 +45,7 @@ export class FormRegisterComponent implements OnInit {
   filtros: any;
 
   referencia: number;
-  periode: string;
+  periode: Periode;
   eInformant: string;
   uInformant: string;
   tipusProducte: string;
@@ -57,7 +60,8 @@ export class FormRegisterComponent implements OnInit {
   selectedQualitat:       string;
   selectedKalibre:        string;
   selectedColorCarn:      string;
-  
+  selectedVarietat:       string;
+
   bsModalRefAdd: BsModalRef;
   
   usuariActual: String;
@@ -89,41 +93,33 @@ export class FormRegisterComponent implements OnInit {
      
     
      let params = new HttpParams();
-     if(this.selectedTipusProducte){
+     if(this.selectedTipusProducte && this.selectedTipusProducte.nom != 'Tots'){
       params = params.set('tipusProducte', this.selectedTipusProducte.nom);
      }
+     if(this.periode && this.periode.tipusPeriode != 'Tots'){
+      params = params.set('periode', this.periode.numPeriode + this.periode.tipusPeriode);
+     }
     // params = params.set('tipusProducte', this.selectedTipusProducte).set('colorCarn', this.selectedColorCarn).set('qualitat', this.selectedQualitat).set('calibre', this.selectedKalibre);
-     if (this.selectedColorCarn){
-       params = params.set('colorCarn', this.selectedColorCarn);
+     if (this.selectedColorCarn && this.selectedColorCarn != '-'){
+        params = params.set('colorCarn', this.selectedColorCarn);
      }
-     if (this.selectedQualitat){
-     params = params.set('qualitat', this.selectedQualitat);
+     if (this.selectedQualitat && this.selectedQualitat != '-'){
+        params = params.set('qualitat', this.selectedQualitat);
      }
-     if (this.selectedKalibre){
-    params = params.set('calibre', this.selectedKalibre);
+     if (this.selectedKalibre && this.selectedKalibre != '-'){
+        params = params.set('calibre', this.selectedKalibre);
      }
+     if (this.selectedVarietat && this.selectedVarietat != '-'){
+      params = params.set('varietat', this.selectedVarietat);
+   }
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
       console.log(params);
     this.evento_form1.emit(params);
   }
 
-  // provaOnChange($event){
-  //   this.tipusProducte = this.selectedTipusProducte.clau;
-  //   console.log("PROVA ON CHANGE: ");
-  //   console.log($event.Clau);
-  //   console.log(this.tipusProducte);
-  //   console.log("FI DE PROVA ON CHANGE");
-  // }
-
   afegirProd($event){
-    console.log("Test event: "+ $event);
-
     this.filtros = {"tipusProducte" : this.selectedTipusProducte.nom,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre, "periode" : this.periode, "quantitatVenuda" : this.qVenuda, "preuSortida" : this.pSortida};
-    console.log(this.filtros);
     
-
-    //  console.log("Afegir prod: " + params);
-    //  console.log("Afegir OBJECTE " + this.item);
     this.evento_form_afegir.emit(this.filtros);
   }
 
@@ -134,33 +130,19 @@ export class FormRegisterComponent implements OnInit {
       lista: [],
       botonCerrar: "Tancar"  
     };
-
-    // this.bsModalRef.content.comboInfoModal = 
+ 
     console.log(this.item);
-    // this.getCombos(item.tipusProducte);
     this.bsModalRefAdd = this.BsModalRefAdd.show(ModalToAddComponent, {initialState});
     
     // Pass in data directly content atribute after show
     this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : null, eInformant : null, colorCarn : null, calibre : null, qualitat : null, varietat : null, quantitatVenuda: null, preuSortida: null};
     
-    console.log("*/*/*/*/*/*/*/*/*/*");
-    console.log(this.comboGeneral);
     this.bsModalRefAdd.content.comboGeneral = this.comboGeneralModalToAdd;
     this.bsModalRefAdd.content.comboInfoModal = this.comboInfoModal;
-    // this.bsModalRefAdd.content.isPinyol = this.isPinyol;
-    // this.bsModalRefAdd.content.isLlavor = this.isLlavor;
-    console.log("ComboInfoModal al abrir el popup: ");
-    console.log(this.bsModalRefAdd.content.comboInfoModal);
-    console.log(this.comboInfoModal);
-    // this.bsModalRefAdd.content.comboInfoModal = this.comboGeneral[this.bsModalRefAdd.content.producteSelected];
-    this.bsModalRefAdd.content.productesModal = this.productesModal;
-    console.log(this.bsModalRefAdd.content.comboGeneral);
-    console.log(this.bsModalRefAdd.content.datos_entrada);
-    // this.bsModalRef.content.datos_entrada = JSON.parse(this.bsModalRef.content.datos_entrada);
-    // this.registreToEdit = this.bsModalRef.content.datos_entrada;
+     this.bsModalRefAdd.content.productesModal = this.productesModal;
 
-    
-    console.log("/////////////////////////////");
+    this.bsModalRefAdd.content.periodesModal = this.periodesModal;
+
     // Get out
     
 
@@ -175,26 +157,7 @@ export class FormRegisterComponent implements OnInit {
 
   actionPutYES(){
     console.log("ACTION PUT YES")
-    // console.log(this.bsModalRef.content.datos_entrada);
-    // console.log(this.productEdit);
-
-    // console.log(this.bsModalRef.content.calibreSelected);
-    console.log(this.bsModalRefAdd.content.datos_salida);
-    console.log(this.item);
-    // this.bsModalRefAdd.content.datos_salida = this.item;
-   
-    // this.bsModalRefAdd.content.datos_salida.periode = this.bsModalRefAdd.content.nouPeriode;
-    // this.bsModalRefAdd.content.datos_salida.tipusProducte = this.bsModalRefAdd.content.producteSelected;
-    // this.bsModalRefAdd.content.datos_salida.varietat = this.bsModalRefAdd.content.varietatSelected;
-    // this.bsModalRefAdd.content.datos_salida.calibre = this.bsModalRefAdd.content.calibreSelected;
-    // this.bsModalRefAdd.content.datos_salida.qualitat = this.bsModalRefAdd.content.qualitatSelected;
-    // this.bsModalRefAdd.content.datos_salida.preuSortida = this.bsModalRefAdd.content.pSortida;
-    // this.bsModalRefAdd.content.datos_salida.quantitatVenuda = this.bsModalRefAdd.content.qVenuda;
-    // this.bsModalRefAdd.content.datos_salida.colorCarn = this.bsModalRefAdd.content.colorCarnSelected;
-    console.log(this.bsModalRefAdd.content.datos_salida);
-
     this.actionToAdd(this.bsModalRefAdd.content.datos_salida);
-    // this.actionToEdit(this.productEdit);
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////
@@ -208,9 +171,9 @@ export class FormRegisterComponent implements OnInit {
     this.evento_form_afegir.emit(registro);
   }
 
-  changeSelectedTipusProducte($event)
+  changeSelectedTipusProducte($event: InfoKey)
   {
-    console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte);
+    console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte.subGrup);
     this.evento_tProduct.emit(this.selectedTipusProducte);
     this.selectedColorCarn="";
     this.selectedQualitat="";

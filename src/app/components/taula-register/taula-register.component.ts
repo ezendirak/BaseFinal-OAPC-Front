@@ -69,9 +69,7 @@ export class TaulaRegisterComponent implements OnInit {
       botonCerrar: "Tancar"  
     };
 
-    // this.bsModalRef.content.comboInfoModal = 
-    
-    // this.getCombos(item.tipusProducte);
+
     this.bsModalRef = this.modalService.show(ModalNoteComponent, {initialState});
     
     // Pass in data directly content atribute after show
@@ -86,55 +84,10 @@ export class TaulaRegisterComponent implements OnInit {
     this.bsModalRef.content.comboGeneral = this.comboGeneral;
     this.bsModalRef.content.comboGeneralNoms = this.comboGeneralNoms;
     
-    // console.log(this.bsModalRef.content.isLlavor);
-    // console.log(this.bsModalRef.content.producteSelected);
-    
     this.bsModalRef.content.comboInfoModal = this.comboGeneralNoms[this.bsModalRef.content.producteSelected.nom];
-    // console.log();
-    // console.log(this.bsModalRef.content.comboInfoModal);
+    
     this.bsModalRef.content.productesModal = this.productesModal;
-    // console.log(this.bsModalRef.content.productesModal);
-    // console.log("/////////////");
-    // let subGrup: string;
-    // for (let prod in this.bsModalRef.content.productesModal){
-    //   // console.log(Object(this.bsModalRef.content.productesModal[prod]));
-    //   // console.log(Object(this.bsModalRef.content.productesModal[prod].subGrup));
-    //   // console.log(Object(this.bsModalRef.content.productesModal[prod].nom));
-    //   // console.log(this.bsModalRef.content.producteSelected);
-    //   if (this.bsModalRef.content.producteSelected == Object(this.bsModalRef.content.productesModal[prod].clau)){
-        
-    //     if (Object(this.bsModalRef.content.productesModal[prod].subGrup) == "PI"){
-    //       this.bsModalRef.content.isPinyol = true;
-    //       this.bsModalRef.content.isLlavor = false;
-    //         console.log("ES UN PINYOL... isPinyol = " + this.bsModalRef.content.isPinyol);
-    //         console.log("isLlavor = " + this.bsModalRef.content.isLlavor);
-    //     }else if (Object(this.bsModalRef.content.productesModal[prod].subGrup) == "LL"){
-    //       this.bsModalRef.content.isPinyol = true;
-    //       this.bsModalRef.content.isLlavor = false;
-    //       console.log("ES UNA LLAVOR... isLlavor = " + this.bsModalRef.content.isLlavor);
-    //       console.log("isPinyol = " + this.bsModalRef.content.isPinyol);
-    //     }
-    //   }
-    
-    // }
-    
-    // if (this.bsModalRef.content.productesModal[prod].clau == this.bsModalRef.content.producteSelected){
-    //   if(prod == "PI"){
-    //     this.bsModalRef.content.isPinyol = true;
-    //     this.bsModalRef.content.isLlavor = false;
-    //   }else if (prod == "LL"){
-    //     this.bsModalRef.content.isLlavor = true;
-    //     this.bsModalRef.content.isPinyol = false;
-    //   }
-    // }
-    console.log("Productes Modal: " + JSON.stringify(this.productesModal[0]));
-    
-    //console.log(this.bsModalRef.content.datos_entrada);
-    // this.bsModalRef.content.datos_entrada = JSON.parse(this.bsModalRef.content.datos_entrada);
-    // this.registreToEdit = this.bsModalRef.content.datos_entrada;
-
-    
-    console.log("/////////////////////////////");
+   
     // Get out
     
 
@@ -148,24 +101,8 @@ export class TaulaRegisterComponent implements OnInit {
   }
 
   actionPutYES(){
-    console.log("ACTION PUT YES")
-    // console.log(this.bsModalRef.content.datos_entrada);
-    // console.log(this.productEdit);
-
-    // console.log(this.bsModalRef.content.calibreSelected);
-    console.log(this.bsModalRef.content.datos_salida);
-    // this.bsModalRef.content.datos_salida = this.bsModalRef.content.datos_entrada;
-    // this.bsModalRef.content.datos_salida.id = this.bsModalRef.content.datos_entrada.id;
-    // this.bsModalRef.content.datos_salida.periode = this.bsModalRef.content.nouPeriode;
-    // this.bsModalRef.content.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected;
-    // this.bsModalRef.content.datos_salida.varietat = this.bsModalRef.content.varietatSelected;
-    // this.bsModalRef.content.datos_salida.calibre = this.bsModalRef.content.calibreSelected;
-    // this.bsModalRef.content.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected;
-    // this.bsModalRef.content.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
-    // this.bsModalRef.content.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
-    // this.bsModalRef.content.datos_salida.colorCarn = this.bsModalRef.content.colorCarnSelected;
-    console.log(this.bsModalRef.content.datos_salida);
-
+    // console.log("ACTION PUT YES")
+   
     this.actionToEdit(this.bsModalRef.content.datos_salida);
     // this.actionToEdit(this.productEdit);
   }
@@ -173,8 +110,8 @@ export class TaulaRegisterComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////////////
 
   actionPutNO(){
-    console.log("ACTION NO PUT")
-    console.log(this.bsModalRef.content.datos_salida);
+    // console.log("ACTION NO PUT")
+    // console.log(this.bsModalRef.content.datos_salida);
   }
 
   actionToEdit(datos_salida: RegisterResponse){

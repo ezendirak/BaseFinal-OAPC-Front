@@ -1,0 +1,24 @@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.produ | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.atr | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.val | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.estat | translate }}</th>
+            <th class="columnCenter">{{ 'LITERALS_COL.' + literals.fam | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of regisProd">
+            <td>{{item?.producte}}</td>
+            <td>{{item?.atribut}}</td>
+            <td>{{item?.valor}}</td>
+            <td>{{item?.cont}}</td>
+            <td>{{item?.subGrup}}</td>
+            <td>
+                <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

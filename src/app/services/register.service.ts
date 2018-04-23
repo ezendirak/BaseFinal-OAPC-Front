@@ -9,6 +9,8 @@ import { RegisterResponse } from '../interfaces/register-response';
 import { Observable}                  from 'rxjs/Rx';
 import { AtributsComboResponse } from '../interfaces/atributs-combo-response';
 import { AtributsComboMap } from '../interfaces/atributs-combo-map';
+import { Register } from '../model/register';
+import { Periode } from '../model/periode';
 
 @Injectable()
 export class RegisterService {
@@ -162,4 +164,20 @@ getResultatFiltrat(filtre: any): Observable<RegisterResponse[]>
   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));  
 }
+
+getPeriodes(): Observable<Periode[]>
+{
+  return this.http.get(this.ApiUrlConfigService._periodesTotals,
+                        this.AuthorizationService.header_token()
+    )
+    .catch((error: any) => Observable.throw(error));
+  }
+
+  getPeriodesDisponibles(): Observable<Periode[]>
+{
+  return this.http.get(this.ApiUrlConfigService._periodesDisponibles,
+                        this.AuthorizationService.header_token()
+    )
+    .catch((error: any) => Observable.throw(error));
+  }
 }

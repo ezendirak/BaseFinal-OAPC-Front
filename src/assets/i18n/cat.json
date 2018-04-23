@@ -14,7 +14,12 @@
         "quVe": "Quantitat Venuda ",
         "peSo": "Preu de Sortida ",
         "tan": "Tancada ",
-        "quPe": "Quantitat per Preu "
+        "quPe": "Quantitat per Preu ",
+        "produ": "Producte",
+        "fam": "Familia",
+        "atr": "Atribut",
+        "val": "Valor",
+        "estat": "Estat"
     },
 
     "LITERALS_COL" : {
@@ -30,7 +35,12 @@
         "quVe": "Quantitat Venuda",
         "peSo": "Preu de Sortida",
         "tan": "Tancada",
-        "quPe": "Quantitat per Preu"
+        "quPe": "Quantitat per Preu",
+        "produ": "Producte",
+        "fam": "Familia",
+        "atr": "Atribut",
+        "val": "Valor",
+        "estat": "Estat"
     },
     
 	"COLORCARN" : {
@@ -91,6 +101,7 @@
     },
     
     "TITOLS" : {
-        "OAPC": "Observatori Agroalimentari de Preus de Catalunya"
+        "OAPC": "Observatori Agroalimentari de Preus de Catalunya",
+        "admin": "Administració"
     }
 }

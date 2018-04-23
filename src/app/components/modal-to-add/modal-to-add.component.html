@@ -1,8 +1,10 @@
 <div class="modal-header">
   <h4 class="modal-title pull-left">{{titulo}}</h4>
+  
   <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
+  <label [hidden]="notErrorPeriode">Error. Periode seleccionat no disponible pel producte escollit.</label>
 </div>
 
 <div class="modal-body">
@@ -18,12 +20,15 @@
         <div>
             <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.ref | translate }}</label>
             <input type="text"  class="col-md-3 col-xs-12"    id="referencia"    name="referencia"    [(ngModel)]="id" value="{{datos_entrada?.id}}">
-        </div>
-    
+          </div>
+            
         <div>
             <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-            <input type="text"  class="col-md-3 col-xs-12"    id="nouPeriode"    name="nouPeriode"    [(ngModel)]="nouPeriode" value="{{datos_entrada?.periode}}">
-        </div> 
+            <!-- <input type="text"  class="col-md-3 col-xs-12"    id="nouPeriode"    name="nouPeriode"    [(ngModel)]="nouPeriode" value="{{datos_entrada?.periode}}"> -->
+            <select class="col-md-3 col-xs-12" name="periode" [(ngModel)]="nouPeriode" (change) = "changeSelectedPeriodeModal($event)">
+              <option *ngFor="let h of periodesModal" [ngValue]="h">{{ h.numPeriode + "-" + h.tipusPeriode}}</option>
+          </select>
+          </div> 
       </div>
 
       <div class="form-group row margin-bottom">
@@ -99,8 +104,7 @@
       <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
       <input type="text"  class="col-md-3 col-xs-12"    id="tancada"    name="tancada"    [(ngModel)]="tancada">
     </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-
+        <button [disabled]="!notErrorPeriode" type="submit" class="btn btn-primary">Submit</button>
       </form>
   
 </div>

@@ -30,13 +30,16 @@ export class ApiUrlConfigService {
 
   public _getRegistresCountURL   = '/api/v4/registres_count/';
   public _getRegistresCountURLFiltrat   = '/api/v4/registres_countFiltrat/';
-
+  
   public _getRegistreURL         = '/api/v4/registres/';
   public _postRegistreURL        = '/api/v4/registres/';
   public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres/';
   public _putRegistreURL         = '/api/v4/registres/';
   public _deleteRegistreURL      = '/api/v4/registres/';
   public _resultatFiltrat         = '/api/v4/filtro/';
+
+  public _periodesDisponibles   = 'api/v4/periodesDisponibles/';
+  public _periodesTotals        =  'api/v4/periodesTotals/';
 
   public _getProductesURL        = '/api/v3/pdu/productes/';
   public _getProductesModalURL        = '/api/v3/pdu/productesModal/';
@@ -45,12 +48,21 @@ export class ApiUrlConfigService {
   public _getAllCombos          = '/api/v3/pduCombos/';
   public _getAllNamesCombos          = '/api/v3/pduNamedCombos/';
   public _provaTest             = '/api/v3/pdu/PROPDU/';
+  public _allFam             = '/api/v3/pdu/FAMPDU/';
+
   
   public _getCombosProdColorCarn     = '/api/v3/pdu/colorcarn/';
   public _getCombosProdQualitat      = '/api/v3/pdu/qualitat/';
   public _getCombosProdVarietat      = '/api/v3/pdu/varietat/';
   public _getCombosProdCalibre       = '/api/v3/pdu/calibre/';
 
+
+  public _atributsProd                = 'api/v5/atributsProd/';
+  public _atributsProdFiltrat                = 'api/v5/atributsProdFiltrat/';
+
+  public _getAtributsProd_countFiltrat  = '/api/v5/atributsProd_countFiltrat';
+
+  public _putGestioProducteURL         = '/api/v5/gestioProducte/';
 
   constructor() 
   { }

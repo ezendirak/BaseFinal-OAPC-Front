@@ -14,7 +14,12 @@
         "quVe": "Cantidad Vendida ",
         "peSo": "Precio de Salida ",
         "tan": "Cerrada ",
-        "quPe": "Cantidad por Precio "
+        "quPe": "Cantidad por Precio ",
+        "produ": "Producto",
+        "fam": "Familia",
+        "atr": "Atributo",
+        "val": "Valor",
+        "estat": "Estado"
     },
 
     "LITERALS_COL" : {
@@ -30,7 +35,12 @@
         "quVe": "Cantidad Vendida",
         "peSo": "Precio de Salida",
         "tan": "Cerrada",
-        "quPe": "Cantidad por Precio"
+        "quPe": "Cantidad por Precio",
+        "produ": "Producto",
+        "fam": "Familia",
+        "atr": "Atributo",
+        "val": "Valor",
+        "estat": "Estado"
     },
 
 	"COLORCARN" : {
@@ -91,7 +101,7 @@
     },
 
     "TITOLS" : {
-        "OAPC": "Observatorio Agroalimentario de Precios de Cataluña"
+        "OAPC": "Observatorio Agroalimentario de Precios de Cataluña",
+        "admin": "Administración"
     }
-    
 }

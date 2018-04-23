@@ -1,10 +1,12 @@
+import { Empressa } from './empressa';
+import { Periode } from './periode';
 import { InfoKey } from "../interfaces/info-key";
 
 export class Register {
-    id: number;
-    periode: string;
+    id: Periode;
+    periode: number;
     tipusProducte: string;
-    eInformant: string;
+    eInformant: Empressa;
     colorCarn: string;
     calibre: string;
     qualitat: string;

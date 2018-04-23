@@ -1,3 +1,4 @@
+import { GestionsService } from './services/gestions.service';
 import { HttpClient } from '@angular/common/http';
 import { RegisterService } from './services/register.service';
 
@@ -45,6 +46,11 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ModalToAddComponent } from './components/modal-to-add/modal-to-add.component';
 import { LectorExcelComponent } from './components/lector-excel/lector-excel.component';
+import { GestioProductesComponent } from './components/gestio-productes/gestio-productes.component';
+import { FormGestioProductesComponent } from './components/form-gestio-productes/form-gestio-productes.component';
+import { TaulaGestioProductesComponent } from './components/taula-gestio-productes/taula-gestio-productes.component';
+import { ButtonTaulaGestioProdComponent } from './components/button-taula-gestio-prod/button-taula-gestio-prod.component';
+import { ModalEditGestProdComponent } from './components/modal-edit-gest-prod/modal-edit-gest-prod.component';
 //import { TranslateLoader } from '@ngx-translate/core';
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -74,10 +80,15 @@ export function HttpLoaderFactory(http: HttpClient){
     TaulaRegisterComponent,
     RegisterComponent,
     ModalToAddComponent,
-    LectorExcelComponent
+    LectorExcelComponent,
+    GestioProductesComponent,
+    FormGestioProductesComponent,
+    TaulaGestioProductesComponent,
+    ButtonTaulaGestioProdComponent,
+    ModalEditGestProdComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent],
 
   imports: [
     BrowserModule,
@@ -107,7 +118,8 @@ export function HttpLoaderFactory(http: HttpClient){
     NotesService,
     MessageService,
     RegisterService,
-    TranslateService
+    TranslateService,
+    GestionsService
   ],
 
   bootstrap: [AppComponent]

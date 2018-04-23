@@ -1,0 +1,23 @@
+<div class="container">
+
+  <app-form-gestio-productes  [productes]="productes"
+                              [families]="families"
+                              (evento_filtroGestioProd)="onClickBuscarForm($event)"
+  >
+
+  </app-form-gestio-productes>
+
+  <app-taula-gestio-productes [regisProd]="regisProd"
+                              (evento_putRegistre)="putRegistre($event)"
+  
+  >
+
+</app-taula-gestio-productes>
+
+<app-button-taula-gestio-prod [pagination]="pagination" 
+                              (evento_list_pagination)="onClickPagination($event)"
+                              (evento_new_pagination)="onClickNewPagination($event)">
+
+</app-button-taula-gestio-prod>
+
+</div>

@@ -14,6 +14,7 @@ import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
 import { AuthorizationService } from '../../services/authorization.service';
 import { RegisterService } from '../../services/register.service';
 import { TrazaService } from '../../services/traza.service';
+import { Periode } from '../../model/periode';
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +43,8 @@ export class ModalToAddComponent implements  OnInit  {
 
   comboInfoModal: AtributsComboResponse;
 
+  periodesModal:  Periode[];
+  
   public onClose: Subject<boolean>;
  
   id: number;
@@ -49,10 +52,12 @@ export class ModalToAddComponent implements  OnInit  {
   qVenuda:  number;
   pSortida: number;
 
+  notErrorPeriode: boolean;
+
   comboLlenoModal: boolean;
   nouRegistre: RegisterResponse;
   productesModal: InfoKey[];
-  nouPeriode: string;
+  nouPeriode: Periode;
   producteSelected: InfoKey;
   calibreSelected: string;
   qualitatSelected: string;
@@ -75,7 +80,7 @@ export class ModalToAddComponent implements  OnInit  {
   ngOnInit() {
     console.log("MODAL MODAL: MODAL OBERT");
     // console.log(this.producteSelected);
-    
+    this.notErrorPeriode = true;
     this.onClose = new Subject();
   }
 
@@ -102,8 +107,9 @@ export class ModalToAddComponent implements  OnInit  {
     this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.nom;
-    this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
+    this.datos_salida.periode = this.bsModalRef.content.nouPeriode.id;
     // this.datos_salida.varietat = form.controls['eInformant'].value
+    console.log(this.datos_salida);
     this.onClose.next(true);
     
     this.bsModalRef.hide();
@@ -121,7 +127,22 @@ export class ModalToAddComponent implements  OnInit  {
     this.bsModalRef.hide();
   }
 
-  changeSelesctedTipusProducteModal()
+  changeSelectedPeriodeModal($event){
+    if (this.notErrorPeriode == false){
+      this.notErrorPeriode = true;
+    }
+    if (this.nouPeriode.tipusPeriode == 'S' && this.producteSelected.subGrup != 'PI'){
+      //ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT
+      console.log("ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT");
+      this.notErrorPeriode = false;
+    }else if(this.nouPeriode.tipusPeriode == 'Q' && this.producteSelected.subGrup != 'LL'){
+      //ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT
+      console.log("ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT");
+      this.notErrorPeriode = false;
+    }
+  }
+
+  changeSelesctedTipusProducteModal($event)
   {
     console.log("MODAL TO ADD: (MODAL | ADD)" + JSON.parse(JSON.stringify(this.producteSelected)));
     
@@ -135,13 +156,21 @@ export class ModalToAddComponent implements  OnInit  {
 
     console.log(test.subGrup);
     if (test.subGrup == 'PI'){
-      console.log("ES PINYOL");
       this.isPinyol = true;
       this.isLlavor = false;
+      if (this.nouPeriode.tipusPeriode != null){
+        if (this.nouPeriode.tipusPeriode != 'S'){
+          this.nouPeriode=null;
+        }
+      }
     }else if (test.subGrup == "LL"){
-      console.log("ES LLAVOR");
       this.isPinyol = false;
       this.isLlavor = true;
+      if (this.nouPeriode.tipusPeriode != null){
+        if (this.nouPeriode.tipusPeriode != 'Q'){
+          this.nouPeriode=null;
+        }
+      }
     }
 
     console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );

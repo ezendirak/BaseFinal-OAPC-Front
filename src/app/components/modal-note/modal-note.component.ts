@@ -105,8 +105,14 @@ export class ModalNoteComponent implements  OnInit  {
     console.log(this.bsModalRef.content);
     this.datos_salida.calibre = this.calibreSelected;
     this.datos_salida.qualitat = this.qualitatSelected
-    this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
-    this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
+    
+    if (this.bsModalRef.content.qVenuda != null && this.bsModalRef.content.qVenuda != ""){
+      this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
+    }
+    if (this.bsModalRef.content.qVenuda != null && this.bsModalRef.content.qVenuda != ""){
+      this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
+    }// FER TAMBE AMB EL PERIODE
+    
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected;
     this.datos_salida.colorCarn = this.colorCarnSelected;
     this.datos_salida.varietat = this.varietatSelected;

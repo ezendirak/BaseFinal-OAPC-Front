@@ -72,7 +72,15 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/nueve">Administracio</a></li>
+              <li class="dropdown" dropdown>
+                <a href="javascript:void(0)" dropdownToggle class="dropdown-toggle">{{ 'TITOLS.' + literals.admin | translate }} <span class="caret"></span></a>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem"><a class="dropdown-item" href="/uno">Gestió d'empreses</a></li>
+                    <li role="menuitem"><a class="dropdown-item" href="/gestProd">Gestió de productes</a></li>
+                    <li role="menuitem"><a class="dropdown-item" href="/tres">Gestió de dades mestres</a></li>
+                    <li role="menuitem"><a class="dropdown-item" href="/cuatro">Gestió d'usuaris</a></li>
+                  </ul>
+              </li>
             </ul>
 
           </div><!-- /.navbar-collapse -->
