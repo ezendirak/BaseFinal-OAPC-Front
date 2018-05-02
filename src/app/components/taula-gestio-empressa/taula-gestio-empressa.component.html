@@ -1,0 +1,28 @@
+
+<table class="table">
+  <thead>
+      <tr>
+          <th class="columnCenter">Codi d'empressa</th>
+          <th class="columnCenter">Productes</th>
+          <th class="columnCenter">Estat</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of items">
+          <td>{{item?.codi}}</td>
+          <ng-container *ngIf="item?.tipusProductes == '' ;then content1 else other_content1"></ng-container>
+            <ng-template #content1><td >-</td></ng-template>
+            <ng-template #other_content1><td >{{ item?.tipusProductes }}</td></ng-template>
+          <td>{{ item?.estat }}</td>
+          <td>
+              <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
+          </td>
+          <td>
+              <button type="button" class="btn-custom btn btnEnvio" (click)="actionDelete(item)">Borrar</button>
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+
+

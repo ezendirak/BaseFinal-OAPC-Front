@@ -3,7 +3,7 @@ export class Periode {
     tipusPeriode: string;
     any: number;
     numPeriode: number;
-    dataInici: String;
-    dataFi: String;
+    dataInici: Date;
+    dataFi: Date;
     duracio: number;
 }

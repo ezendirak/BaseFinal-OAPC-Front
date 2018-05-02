@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 import { Notes2Component }       from './components/notes2/notes2.component';
 import { RegisterComponent } from './components/register/register.component';
+import { GestioEmpressaComponent } from './components/gestio-empressa/gestio-empressa.component';
 
 const routes: Routes = [
   { path: '',           component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'login',      component: LoginComponent },
   { path: 'logout',     component: LogoutComponent },
   { path: 'gestProd',     component: GestioProductesComponent },
+  { path: 'gestEmp',     component: GestioEmpressaComponent },
   { path: '**',         component: PageNotFoundComponent },  
 ];
 

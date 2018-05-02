@@ -53,7 +53,9 @@ export class FormRegisterComponent implements OnInit {
   qualitat: string;
   calibre: string;
   qVenuda: number;
+  qVenuda2: number;
   pSortida: number;
+  pSortida2: number;
   tancada: string;
   
   selectedTipusProducte:  InfoKey;
@@ -89,9 +91,10 @@ export class FormRegisterComponent implements OnInit {
     console.log("CAPTURADO CLICK EN FORMULARIO");
     console.log("EMITIMOS EVENTO eventoRegistreClicked");
     // this.filtros = { "referencia": this.referencia, "periode" : this.periode, "eInformant" : this.eInformant, "uInformant" : this.uInformant, "tipusProducte" : this.selectedTipusProducte,  "varietat" : this.varietat, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre, "qVenuda" : this.qVenuda, "pSortida" : this.pSortida, "tancada" : this.tancada};
-     this.filtros = {"tipusProducte" : this.selectedTipusProducte,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre};
+    //  this.filtros = {"tipusProducte" : this.selectedTipusProducte,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre};
      
-    
+    console.log(this.qVenuda);
+    console.log(this.qVenuda2);
      let params = new HttpParams();
      if(this.selectedTipusProducte && this.selectedTipusProducte.nom != 'Tots'){
       params = params.set('tipusProducte', this.selectedTipusProducte.nom);
@@ -111,7 +114,21 @@ export class FormRegisterComponent implements OnInit {
      }
      if (this.selectedVarietat && this.selectedVarietat != '-'){
       params = params.set('varietat', this.selectedVarietat);
-   }
+     }
+     if (this.qVenuda){
+      params = params.set('qVenuda', this.qVenuda.toString());
+      console.log(this.qVenuda);
+     }
+     if (this.qVenuda2){
+      params = params.set('qVenuda2', this.qVenuda2.toString());
+     }
+     if (this.pSortida){
+      params = params.set('pSortida', this.pSortida.toString());
+      console.log(this.qVenuda);
+     }
+     if (this.pSortida2){
+      params = params.set('pSortida2', this.pSortida2.toString());
+     }
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
       console.log(params);
     this.evento_form1.emit(params);
@@ -139,7 +156,7 @@ export class FormRegisterComponent implements OnInit {
     
     this.bsModalRefAdd.content.comboGeneral = this.comboGeneralModalToAdd;
     this.bsModalRefAdd.content.comboInfoModal = this.comboInfoModal;
-     this.bsModalRefAdd.content.productesModal = this.productesModal;
+    this.bsModalRefAdd.content.productesModal = this.productesModal;
 
     this.bsModalRefAdd.content.periodesModal = this.periodesModal;
 

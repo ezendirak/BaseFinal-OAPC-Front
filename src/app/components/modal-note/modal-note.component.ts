@@ -92,16 +92,7 @@ export class ModalNoteComponent implements  OnInit  {
   //////////////////////////////////////////////////////////////////////////////////////
 
   public onConfirm(form) {
-    console.log("ON CONFIRM");
-    console.log(this.datos_salida);
-  console.log(this.datos_entrada);
-    // this.datos_salida.id = this.id;
-    // if (this.varietat){
-    //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "varietat" : this.varietatSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
-    // } else {
-    //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "colorCarn" : this.colorCarnSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
-    // }
-    // this.bsModalRef.content.datos_salida.colorCarn = form.controls['colorsCarn'].value
+    // console.log("ON CONFIRM");
     console.log(this.bsModalRef.content);
     this.datos_salida.calibre = this.calibreSelected;
     this.datos_salida.qualitat = this.qualitatSelected
@@ -116,19 +107,11 @@ export class ModalNoteComponent implements  OnInit  {
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected;
     this.datos_salida.colorCarn = this.colorCarnSelected;
     this.datos_salida.varietat = this.varietatSelected;
-    console.log(this.nouPeriode + " - " + this.qVenuda + " - " +this.pSortida + " - " + this.calibreSelected + " - " + this.qualitatSelected + " - " + this.producteSelected + " - " + this.colorCarnSelected + " - " + this.varietatSelected);
-    console.log(this.datos_salida);
 
     this.datos_salida.periode = this.nouPeriode;
-    // this.datos_salida.varietat = this.bsModalRef.content.;
-    // this.datos_salida.varietat = form.controls['eInformant'].value
-    // console.log(form.controls['calibres'].value);
     console.log("********************************");
     console.log(this.datos_salida);
     console.log("********************************");
-    // console.log(form);
-    // console.log("hiiiii");
-    // console.log(this.nouRegistre);
     this.onClose.next(true);
     
     this.bsModalRef.hide();
@@ -137,10 +120,7 @@ export class ModalNoteComponent implements  OnInit  {
   //////////////////////////////////////////////////////////////////////////////////////
 
   public onCancel(form) {
-    //console.log("ON CANCEL");    
-    //console.log(form);
     
-    // this.datos_salida = "DATOS SALIDA ON CANCEL";
     this.onClose.next(false);
 
     this.bsModalRef.hide();
@@ -157,7 +137,7 @@ export class ModalNoteComponent implements  OnInit  {
     console.log("ComboInfoModal abans de canviar de producte: ");
     console.log(this.comboInfoModal);
     this.comboInfoModal = this.comboGeneral[this.producteSelected];
-    console.log(JSON.stringify(this.comboInfoModal));
+    // console.log(JSON.stringify(this.comboInfoModal));
     infoTest = JSON.parse(JSON.stringify(this.comboInfoModal)); 
     console.log(infoTest.colorsCarn.length);
     if (infoTest.colorsCarn.length > 1){
@@ -173,11 +153,7 @@ export class ModalNoteComponent implements  OnInit  {
 
   test(){
     let infoTest: any;
-    // console.log(this.productesModal);
-    // console.log(this.comboGeneral);
-    // console.log(this.comboGeneralNoms);
-    // console.log(this.comboGeneralNoms);
-    // console.log(this.comboGeneral[this.producteSelected]);
+
     this.comboInfoModal = this.comboGeneralNoms[this.producteSelected];
     this.isDisabled = false;
     infoTest = JSON.parse(JSON.stringify(this.comboInfoModal)); 

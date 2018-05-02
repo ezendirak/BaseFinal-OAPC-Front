@@ -23,6 +23,8 @@ export class GestioProductesComponent implements OnInit {
   pagination: Pagination;
   paginacio: number;
 
+  productesModal:     InfoKey[];
+
   item:   InfoGestioProd;
   items:  InfoGestioProd[];
 
@@ -42,7 +44,7 @@ export class GestioProductesComponent implements OnInit {
     this.getProductes();
     this.getFamilies();
     // this.getTaulaProd();
-
+    this.getProductesModal();
     this.filtroFake = "";
     this.paginacio = 5;
 
@@ -151,14 +153,26 @@ export class GestioProductesComponent implements OnInit {
       .subscribe ( respuesta => { this.item = respuesta;
 
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  this.getProductes();
                                   this.getRegistresPage(this.filtroFake);
                                 },
                   error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
       );
     }
-
   }
 
+  getProductesModal()
+  {
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getProductesModal()
+      .subscribe ( respuesta => { this.productesModal = respuesta;
+
+                                  // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
+                                },
+                  error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
+      );
+  }
+  
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// FROM EVENTS //////////////////////////////////////////////
 
@@ -167,9 +181,7 @@ export class GestioProductesComponent implements OnInit {
     this.pagination.page_actual = 1;
     this.filtre = $event;
     console.log(this.filtre);
-    // if (!this.filtre){
-    //   this.filtre = "";
-    // }
+
     this.getRegistresPage($event);
   }
 
@@ -180,6 +192,23 @@ export class GestioProductesComponent implements OnInit {
   }
 
 
+  onClickAddAtribut(newProd:  any)
+  {
+    if (this.AuthorizationService.is_logged()){
+      console.log("a la funcio del controlador: ");
+      console.log(newProd);
+      // console.log("abans del service: " + filtro.tipusProducte);
+      this.GestionsService.postNewAtribut(newProd)
+      .subscribe ( respuesta => { //this.item = respuesta;
+
+                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  this.getRegistresPage(this.filtroFake);
+                                },
+                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+      );
+    }
+  }
+
 
   ////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// PAGINATION //////////////////////////////////////////////////
@@ -188,12 +217,10 @@ export class GestioProductesComponent implements OnInit {
   {
     if ($event > 0)
     {
-      // console.log("controller: onClickPagination " + $event);    
-
       this.pagination.page_actual = $event;
-      // this.getRegistresPage($event);
+
       if (this.filtre){
-        // console.log(this.filtre);
+        
         this.getRegistresPage(this.filtre); 
       }else{
         this.getRegistresPage(""); 

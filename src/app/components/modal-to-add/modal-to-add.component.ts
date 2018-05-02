@@ -135,6 +135,7 @@ export class ModalToAddComponent implements  OnInit  {
       //ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT
       console.log("ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT");
       this.notErrorPeriode = false;
+
     }else if(this.nouPeriode.tipusPeriode == 'Q' && this.producteSelected.subGrup != 'LL'){
       //ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT
       console.log("ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT");
@@ -158,7 +159,9 @@ export class ModalToAddComponent implements  OnInit  {
     if (test.subGrup == 'PI'){
       this.isPinyol = true;
       this.isLlavor = false;
+      this.getPeriodesByProd(test.subGrup);
       if (this.nouPeriode.tipusPeriode != null){
+        
         if (this.nouPeriode.tipusPeriode != 'S'){
           this.nouPeriode=null;
         }
@@ -166,7 +169,9 @@ export class ModalToAddComponent implements  OnInit  {
     }else if (test.subGrup == "LL"){
       this.isPinyol = false;
       this.isLlavor = true;
+      this.getPeriodesByProd(test.subGrup);
       if (this.nouPeriode.tipusPeriode != null){
+        
         if (this.nouPeriode.tipusPeriode != 'Q'){
           this.nouPeriode=null;
         }
@@ -196,5 +201,16 @@ export class ModalToAddComponent implements  OnInit  {
                                 },
                   error =>      { this.TrazaService.error("Combos", "API GET Combo KO (ON MODAL)", error); } 
       );   
+  }
+
+  getPeriodesByProd(subGrup: String){
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getPeriodesByProd(subGrup)
+      .subscribe ( respuesta => { this.periodesModal = respuesta;
+
+                                   this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodesModal);
+                                },
+                  error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
+      );
   }
 }

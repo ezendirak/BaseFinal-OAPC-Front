@@ -51,7 +51,18 @@ import { FormGestioProductesComponent } from './components/form-gestio-productes
 import { TaulaGestioProductesComponent } from './components/taula-gestio-productes/taula-gestio-productes.component';
 import { ButtonTaulaGestioProdComponent } from './components/button-taula-gestio-prod/button-taula-gestio-prod.component';
 import { ModalEditGestProdComponent } from './components/modal-edit-gest-prod/modal-edit-gest-prod.component';
-//import { TranslateLoader } from '@ngx-translate/core';
+import { GestioEmpressaComponent } from './components/gestio-empressa/gestio-empressa.component';
+import { FormGestioEmpressaComponent } from './components/form-gestio-empressa/form-gestio-empressa.component';
+import { TaulaGestioEmpressaComponent } from './components/taula-gestio-empressa/taula-gestio-empressa.component';
+import { ButtonTaulaGestioEmpressaComponent } from './components/button-taula-gestio-empressa/button-taula-gestio-empressa.component';
+import { EmpressaService } from './services/empressa.service';
+import { ModalEditGestEmpComponent } from './components/modal-edit-gest-emp/modal-edit-gest-emp.component';
+
+import { ModalToAddProdComponent } from './components/modal-to-add-prod/modal-to-add-prod.component';
+
+import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
+
+
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -59,6 +70,11 @@ import { ModalEditGestProdComponent } from './components/modal-edit-gest-prod/mo
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
+ 
+const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
+  optionValueField: 'clau',
+  optionTextField: 'nom'
+};
 
 @NgModule({
   declarations: [ 
@@ -85,10 +101,16 @@ export function HttpLoaderFactory(http: HttpClient){
     FormGestioProductesComponent,
     TaulaGestioProductesComponent,
     ButtonTaulaGestioProdComponent,
-    ModalEditGestProdComponent
+    ModalEditGestProdComponent,
+    GestioEmpressaComponent,
+    FormGestioEmpressaComponent,
+    TaulaGestioEmpressaComponent,
+    ButtonTaulaGestioEmpressaComponent,
+    ModalEditGestEmpComponent,
+    ModalToAddProdComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent],
 
   imports: [
     BrowserModule,
@@ -107,7 +129,8 @@ export function HttpLoaderFactory(http: HttpClient){
     ReactiveFormsModule,
     CollapseModule.forRoot(), 
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxSelectModule
   ],
 
   providers: [
@@ -119,7 +142,8 @@ export function HttpLoaderFactory(http: HttpClient){
     MessageService,
     RegisterService,
     TranslateService,
-    GestionsService
+    GestionsService,
+    EmpressaService
   ],
 
   bootstrap: [AppComponent]

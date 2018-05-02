@@ -3,6 +3,8 @@
   <app-form-gestio-productes  [productes]="productes"
                               [families]="families"
                               (evento_filtroGestioProd)="onClickBuscarForm($event)"
+                              [productesModal]="productesModal"
+                              (evento_actionToAddAtribut)="onClickAddAtribut($event)"
   >
 
   </app-form-gestio-productes>

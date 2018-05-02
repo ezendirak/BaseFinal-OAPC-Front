@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{titulo}}</h4>
+    
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  
+    </div>
+  
+  <div class="modal-body">
+  
+      <ul *ngIf="lista.length">
+          <li *ngFor="let item of lista">{{item}}</li>
+      </ul>
+  
+    <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
+  
+      <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+        <div class="form-group row margin-bottom">
+
+          <div>
+            <label for="periode" class="col-md-2 col-xs-12">Producte</label>
+              <select class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="productes" [(ngModel)]="selectedProducte" (change) = "changeSelectedTipusProducte($event)" >
+                  <option *ngFor="let c of productes" [ngValue]="c">{{ c.nom }}</option>
+              </select>
+          </div>
+
+          <div>
+              <label for="id" class="col-md-2 col-xs-12">Atribut</label>
+              <select [disabled]="atrDisabled" class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="atributs" [(ngModel)]="selectedAtribut" (change) = "changeSelectedAtribut($event)">
+                  <option *ngFor="let a of atributs" [ngValue]="a">{{ a }}</option>
+              </select>
+          </div> 
+
+        </div>
+  
+        <div class="form-group row margin-bottom">
+          <div >
+            <label for="campoC" class="col-md-2 col-xs-12">Valor</label>
+            <input [disabled]="valorDisabled" type="text"  class="col-md-3 col-xs-12"    id="valor"    name="valor"    [(ngModel)]="selectedValor">
+          </div>
+        </div>
+      
+      
+          <button type="submit" class="btn btn-primary">Submit</button>
+  
+        </form>
+    
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+  </div>

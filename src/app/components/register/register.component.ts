@@ -27,9 +27,9 @@ import { Periode } from '../../model/periode';
 export class RegisterComponent implements OnInit {
 
   filtroFake: any;
-
+  
   pagination: Pagination;
-
+  
   items:      RegisterResponse[];
   item:       RegisterResponse;
 
@@ -107,23 +107,23 @@ export class RegisterComponent implements OnInit {
 
   afegirForm($event)
   {
-    
     this.postRegistre($event);
-    
   }
 
   putRegistre($event)
   {
-    // console.log("********************* controller: onClickPutList *******************"); 
-    // console.log($event);
     this.putRegistreToService($event);
+  }
+
+  printItems($event)
+  {
+    console.log("lets see");
+    console.log($event);
+    this.downloadToExcel($event);
   }
 
   onClickDeleteList(item)
   {
-    // console.log("controller: onClickDeleteList ");
-    // console.log("Controlador: " + item.id);
-
     this.deleteRegistre(item.id, true)    
   }
 
@@ -131,12 +131,8 @@ export class RegisterComponent implements OnInit {
   {
     if ($event > 0)
     {
-      // console.log("controller: onClickPagination " + $event);    
-
       this.pagination.page_actual = $event;
-      // this.getRegistresPage($event);
       if (this.filtre){
-        // console.log(this.filtre);
         this.getRegistresPage(this.filtre); 
       }else{
         this.getRegistresPage(""); 
@@ -147,25 +143,26 @@ export class RegisterComponent implements OnInit {
 
   onClickParams($event)
   {
-    // console.log("controller: onClickParams " + $event.subGrup);
-    // console.log("*/*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*");
     if ($event.subGrup == "PI"){
       this.isPinyol = true;
       this.isLlavor = false;
+      //Cridar nous periodes
+      this.getPeriodesByProd($event.subGrup);
     }else if ($event.subGrup == "LL"){
       this.isPinyol = false;
       this.isLlavor = true;
+      //Cridar nous periodes
+      this.getPeriodesByProd($event.subGrup);
     } else {
       this.isPinyol = false;
       this.isLlavor = false;
-    }
-    this.getCombos($event.clau);
-    // console.log(this.comboGeneral[$event.clau]);
-    // console.log(this.comboInfoModal);
-    // this.comboInfoModal = this.comboGeneral[$event.clau];
-    // this.comboLleno = true;
-  }
+      //Treiem tots els periodes ja que no hi ha cap producte fixat
+      this.getPeriodes();
 
+    }
+    this.getCombos($event.clau);;
+  }
+ 
   onClickNewPagination($event){
     // console.log("Desde Registre: "+$event);
     this.pagination.page_items = $event;
@@ -185,17 +182,27 @@ export class RegisterComponent implements OnInit {
   }
 
   SaveFromExcel($event){
-    // console.log("Estem al pare enviant a spring!");
-    // console.log($event);
-    // console.log($event.newRegistre);
-    // console.log($event.params)
     this.postRegistreFromExcel($event.newRegistre, $event.params);
   }
 
+  descarregarAXLS($event){
+    console.log("Estem al pare");
+    this.downloadToExcel($event);
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////  
   /////////////////////////////////////////////////////////////////////////////////////////////
  
+  downloadToExcel(items: RegisterResponse[]){
+    if (this.AuthorizationService.is_logged())
+    this.RegisterService.getDownloadToExcel(items)
+    .subscribe ( respuesta => { //this.items = respuesta;
+                                this.TrazaService.dato("ToExcel", "API GET ToExcel OK", this.items);
+                              },
+                error =>      { this.TrazaService.error("ToExcel", "API GET ToExcel KO", error); } 
+    );
+  }
+
   getRegistres()
   {
     if (this.AuthorizationService.is_logged())
@@ -320,6 +327,16 @@ export class RegisterComponent implements OnInit {
       );
   }
 
+  getPeriodesByProd(subGrup: String){
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getPeriodesByProd(subGrup)
+      .subscribe ( respuesta => { this.periodes = respuesta;
+
+                                   this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodes);
+                                },
+                  error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
+      );
+  }
 
   getCombos(tipusProducte: String)
   {
@@ -345,23 +362,6 @@ export class RegisterComponent implements OnInit {
                   error =>      { this.TrazaService.error("Combos", "API GET Combo KO", error); } 
       );   
   }
-
-
-  
-  // getResultatFiltrat(filtro: any)
-  // {
-  //   if (this.AuthorizationService.is_logged())
-  //   console.log("a la funcio del controlador: " + filtro);
-  //     this.RegisterService.getResultatFiltrat(filtro)
-  //     .subscribe ( respuesta => { this.items = respuesta;
-
-  //                                 this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
-  //                               },
-  //                 error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
-  //     );
-  // }
-
-
 
   postRegistre(filtro: any)
   { 

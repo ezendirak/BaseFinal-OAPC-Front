@@ -17,7 +17,7 @@
         <!-- <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="periode"    name="periode"    [(ngModel)]="periode"> -->
         
         <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="periode" [(ngModel)]="periode">
-            <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + "-" + h.tipusPeriode}}</option>
+            <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
         </select>
       </div>
   <!-- </div> -->
@@ -97,11 +97,13 @@
 <!-- <div class="form-group row margin-bottom"> -->
   <div class="formCompradorGrande">
   <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.quVe | translate }}</label>
-  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;"   id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:195px; display:inline-block;"   id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:195px; display:inline-block;"   id="qVenuda2"    name="qVenuda2"    [(ngModel)]="qVenuda2">
 </div>
 <div class="formCompradorGrande">
   <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.peSo | translate }}</label>
-  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="pSortida"    name="pSortida"    [(ngModel)]="pSortida">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:195px; display:inline-block;"  id="pSortida"    name="pSortida"    [(ngModel)]="pSortida">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:195px; display:inline-block;"  id="pSortida2"    name="pSortida2"    [(ngModel)]="pSortida2">
 </div>
   <!-- </div> -->
 

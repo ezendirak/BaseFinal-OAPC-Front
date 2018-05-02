@@ -33,13 +33,17 @@ export class ApiUrlConfigService {
   
   public _getRegistreURL         = '/api/v4/registres/';
   public _postRegistreURL        = '/api/v4/registres/';
-  public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres/';
+  public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres';
+
+  public _downloadToExcel   = 'api/v4/downloadToExcel/';
+
   public _putRegistreURL         = '/api/v4/registres/';
   public _deleteRegistreURL      = '/api/v4/registres/';
   public _resultatFiltrat         = '/api/v4/filtro/';
 
   public _periodesDisponibles   = 'api/v4/periodesDisponibles/';
   public _periodesTotals        =  'api/v4/periodesTotals/';
+  public _periodesByProd   = 'api/v4/periodesByProd/';
 
   public _getProductesURL        = '/api/v3/pdu/productes/';
   public _getProductesModalURL        = '/api/v3/pdu/productesModal/';
@@ -63,6 +67,17 @@ export class ApiUrlConfigService {
   public _getAtributsProd_countFiltrat  = '/api/v5/atributsProd_countFiltrat';
 
   public _putGestioProducteURL         = '/api/v5/gestioProducte/';
+  public _putGestioEmpressaURL         = '/api/v5/gestioEmpressa/';
+
+
+  public _empressesFiltrat                = 'api/v5/empressesFiltrat/';
+
+  public _empresses_countFiltrat  = '/api/v5/empresses_countFiltrat';
+
+  public _allEmpresses             = '/api/v5/allEmpresses/';
+  public _getProductesModal        = '/api/v5/productesModal/';
+  public _getProductesModalNom        = '/api/v5/nomProductesModal/';
+  public _postNewAtribut             = '/api/v3/newAtribut/';
 
   constructor() 
   { }

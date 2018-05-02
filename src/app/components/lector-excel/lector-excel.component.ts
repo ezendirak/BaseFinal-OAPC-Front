@@ -1,6 +1,6 @@
 import { Register } from './../../model/register';
 import { RegisterResponse } from './../../interfaces/register-response';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import * as XLSX from 'xlsx';
 import { HttpParams } from '@angular/common/http';
@@ -26,10 +26,13 @@ type AOA = any [][];
 
 export class LectorExcelComponent {
 
+  @Input() items          :RegisterResponse[];
+  
   @Output() evento_AfegirXLS: EventEmitter<any> = new EventEmitter();
+  @Output() evento_DescarregarXLS: EventEmitter<any> = new EventEmitter();
 
-
-	data: AOA = [ [1, 2], [3, 4] ];
+  data: AOA = [ [1, 2], [3, 4] ];
+  // data: AOA = JSON.stringify(this.items);
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 	fileName: string = 'SheetJS.xlsx';
 
@@ -37,7 +40,8 @@ export class LectorExcelComponent {
 		/* wire up file reader */
 		const target: DataTransfer = <DataTransfer>(evt.target);
 		if (target.files.length !== 1) throw new Error('Cannot use multiple files');
-		const reader: FileReader = new FileReader();
+    
+    const reader: FileReader = new FileReader();
 		reader.onload = (e: any) => {
 			/* read workbook */
 			const bstr: string = e.target.result;
@@ -57,7 +61,7 @@ export class LectorExcelComponent {
       let isLlavor: boolean = false;
 
       
-      // console.log(this.data[0].length);
+      console.log(this.data[0].length);
       switch (this.data[0].length) {
         case 7:
           // isPinyol = true;
@@ -150,15 +154,17 @@ export class LectorExcelComponent {
 	}
 
 	export(): void {
-		/* generate worksheet */
-		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+		// /* generate worksheet */
+		// const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
 
-		/* generate workbook and add the worksheet */
-		const wb: XLSX.WorkBook = XLSX.utils.book_new();
-		XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+		// /* generate workbook and add the worksheet */
+		// const wb: XLSX.WorkBook = XLSX.utils.book_new();
+		// XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-		/* save to file */
-		XLSX.writeFile(wb, this.fileName);
+		// /* save to file */
+    // XLSX.writeFile(wb, this.fileName);
+    console.log(this.items);
+    // this.evento_DescarregarXLS.emit();
   }
   
   saveFromExcel(newRegistre: Register, params:  HttpParams){

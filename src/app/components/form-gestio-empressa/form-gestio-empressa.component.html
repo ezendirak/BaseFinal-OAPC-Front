@@ -1,0 +1,29 @@
+<form #formulario="ngForm" (ngSubmit)="onclick($event)">
+  <div class="jumbotron2" style="margin-bottom:  0; padding-bottom:  0;">  
+    <div class="formCompradorGrande">
+      <label for="campoA" class="labelEstadoComprador col-md-2 col-xs-12">Codi d'empressa</label>
+      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="selectedEmpressa" [(ngModel)]="selectedEmpressa">
+        <option *ngFor="let h of empresses" [ngValue]="h">{{ h }}</option>
+    </select>
+  </div>
+
+  <div class="formCompradorGrande">
+      <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">Producte</label>
+      <!-- <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="periode"    name="periode"    [(ngModel)]="periode"> -->
+      
+      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="selectedProducte" [(ngModel)]="selectedProducte">
+          <option *ngFor="let p of productes" [ngValue]="p">{{ p.nom }}</option>
+      </select>
+    </div>
+<!-- </div> -->
+<!-- <div class="form-group row margin-bottom"> -->
+  <div class="formCompradorGrande">
+    <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">Estat</label>
+    <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="estat"    name="estat"    [(ngModel)]="estat">
+  </div>
+
+      <div class="form-group row margin-bottom" style="text-align: right;"> 
+         <button type="submit" class="btnEnvio btn btn-custom">Buscar</button>   
+     </div> 
+ </div>
+</form>

@@ -16,7 +16,7 @@ import { BsModalService, BsModalRef }                     from 'ngx-bootstrap';
 export class TaulaRegisterComponent implements OnInit {
 
  
-  @Input() items;
+  @Input() items          :RegisterResponse[];
   @Input() productesModal:     InfoKey[];
   @Input() comboInfoModal: AtributsComboResponse;
   
@@ -33,6 +33,7 @@ export class TaulaRegisterComponent implements OnInit {
   @Output() evento_getCombos:   EventEmitter<any> = new EventEmitter();
 
   @Output() evento_putRegistre:   EventEmitter<any> = new EventEmitter();
+  @Output() evento_printItems:   EventEmitter<any> = new EventEmitter();
   // productEdit:  RegisterResponse;
 
   bsModalRef: BsModalRef;
@@ -116,6 +117,12 @@ export class TaulaRegisterComponent implements OnInit {
 
   actionToEdit(datos_salida: RegisterResponse){
     this.evento_putRegistre.emit(datos_salida);
+  }
+
+  actionPrintItems(items: RegisterResponse[]){
+    console.log("Sortim de Taula");
+    console.log(items);
+    this.evento_printItems.emit(items);
   }
 
   actionDelete(item)

@@ -69,4 +69,13 @@ getRegistresCountFiltrat(filtre: any): Observable<number>
                     .catch((error: any) => Observable.throw(error));
 }
 
+  postNewAtribut(newAtribut:  any): Observable<any>
+  {
+    return this.http.post( this.ApiUrlConfigService._postNewAtribut, 
+                        newAtribut, this.AuthorizationService.header_token()
+                    )
+                    .map(respuesta => respuesta)
+                    .catch((error: any) => Observable.throw(error)); 
+  }
+
 }

@@ -1,0 +1,21 @@
+<app-form-gestio-empressa   [empresses]="empresses"
+                            [productes]="productes"
+                            (evento_filtroGestioEmpressa)="onClickBuscarForm($event)"
+>
+
+</app-form-gestio-empressa>
+
+<app-taula-gestio-empressa  [items]="items"
+                            [productesModal]="productesModal"
+                            (evento_editEmpressa)="onClickToEditEmp($event)"
+>
+
+</app-taula-gestio-empressa>
+
+<app-button-taula-gestio-empressa   [pagination]="pagination" 
+                                    (evento_list_pagination)="onClickPagination($event)"
+                                    (evento_new_pagination)="onClickNewPagination($event)"
+                                    
+>
+
+</app-button-taula-gestio-empressa>

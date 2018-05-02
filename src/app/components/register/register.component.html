@@ -22,6 +22,8 @@
   </app-form-register>
 
   <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
+                    [items]="items"
+                    (evento_DescarregarXLS)="descarregarAXLS($event)"
   >
   </app-lector-excel>
   
@@ -39,6 +41,7 @@
                   [isPinyol]="isPinyol"
                   [isLlavor]="isLlavor"
                   (evento_canviProduct)="onClickParams($event)"
+                  (evento_printItems)="printItems($event)"
   >
   </app-taula-register>
 

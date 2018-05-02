@@ -1,10 +1,10 @@
+import { RegisterResponse } from './../interfaces/register-response';
 import { InfoKey } from './../interfaces/info-key';
 import { Injectable } from '@angular/core';
 import { ApiUrlConfigService }        from './api-url-config.service';
 import { AuthorizationService }       from './authorization.service'; 
 
 import { HttpClient, HttpHeaders, HttpParams }    from '@angular/common/http';
-import { RegisterResponse } from '../interfaces/register-response';
 
 import { Observable}                  from 'rxjs/Rx';
 import { AtributsComboResponse } from '../interfaces/atributs-combo-response';
@@ -174,9 +174,31 @@ getPeriodes(): Observable<Periode[]>
   }
 
   getPeriodesDisponibles(): Observable<Periode[]>
-{
+  {
   return this.http.get(this.ApiUrlConfigService._periodesDisponibles,
                         this.AuthorizationService.header_token()
+    )
+    .catch((error: any) => Observable.throw(error));
+  }
+
+  getPeriodesByProd(subGrup:  String): Observable<Periode[]>
+  { 
+    return this.http.get( this.ApiUrlConfigService._periodesByProd + subGrup,
+                          this.AuthorizationService.header_token()
+                        )
+                        .catch((error: any) => Observable.throw(error));
+  }
+
+  getDownloadToExcel(items: RegisterResponse[])
+  {
+    console.log("Estem al servei");
+    console.log(items);
+    console.log(JSON.stringify(items));
+
+    const frmData = new FormData();
+    frmData.append("frmData", JSON.stringify(items))
+    return this.http.post( this.ApiUrlConfigService._downloadToExcel, frmData,
+                          this.AuthorizationService.header_token()
     )
     .catch((error: any) => Observable.throw(error));
   }
