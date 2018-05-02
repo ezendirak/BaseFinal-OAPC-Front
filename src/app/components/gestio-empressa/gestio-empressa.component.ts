@@ -7,6 +7,7 @@ import { TrazaService } from '../../services/traza.service';
 import { TranslateService } from '@ngx-translate/core';
 import { InfoKey } from '../../interfaces/info-key';
 import { InfoKeyClass } from '../../model/info-key-class';
+import { GestionsService } from '../../services/gestions.service';
 
 @Component({
   selector: 'app-gestio-empressa',
@@ -30,7 +31,7 @@ export class GestioEmpressaComponent implements OnInit {
   item:       InfoEmpressa;
 
   constructor(private AuthorizationService  :AuthorizationService, 
-              // private RegisterService     : RegisterService, 
+              private GestionsService:      GestionsService,
               private TrazaService          :TrazaService,
               private EmpressaService       :EmpressaService,
               // private modalService        : BsModalService,
@@ -130,6 +131,23 @@ export class GestioEmpressaComponent implements OnInit {
   onClickToEditEmp($event) {
     console.log($event);
     this.putEmpressa($event);
+  }
+
+  onClickAddNewEmp(newEmp: InfoEmpressa) 
+  {
+    if (this.AuthorizationService.is_logged()){
+      console.log("a la funcio del controlador: ");
+      console.log(newEmp);
+      // console.log("abans del service: " + filtro.tipusProducte);
+      this.GestionsService.postNewEmp(newEmp)
+      .subscribe ( respuesta => { //this.item = respuesta;
+
+                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  this.getRegistresPage(this.filtroFake);
+                                },
+                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+      );
+    }
   }
   /////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////// PAGINATION ////////////////////////////////////////////////////

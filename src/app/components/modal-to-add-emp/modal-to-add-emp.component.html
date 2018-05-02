@@ -1,0 +1,57 @@
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{titulo}}</h4>
+  
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  </div>
+
+<div class="modal-body">
+
+    <ul *ngIf="lista.length">
+        <li *ngFor="let item of lista">{{item}}</li>
+    </ul>
+
+  <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
+
+    <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+      <div class="form-group row margin-bottom">
+        <div>
+            <label for="id" class="col-md-2 col-xs-12">Codi Empressa</label>
+            <input type="text"  class="col-md-3 col-xs-12"    id="codiEmpressa"    name="codiEmpressa"    [(ngModel)]="codiEmpressa">
+          </div>
+            
+        <div>
+            <label for="periode" class="col-md-2 col-xs-12">Producte</label>
+            <ngx-select name="multiSel" style="width:200px; display:inline-block;" [multiple]="true"
+                    [items]="productesNom"
+                    [disabled]="ngxDisabled"
+                    [(ngModel)]="ngxValue"
+                    [defaultValue]="provaStrings"
+                    (selectionChanges)="doSelectOptions($event)">
+        </ngx-select>
+
+        {{ngxValue | json}}
+          
+          </div> 
+      </div>
+
+      <div class="form-group row margin-bottom">
+        <div >
+          <label for="campoC" class="col-md-2 col-xs-12">Estat</label>
+          <input  type="text"  class="col-md-3 col-xs-12"    id="estat"    name="estat"    [(ngModel)]="estat">
+        </div>
+      </div>
+    
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+  
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+</div>

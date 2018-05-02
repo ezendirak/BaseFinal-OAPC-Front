@@ -1,3 +1,4 @@
+import { InfoEmpressa } from './../interfaces/info-empressa';
 import { InfoGestioProd } from './../interfaces/info-gestio-prod';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -76,6 +77,15 @@ getRegistresCountFiltrat(filtre: any): Observable<number>
                     )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error)); 
+  }
+
+  postNewEmp(newEmp:  InfoEmpressa): Observable<any>
+  {
+    return this.http.post( this.ApiUrlConfigService._postNewEmp, 
+          newEmp, this.AuthorizationService.header_token()
+                          )
+                          .map(respuesta => respuesta)
+                          .catch((error: any) => Observable.throw(error)); 
   }
 
 }

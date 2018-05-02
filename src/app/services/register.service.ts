@@ -195,9 +195,9 @@ getPeriodes(): Observable<Periode[]>
     console.log(items);
     console.log(JSON.stringify(items));
 
-    const frmData = new FormData();
-    frmData.append("frmData", JSON.stringify(items))
-    return this.http.post( this.ApiUrlConfigService._downloadToExcel, frmData,
+    // const frmData = new FormData();
+    // frmData.append("frmData", JSON.stringify(items))
+    return this.http.post( this.ApiUrlConfigService._downloadToExcel, JSON.stringify(items),
                           this.AuthorizationService.header_token()
     )
     .catch((error: any) => Observable.throw(error));

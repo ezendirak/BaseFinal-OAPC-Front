@@ -61,6 +61,7 @@ import { ModalEditGestEmpComponent } from './components/modal-edit-gest-emp/moda
 import { ModalToAddProdComponent } from './components/modal-to-add-prod/modal-to-add-prod.component';
 
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
+import { ModalToAddEmpComponent } from './components/modal-to-add-emp/modal-to-add-emp.component';
 
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -107,10 +108,11 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     TaulaGestioEmpressaComponent,
     ButtonTaulaGestioEmpressaComponent,
     ModalEditGestEmpComponent,
-    ModalToAddProdComponent
+    ModalToAddProdComponent,
+    ModalToAddEmpComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent],
 
   imports: [
     BrowserModule,

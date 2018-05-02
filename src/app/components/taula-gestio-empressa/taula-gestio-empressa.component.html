@@ -13,7 +13,10 @@
           <ng-container *ngIf="item?.tipusProductes == '' ;then content1 else other_content1"></ng-container>
             <ng-template #content1><td >-</td></ng-template>
             <ng-template #other_content1><td >{{ item?.tipusProductes }}</td></ng-template>
-          <td>{{ item?.estat }}</td>
+        <ng-container *ngIf="item?.estat == '1' ;then content2 else other_content2"></ng-container>
+        <ng-template #content2><td >Actiu</td></ng-template>
+        <ng-template #other_content2><td >Inactiu</td></ng-template>
+          <!-- <td>{{ item?.estat }}</td> -->
           <td>
               <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
           </td>
