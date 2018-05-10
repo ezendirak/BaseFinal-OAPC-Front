@@ -130,7 +130,7 @@ export function HttpLoaderFactory(http: HttpClient){
     ModalToAddCalendarComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent, ModalToAddCalendarComponent],
 
   imports: [
     BrowserModule,

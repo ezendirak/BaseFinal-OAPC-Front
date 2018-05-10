@@ -4,11 +4,13 @@ import { ApiUrlConfigService } from './api-url-config.service';
 import { Periode } from '../model/periode';
 
 import { HttpClient, HttpHeaders, HttpParams }    from '@angular/common/http';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable()
 export class GestioPeriodesService {
 
   constructor(private ApiUrlConfigService:  ApiUrlConfigService,
+              private AuthorizationService: AuthorizationService,
               private http                 : HttpClient) { }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,4 +34,14 @@ getRegistresCountFiltrat(filtre: any): Observable<number>
                   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));  
 }
+
+postNewPeriodes(periodesNous:   Periode[])
+{
+  return this.http.post(  this.ApiUrlConfigService._postNewPeriodes, 
+                          periodesNous, this.AuthorizationService.header_token()
+                        )
+                        .map(respuesta => respuesta)
+                        .catch((error: any) => Observable.throw(error)); 
+}
+
 }

@@ -46,7 +46,7 @@ export class GestioEmpressaComponent implements OnInit {
     this.getProductesModal();
     
     this.filtroFake = "";
-    this.paginacio = 5;
+    this.paginacio = 10;
 
     this.pagination = new Pagination;
     this.pagination.page_actual = 1;

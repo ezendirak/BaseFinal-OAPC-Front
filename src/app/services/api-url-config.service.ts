@@ -86,6 +86,7 @@ export class ApiUrlConfigService {
   public _getProductesModalNom        = '/api/v5/nomProductesModal/';
   public _postNewAtribut             = '/api/v3/newAtribut/';
 
+  public _postNewPeriodes             = '/api/v5/newPeriodes/';
   public _postNewEmp             = '/api/v5/newEmp/';
 
   constructor() 

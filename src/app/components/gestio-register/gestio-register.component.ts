@@ -51,7 +51,7 @@ export class GestioRegisterComponent implements OnInit {
 
     
     this.filtroFake = "";
-    this.paginacio = 5;
+    this.paginacio = 10;
 
     this.pagination = new Pagination;
     this.pagination.page_actual = 1;

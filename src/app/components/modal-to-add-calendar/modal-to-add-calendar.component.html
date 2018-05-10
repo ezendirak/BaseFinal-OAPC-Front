@@ -1,3 +1,10 @@
-<p>
-  modal-to-add-calendar works!
-</p>
+<form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+  <p>
+    <input type="file" (change)="onFileChange($event)" multiple="false" />
+  </p>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+</div>  

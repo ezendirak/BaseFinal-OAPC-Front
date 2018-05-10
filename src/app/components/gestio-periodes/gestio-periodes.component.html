@@ -1,6 +1,7 @@
 <div class="container">
     <app-form-gestio-periodes   [periodes]="periodes"
                                 (evento_filtroGestioPeriode)="onClickToFilter($event)"
+                                (evento_AfegirPeriodeFromXLS)="onClickToAddPeriode($event)"
     >
     
     </app-form-gestio-periodes>
@@ -10,7 +11,7 @@
 
     </app-taula-gestio-periodes>
 
-    <app-button-taula-gestio-periodes   [pagination]="pagination" 
+    <app-button-taula-gestio-periodes   [pagination]="pagination"
                                         (evento_list_pagination)="onClickPagination($event)"
                                         (evento_new_pagination)="onClickNewPagination($event)"
     >

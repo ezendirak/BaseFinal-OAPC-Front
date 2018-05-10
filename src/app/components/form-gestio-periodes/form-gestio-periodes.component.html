@@ -4,13 +4,12 @@
       <label for="campoA" class="labelEstadoComprador col-md-2 col-xs-12">Periode</label>
       <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="Periode" [(ngModel)]="Periode">
         <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
-    </select>
-  </div>
+      </select>
+    </div>
 
   <div class="formCompradorGrande">
       <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">Dates</label>
-      <!-- <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="periode"    name="periode"    [(ngModel)]="periode"> -->
-      <div class="col-xs-12 col-12 col-md-3 form-group" style="display: inline-block;">
+      <div class="col-xs-12 col-12 col-md-3 form-group">
         <input [attr.disabled]='true' type="text"
            name="rangDates"
            class="form-control"

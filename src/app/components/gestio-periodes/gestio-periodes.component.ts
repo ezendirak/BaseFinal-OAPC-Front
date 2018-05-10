@@ -19,7 +19,8 @@ export class GestioPeriodesComponent implements OnInit {
 
   items:      Periode[];
   filtroFake:   any;
-  
+  filtre:       any;
+
   constructor(private AuthorizationService:   AuthorizationService,
               private RegisterService:        RegisterService,
               private GestioPeriodesService:  GestioPeriodesService,
@@ -29,7 +30,7 @@ export class GestioPeriodesComponent implements OnInit {
     this.getPeriodes();
 
     this.filtroFake = "";
-    this.paginacio = 5;
+    this.paginacio = 10;
 
     this.pagination = new Pagination;
     this.pagination.page_actual = 1;
@@ -56,6 +57,18 @@ export class GestioPeriodesComponent implements OnInit {
       );
   }
 
+  postNewPeriodes(periodesNous:   Periode[])
+  {
+    if (this.AuthorizationService.is_logged())
+      this.GestioPeriodesService.postNewPeriodes(periodesNous)
+      .subscribe ( respuesta => { this.periodes = respuesta;
+
+                                  this.TrazaService.dato("Periodes nous DISPONIBLES", "API GET PERIODES OK", this.periodes);
+                                },
+                  error =>      { this.TrazaService.error("Periodes nous DISPONIBLES", "API GET PERIODES KO", error); } 
+      );
+  }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////FROM EVENTS///////////////////////////////////////////////////
 
@@ -63,6 +76,13 @@ onClickToFilter($event)
 {
 console.log($event);
 this.getRegistresPage($event);
+}
+
+onClickToAddPeriode($event)
+{
+  console.log($event);
+  console.log("Cap a spring!");
+  this.postNewPeriodes($event);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,6 +120,33 @@ this.getRegistresPage($event);
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
   }
+
+  onClickPagination($event)
+  {
+    if ($event > 0)
+    {
+      this.pagination.page_actual = $event;
+      if (this.filtre){
+        this.getRegistresPage(this.filtre); 
+      }else{
+        this.getRegistresPage(""); 
+      }
+      
+    }
+  }
+
+  onClickNewPagination($event){
+    // console.log("Desde Registre: "+$event);
+    this.pagination.page_items = $event;
+    // console.log(this.pagination);
+    if (this.filtre){
+      // console.log(this.filtre);
+      this.getRegistresPage(this.filtre); 
+    }else{
+      this.getRegistresPage(""); 
+    }
+  }
+
 
   refreshPaginationCounters()
   {
