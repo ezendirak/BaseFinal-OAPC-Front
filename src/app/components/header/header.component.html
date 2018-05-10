@@ -30,7 +30,9 @@
               </div>
 
               <div style="display:inline-block; float:right;">
-                  <a ng-click="logout()" href="index.html">Logout</a>
+                  <!-- <a ng-click="logout()" href="index.html">Logout</a> -->
+                  <a *ngIf="!(islogged)" routerLink="/login">Login</a>
+                  <a *ngIf="(islogged)"  routerLink="/logout">Logout</a>
               </div>
               <h3>
                 <span class="label ng-scope" translate="">{{ 'TITOLS.' + literals.OAPC | translate }}</span>
@@ -52,12 +54,13 @@
           <div class="collapse navbar-collapse" [collapse]=isCollapsed>
 
             <ul class="nav navbar-nav" routerLinkActive="active">
-              <li class="nav-item"><a class="nav-link" routerLink="/notes">Notes<span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="/notes2">Notes2<span class="sr-only">(current)</span></a></li>
+              <!-- <li class="nav-item"><a class="nav-link" routerLink="/notes">Notes<span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/notes2">Notes2<span class="sr-only">(current)</span></a></li> -->
               <li class="nav-item"><a class="nav-link" routerLink="/register">Registre de preus<span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link" routerLink="/gestReg">Gestio registre Setmanal<span class="sr-only">(current)</span></a></li>
 
-              <li><a *ngIf="!(islogged)" routerLink="/login">Login</a></li>
-              <li><a *ngIf="(islogged)"  routerLink="/logout">Logout</a></li>
+              <!-- <li><a *ngIf="!(islogged)" routerLink="/login">Login</a></li>
+              <li><a *ngIf="(islogged)"  routerLink="/logout">Logout</a></li> -->
               
               <!-- <li class="dropdown" dropdown>
                   <a href="javascript:void(0)" dropdownToggle class="dropdown-toggle">Opciones A <span class="caret"></span></a>
@@ -79,6 +82,7 @@
                     <li role="menuitem"><a class="dropdown-item" href="/gestProd">Gestió de productes</a></li>
                     <li role="menuitem"><a class="dropdown-item" href="/tres">Gestió de dades mestres</a></li>
                     <li role="menuitem"><a class="dropdown-item" href="/cuatro">Gestió d'usuaris</a></li>
+                    <li role="menuitem"><a class="dropdown-item" href="/gestPer">Gestió de Periodes</a></li>
                   </ul>
               </li>
             </ul>

@@ -129,15 +129,15 @@ export class ModalNoteComponent implements  OnInit  {
   changeSelesctedTipusProducteModal($event)
   {
     let infoTest: any;
-    // console.log("MODAL EDIT: (MODAL)" + this.producteSelected);
+    console.log("MODAL EDIT: (MODAL)" + this.producteSelected);
     this.colorCarnSelected="";
     this.qualitatSelected="";
     this.calibreSelected="";
     this.varietatSelected="";
     console.log("ComboInfoModal abans de canviar de producte: ");
     console.log(this.comboInfoModal);
-    this.comboInfoModal = this.comboGeneral[this.producteSelected];
-    // console.log(JSON.stringify(this.comboInfoModal));
+    this.comboInfoModal = this.comboGeneralNoms[this.producteSelected];
+    console.log(JSON.stringify(this.comboInfoModal));
     infoTest = JSON.parse(JSON.stringify(this.comboInfoModal)); 
     console.log(infoTest.colorsCarn.length);
     if (infoTest.colorsCarn.length > 1){

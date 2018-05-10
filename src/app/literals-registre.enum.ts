@@ -21,6 +21,12 @@ export enum LiteralsRegistre {
     atr = "atr",
     val = "val",
     estat = "estat",
+    emp = "emp",
+    pendent = "pendent",
+    ultimReg = "ultimReg",
+    registrat = "registrat",
+    noCom = "noCom",
+    tancat = "tancat",
     //////////////////////////////////////////////////////////
     ///////////////////// Botons /////////////////////////////
     //////////////////////////////////////////////////////////

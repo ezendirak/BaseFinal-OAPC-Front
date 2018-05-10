@@ -1,0 +1,22 @@
+<form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+  <div class="form-group row margin-bottom">
+
+    <div>
+      <label  for="periode" class="col-md-2 col-xs-12">Producte</label>
+      <ngx-select name="multiSel" style="width:200px; display:inline-block;" [multiple]="true"
+              [items]="productesNom"
+              [disabled]="ngxDisabled"
+              [(ngModel)]="ngxValue"
+              
+              (selectionChanges)="doSelectOptions($event)">
+      </ngx-select>
+    </div>
+
+  
+
+  </div>
+    <button type="submit" class="btn btn-primary">Acceptar</button>
+</form>
+<!-- <div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+</div> -->

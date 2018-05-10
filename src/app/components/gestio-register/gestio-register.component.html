@@ -1,0 +1,26 @@
+<div class="container">    
+    <app-form-gestio-register [periodes]="periodes"
+                            [productesModal]="productesModal"
+                            [productes]="productes"
+                            [empresses]="empresses"
+                            (evento_Buscar)="OnClickSearch($event)"
+                            (evento_actionToClosePeriode)="closePeriode($event)"
+
+    >
+
+    </app-form-gestio-register>
+
+    <app-taula-gestio-register  [items]="items"
+                                (evento_putProducteEmpresaPeriode)="onClickPutPEP($event)"
+    >
+
+    </app-taula-gestio-register>
+
+    <app-button-taula-gestio-register [pagination]="pagination" 
+                                    (evento_list_pagination)="onClickPagination($event)"
+                                    (evento_new_pagination)="onClickNewPagination($event)"
+                                    
+    >
+
+    </app-button-taula-gestio-register>
+</div>

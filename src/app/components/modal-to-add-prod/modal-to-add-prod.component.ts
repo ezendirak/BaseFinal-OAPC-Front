@@ -62,11 +62,6 @@ export class ModalToAddProdComponent implements OnInit {
     console.log(form);
 
     
-    
-    // this.params = this.params.set('producte', this.selectedProducte.nom);
-    // this.params = this.params.set('taula', this.selectedAtribut);
-    // this.params = this.params.set('idProd', `${this.selectedProducte.id}`);
-    // this.params = this.params.set('valor', this.selectedValor);
     this.dadesSortida.idProd = this.selectedProducte.id
     this.dadesSortida.producte = this.selectedProducte.nom;
     this.dadesSortida.taula = this.selectedAtribut;
@@ -84,7 +79,6 @@ export class ModalToAddProdComponent implements OnInit {
     //console.log("ON CANCEL");    
     //console.log(form);
     
-    // this.datos_salida = "DATOS SALIDA ON CANCEL";
     this.onClose.next(false);
 
     this.bsModalRef.hide();

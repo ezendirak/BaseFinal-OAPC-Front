@@ -19,13 +19,14 @@
         "fam": "Familia",
         "atr": "Atribut",
         "val": "Valor",
-        "estat": "Estat"
+        "estat": "Estat",
+        "emp": "Empressa"
     },
 
     "LITERALS_COL" : {
         "ref": "Referència",
         "per": "Període",
-        "empIn": "Empressa Informant",
+        "emp": "Empressa",
         "usuIn": "Usuari Informant",
         "tipPro": "Tipus de producte",
         "colCa": "Color de Carn",
@@ -40,7 +41,12 @@
         "fam": "Familia",
         "atr": "Atribut",
         "val": "Valor",
-        "estat": "Estat"
+        "estat": "Estat",
+        "pendent": "Pendent",
+        "registrat": "Registrat",
+        "noCom":    "No Comercialització",
+        "tancat":   "Tancat",
+        "ultimReg": "Data últim registre"
     },
     
 	"COLORCARN" : {

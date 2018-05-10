@@ -31,8 +31,8 @@
             <td>{{ item?.calibre }}</td>
             <td>{{ item?.qualitat }}</td>
             <td>{{item?.quantitatVenuda}}</td>
-            <td>{{item?.preuSortida}}</td>
-            <td>{{item?.quantitatVenuda * item?.preuSortida}} €</td>
+            <td>{{item?.preuSortida.toFixed(2)}} €</td>
+            <td>{{(item?.quantitatVenuda * item?.preuSortida).toFixed(2)}} €</td>
             <td>
                 <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
             </td>
@@ -40,6 +40,6 @@
                 <button type="button" class="btn-custom btn btnEnvio" (click)="actionDelete(item)">Borrar</button>
             </td>
         </tr>
-        <button type="button" class="btn-custom btn btnEnvio" (click)="actionPrintItems(items)">Borrar</button>
+        <!-- <button type="button" class="btn-custom btn btnEnvio" (click)="actionPrintItems(items)">Borrar</button> -->
     </tbody>
 </table>

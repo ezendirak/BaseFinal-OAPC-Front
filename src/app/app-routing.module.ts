@@ -12,6 +12,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { Notes2Component }       from './components/notes2/notes2.component';
 import { RegisterComponent } from './components/register/register.component';
 import { GestioEmpressaComponent } from './components/gestio-empressa/gestio-empressa.component';
+import { GestioRegisterComponent } from './components/gestio-register/gestio-register.component';
+import { GestioPeriodesComponent } from './components/gestio-periodes/gestio-periodes.component';
 
 const routes: Routes = [
   { path: '',           component: HomeComponent },
@@ -20,8 +22,10 @@ const routes: Routes = [
   { path: 'register',   component: RegisterComponent },
   { path: 'login',      component: LoginComponent },
   { path: 'logout',     component: LogoutComponent },
+  { path: 'gestReg',     component: GestioRegisterComponent },
   { path: 'gestProd',     component: GestioProductesComponent },
   { path: 'gestEmp',     component: GestioEmpressaComponent },
+  { path: 'gestPer',     component: GestioPeriodesComponent },
   { path: '**',         component: PageNotFoundComponent },  
 ];
 
@@ -29,4 +33,5 @@ const routes: Routes = [
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
+
 export class AppRoutingModule {}

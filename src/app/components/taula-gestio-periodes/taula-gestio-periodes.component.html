@@ -1,0 +1,28 @@
+
+<table class="table">
+  <thead>
+      <tr>
+          <th class="columnCenter">Periode</th>
+          <th class="columnCenter">Periodicitat</th>
+          <th class="columnCenter">Data Inicial</th>
+          <th class="columnCenter">Data Final</th>
+          <th class="columnCenter">Any</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{item?.numPeriode + item?.tipusPeriode}}</td>
+        <ng-container *ngIf="item?.tipusPeriode=='S';then content1"></ng-container>
+        <ng-template #content1><td >Setmanal</td></ng-template>
+        <ng-container *ngIf="item?.tipusPeriode=='Q';then content2"></ng-container>
+        <ng-template #content2><td >Quinzenal</td></ng-template>
+        <td >{{ item?.dataInici | date:'d/M/yy'}}</td>
+        
+        <td >{{ item?.dataFi | date:'d/M/yy'}}</td>
+        <td >{{ item?.any }}</td>
+          <!-- <td>
+              <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
+          </td> -->
+      </tr>
+  </tbody>
+</table>

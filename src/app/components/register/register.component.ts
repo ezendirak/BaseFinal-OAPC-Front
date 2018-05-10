@@ -18,6 +18,7 @@ import { AtributsComboResponse } from '../../interfaces/atributs-combo-response'
 import { TranslateService } from '@ngx-translate/core';
 import { Register } from '../../model/register';
 import { Periode } from '../../model/periode';
+import { EmpressaService } from '../../services/empressa.service';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
   filtroFake: any;
   
   pagination: Pagination;
+  paginacio: number;
   
   items:      RegisterResponse[];
   item:       RegisterResponse;
@@ -50,7 +52,7 @@ export class RegisterComponent implements OnInit {
   isPinyol: Boolean;
   isLlavor: Boolean;
 
-  paginacio: number;
+  empresses:  String[];
 
   registres:    RegisterResponse[];
 
@@ -63,7 +65,8 @@ export class RegisterComponent implements OnInit {
                private RegisterService     : RegisterService, 
                private TrazaService        : TrazaService,
                private modalService        : BsModalService,
-               private translate            : TranslateService) 
+               private translate            : TranslateService,
+               private EmpressaService      :EmpressaService) 
                
   { }
 
@@ -77,7 +80,8 @@ export class RegisterComponent implements OnInit {
     this.getProductes();
     this.getPeriodes();
     this.getPeriodesModal();
-    
+    this.getEmpresses();
+
     this.filtroFake = "";
     this.paginacio = 5;
 
@@ -157,10 +161,11 @@ export class RegisterComponent implements OnInit {
       this.isPinyol = false;
       this.isLlavor = false;
       //Treiem tots els periodes ja que no hi ha cap producte fixat
-      this.getPeriodes();
-
+      this.getPeriodes(); 
     }
-    this.getCombos($event.clau);;
+    //En el cas de que seleccionem un producte, sino hem de treure tots els atributs diferents.
+    //Controlar quan es seleccionen tots els productes
+    this.getCombos($event.clau); 
   }
  
   onClickNewPagination($event){
@@ -189,6 +194,7 @@ export class RegisterComponent implements OnInit {
     console.log("Estem al pare");
     this.downloadToExcel($event);
   }
+
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////  
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -439,6 +445,19 @@ export class RegisterComponent implements OnInit {
                   error =>      { this.TrazaService.error("Combo GENERALS NOMS", "API GET COMBOGENERALS KO", error); } 
       );
     }
+  }
+
+  getEmpresses()
+  {
+    if (this.AuthorizationService.is_logged())
+      this.EmpressaService.getEmpressa()
+      .subscribe ( respuesta => { this.empresses = respuesta;
+                                  // console.log("prrrrrrrrrrrrrrrrrrra");
+                                  // console.log(this.productes);
+                                  // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
+                                },
+                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+      );
   }
 
   /////////////////////////////////////////////////////////////////////////////////

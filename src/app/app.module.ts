@@ -1,3 +1,4 @@
+import { GestioPeriodesService } from './services/gestio-periodes.service';
 import { GestionsService } from './services/gestions.service';
 import { HttpClient } from '@angular/common/http';
 import { RegisterService } from './services/register.service';
@@ -9,7 +10,7 @@ import { HttpClientModule }       from '@angular/common/http';
 import { FormsModule }            from '@angular/forms';
 import { ReactiveFormsModule }    from '@angular/forms';
 
-import { CollapseModule }         from 'ngx-bootstrap';
+import { CollapseModule, BsDatepickerModule }         from 'ngx-bootstrap';
 import { BsDropdownModule }       from 'ngx-bootstrap';
 import { ModalModule  }           from 'ngx-bootstrap';
 
@@ -62,6 +63,17 @@ import { ModalToAddProdComponent } from './components/modal-to-add-prod/modal-to
 
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { ModalToAddEmpComponent } from './components/modal-to-add-emp/modal-to-add-emp.component';
+import { GestioRegisterComponent } from './components/gestio-register/gestio-register.component';
+import { TaulaGestioRegisterComponent } from './components/taula-gestio-register/taula-gestio-register.component';
+import { FormGestioRegisterComponent } from './components/form-gestio-register/form-gestio-register.component';
+import { ButtonTaulaGestioRegisterComponent } from './components/button-taula-gestio-register/button-taula-gestio-register.component';
+import { GestioRegisterService } from './services/gestio-register.service';
+import { ModalToClosePerComponent } from './components/modal-to-close-per/modal-to-close-per.component';
+import { GestioPeriodesComponent } from './components/gestio-periodes/gestio-periodes.component';
+import { FormGestioPeriodesComponent } from './components/form-gestio-periodes/form-gestio-periodes.component';
+import { TaulaGestioPeriodesComponent } from './components/taula-gestio-periodes/taula-gestio-periodes.component';
+import { ButtonTaulaGestioPeriodesComponent } from './components/button-taula-gestio-periodes/button-taula-gestio-periodes.component';
+import { ModalToAddCalendarComponent } from './components/modal-to-add-calendar/modal-to-add-calendar.component';
 
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -72,10 +84,6 @@ export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http);
 }
  
-const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more options
-  optionValueField: 'clau',
-  optionTextField: 'nom'
-};
 
 @NgModule({
   declarations: [ 
@@ -109,16 +117,26 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     ButtonTaulaGestioEmpressaComponent,
     ModalEditGestEmpComponent,
     ModalToAddProdComponent,
-    ModalToAddEmpComponent
+    ModalToAddEmpComponent,
+    GestioRegisterComponent,
+    TaulaGestioRegisterComponent,
+    FormGestioRegisterComponent,
+    ButtonTaulaGestioRegisterComponent,
+    ModalToClosePerComponent,
+    GestioPeriodesComponent,
+    FormGestioPeriodesComponent,
+    TaulaGestioPeriodesComponent,
+    ButtonTaulaGestioPeriodesComponent,
+    ModalToAddCalendarComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
+    BsDatepickerModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -132,7 +150,8 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     CollapseModule.forRoot(), 
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    NgxSelectModule
+    NgxSelectModule,
+    BsDatepickerModule
   ],
 
   providers: [
@@ -145,7 +164,9 @@ const CustomSelectOptions: INgxSelectOptions = { // Check the interface for more
     RegisterService,
     TranslateService,
     GestionsService,
-    EmpressaService
+    EmpressaService,
+    GestioRegisterService,
+    GestioPeriodesService
   ],
 
   bootstrap: [AppComponent]

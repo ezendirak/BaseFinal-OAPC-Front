@@ -145,8 +145,8 @@ export class ModalToAddComponent implements  OnInit  {
 
   changeSelesctedTipusProducteModal($event)
   {
-    console.log("MODAL TO ADD: (MODAL | ADD)" + JSON.parse(JSON.stringify(this.producteSelected)));
-    
+    // console.log("MODAL TO ADD: (MODAL | ADD)" + JSON.parse(JSON.stringify(this.producteSelected)));
+    console.log("WTF");
     let test: any;
     test = this.producteSelected;
     this.getCombosModal(test.clau);
@@ -178,13 +178,13 @@ export class ModalToAddComponent implements  OnInit  {
       }
     }
 
-    console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
-    console.log(this.comboInfoModal);
+    // console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
+    // console.log(this.comboInfoModal);
     // let comboEnModal: any;
     // comboEnModal = this.comboGeneral;
     // this.comboInfoModal = comboEnModal[test.clau];
 
-    console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
+    // console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
     
     // comboInfoModal = comboEnModal[test.Clau];
     

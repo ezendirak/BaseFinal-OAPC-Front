@@ -17,15 +17,11 @@
 
     <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
       <div class="form-group row margin-bottom">
-        <div>
-            <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.ref | translate }}</label>
-            <input type="text"  class="col-md-3 col-xs-12"    id="referencia"    name="referencia"    [(ngModel)]="id" value="{{datos_entrada?.id}}">
-          </div>
-            
+        
         <div>
             <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
             
-            <select class="col-md-3 col-xs-12" name="periode" [(ngModel)]="nouPeriode" (change) = "changeSelectedPeriodeModal($event)">
+            <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode" (change) = "changeSelectedPeriodeModal($event)">
               <option *ngFor="let h of periodesModal" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
           </select>
           </div> 
@@ -96,10 +92,10 @@
       <input type="number"  class="col-md-3 col-xs-12"    id="pSortida"    name="pSortida"    [(ngModel)]="pSortida">
     </div>
     
-    <div class="form-group row margin-bottom">
+    <!-- <div class="form-group row margin-bottom">
       <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
       <input type="text"  class="col-md-3 col-xs-12"    id="tancada"    name="tancada"    [(ngModel)]="tancada">
-    </div>
+    </div> -->
         <button [disabled]="!notErrorPeriode" type="submit" class="btn btn-primary">Submit</button>
       </form>
   

@@ -1,0 +1,50 @@
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.per | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.emp | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.tipPro | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.ultimReg | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.pendent | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.registrat | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.noCom | translate }}</th>
+                <th class="columnCenter">{{ 'LITERALS_COL.' + literals.tancat | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <!-- <td>{{item?.id}}</td> -->
+                <td>{{item?.idPeriode}}</td>
+                <td>{{ item?.codiEmpresa }}</td>
+                <td>{{ item?.empressaProducte }}</td>
+                <ng-container *ngIf="item?.dataUltimRegistre;then content1 else other_content1"></ng-container>
+                <ng-template #content1><td >{{ item?.dataUltimRegistre }}</td></ng-template>
+                <ng-template #other_content1><td >-</td></ng-template>
+                <!-- <ng-container *ngIf="item?.pendent;then content2"></ng-container>
+                <ng-template #content2> -->
+                    <td><input type="checkbox" value="{{item?.id}}" name="{{item?.id}}"  [checked]="item?.pendent" (change) ="updatePendent(item)" /></td>
+                <!-- </ng-template>
+                <ng-container *ngIf="item?.registrat;then content3"></ng-container> -->
+                <!-- <ng-template #content3> -->
+                    <td><input type="checkbox" value="{{item?.id}}" name="{{item?.id}}"  [checked]="item?.registrat" (change) ="updateRegistrat(item)" /></td>
+                <!-- </ng-template>
+                <ng-container *ngIf="item?.noComercialitzacio;then content4"></ng-container>
+                <ng-template #content4> -->
+                    <td><input type="checkbox" value="{{item?.id}}" name="{{item?.id}}"  [checked]="item?.noComercialitzacio" (change) ="updateNoComer(item)" /></td>
+                <!-- </ng-template>
+                <ng-container *ngIf="item?.tancat;then content5"></ng-container>
+                <ng-template #content5> -->
+                    <td><input type="checkbox" value="{{item?.id}}" name="{{item?.id}}"  [checked]="item?.tancat" (change) ="updateTancat(item)" /></td>
+                <!-- </ng-template> -->
+                <!-- <td>
+                    <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
+                </td>
+                <td>
+                    <button type="button" class="btn-custom btn btnEnvio" (click)="actionDelete(item)">Borrar</button>
+                </td> -->
+                
+            </tr>
+        </tbody>
+    </table>
+    

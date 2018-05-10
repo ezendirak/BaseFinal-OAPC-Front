@@ -23,7 +23,7 @@ export class FormRegisterComponent implements OnInit {
   
   
   @Input()  titulo_form:    string;
-  @Input()  productes:      string[];
+  @Input()  productes:      InfoKey[];
   @Input()  comboInfo:      AtributsComboResponse;
   @Input()  comboLleno:     Boolean;
   @Input()  item:           RegisterResponse;
@@ -35,8 +35,9 @@ export class FormRegisterComponent implements OnInit {
   @Input()  isLlavor:       Boolean;
   @Input()  periodes:       Periode[];
   @Input()  periodesModal:  Periode[];
+  @Input()  empresses:      String[];
 
-
+  
   @Output() evento_form1: EventEmitter<any> = new EventEmitter();
   @Output() evento_tProduct: EventEmitter<any> = new EventEmitter();
   @Output() evento_form_afegir: EventEmitter<any> = new EventEmitter();
@@ -73,7 +74,7 @@ export class FormRegisterComponent implements OnInit {
               private BsModalRefAdd: BsModalService) {
     
     traductorService.setDefaultLang('cat');
-    this.usuariActual = 'Pol Garcia';
+    this.usuariActual = 'Administrador';
   }
 
   
@@ -129,8 +130,12 @@ export class FormRegisterComponent implements OnInit {
      if (this.pSortida2){
       params = params.set('pSortida2', this.pSortida2.toString());
      }
+     if (this.eInformant && this.eInformant != 'Totes'){
+      params = params.set('eInformant', this.eInformant);
+     }
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
       console.log(params);
+    window.scrollTo(0, 575);
     this.evento_form1.emit(params);
   }
 
@@ -195,6 +200,7 @@ export class FormRegisterComponent implements OnInit {
     this.selectedColorCarn="";
     this.selectedQualitat="";
     this.selectedKalibre="";
+    
   }
 
   getCombos(tipusProducte: string){

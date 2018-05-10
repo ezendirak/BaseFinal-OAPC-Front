@@ -53,8 +53,8 @@ export class TaulaGestioEmpressaComponent implements OnInit {
   // ]
     this.bsModalRef.content.provaStrings = item.tipusProductes;
     
-    this.bsModalRef.content.datos_entrada = item; //res
-    this.bsModalRef.content.datos_salida = item;  //res
+    this.bsModalRef.content.datos_entrada = item; 
+    this.bsModalRef.content.datos_salida = item;  
 
     // this.bsModalRef.content.productesModal = this.productesModal; //no s'utlitza
     

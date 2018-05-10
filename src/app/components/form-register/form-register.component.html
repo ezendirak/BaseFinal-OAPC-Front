@@ -1,30 +1,20 @@
-<!-- <h2>FORM-COMPONENT</h2>
-<h3>{{titulo_form}}</h3> -->
-
-<!-- <button (click)="switchLanguage('cat')">cat</button>
-<button (click)="switchLanguage('es')">es</button> -->
-
 <form #formulario="ngForm" (ngSubmit)="onclick($event)">
-   <!-- <div>  -->
+   
   <div class="jumbotron2" style="margin-bottom:  0; padding-bottom:  0;">  
-    <div class="formCompradorGrande">
-        <label for="campoA" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.ref | translate }}</label>
-        <input type="text"  class="form-control  ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;"   id="referencia"    name="referencia"    [(ngModel)]="referencia">
-    </div>
-
+    
     <div class="formCompradorGrande">
         <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-        <!-- <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="periode"    name="periode"    [(ngModel)]="periode"> -->
         
         <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="periode" [(ngModel)]="periode">
             <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
         </select>
       </div>
-  <!-- </div> -->
-  <!-- <div class="form-group row margin-bottom"> -->
+  
     <div class="formCompradorGrande">
       <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
-      <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:400px; display:inline-block;"  id="eInformant"    name="eInformant"    [(ngModel)]="eInformant">
+      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="eInformant" [(ngModel)]="eInformant">
+          <option *ngFor="let e of empresses" [ngValue]="e">{{ e }} </option>
+      </select>
     </div>
 
     <div class="formCompradorGrande">
@@ -108,10 +98,10 @@
   <!-- </div> -->
 
 <!-- <div class="form-group row margin-bottom"> -->
-  <div class="formCompradorGrande">
+  <!-- <div class="formCompradorGrande">
     <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
     <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;"   id="tancada"    name="tancada"    [(ngModel)]="tancada">
-  </div>
+  </div> -->
   <!-- </div> -->
 
   <div class="form-group row margin-bottom" style="text-align: left;"> 

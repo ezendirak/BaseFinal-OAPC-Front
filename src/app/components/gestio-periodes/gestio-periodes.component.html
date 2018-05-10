@@ -1,0 +1,20 @@
+<div class="container">
+    <app-form-gestio-periodes   [periodes]="periodes"
+                                (evento_filtroGestioPeriode)="onClickToFilter($event)"
+    >
+    
+    </app-form-gestio-periodes>
+
+    <app-taula-gestio-periodes [items]="items"
+    >
+
+    </app-taula-gestio-periodes>
+
+    <app-button-taula-gestio-periodes   [pagination]="pagination" 
+                                        (evento_list_pagination)="onClickPagination($event)"
+                                        (evento_new_pagination)="onClickNewPagination($event)"
+    >
+
+    </app-button-taula-gestio-periodes>
+
+</div>

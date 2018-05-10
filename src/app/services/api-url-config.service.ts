@@ -27,10 +27,12 @@ export class ApiUrlConfigService {
   public _getRegistresPageURL     = '/api/v4/registres_page/';
 
   public _getRegistresPageFiltratURL = '/api/v4/registresFiltrat/';
-
   public _getRegistresCountURL   = '/api/v4/registres_count/';
   public _getRegistresCountURLFiltrat   = '/api/v4/registres_countFiltrat/';
   
+  public _getRegistresPEPPageFiltratURL = '/api/v5/registresPEPFiltrat/';
+  public _getRegistresPEPCountURL   = '/api/v5/registresPEP_count/';
+
   public _getRegistreURL         = '/api/v4/registres/';
   public _postRegistreURL        = '/api/v4/registres/';
   public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres';
@@ -68,11 +70,16 @@ export class ApiUrlConfigService {
 
   public _putGestioProducteURL         = '/api/v5/gestioProducte/';
   public _putGestioEmpressaURL         = '/api/v5/gestioEmpressa/';
-
+  public _putGestioPeriodeURL         = '/api/v5/gestioPeriode/';
+  public _putGestioPepURL         = '/api/v5/gestioPep/';
 
   public _empressesFiltrat                = 'api/v5/empressesFiltrat/';
 
   public _empresses_countFiltrat  = '/api/v5/empresses_countFiltrat';
+
+  public _periodesFiltrat                = 'api/v5/periodesFiltrat/';
+
+  public _periodes_countFiltrat  = '/api/v5/periodes_countFiltrat';
 
   public _allEmpresses             = '/api/v5/allEmpresses/';
   public _getProductesModal        = '/api/v5/productesModal/';
