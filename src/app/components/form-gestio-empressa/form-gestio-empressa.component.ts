@@ -47,6 +47,7 @@ export class FormGestioEmpressaComponent implements OnInit {
     }
 
     console.log(params);
+    window.scrollTo(0, 320);
     this.evento_filtroGestioEmpressa.emit(params);
   }
   

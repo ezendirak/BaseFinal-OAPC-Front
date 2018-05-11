@@ -124,28 +124,12 @@ export class ModalToAddCalendarComponent implements OnInit {
             
             posicio +=1;
           }
-          // console.log("Registre guardat: ");
-          // console.log(newRegistre);
-          // if (newRegistre.tipusProducte != null){
-          //   let params = new HttpParams();
-          //   if(isPinyol){
-          //     params = params.set('Familia', "1");
-          //   }else if (isLlavor){
-          //     params = params.set('Familia', "2");
-          //   }
-            
-     
-          // this.savePeriodeFromExcel(newPeriode);
+
           if (newPeriode != undefined) {if (newPeriode.numPeriode.toString() != ''){this.periodesNous.push(newPeriode);}}
-          
           
         }
       }
-        //console.log(newRegistre);
-      
-      
 		};
     reader.readAsBinaryString(target.files[0]);
-    
   }
 }

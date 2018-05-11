@@ -134,7 +134,8 @@ export class FormRegisterComponent implements OnInit {
       params = params.set('eInformant', this.eInformant);
      }
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
-      console.log(params);
+    
+    console.log(params);
     window.scrollTo(0, 575);
     this.evento_form1.emit(params);
   }

@@ -49,6 +49,7 @@ export class ApiUrlConfigService {
 
   public _getProductesURL        = '/api/v3/pdu/productes/';
   public _getProductesModalURL        = '/api/v3/pdu/productesModal/';
+  public _getProductesModalByTypeURL        = '/api/v3/productesModalByType/';
   public _getCombosProd          = '/api/v3/pdu/combos/';
   public _getCombosProdModalToAdd         = '/api/v3/pdu/ModalCombosToAdd/';
   public _getAllCombos          = '/api/v3/pduCombos/';

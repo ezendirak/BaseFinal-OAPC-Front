@@ -21,7 +21,7 @@ export class ButtonTaulaRegisterComponent implements OnInit {
   valors: number[];
   ngOnInit() {
     this.valors = [5, 10, 15, 20];
-    this.selectedPagination = 5;
+    this.selectedPagination = 10;
   }
 
   actionPagination($event)

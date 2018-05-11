@@ -128,18 +128,25 @@ export class ModalToAddComponent implements  OnInit  {
   }
 
   changeSelectedPeriodeModal($event){
-    if (this.notErrorPeriode == false){
-      this.notErrorPeriode = true;
-    }
-    if (this.nouPeriode.tipusPeriode == 'S' && this.producteSelected.subGrup != 'PI'){
-      //ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT
-      console.log("ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT");
-      this.notErrorPeriode = false;
-
-    }else if(this.nouPeriode.tipusPeriode == 'Q' && this.producteSelected.subGrup != 'LL'){
-      //ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT
-      console.log("ERROR NO ES DEL TIPUS DE PERIODE SELECCIONAT");
-      this.notErrorPeriode = false;
+    
+    if (this.nouPeriode.tipusPeriode == 'S'){
+      console.log("ES PRODUCTE SETMANAL");
+      this.getProductesModalByType(this.nouPeriode.tipusPeriode);
+      this.colorCarnSelected="";
+      this.qualitatSelected="";
+      this.calibreSelected="";
+      this.varietatSelected="";
+      this.isPinyol = false;
+      this.isLlavor = false;
+    }else if(this.nouPeriode.tipusPeriode == 'Q'){
+      console.log("ES PRODUCTE QUINZENAL");
+      this.getProductesModalByType(this.nouPeriode.tipusPeriode);
+      this.colorCarnSelected="";
+      this.qualitatSelected="";
+      this.calibreSelected="";
+      this.varietatSelected="";
+      this.isPinyol = false;
+      this.isLlavor = false;
     }
   }
 
@@ -159,23 +166,11 @@ export class ModalToAddComponent implements  OnInit  {
     if (test.subGrup == 'PI'){
       this.isPinyol = true;
       this.isLlavor = false;
-      this.getPeriodesByProd(test.subGrup);
-      if (this.nouPeriode.tipusPeriode != null){
-        
-        if (this.nouPeriode.tipusPeriode != 'S'){
-          this.nouPeriode=null;
-        }
-      }
+    
     }else if (test.subGrup == "LL"){
       this.isPinyol = false;
       this.isLlavor = true;
-      this.getPeriodesByProd(test.subGrup);
-      if (this.nouPeriode.tipusPeriode != null){
-        
-        if (this.nouPeriode.tipusPeriode != 'Q'){
-          this.nouPeriode=null;
-        }
-      }
+      
     }
 
     // console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
@@ -211,6 +206,18 @@ export class ModalToAddComponent implements  OnInit  {
                                    this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodesModal);
                                 },
                   error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
+      );
+  }
+
+  getProductesModalByType(subGrup: String)
+  {
+    if (this.AuthorizationService.is_logged())
+      this.RegisterService.getProductesModalByType(subGrup)
+      .subscribe ( respuesta => { this.productesModal = respuesta;
+
+                                  this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productesModal);
+                                },
+                  error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
       );
   }
 }

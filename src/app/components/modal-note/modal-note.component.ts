@@ -74,16 +74,6 @@ export class ModalNoteComponent implements  OnInit  {
     // console.log(this.datos_entrada);
     // console.log("MODAL MODAL: 2 ");
     this.isDisabled = true;
-    // this.producteSelected = this.datos_entrada.tipusProducte;
-    // this.nouPeriode = this.datos_entrada.periode;
-    // this.calibreSelected = this.datos_entrada.calibre;
-    // this.colorCarnSelected = this.datos_entrada.colorCarn;
-    // this.qualitatSelected = this.datos_entrada.qualitat;
-    // this.varietatSelected = this.datos_entrada.varietat;
-    // this.comboGeneral = this.comboGeneral;
-    // this.comboInfoModal = this.comboGeneral[this.producteSelected];
-    // this.pSortida = this.datos_entrada.preuSortida;
-    // this.qVenuda = this.datos_entrada.quantitatVenuda;
     this.onClose = new Subject();
   }
 

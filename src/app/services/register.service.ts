@@ -123,6 +123,13 @@ getProductesModal(): Observable<InfoKey[]>
                   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));  
 }
+getProductesModalByType(subGrup: String): Observable<InfoKey[]>
+{
+  return this.http.get( this.ApiUrlConfigService._getProductesModalByTypeURL + subGrup
+                      )
+                    .map(respuesta => respuesta)
+                    .catch((error: any) => Observable.throw(error));  
+}
 
 getCombos(tipusProducte: String): Observable<AtributsComboResponse>
 {

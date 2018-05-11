@@ -44,6 +44,7 @@ export class FormGestioProductesComponent implements OnInit {
      }
 
     console.log(params);
+    window.scrollTo(0, 320);
     this.evento_filtroGestioProd.emit(params);
   }
 
