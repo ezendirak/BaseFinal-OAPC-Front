@@ -1,3 +1,4 @@
+import { Empressa } from './../model/empressa';
 import { InfoEmpressa } from './../interfaces/info-empressa';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -61,6 +62,16 @@ export class EmpressaService {
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));
 }
+
+getEmpresesByProd(producte: string): Observable<String[]>
+{
+  return this.http.get( this.ApiUrlConfigService._getEmpresesByProd + producte, 
+                        this.AuthorizationService.header_token()
+                      )
+                      .map(respuesta => respuesta)
+                      .catch((error: any) => Observable.throw(error));
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// PAGINATION ///////////////////////////////////////////////////////
 

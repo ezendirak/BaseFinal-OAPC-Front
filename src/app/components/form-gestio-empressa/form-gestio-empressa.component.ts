@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ModalToAddEmpComponent } from '../modal-to-add-emp/modal-to-add-emp.component';
 import { LiteralsRegistre } from '../../literals-registre.enum';
 import { InfoKeyClass } from '../../model/info-key-class';
+import { Estats } from '../../model/estats';
 
 @Component({
   selector: 'app-form-gestio-empressa',
@@ -14,24 +15,31 @@ import { InfoKeyClass } from '../../model/info-key-class';
 })
 export class FormGestioEmpressaComponent implements OnInit {
 
-  @Input() items      :InfoEmpressa;
-  @Input() empresses  :String[];
-  @Input() productes  :InfoKey[];
-  @Input() productesModal        :InfoKeyClass[];
+  @Input()  items           :InfoEmpressa;
+  @Input()  empresses       :String[];
+  @Input()  productes       :InfoKey[];
+  @Input()  productesModal  :InfoKeyClass[];
+  @Input()  estats          :Estats[];
+  @Input()  estatsModal     :Estats[];
   
   @Output() evento_filtroGestioEmpressa:  EventEmitter<any> = new EventEmitter();
   @Output() evento_AddNewEmpressa:  EventEmitter<any> = new EventEmitter();
 
   selectedEmpressa  :string;
   selectedProducte  :InfoKey;
-  estat             :string;
+  estat             :Estats;
+  estatModal        :Estats;
   
+  // estats            :Estats[];
+  // estatsModal            :Estats[];
+
   bsModalRef: BsModalRef;
   private literals = LiteralsRegistre;
   
   constructor(private modalService : BsModalService) { }
 
   ngOnInit() {
+    
   }
 
   onclick(){
@@ -42,8 +50,9 @@ export class FormGestioEmpressaComponent implements OnInit {
     if(this.selectedProducte && this.selectedProducte.nom != 'Tots'){
       params = params.set('tipusProducte', this.selectedProducte.nom);
     }
-    if(this.estat){
-      params = params.set('estat', this.estat);
+    console.log(this.estat);
+    if(this.estat && this.estat.nom != 'Tots'){
+      params = params.set('estat', this.estat.valor);
     }
 
     console.log(params);
@@ -55,7 +64,7 @@ export class FormGestioEmpressaComponent implements OnInit {
     
     // Pass in data directly before show method
     const initialState = {
-      titulo: 'Modificació del Producte',
+      titulo: 'Nova Empresa',
       lista: [],
       botonCerrar: "Tancar"  
     };
@@ -65,6 +74,9 @@ export class FormGestioEmpressaComponent implements OnInit {
     // Pass in data directly content atribute after show
     
     // this.bsModalRef.content.datos_entrada = item;
+    this.bsModalRef.content.estats = this.estatsModal;
+    console.log(this.estatsModal);
+    console.log(this.estats);
     this.bsModalRef.content.datos_salida = {'codi': null, 'tipusProductes': null, 'estat': null};
     
     
@@ -78,7 +90,6 @@ export class FormGestioEmpressaComponent implements OnInit {
 
   actionPutYES(){
     console.log("ACTION PUT YES")
-    
     // console.log(this.bsModalRef.content.datos_salida);
 
     this.evento_AddNewEmpressa.emit(this.bsModalRef.content.datos_salida);

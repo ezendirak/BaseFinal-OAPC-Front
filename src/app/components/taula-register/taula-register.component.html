@@ -17,7 +17,7 @@
     <tbody>
         <tr *ngFor="let item of items">
             <td>{{item?.id}}</td>
-            <td>{{item?.periode}}</td>
+            <td>{{item?.periode.numPeriode + item?.periode.tipusPeriode}}</td>
             <td>{{ item?.tipusProducte }}</td>
             
             <ng-container *ngIf="item?.varietat;then content1 else other_content1"></ng-container>
@@ -33,6 +33,7 @@
             <td>{{item?.quantitatVenuda}}</td>
             <td>{{item?.preuSortida.toFixed(2)}} €</td>
             <td>{{(item?.quantitatVenuda * item?.preuSortida).toFixed(2)}} €</td>
+            {{periodeModal}}
             <td>
                 <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
             </td>

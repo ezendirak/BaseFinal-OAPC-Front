@@ -11,6 +11,7 @@ import { LiteralsRegistre } from './../../literals-registre.enum';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateService } from '@ngx-translate/core';
 import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
+import { Periode } from '../../model/periode';
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -52,13 +53,14 @@ export class ModalNoteComponent implements  OnInit  {
   varietat: string;
   comboLlenoModal: boolean;
   productesModal: string[];
-  nouPeriode: string;
+  nouPeriode: Periode;
   producteSelected: string;
   calibreSelected: string;
   qualitatSelected: string;
   colorCarnSelected: string;
   varietatSelected: string;
  
+  periodesModal:  Periode[];
   isPinyol: boolean;
   isLlavor: boolean;
 
@@ -70,9 +72,6 @@ export class ModalNoteComponent implements  OnInit  {
  
 
   ngOnInit() {
-    // console.log("MODAL MODAL: ");
-    // console.log(this.datos_entrada);
-    // console.log("MODAL MODAL: 2 ");
     this.isDisabled = true;
     this.onClose = new Subject();
   }
@@ -82,7 +81,7 @@ export class ModalNoteComponent implements  OnInit  {
   //////////////////////////////////////////////////////////////////////////////////////
 
   public onConfirm(form) {
-    // console.log("ON CONFIRM");
+    
     console.log(this.bsModalRef.content);
     this.datos_salida.calibre = this.calibreSelected;
     this.datos_salida.qualitat = this.qualitatSelected
@@ -140,6 +139,11 @@ export class ModalNoteComponent implements  OnInit  {
       console.log("ES LLAVOR");
     }
   }
+
+  // changeSelectedPeriodeModal($event)
+  // {
+  //   this.nouPeriode = this.
+  // }
 
   test(){
     let infoTest: any;

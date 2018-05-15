@@ -19,6 +19,7 @@
                   [periodes]="periodes"
                   [periodesModal]="periodesModal"
                   [empresses]="empresses"
+                  (evento_postNoComPer)="onClickPostNoComPer($event)"
   >
   </app-form-register>
 
@@ -43,6 +44,7 @@
                   [isLlavor]="isLlavor"
                   (evento_canviProduct)="onClickParams($event)"
                   (evento_printItems)="printItems($event)"
+                  [periodesModal]="periodesModal"
   >
   </app-taula-register>
 

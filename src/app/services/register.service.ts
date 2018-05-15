@@ -76,7 +76,7 @@ getRegistres(): Observable<RegisterResponse[]>
   }
 
   postRegistre(filtre: any): Observable<RegisterResponse> {
-    console.log("Servei final: " + filtre);
+    // console.log("Servei final: " + filtre);
     
     return this.http.post(  this.ApiUrlConfigService._postRegistreURL,
                             filtre , this.AuthorizationService.header_token()
@@ -106,6 +106,16 @@ getRegistres(): Observable<RegisterResponse[]>
                       .catch((error: any) => Observable.throw(error));
   }
 
+  putPerNoCom(nouRegistreNoCom: any)
+  {
+    return this.http.put(  this.ApiUrlConfigService._putRegNoComPer,
+                           nouRegistreNoCom, this.AuthorizationService.header_token()
+                        )
+                        .map(respuesta => respuesta)
+                        .catch((error: any) => Observable.throw(error));
+  }
+
+  
   getProductes(): Observable<InfoKey[]>
 {
   return this.http.get( this.ApiUrlConfigService._provaTest, 
@@ -191,6 +201,14 @@ getPeriodes(): Observable<Periode[]>
   getPeriodesByProd(subGrup:  String): Observable<Periode[]>
   { 
     return this.http.get( this.ApiUrlConfigService._periodesByProd + subGrup,
+                          this.AuthorizationService.header_token()
+                        )
+                        .catch((error: any) => Observable.throw(error));
+  }
+
+  getPeriodesByProductes(productes: string): Observable<Periode[]>
+  {
+    return this.http.get( this.ApiUrlConfigService._periodesByProductes + productes,
                           this.AuthorizationService.header_token()
                         )
                         .catch((error: any) => Observable.throw(error));

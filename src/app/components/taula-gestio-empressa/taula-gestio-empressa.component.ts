@@ -8,6 +8,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 import { EmpressaService } from '../../services/empressa.service';
 import { TrazaService } from '../../services/traza.service';
 import { InfoKeyClass } from '../../model/info-key-class';
+import { Estats } from '../../model/estats';
 
 @Component({
   selector: 'app-taula-gestio-empressa',
@@ -18,7 +19,8 @@ export class TaulaGestioEmpressaComponent implements OnInit {
 
   @Input() items            :InfoEmpressa[];
   @Input() productesModal        :InfoKeyClass[];
-
+  @Input()  estats          :Estats[];
+  @Input()  estatsModal      :Estats[];
   @Output() evento_editEmpressa:    EventEmitter<any> = new EventEmitter();
   
   bsModalRef: BsModalRef;
@@ -43,18 +45,31 @@ export class TaulaGestioEmpressaComponent implements OnInit {
     };
 
     console.log("Estem a taula gestio! => ");
-    console.log(this.productesModal);
+    // console.log(this.productesModal);
     this.bsModalRef = this.modalService.show(ModalEditGestEmpComponent, {initialState});
     console.log(this.bsModalRef.content.productesNom);
     // Pass in data directly content atribute after show
-    console.log(JSON.stringify(item));
+    // console.log(JSON.stringify(item));
   //   this.bsModalRef.content.provaStrings = [
   //     "Poma","Nectarina"
   // ]
     this.bsModalRef.content.provaStrings = item.tipusProductes;
+    this.bsModalRef.content.estats = [{'nom':'Actiu', 'valor':'1'},{'nom': 'Inactiu', 'valor': '0'}]
     
+    console.log(item);
     this.bsModalRef.content.datos_entrada = item; 
-    this.bsModalRef.content.datos_salida = item;  
+    this.bsModalRef.content.datos_salida = item;
+    if(this.bsModalRef.content.datos_entrada.estat == 1)
+                      { 
+                        this.bsModalRef.content.estat = {'nom':'Actiu', 'valor': '1'}
+                        console.log("Es Actiu");
+                      }
+                      if(this.bsModalRef.content.datos_entrada.estat == 0)
+                      { 
+                        this.bsModalRef.content.estat = {'nom':'Inactiu', 'valor': '0'}
+                        console.log("Es Inactiu");
+                      }  
+    // this.bsModalRef.content.datos_estrada.estat.valor = item.estat;
 
     // this.bsModalRef.content.productesModal = this.productesModal; //no s'utlitza
     

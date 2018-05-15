@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
 import { ModalToAddComponent } from '../modal-to-add/modal-to-add.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { ModalNoComComponent } from '../modal-no-com/modal-no-com.component';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class FormRegisterComponent implements OnInit {
   @Output() evento_tProduct: EventEmitter<any> = new EventEmitter();
   @Output() evento_form_afegir: EventEmitter<any> = new EventEmitter();
   @Output() evento_getCombos: EventEmitter<any> = new EventEmitter();
+  @Output() evento_postNoComPer: EventEmitter<any> = new EventEmitter();
   
   filtros: any;
 
@@ -211,5 +213,43 @@ export class FormRegisterComponent implements OnInit {
   }
 
 
+  
+  openModalToNoCom($event){
+    // Pass in data directly before show method
+    const initialState = {
+      titulo: 'Periode de No Comercialitzacio',
+      lista: [],
+      botonCerrar: "Tancar"  
+    };
+ 
+    // console.log(this.item);
+    this.bsModalRefAdd = this.BsModalRefAdd.show(ModalNoComComponent, {initialState});
+    
+    // Pass in data directly content atribute after show
+    
+    this.bsModalRefAdd.content.productesModal = this.productesModal;
 
+    this.bsModalRefAdd.content.periodesModal = this.periodesModal;
+
+    // Get out
+    
+
+    
+    this.bsModalRefAdd.content.onClose
+      .subscribe( result => { if (result == true)
+                                this.actionPutYESNoCom();                                
+                              else  
+                                this.actionPutNONoCom();                                
+      })
+  }
+
+  actionPutYESNoCom(){
+    console.log(this.bsModalRefAdd.content.registreNoCom);
+    this.evento_postNoComPer.emit(this.bsModalRefAdd.content.registreNoCom);
+    // this.evento_postNoComPer.emit(this.bsModalRefAdd.content.params);
+  }
+
+  actionPutNONoCom(){
+
+  }
 }

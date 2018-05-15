@@ -1,5 +1,7 @@
+import { Estats } from "../model/estats";
+
 export interface InfoEmpressa {
     codi:           string;
     tipusProductes: string[];
-    estat:          number;
+    estat:          Estats;
 }

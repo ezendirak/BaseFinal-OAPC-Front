@@ -15,7 +15,11 @@
             <td>{{item?.atribut}}</td>
             <td>{{item?.valor}}</td>
             <td>{{item?.cont}}</td>
-            <td>{{item?.subGrup}}</td>
+            <ng-container *ngIf="item?.subGrup == 'PI';then content1"></ng-container>
+            <ng-template #content1><td >Pinyol</td></ng-template>
+            <ng-container *ngIf="item?.subGrup == 'LL';then content2"></ng-container>
+            <ng-template #content2><td >Llavor</td></ng-template>
+            <!-- <td>{{item?.subGrup}}</td> -->
             <td>
                 <button type="button" class="btnEnvio btn btn-custom" (click)="openModalToEdit(item)">Modificar</button>
             </td>

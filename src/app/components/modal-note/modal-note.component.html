@@ -16,14 +16,17 @@
 
       <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
         <div class="form-group row margin-bottom">
-          <div>
+          <!-- <div>
               <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.ref | translate }}</label>
               <input [disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="referencia"    name="referencia"    [(ngModel)]="id" value="{{datos_entrada?.id}}">
-          </div>
+          </div> -->
       
           <div>
               <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-              <input [disabled]="false" type="text"  class="col-md-3 col-xs-12"    id="nouPeriode"    name="nouPeriode"    [(ngModel)]="nouPeriode" value="{{datos_entrada?.periode}}">
+              <!-- <input [disabled]="false" type="text"  class="col-md-3 col-xs-12"    id="nouPeriode"    name="nouPeriode"    [(ngModel)]="nouPeriode" value="{{datos_entrada?.periode}}"> -->
+              <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode"  value="{{ nouPeriode }}">
+                <option *ngFor="let nouPeriode of periodesModal" [ngValue]="nouPeriode">{{ nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + " ("}} {{nouPeriode?.dataInici | date: 'dd/MM/yyyy'}} - {{ nouPeriode?.dataFi | date: 'dd/MM/yyyy'}} )</option>
+            </select>
           </div> 
         </div>
 
@@ -98,10 +101,10 @@
         <input [disabled]="isDisabled" type="number"  class="col-md-3 col-xs-12"    id="pSortida"    name="pSortida"    [(ngModel)]="pSortida" value="{{datos_entrada?.preuSortida}}">
       </div>
       
-      <div class="form-group row margin-bottom">
+      <!-- <div class="form-group row margin-bottom">
         <label for="tancada" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
         <input [disabled]="isDisabled" type="text"  class="col-md-3 col-xs-12"    id="tancada"    name="tancada"    [(ngModel)]="tancada">
-      </div>
+      </div> -->
           <button type="submit" class="btn btn-primary">Submit</button>
 
         </form>

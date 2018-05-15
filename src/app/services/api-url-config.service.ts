@@ -46,6 +46,7 @@ export class ApiUrlConfigService {
   public _periodesDisponibles   = 'api/v4/periodesDisponibles/';
   public _periodesTotals        =  'api/v4/periodesTotals/';
   public _periodesByProd   = 'api/v4/periodesByProd/';
+  public _periodesByProductes   = 'api/v4/periByProductes/';
 
   public _getProductesURL        = '/api/v3/pdu/productes/';
   public _getProductesModalURL        = '/api/v3/pdu/productesModal/';
@@ -69,6 +70,8 @@ export class ApiUrlConfigService {
 
   public _getAtributsProd_countFiltrat  = '/api/v5/atributsProd_countFiltrat';
 
+  public _putRegNoComPer         = '/api/v5/regNoComPer/';
+
   public _putGestioProducteURL         = '/api/v5/gestioProducte/';
   public _putGestioEmpressaURL         = '/api/v5/gestioEmpressa/';
   public _putGestioPeriodeURL         = '/api/v5/gestioPeriode/';
@@ -77,6 +80,8 @@ export class ApiUrlConfigService {
   public _empressesFiltrat                = 'api/v5/empressesFiltrat/';
 
   public _empresses_countFiltrat  = '/api/v5/empresses_countFiltrat';
+
+  public _getEmpresesByProd        = '/api/v5/empresesByProd/';
 
   public _periodesFiltrat                = 'api/v5/periodesFiltrat/';
 

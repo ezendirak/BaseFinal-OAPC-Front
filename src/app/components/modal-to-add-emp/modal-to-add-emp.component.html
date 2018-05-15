@@ -33,7 +33,7 @@
                     (selectionChanges)="doSelectOptions($event)">
         </ngx-select>
 
-        {{ngxValue | json}}
+        <!-- {{ngxValue | json}} -->
           
           </div> 
       </div>
@@ -41,7 +41,9 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">Estat</label>
-          <input  type="text"  class="col-md-3 col-xs-12"    id="estat"    name="estat"    [(ngModel)]="estat">
+          <select class="col-md-3 col-xs-12" style="width:200px;" name="estat" [(ngModel)]="estat">
+              <option *ngFor="let e of estats" [ngValue]="e">{{ e?.nom }} </option>
+          </select>
         </div>
       </div>
     

@@ -186,6 +186,12 @@ export class RegisterComponent implements OnInit {
     this.getCombosModal($event);
   }
 
+  onClickPostNoComPer($event)
+  {
+    console.log($event);
+    this.putPerNoCom($event);
+  }
+ 
   SaveFromExcel($event){
     this.postRegistreFromExcel($event.newRegistre, $event.params);
   }
@@ -232,7 +238,7 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.getRegistresPage(this.pagination.page_actual, this.pagination.page_items, filtro)
       .subscribe ( respuesta => { this.items = respuesta;  
                                   this.pagination.page_actual_items = this.items.length;
-
+                                  console.log(this.items);
                                   this.TrazaService.dato("REGISTRES", "API GETREGISTRESPAGE OK(" + this.pagination.page_actual + ")",this.items.length); 
                                 },
                   error =>      { this.TrazaService.error("REGISTRES", "API GETREGISTRESPAGE KO", error); } 
@@ -417,6 +423,20 @@ export class RegisterComponent implements OnInit {
       );
     }
 
+  }
+
+  putPerNoCom(nouRegistre:  any)
+  {
+    if (this.AuthorizationService.is_logged()){
+      this.RegisterService.putPerNoCom(nouRegistre)
+      .subscribe ( respuesta => { //this.item = respuesta;
+
+                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  // this.getRegistresPage(this.filtroFake);
+                                },
+                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+      );
+    }
   }
 
   getAllCombos() {

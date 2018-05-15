@@ -1,3 +1,4 @@
+import { Estats } from './../../model/estats';
 import { Component, OnInit } from '@angular/core';
 import { InfoEmpressa } from '../../interfaces/info-empressa';
 import { InfoKeyClass } from '../../model/info-key-class';
@@ -33,7 +34,8 @@ export class ModalToAddEmpComponent implements OnInit {
 
 
   codiEmpressa  :string;
-  estat         :number;
+  estat         :Estats;
+  estats        :Estats[] = new Array<Estats>();
 
   public ngxValue: any = [];
   public ngxDisabled = false;
@@ -84,6 +86,7 @@ export class ModalToAddEmpComponent implements OnInit {
       this.EmpressaService.getProductesModalName()
       .subscribe ( respuesta => { this.productesNom = respuesta;
                                   console.log("prrrrrrrrrrrrrrrrrrra");
+                                  console.log(this.estats);
                                   // console.log(this.options);
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },

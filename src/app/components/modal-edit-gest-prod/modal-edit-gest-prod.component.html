@@ -42,7 +42,16 @@
         </div>
       <div class="form-group row margin-bottom">
         <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tipPro | translate }}</label>
-        <input [attr.disabled]="true" name="subGrup"  type="text"  class="col-md-3 col-xs-12"    id="subGrup"  name="subGrup" value="{{datos_entrada?.subGrup}}">
+        
+        <ng-container *ngIf="datos_entrada?.subGrup == 'PI';then content"></ng-container>
+        <ng-template #content>
+          <input [attr.disabled]="true" name="subGrup"  type="text"  class="col-md-3 col-xs-12"    id="subGrup"  name="subGrup" value="Pinyol">
+        </ng-template>
+
+        <ng-container *ngIf="datos_entrada?.subGrup == 'LL';then content2"></ng-container>
+        <ng-template #content2>
+            <input [attr.disabled]="true" name="subGrup"  type="text"  class="col-md-3 col-xs-12"    id="subGrup"  name="subGrup" value="Llavor">
+        </ng-template>
       </div>
       
           <button type="submit" class="btn btn-primary">Submit</button>

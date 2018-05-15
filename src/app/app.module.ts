@@ -74,6 +74,7 @@ import { FormGestioPeriodesComponent } from './components/form-gestio-periodes/f
 import { TaulaGestioPeriodesComponent } from './components/taula-gestio-periodes/taula-gestio-periodes.component';
 import { ButtonTaulaGestioPeriodesComponent } from './components/button-taula-gestio-periodes/button-taula-gestio-periodes.component';
 import { ModalToAddCalendarComponent } from './components/modal-to-add-calendar/modal-to-add-calendar.component';
+import { ModalNoComComponent } from './components/modal-no-com/modal-no-com.component';
 
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -127,10 +128,11 @@ export function HttpLoaderFactory(http: HttpClient){
     FormGestioPeriodesComponent,
     TaulaGestioPeriodesComponent,
     ButtonTaulaGestioPeriodesComponent,
-    ModalToAddCalendarComponent
+    ModalToAddCalendarComponent,
+    ModalNoComComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent, ModalToAddCalendarComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent, ModalToAddCalendarComponent, ModalNoComComponent],
 
   imports: [
     BrowserModule,

@@ -91,24 +91,15 @@ export class ModalToAddComponent implements  OnInit  {
   public onConfirm(form) {
 
     console.log(form);
-
-    // this.datos_salida.id = this.id;
-    // if (this.varietat){
-    //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "varietat" : this.varietatSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
-    // } else {
-    //   this.nouRegistre = {"tipusProducte" : this.producteSelected,  "colorCarn" : this.colorCarnSelected, "qualitat" : this.qualitatSelected, "calibre" : this.calibreSelected, "periode" : this.nouPeriode, "preu_sortida" : this.pSortida, "quantitat_venuda" : this.qVenuda};
-    // }
-    // console.log(form.controls['colorsCarn'].value);
-    
+    console.log("wtf");
     this.datos_salida.calibre = this.bsModalRef.content.calibreSelected;
     this.datos_salida.colorCarn = this.bsModalRef.content.colorCarnSelected;
-    this.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected
+    this.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected;
     this.datos_salida.varietat = this.bsModalRef.content.varietatSelected;
     this.datos_salida.quantitatVenuda = this.bsModalRef.content.qVenuda;
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.nom;
-    this.datos_salida.periode = this.bsModalRef.content.nouPeriode.id;
-    // this.datos_salida.varietat = form.controls['eInformant'].value
+    this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
     console.log(this.datos_salida);
     this.onClose.next(true);
     
@@ -152,8 +143,7 @@ export class ModalToAddComponent implements  OnInit  {
 
   changeSelesctedTipusProducteModal($event)
   {
-    // console.log("MODAL TO ADD: (MODAL | ADD)" + JSON.parse(JSON.stringify(this.producteSelected)));
-    console.log("WTF");
+    
     let test: any;
     test = this.producteSelected;
     this.getCombosModal(test.clau);
@@ -161,28 +151,13 @@ export class ModalToAddComponent implements  OnInit  {
     this.qualitatSelected="";
     this.calibreSelected="";
     this.varietatSelected="";
-
-    console.log(test.subGrup);
     if (test.subGrup == 'PI'){
       this.isPinyol = true;
       this.isLlavor = false;
-    
     }else if (test.subGrup == "LL"){
       this.isPinyol = false;
       this.isLlavor = true;
-      
     }
-
-    // console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
-    // console.log(this.comboInfoModal);
-    // let comboEnModal: any;
-    // comboEnModal = this.comboGeneral;
-    // this.comboInfoModal = comboEnModal[test.clau];
-
-    // console.log(this.comboInfoModal +" - " + this.isPinyol + " - " + this.isLlavor + " - " + this.comboGeneral );
-    
-    // comboInfoModal = comboEnModal[test.Clau];
-    
   }
 
   getCombosModal(tipusProducte: String)

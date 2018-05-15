@@ -1,7 +1,8 @@
 import { InfoKey } from './info-key';
+import { Periode } from '../model/periode';
 export interface RegisterResponse {
     id: number;
-    periode: string;
+    periode: Periode;
     tipusProducte: InfoKey;
     eInformant: string;
     colorCarn: string;

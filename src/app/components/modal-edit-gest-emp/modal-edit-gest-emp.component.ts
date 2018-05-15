@@ -1,3 +1,4 @@
+import { Estats } from './../../model/estats';
 import { InfoKey } from './../../interfaces/info-key';
 import { InfoEmpressa } from './../../interfaces/info-empressa';
 import { Component, OnInit } from '@angular/core';
@@ -34,8 +35,8 @@ export class ModalEditGestEmpComponent implements OnInit {
 
 
   codiEmpressa  :string;
-  estat         :number;
-
+  estat         :Estats;
+  estats        :Estats[];
   public ngxValue: any = [];
   public ngxDisabled = false;
 
@@ -53,9 +54,19 @@ export class ModalEditGestEmpComponent implements OnInit {
   ngOnInit() {
     this.onClose = new Subject();
     this.getProductesModalName()
-    // console.log(this.productesModal);
+    // console.log(this.estats);
     // console.log(this.options);
-    
+    this.estat = new Estats();
+    setTimeout(() => {if(this.datos_entrada.estat.valor == '1')
+                      { 
+                        this.estat = {'nom':'Actiu', 'valor': '1'}
+                      }
+                      if(this.datos_entrada.estat.valor == '0')
+                      { 
+                        this.estat = {'nom':'Inactiu', 'valor': '0'}
+                      }
+                    }, 1000);
+                    // console.log(this.estat);
   }
 
 

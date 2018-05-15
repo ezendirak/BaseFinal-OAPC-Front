@@ -7,6 +7,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { LiteralsRegistre } from './../../literals-registre.enum';
 import { ModalNoteComponent } from '../modal-note/modal-note.component';
 import { BsModalService, BsModalRef }                     from 'ngx-bootstrap';
+import { Periode } from '../../model/periode';
 
 @Component({
   selector: 'app-taula-register',
@@ -27,7 +28,8 @@ export class TaulaRegisterComponent implements OnInit {
   
   @Input() isPinyol: boolean;
   @Input() isLlavor: boolean;
-
+  @Input()  periodesModal:  Periode[];
+  
   @Output() evento_list_put:    EventEmitter<any> = new EventEmitter();
   @Output() evento_list_delete: EventEmitter<any> = new EventEmitter();
   @Output() evento_getCombos:   EventEmitter<any> = new EventEmitter();
@@ -86,12 +88,12 @@ export class TaulaRegisterComponent implements OnInit {
     this.bsModalRef.content.comboGeneralNoms = this.comboGeneralNoms;
     
     this.bsModalRef.content.comboInfoModal = this.comboGeneralNoms[this.bsModalRef.content.producteSelected.nom];
-    
+    this.bsModalRef.content.nouPeriode      = this.bsModalRef.content.datos_entrada.periode
     this.bsModalRef.content.productesModal = this.productesModal;
+    this.bsModalRef.content.periodesModal   = this.periodesModal;
+    // if ()
    
     // Get out
-    
-
     
     this.bsModalRef.content.onClose
       .subscribe( result => { if (result == true)
@@ -104,7 +106,7 @@ export class TaulaRegisterComponent implements OnInit {
   actionPutYES(){
     // console.log("ACTION PUT YES")
    
-    this.actionToEdit(this.bsModalRef.content.datos_salida);
+    // this.actionToEdit(this.bsModalRef.content.datos_salida);
     // this.actionToEdit(this.productEdit);
   }
 

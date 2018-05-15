@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { InfoKey } from '../../interfaces/info-key';
 import { InfoKeyClass } from '../../model/info-key-class';
 import { GestionsService } from '../../services/gestions.service';
+import { Estats } from '../../model/estats';
 
 @Component({
   selector: 'app-gestio-empressa',
@@ -29,6 +30,10 @@ export class GestioEmpressaComponent implements OnInit {
 
   items:      InfoEmpressa[];
   item:       InfoEmpressa;
+  estat:        Estats;
+  estats:       Estats[];
+  estatsModal:  Estats[];
+  estatModal:     Estats;
 
   constructor(private AuthorizationService  :AuthorizationService, 
               private GestionsService:      GestionsService,
@@ -57,6 +62,38 @@ export class GestioEmpressaComponent implements OnInit {
     this.pagination.page_items  = this.paginacio;   
     
     this.getRegistresPage(this.filtroFake);  
+
+    this.estat = new Estats();
+    this.estats = new Array<Estats>();
+    this.estatsModal = new Array<Estats>();
+    this.estat.nom = "Tots";
+    this.estat.valor = "2";
+    this.estats.push(this.estat);
+
+    this.estat = new Estats();
+    this.estat.nom = "Actiu";
+    this.estat.valor = "1";
+    this.estats.push(this.estat);
+    // this.estatsModal.push(this.estat);
+
+    this.estat = new Estats();
+    this.estat.nom = "Inactiu";
+    this.estat.valor = "0";
+    this.estats.push(this.estat);
+    
+    this.estat = new Estats();
+    // this.estatsModal.push(this.estat);
+/////////////////////////////////////////////
+    this.estatModal = new Estats();
+    this.estatModal.nom = "Actiu";
+    this.estatModal.valor = "1";
+    this.estatsModal.push(this.estatModal);
+
+    this.estatModal = new Estats();
+    this.estatModal.nom = "Inactiu";
+    this.estatModal.valor = "0";
+    this.estatsModal.push(this.estatModal);
+    console.log(this.estatsModal);
   }
 
 
