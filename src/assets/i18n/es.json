@@ -114,7 +114,8 @@
         "afegirR": "Añadir nuevo registro",
         "afegirE": "Añadir nueva empresa",
         "afegirA": "Añadir nuevo atributo",
-        "afegirC": "Añadir nuevo calendario"
+        "afegirC": "Añadir nuevo calendario",
+        "afegirD":  "Añadir fechas"
     },
 
     "TITOLS" : {

@@ -5,9 +5,9 @@
       <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="Periode" [(ngModel)]="Periode">
         <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
       </select>
-    </div>
+    <!-- </div>
 
-  <div class="formCompradorGrande">
+  <div class="formCompradorGrande"> -->
       <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.dates | translate }}</label>
       <div class="col-xs-12 col-12 col-md-3 form-group">
         <input [attr.disabled]='true' type="text"
@@ -21,7 +21,7 @@
            [bsConfig]="{containerClass: 'theme-red'}">
 
       
-        <button class="btn" value="Toggle" (click)="isOpen = !isOpen" [attr.aria-expanded]="dpYMD.isOpen">Date Picker</button>
+        <button class="btn" value="Toggle" (click)="isOpen = !isOpen" [attr.aria-expanded]="dpYMD.isOpen">{{ 'BOTTON.' + literals.afegirD | translate }}</button>
       </div>
     </div>
 

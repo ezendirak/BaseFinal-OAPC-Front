@@ -20,7 +20,7 @@
       <div class="form-group row margin-bottom">
         
             
-        <div>
+        
             <label for="periode" class="col-md-2 col-xs-12">Productes</label>
             <!-- <ngx-select name="multiSel" style="width:200px; display:inline-block;" [multiple]="true"
                     [items]="productesNom"
@@ -29,24 +29,24 @@
                     [defaultValue]="provaStrings"
                     (selectionChanges)="canviProdForPeriode($event)">
         </ngx-select> -->
-        <select class="col-md-3 col-xs-12" style="width:260px;" name="producteSelected" [(ngModel)]="producteSelected" (change) = "changeSelectedProd($event)">
+        <select class="col-md-3 col-xs-12" style="width:155px;" name="producteSelected" [(ngModel)]="producteSelected" (change) = "changeSelectedProd($event)">
             <option *ngFor="let p of productesNom" [ngValue]="p">{{ p }} </option>
         </select>
           
-          </div> 
+           
 
-          <div>
+          
             <label for="id" class="col-md-2 col-xs-12">Periode</label>
             <select class="col-md-3 col-xs-12" style="width:260px;" name="periodeSelected" [(ngModel)]="periodeSelected">
                 <option *ngFor="let p of periodes" [ngValue]="p">{{ p?.numPeriode + " - " + p?.tipusPeriode + " ("}} {{p?.dataInici | date: 'dd/MM/yyyy'}} - {{ p?.dataFi | date: 'dd/MM/yyyy'}} )</option>
             </select> 
-          </div>
+          
       </div>
 
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">Empresa</label>
-          <select class="col-md-3 col-xs-12" style="width:260px;" name="empresaSelected" [(ngModel)]="empresaSelected">
+          <select class="col-md-3 col-xs-12" style="width:170px;" name="empresaSelected" [(ngModel)]="empresaSelected">
               <option *ngFor="let e of empreses" [ngValue]="e">{{ e }} </option>
           </select>
         </div>

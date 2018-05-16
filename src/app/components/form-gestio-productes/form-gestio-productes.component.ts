@@ -51,7 +51,7 @@ export class FormGestioProductesComponent implements OnInit {
   openModalToAddProd($event){
     // Pass in data directly before show method
     const initialState = {
-      titulo: 'Afegir nou Producte',
+      titulo: 'Afegir nou atribut',
       lista: [],
       botonCerrar: "Tancar"  
     };

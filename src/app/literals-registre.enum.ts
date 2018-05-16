@@ -34,16 +34,17 @@ export enum LiteralsRegistre {
     dataIn =    "dataIn",
     dataFi =    "dataFi",
     any = "any",
-    
+
     //////////////////////////////////////////////////////////
     ///////////////////// Botons /////////////////////////////
     //////////////////////////////////////////////////////////
 
-    searchB = "searchB",
-    afegirR = "afegirR",
-    afegirE = "afegirE",
     afegirA = "afegirA",
+    searchB = "searchB",
     afegirC = "afegirC",
+    afegirD = "afegirD",
+    afegirE = "afegirE",
+    afegirR = "afegirR",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Titols /////////////////////////////

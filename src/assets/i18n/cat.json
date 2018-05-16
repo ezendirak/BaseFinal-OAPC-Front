@@ -115,7 +115,8 @@
         "afegirR": "Afegir nou registre",
         "afegirE": "Afegir nova empresa",
         "afegirA": "Afegir nou atribut",
-        "afegirC": "Afegir nou calendari"
+        "afegirC": "Afegir nou calendari",
+        "afegirD":  "Afegir dates"
     },
     
     "TITOLS" : {
