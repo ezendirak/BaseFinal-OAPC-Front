@@ -106,7 +106,7 @@ export class TaulaRegisterComponent implements OnInit {
   actionPutYES(){
     // console.log("ACTION PUT YES")
    
-    // this.actionToEdit(this.bsModalRef.content.datos_salida);
+    this.actionToEdit(this.bsModalRef.content.datos_salida);
     // this.actionToEdit(this.productEdit);
   }
 
