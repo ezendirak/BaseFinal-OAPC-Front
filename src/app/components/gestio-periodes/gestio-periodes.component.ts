@@ -97,6 +97,7 @@ onClickToAddPeriode($event)
       .subscribe ( respuesta => { this.items = respuesta;  
                                   this.pagination.page_actual_items = this.items.length;
                                   
+                                  
                                   this.TrazaService.dato("GESTIOPERIODE", "API GESTIOPERIODE OK(" + this.pagination.page_actual + ")",this.items.length); 
                                 },
                   error =>      { this.TrazaService.error("GESTIOPERIODE", "API GESTIOPERIODE KO", error); } 

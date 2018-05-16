@@ -2,6 +2,7 @@ import { DraggableItemService } from 'ngx-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 import { Periode } from '../../model/periode';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-taula-gestio-periodes',
@@ -11,6 +12,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 export class TaulaGestioPeriodesComponent implements OnInit {
 
   @Input()  items:  Periode[];
+  
+  private literals = LiteralsRegistre;
   
   constructor() { }
 

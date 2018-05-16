@@ -27,12 +27,23 @@ export enum LiteralsRegistre {
     registrat = "registrat",
     noCom = "noCom",
     tancat = "tancat",
+    codEmp = "codEmp",
+    produs = "produs",
+    dates = "dates",
+    perType = "perType",
+    dataIn =    "dataIn",
+    dataFi =    "dataFi",
+    any = "any",
+    
     //////////////////////////////////////////////////////////
     ///////////////////// Botons /////////////////////////////
     //////////////////////////////////////////////////////////
 
     searchB = "searchB",
-    afegirB = "afegirB",
+    afegirR = "afegirR",
+    afegirE = "afegirE",
+    afegirA = "afegirA",
+    afegirC = "afegirC",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Titols /////////////////////////////
@@ -40,6 +51,8 @@ export enum LiteralsRegistre {
 
     OAPC = "OAPC",
     admin = "admin",
+    regPreus = "regPreus",
+    gesReg = "gesReg",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Altres /////////////////////////////

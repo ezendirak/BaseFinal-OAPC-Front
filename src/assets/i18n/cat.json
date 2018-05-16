@@ -4,7 +4,7 @@
     "LITERALS_FORM" : {
         "ref": "Referència ",
         "per": "Període ",
-        "empIn": "Empressa Informant ",
+        "empIn": "Empresa Informant ",
         "usuIn": "Usuari Informant ",
         "tipPro": "Tipus de producte ",
         "colCa": "Color de Carn ",
@@ -20,13 +20,16 @@
         "atr": "Atribut",
         "val": "Valor",
         "estat": "Estat",
-        "emp": "Empressa"
+        "emp": "Empressa",
+        "codEmp": "Codi d'empresa",
+        "dates": "Dates"
+
     },
 
     "LITERALS_COL" : {
         "ref": "Referència",
         "per": "Període",
-        "emp": "Empressa",
+        "emp": "Empresa",
         "usuIn": "Usuari Informant",
         "tipPro": "Tipus de producte",
         "colCa": "Color de Carn",
@@ -38,6 +41,7 @@
         "tan": "Tancada",
         "quPe": "Quantitat per Preu",
         "produ": "Producte",
+        "produs": "Productes",
         "fam": "Familia",
         "atr": "Atribut",
         "val": "Valor",
@@ -46,7 +50,12 @@
         "registrat": "Registrat",
         "noCom":    "No Comercialització",
         "tancat":   "Tancat",
-        "ultimReg": "Data últim registre"
+        "ultimReg": "Data últim registre",
+        "codEmp": "Codi d'empresa",
+        "perType": "Periodicitat",
+        "dataIn":  "Data Inicial",
+        "dataFi": "Data Fi",
+        "any":  "Any"
     },
     
 	"COLORCARN" : {
@@ -103,11 +112,16 @@
 
     "BOTTON" : {
         "searchB": "Cercar",
-        "afegirB": "Afegir nou registre"
+        "afegirR": "Afegir nou registre",
+        "afegirE": "Afegir nova empresa",
+        "afegirA": "Afegir nou atribut",
+        "afegirC": "Afegir nou calendari"
     },
     
     "TITOLS" : {
-        "OAPC": "Observatori Agroalimentari de Preus de Catalunya",
-        "admin": "Administració"
+        "OAPC":     "Observatori Agroalimentari de Preus de Catalunya",
+        "admin":    "Administració",
+        "regPreus": "Registre de preus",
+        "gesReg":   "Gestió registres setmanal"
     }
 }

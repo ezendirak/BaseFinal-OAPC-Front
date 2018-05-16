@@ -20,7 +20,9 @@
         "atr": "Atributo",
         "val": "Valor",
         "estat": "Estado",
-        "emp": "Empresa"
+        "emp": "Empresa",
+        "codEmp": "Codigo de empresa",
+        "dates": "Fechas"
     },
 
     "LITERALS_COL" : {
@@ -38,6 +40,7 @@
         "tan": "Cerrada",
         "quPe": "Cantidad por Precio",
         "produ": "Producto",
+        "produs": "Productos",
         "fam": "Familia",
         "atr": "Atributo",
         "val": "Valor",
@@ -46,7 +49,12 @@
         "registrat": "Registrado",
         "noCom":    "No Comercialitzación",
         "tancat":   "Cerrado",
-        "ultimReg": "Fecha último registro"
+        "ultimReg": "Fecha último registro",
+        "codEmp": "Codigo de empresa",
+        "perType": "Periodicidad",
+        "dataIn":  "Fecha Inicial",
+        "dataFi": "Fecha Fin",
+        "any":  "Año"
     },
 
 	"COLORCARN" : {
@@ -103,11 +111,16 @@
 
     "BOTTON" : {
         "searchB": "Buscar",
-        "afegirB": "Añadir nuevo registro"
+        "afegirR": "Añadir nuevo registro",
+        "afegirE": "Añadir nueva empresa",
+        "afegirA": "Añadir nuevo atributo",
+        "afegirC": "Añadir nuevo calendario"
     },
 
     "TITOLS" : {
-        "OAPC": "Observatorio Agroalimentario de Precios de Cataluña",
-        "admin": "Administración"
+        "OAPC":     "Observatorio Agroalimentario de Precios de Cataluña",
+        "admin":    "Administración",
+        "regPreus": "Registro de precios",
+        "gesReg":   "Gestión registros semanales"
     }
 }

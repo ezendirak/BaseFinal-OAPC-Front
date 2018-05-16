@@ -141,7 +141,6 @@ export class RegisterComponent implements OnInit {
       }else{
         this.getRegistresPage(""); 
       }
-      
     }
   }
 

@@ -16,15 +16,10 @@
 
       <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
         <div class="form-group row margin-bottom">
-          <!-- <div>
-              <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.ref | translate }}</label>
-              <input [disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="referencia"    name="referencia"    [(ngModel)]="id" value="{{datos_entrada?.id}}">
-          </div> -->
-      
+          
           <div>
               <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-              <!-- <input [disabled]="false" type="text"  class="col-md-3 col-xs-12"    id="nouPeriode"    name="nouPeriode"    [(ngModel)]="nouPeriode" value="{{datos_entrada?.periode}}"> -->
-              <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode"  value="{{ nouPeriode }}">
+             <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode"  value="{{ nouPeriode }}">
                 <option *ngFor="let nouPeriode of periodesModal" [ngValue]="nouPeriode">{{ nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + " ("}} {{nouPeriode?.dataInici | date: 'dd/MM/yyyy'}} - {{ nouPeriode?.dataFi | date: 'dd/MM/yyyy'}} )</option>
             </select>
           </div> 
@@ -52,8 +47,7 @@
           <ng-container *ngIf="comboInfoModal && isPinyol;then content"></ng-container>
         <ng-template #content>
         <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.colCa | translate }}</label>
-        <!-- <input type="text"  class="col-md-3 col-xs-12"    id="varietat"    name="varietat"    [(ngModel)]="varietat"> -->
-        
+       
             <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="colorsCarn" [(ngModel)]="colorCarnSelected" >
               <option *ngFor="let v of comboInfoModal.colorsCarn" [ngValue]="v.nom">{{ v.nom }}</option>
             </select>  
@@ -62,8 +56,7 @@
         <ng-container *ngIf="comboInfoModal && isLlavor;then content4"></ng-container>
     <ng-template #content4>
     <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.vari | translate }}</label>
-    <!-- <input type="text"  class="col-md-3 col-xs-12"    id="varietat"    name="varietat"    [(ngModel)]="varietat"> -->
-    
+   
     
     <select [disabled]="isDisabled" class="col-md-3 col-xs-12"  name="varietats" [(ngModel)]="varietatSelected" >
       <option *ngFor="let y of comboInfoModal.varietats" [ngValue]="y.nom">{{ y.nom }}</option>
@@ -77,8 +70,7 @@
           <ng-template #content2>
           <label for="qual" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.qual | translate }}</label>
           
-          <!-- <input type="text"  class="col-md-3 col-xs-12"    id="qualitat"    name="qualitat"    [(ngModel)]="qualitat"> -->
-             <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="qualitats" [(ngModel)]="qualitatSelected" >
+          <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="qualitats" [(ngModel)]="qualitatSelected" >
             <option *ngFor="let q of comboInfoModal.qualitats" [ngValue]="q.nom">{{ q.nom }}</option>
           </select>   
       </ng-template>
@@ -86,8 +78,7 @@
       <ng-template #content3>  
         <label for="cali" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.cali | translate }}</label>
         
-        <!-- <input type="text"  class="col-md-3 col-xs-12"    id="calibre"    name="calibre"    [(ngModel)]="calibre"> -->
-            <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="calibres" [(ngModel)]="calibreSelected">
+         <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="calibres" [(ngModel)]="calibreSelected">
           <option *ngFor="let k of comboInfoModal.calibres" [ngValue]="k.nom">{{ k.nom }}</option>
         </select> 
         </ng-template> 
@@ -101,10 +92,6 @@
         <input [disabled]="isDisabled" type="number"  class="col-md-3 col-xs-12"    id="pSortida"    name="pSortida"    [(ngModel)]="pSortida" value="{{datos_entrada?.preuSortida}}">
       </div>
       
-      <!-- <div class="form-group row margin-bottom">
-        <label for="tancada" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
-        <input [disabled]="isDisabled" type="text"  class="col-md-3 col-xs-12"    id="tancada"    name="tancada"    [(ngModel)]="tancada">
-      </div> -->
           <button type="submit" class="btn btn-primary">Submit</button>
 
         </form>
@@ -113,7 +100,7 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
-    <button type="button" class="btn btn-default" (click)="test()">Habilitar Edició</button>
+    <!-- <button type="button" class="btn btn-default" (click)="test()">Habilitar Edició</button> -->
   </div>
 
 

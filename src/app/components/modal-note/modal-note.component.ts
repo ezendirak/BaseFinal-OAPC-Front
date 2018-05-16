@@ -74,6 +74,8 @@ export class ModalNoteComponent implements  OnInit  {
   ngOnInit() {
     this.isDisabled = true;
     this.onClose = new Subject();
+    
+    setTimeout(() => this.test(), 0);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////

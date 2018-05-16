@@ -16,8 +16,8 @@ export class FormGestioRegisterComponent implements OnInit {
 
   @Input()  periodes:           Periode[];
   @Input()  productes:          InfoKey[];
-  @Input() productesModal:      InfoKey[];
-  @Input() empresses:           String[];
+  @Input()  productesModal:      InfoKey[];
+  @Input()  empresses:           String[];
 
   @Output() evento_Buscar:                EventEmitter<any> = new EventEmitter();
   @Output() evento_actionToClosePeriode:  EventEmitter<any> = new EventEmitter();

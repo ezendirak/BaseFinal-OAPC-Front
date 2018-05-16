@@ -9,6 +9,7 @@ import { EmpressaService } from '../../services/empressa.service';
 import { TrazaService } from '../../services/traza.service';
 import { InfoKeyClass } from '../../model/info-key-class';
 import { Estats } from '../../model/estats';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-taula-gestio-empressa',
@@ -24,7 +25,7 @@ export class TaulaGestioEmpressaComponent implements OnInit {
   @Output() evento_editEmpressa:    EventEmitter<any> = new EventEmitter();
   
   bsModalRef: BsModalRef;
-
+  private literals = LiteralsRegistre;
   constructor(private traductorService: TranslateService,
               private modalService : BsModalService,
               private AuthorizationService  :AuthorizationService,

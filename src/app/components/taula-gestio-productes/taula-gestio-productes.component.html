@@ -14,7 +14,11 @@
             <td>{{item?.producte}}</td>
             <td>{{item?.atribut}}</td>
             <td>{{item?.valor}}</td>
-            <td>{{item?.cont}}</td>
+            <!-- <td>{{item?.cont}}</td> -->
+            <ng-container *ngIf="item?.cont == 1;then content10"></ng-container>
+            <ng-template #content10><td >Actiu</td></ng-template>
+            <ng-container *ngIf="item?.cont == 'LL';then content20"></ng-container>
+            <ng-template #content20><td >Inactiu</td></ng-template>
             <ng-container *ngIf="item?.subGrup == 'PI';then content1"></ng-container>
             <ng-template #content1><td >Pinyol</td></ng-template>
             <ng-container *ngIf="item?.subGrup == 'LL';then content2"></ng-container>
