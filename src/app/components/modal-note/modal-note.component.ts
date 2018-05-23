@@ -65,7 +65,7 @@ export class ModalNoteComponent implements  OnInit  {
   isLlavor: boolean;
 
   private literals = LiteralsRegistre;
-  constructor(private traductorService: TranslateService,
+  constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,
               ) 
   { }

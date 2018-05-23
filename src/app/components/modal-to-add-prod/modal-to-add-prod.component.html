@@ -19,14 +19,14 @@
         <div class="form-group row margin-bottom">
 
           <div>
-            <label for="periode" class="col-md-2 col-xs-12">Producte</label>
+            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
               <select class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="productes" [(ngModel)]="selectedProducte" (change) = "changeSelectedTipusProducte($event)" >
                   <option *ngFor="let c of productes" [ngValue]="c">{{ c.nom }}</option>
               </select>
           </div>
 
           <div>
-              <label for="id" class="col-md-2 col-xs-12">Atribut</label>
+              <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.atr | translate }}</label>
               <select [disabled]="atrDisabled" class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="atributs" [(ngModel)]="selectedAtribut" (change) = "changeSelectedAtribut($event)">
                   <option *ngFor="let a of atributs" [ngValue]="a">{{ a }}</option>
               </select>
@@ -36,7 +36,7 @@
   
         <div class="form-group row margin-bottom">
           <div >
-            <label for="campoC" class="col-md-2 col-xs-12">Valor</label>
+            <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.val | translate }}</label>
             <input [disabled]="valorDisabled" type="text"  class="col-md-3 col-xs-12"    id="valor"    name="valor"    [(ngModel)]="selectedValor">
           </div>
         </div>

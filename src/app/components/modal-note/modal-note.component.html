@@ -19,12 +19,12 @@
           
           <div>
               <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-             <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode"  value="{{ nouPeriode }}">
-                <option *ngFor="let nouPeriode of periodesModal" [ngValue]="nouPeriode">{{ nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + " ("}} {{nouPeriode?.dataInici | date: 'dd/MM/yyyy'}} - {{ nouPeriode?.dataFi | date: 'dd/MM/yyyy'}} )</option>
+             <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode">
+                <option *ngFor="let np of periodesModal" [ngValue]="np">{{ np?.numPeriode + " - " + np?.tipusPeriode + " ("}} {{np?.dataInici | date: 'dd/MM/yyyy'}} - {{ np?.dataFi | date: 'dd/MM/yyyy'}} )</option>
             </select>
           </div> 
         </div>
-
+Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + " ("}} {{nouPeriode?.dataInici | date: 'dd/MM/yyyy'}} - {{ nouPeriode?.dataFi | date: 'dd/MM/yyyy'}} )
         <div class="form-group row margin-bottom">
           <div >
             <label for="empressa" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>

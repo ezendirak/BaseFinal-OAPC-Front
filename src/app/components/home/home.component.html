@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="islogged;else else_code" class="container">
-    <h2>Hola {{user_name}}</h2>
+    <h2>Hola {{user_name}}</h2> {{isUser}} {{isGestor}} {{isAdmin}}
 
     <button (click)="userall()">userall</button>
     <button (click)="refresh()">refresh token</button>

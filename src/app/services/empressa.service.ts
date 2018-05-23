@@ -54,7 +54,7 @@ export class EmpressaService {
                     .catch((error: any) => Observable.throw(error));
   }
 
-  putEmpressa(registre: InfoEmpressa): Observable<InfoEmpressa>{
+  putEmpressa(registre: InfoEmpressa){
 
     return this.http.put(  this.ApiUrlConfigService._putGestioEmpressaURL,
                            registre, this.AuthorizationService.header_token()
@@ -78,7 +78,7 @@ getEmpresesByProd(producte: string): Observable<String[]>
   getRegistresPage(page: number, per_page: number, filtro: any): Observable<InfoEmpressa[]>
   {
     return this.http.get( this.ApiUrlConfigService._empressesFiltrat + "?page=" + page + "&per_page=" + per_page, 
-                          { params: filtro }
+                          {headers: this.AuthorizationService.header_tokenPol(), params: filtro }
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));
@@ -88,7 +88,7 @@ getEmpresesByProd(producte: string): Observable<String[]>
   getRegistresCountFiltrat(filtre: any): Observable<number>
   {
     return this.http.get( this.ApiUrlConfigService._empresses_countFiltrat, 
-                          {params: filtre}
+                          {headers: this.AuthorizationService.header_tokenPol(), params: filtre}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));  

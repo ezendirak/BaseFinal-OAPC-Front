@@ -7,6 +7,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { AuthorizationService } from '../../services/authorization.service';
 import { TrazaService } from '../../services/traza.service';
 import { EmpressaService } from '../../services/empressa.service';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-modal-to-close-per',
@@ -22,15 +23,18 @@ export class ModalToClosePerComponent implements OnInit {
   public ngxDisabled = false;
 
   public doSelectOptions = (options: INgxSelectOption[]) => console.log('MultipleDemoComponent.doSelectOptions', options);
-
+  private literals = LiteralsRegistre;
   public onClose: Subject<boolean>;
-  constructor(private traductorService      :TranslateService,
+  constructor(private translate            : TranslateService,
               public bsModalRef             :BsModalRef,
               private AuthorizationService  :AuthorizationService, 
               // private RegisterService     : RegisterService, 
               private TrazaService          :TrazaService,
-              private EmpressaService       :EmpressaService) { }
+              private EmpressaService       :EmpressaService) { 
+                
+              }
 
+              
   ngOnInit() {
     this.onClose = new Subject();
     this.getProductesModalName();
@@ -39,7 +43,7 @@ export class ModalToClosePerComponent implements OnInit {
 
   getProductesModalName()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModalName()
       .subscribe ( respuesta => { this.productesNom = respuesta;
                                   console.log("prrrrrrrrrrrrrrrrrrra");
@@ -48,6 +52,7 @@ export class ModalToClosePerComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   public onConfirm(form) {

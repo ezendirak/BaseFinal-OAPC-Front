@@ -27,8 +27,10 @@ export class FormGestioProductesComponent implements OnInit {
   bsModalRefAdd: BsModalRef;
   
   private literals = LiteralsRegistre;
-  constructor(private traductorService: TranslateService,
-              private BsModalRefAdd: BsModalService) { }
+  constructor(private translate            : TranslateService,
+              private BsModalRefAdd: BsModalService) { 
+                translate.setDefaultLang('cat');
+              }
 
   ngOnInit() {
 
@@ -44,7 +46,10 @@ export class FormGestioProductesComponent implements OnInit {
      }
 
     console.log(params);
-    window.scrollTo(0, 320);
+    window.scrollTo({
+      top: 408,
+      behavior: "smooth"
+    });
     this.evento_filtroGestioProd.emit(params);
   }
 

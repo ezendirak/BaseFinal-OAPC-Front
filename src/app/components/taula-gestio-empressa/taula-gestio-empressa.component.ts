@@ -26,11 +26,13 @@ export class TaulaGestioEmpressaComponent implements OnInit {
   
   bsModalRef: BsModalRef;
   private literals = LiteralsRegistre;
-  constructor(private traductorService: TranslateService,
+  constructor(private translate            : TranslateService,
               private modalService : BsModalService,
               private AuthorizationService  :AuthorizationService,
               private EmpressaService       :EmpressaService,
-              private TrazaService          :TrazaService) { }
+              private TrazaService          :TrazaService) {
+                translate.setDefaultLang('cat');
+               }
 
   ngOnInit() {
   }

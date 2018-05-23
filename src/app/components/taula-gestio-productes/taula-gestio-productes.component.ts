@@ -4,6 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LiteralsRegistre } from '../../literals-registre.enum';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ModalEditGestProdComponent } from '../modal-edit-gest-prod/modal-edit-gest-prod.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-taula-gestio-productes',
@@ -19,7 +20,10 @@ export class TaulaGestioProductesComponent implements OnInit {
   bsModalRef: BsModalRef;
   private literals = LiteralsRegistre;
   
-  constructor(private modalService : BsModalService) { }
+  constructor(private modalService : BsModalService,
+              private translate            : TranslateService) { 
+                translate.setDefaultLang('cat');
+              }
 
   ngOnInit() {
 
@@ -37,7 +41,7 @@ export class TaulaGestioProductesComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ModalEditGestProdComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    
+    console.log(item);
     this.bsModalRef.content.datos_entrada = item;
     this.bsModalRef.content.datos_salida = item;
     

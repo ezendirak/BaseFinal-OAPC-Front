@@ -68,7 +68,7 @@ export class ModalToAddComponent implements  OnInit  {
   isLlavor: boolean;
 
   private literals = LiteralsRegistre;
-  constructor(private traductorService: TranslateService,
+  constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,
               private AuthorizationService: AuthorizationService, 
                private RegisterService     : RegisterService, 
@@ -163,7 +163,7 @@ export class ModalToAddComponent implements  OnInit  {
   getCombosModal(tipusProducte: String)
   {
     console.log("getcombosModal en pare: (MODAL) " + tipusProducte);
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombosModalToAdd(tipusProducte)
       .subscribe ( respuesta => { this.comboInfoModal = respuesta;
                                   this.TrazaService.dato("Combos", "API GET Combo OK (ON MODAL)", this.comboInfoModal);
@@ -171,10 +171,11 @@ export class ModalToAddComponent implements  OnInit  {
                                 },
                   error =>      { this.TrazaService.error("Combos", "API GET Combo KO (ON MODAL)", error); } 
       );   
+    }
   }
 
   getPeriodesByProd(subGrup: String){
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesByProd(subGrup)
       .subscribe ( respuesta => { this.periodesModal = respuesta;
 
@@ -182,11 +183,12 @@ export class ModalToAddComponent implements  OnInit  {
                                 },
                   error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
       );
+    }
   }
 
   getProductesModalByType(subGrup: String)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getProductesModalByType(subGrup)
       .subscribe ( respuesta => { this.productesModal = respuesta;
 
@@ -194,5 +196,6 @@ export class ModalToAddComponent implements  OnInit  {
                                 },
                   error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
       );
+    }
   }
 }

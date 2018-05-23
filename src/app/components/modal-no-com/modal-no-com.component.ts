@@ -10,6 +10,8 @@ import { Periode } from '../../model/periode';
 import { RegisterService } from '../../services/register.service';
 import { BsModalRef } from 'ngx-bootstrap';
 import { HttpParams } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-modal-no-com',
@@ -34,12 +36,13 @@ public ngxDisabled = false;
 public doSelectOptions = (options: INgxSelectOption[]) => console.log('MultipleDemoComponent.doSelectOptions', options);
 
 public onClose: Subject<boolean>;
-
+private literals = LiteralsRegistre;
 constructor(  private AuthorizationService: AuthorizationService,
               private EmpressaService:  EmpressaService,
               private TrazaService:     TrazaService,
               public bsModalRef:            BsModalRef,
-            private RegisterService:    RegisterService) { }
+              private RegisterService:    RegisterService,
+              private translate            : TranslateService) { }
 
   ngOnInit() {
     this.onClose = new Subject();
@@ -93,33 +96,36 @@ constructor(  private AuthorizationService: AuthorizationService,
 
   getProductesModalName()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModalName()
       .subscribe ( respuesta => { this.productesNom = respuesta;
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getPeriodesByProductes(productes  :string)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesByProductes(productes)
       .subscribe ( respuesta => { this.periodes = respuesta;
                                   console.log(this.periodes);
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getEmpresesByProducte(producte :string)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
     this.EmpressaService.getEmpresesByProd(producte)
     .subscribe ( respuesta => { this.empreses = respuesta;
                               },
                 error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
     );
+  }
   }
 
 }

@@ -52,12 +52,12 @@ export class LoginComponent implements OnInit {
         this.mitoken = respuesta;
         this.TrazaService.log("LOGIN", "API LOGIN OK", "")
 
-        this.miusuario = { "user": user, "firstname": "", "lastname": "", "token": this.mitoken.access_token };
+        this.miusuario = { "user": user, "firstname": "", "lastname": "", "token": this.mitoken.access_token , "authorities": null};
         localStorage.setItem("USER", JSON.stringify(this.miusuario));
-
+        // console.log(this.miusuario);
+        // console.log(this.mitoken.access_token);
         //https://github.com/xpoveda/oapc/blob/master/docs/multinotificacion_asincrona_entre_controles.pdf
         this.MessageService.login();
-
         this.router.navigateByUrl("/");
       },
         error => {

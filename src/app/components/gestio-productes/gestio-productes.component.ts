@@ -69,8 +69,8 @@ export class GestioProductesComponent implements OnInit {
 
   getProductes()
   {
-    if (this.AuthorizationService.is_logged())
-      this.GestionsService.getProductes()
+    if (this.AuthorizationService.is_logged()) {
+        this.GestionsService.getProductes()
       .subscribe ( respuesta => { this.productes = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
                                   // console.log(this.productes);
@@ -78,19 +78,19 @@ export class GestioProductesComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getFamilies()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestionsService.getFamilies()
       .subscribe ( respuesta => { this.families = respuesta;
-                                  // console.log("prrrrrrrrrrrrrrrrrrra");
-                                  // console.log(this.productes);
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
                   error =>      { this.TrazaService.error("Families CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getTaulaProd() {
@@ -116,8 +116,8 @@ export class GestioProductesComponent implements OnInit {
       // this.getRegistresCount(filtro);
       // console.log("abans del service "+filtro);
       this.getRegistresCountFiltrat(filtro);
-      console.log("Filtre al pare: ");
-      console.log(filtro);
+      // console.log("Filtre al pare: ");
+      // console.log(filtro);
       this.GestionsService.getRegistresPage(this.pagination.page_actual, this.pagination.page_items, filtro)
       .subscribe ( respuesta => { //this.items = respuesta;
                                   this.regisProd = respuesta;  
@@ -132,7 +132,7 @@ export class GestioProductesComponent implements OnInit {
 
   getRegistresCountFiltrat(filtro: any)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestionsService.getRegistresCountFiltrat(filtro)
       .subscribe ( respuesta => { this.pagination.total_items = respuesta;
 
@@ -143,6 +143,7 @@ export class GestioProductesComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
+    }
   }
 
   putRegistreToService(registre: InfoGestioProd)
@@ -150,7 +151,7 @@ export class GestioProductesComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       console.log(registre);
       this.GestionsService.putRegistre(registre)
-      .subscribe ( respuesta => { this.item = respuesta;
+      .subscribe ( respuesta => { //this.item = respuesta;
 
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
                                   this.getProductes();
@@ -163,7 +164,7 @@ export class GestioProductesComponent implements OnInit {
 
   getProductesModal()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
 
@@ -171,6 +172,7 @@ export class GestioProductesComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
       );
+    }
   }
   
 //////////////////////////////////////////////////////////////////////////////////////////////

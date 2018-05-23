@@ -5,6 +5,7 @@ import { BsDatepickerConfig, BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { HttpParams } from '@angular/common/http';
 import { LiteralsRegistre } from '../../literals-registre.enum';
 import { ModalToAddCalendarComponent } from '../modal-to-add-calendar/modal-to-add-calendar.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-gestio-periodes',
@@ -25,7 +26,10 @@ export class FormGestioPeriodesComponent implements OnInit {
   bsModalRef: BsModalRef;
   private literals = LiteralsRegistre;
   
-  constructor(private modalService : BsModalService) { }
+  constructor(private modalService : BsModalService,
+              private translate            : TranslateService) { 
+                translate.setDefaultLang('cat');
+              }
 
   
 
@@ -52,6 +56,10 @@ export class FormGestioPeriodesComponent implements OnInit {
 
     console.log(params);
     console.log(decodeURI(params.toString()));
+    window.scrollTo({
+      top: 480,
+      behavior: "smooth"
+    });
     this.evento_filtroGestioPeriode.emit(params);
   }
 

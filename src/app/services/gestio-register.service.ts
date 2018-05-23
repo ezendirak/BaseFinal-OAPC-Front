@@ -56,7 +56,7 @@ getPeriodes(): Observable<Periode[]>
                       .catch((error: any) => Observable.throw(error));
   }
 
-  putPep(objPep: InfoGestioReg): Observable<InfoGestioReg>{
+  putPep(objPep: InfoGestioReg){
 
     return this.http.put(  this.ApiUrlConfigService._putGestioPepURL,
                            objPep, this.AuthorizationService.header_token()
@@ -71,7 +71,7 @@ getPeriodes(): Observable<Periode[]>
   getRegistresPage(page: number, per_page: number, filtro: any): Observable<InfoGestioReg[]>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresPageFiltratURL + "?page=" + page + "&per_page=" + per_page, 
-                          { params: filtro }
+                          {headers: this.AuthorizationService.header_tokenPol(),params: filtro}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));
@@ -81,7 +81,7 @@ getPeriodes(): Observable<Periode[]>
   getRegistresCountFiltrat(filtre: any): Observable<number>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresCountURLFiltrat, 
-                          {params: filtre}
+                          {headers: this.AuthorizationService.header_tokenPol(),params: filtre}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));  
@@ -91,7 +91,7 @@ getPeriodes(): Observable<Periode[]>
   getRegistresProdEmpPerPage(page: number, per_page: number, filtro: any): Observable<InfoGestioReg[]>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresPEPPageFiltratURL + "?page=" + page + "&per_page=" + per_page, 
-                          { params: filtro }
+                          {headers: this.AuthorizationService.header_tokenPol(),params: filtro}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));
@@ -101,7 +101,7 @@ getPeriodes(): Observable<Periode[]>
   getRegistresProdEmpPerCountFiltrat(filtre: any): Observable<number>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresPEPCountURL, 
-                          {params: filtre}
+                          {headers: this.AuthorizationService.header_tokenPol(),params: filtre}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));  

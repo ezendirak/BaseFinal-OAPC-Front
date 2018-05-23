@@ -1,8 +1,9 @@
+<h2 class="titolPlana">{{ 'TITOLS.' + literals.gesProd | translate }}</h2>
 <form #formulario="ngForm" (ngSubmit)="onclick($event)">
    <div class="jumbotron2" style="margin-bottom:  0; padding-bottom:  0;">  
      <div class="formCompradorGrande">
          <label for="campoA" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
-         <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="productes" [(ngModel)]="selectedTipusProducte" >
+         <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="productes" [(ngModel)]="selectedTipusProducte" >
             <option *ngFor="let c of productes" [ngValue]="c">{{ c.nom }}</option>
         </select>
      </div>
@@ -10,7 +11,7 @@
      <div class="formCompradorGrande">
          <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.fam | translate }}</label>
          
-         <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="families" [(ngModel)]="selectedFamilia">
+         <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="families" [(ngModel)]="selectedFamilia">
              <option *ngFor="let h of families" [ngValue]="h">{{ h.nom }}</option>
          </select>
        </div>

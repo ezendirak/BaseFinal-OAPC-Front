@@ -100,7 +100,7 @@ export class GestioEmpressaComponent implements OnInit {
 
   getEmpresses()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getEmpressa()
       .subscribe ( respuesta => { this.empresses = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
@@ -109,11 +109,12 @@ export class GestioEmpressaComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
       );
+    }
   }
 
   getProductes()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductes()
       .subscribe ( respuesta => { this.productes = respuesta;
                                   console.log("prrrrrrrrrrrrrrrrrrra");
@@ -122,11 +123,12 @@ export class GestioEmpressaComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getProductesModal()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
                                   console.log("prrrrrrrrrrrrrrrrrrra");
@@ -135,6 +137,7 @@ export class GestioEmpressaComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   putEmpressa(registre: InfoEmpressa)
@@ -142,7 +145,7 @@ export class GestioEmpressaComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       console.log(registre);
       this.EmpressaService.putEmpressa(registre)
-      .subscribe ( respuesta => { this.item = respuesta;
+      .subscribe ( respuesta => { //this.item = respuesta;
 
                                   this.TrazaService.dato("PUT EMPRESSA", "API GET EMPRESSA OK", this.items);
                                   this.getRegistresPage(this.filtroFake);
@@ -226,7 +229,7 @@ export class GestioEmpressaComponent implements OnInit {
       this.EmpressaService.getRegistresPage(this.pagination.page_actual, this.pagination.page_items, filtro)
       .subscribe ( respuesta => { this.items = respuesta;  
                                   this.pagination.page_actual_items = this.items.length;
-
+                                  console.log(this.items);
                                   this.TrazaService.dato("EMPRESSES", "API GETEMPRESSESPAGE OK(" + this.pagination.page_actual + ")",this.items.length); 
                                 },
                   error =>      { this.TrazaService.error("EMPRESSES", "API GETEMPRESSESPAGE KO", error); } 
@@ -236,8 +239,8 @@ export class GestioEmpressaComponent implements OnInit {
 
   getRegistresCountFiltrat(filtro: any)
   {
-    if (this.AuthorizationService.is_logged())
-      this.EmpressaService.getRegistresCountFiltrat(filtro)
+    if (this.AuthorizationService.is_logged()){
+        this.EmpressaService.getRegistresCountFiltrat(filtro)
       .subscribe ( respuesta => { this.pagination.total_items = respuesta;
 
                                   this.refreshPaginationCounters();
@@ -247,6 +250,7 @@ export class GestioEmpressaComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("EMPRESSES", "API GETEMPRESSESCOUNT KO", error); } 
       );
+    }
   }
 
 

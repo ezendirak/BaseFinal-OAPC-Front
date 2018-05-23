@@ -39,12 +39,14 @@ export enum LiteralsRegistre {
     ///////////////////// Botons /////////////////////////////
     //////////////////////////////////////////////////////////
 
-    afegirA = "afegirA",
-    searchB = "searchB",
-    afegirC = "afegirC",
-    afegirD = "afegirD",
-    afegirE = "afegirE",
-    afegirR = "afegirR",
+    afegirA     =   "afegirA",
+    searchB     =   "searchB",
+    afegirC     =   "afegirC",
+    afegirD     =   "afegirD",
+    afegirE     =   "afegirE",
+    afegirR     =   "afegirR",
+    closePer    =   "closePer",
+    perNoCom    =   "perNoCom",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Titols /////////////////////////////
@@ -54,6 +56,11 @@ export enum LiteralsRegistre {
     admin = "admin",
     regPreus = "regPreus",
     gesReg = "gesReg",
+    gesEmp = "gesEmp",
+    gesProd = "gesProd",
+    gesDDMM =  "gesDDMM",
+    gesUser =  "gesUser",
+    gesPer =   "gesPer",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Altres /////////////////////////////

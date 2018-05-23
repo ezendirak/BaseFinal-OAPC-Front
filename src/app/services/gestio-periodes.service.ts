@@ -19,7 +19,7 @@ export class GestioPeriodesService {
 getRegistresPage(page: number, per_page: number, filtro: any): Observable<Periode[]>
 {
   return this.http.get( this.ApiUrlConfigService._periodesFiltrat + "?page=" + page + "&per_page=" + per_page, 
-                        { params: filtro }
+                        {headers: this.AuthorizationService.header_tokenPol() ,params: filtro }
                       )
                   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));
@@ -29,7 +29,7 @@ getRegistresPage(page: number, per_page: number, filtro: any): Observable<Period
 getRegistresCountFiltrat(filtre: any): Observable<number>
 {
   return this.http.get( this.ApiUrlConfigService._periodes_countFiltrat, 
-                        {params: filtre}
+                        {headers: this.AuthorizationService.header_tokenPol(), params: filtre}
                       )
                   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));  

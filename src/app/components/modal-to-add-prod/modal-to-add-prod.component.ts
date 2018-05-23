@@ -6,6 +6,8 @@ import { InfoKeyClass } from '../../model/info-key-class';
 import { BsModalRef } from 'ngx-bootstrap';
 import { HttpParams } from '@angular/common/http';
 import { NewProdDto } from '../../model/new-prod-dto';
+import { TranslateService } from '@ngx-translate/core';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-modal-to-add-prod',
@@ -29,8 +31,9 @@ export class ModalToAddProdComponent implements OnInit {
 
   // params = new HttpParams();
   // newRegistre           :any;
-
-  constructor(public bsModalRef: BsModalRef) { }
+  private literals = LiteralsRegistre;
+  constructor(public bsModalRef: BsModalRef,
+              private translate            : TranslateService) { }
 
   ngOnInit() {
     this.onClose = new Subject();

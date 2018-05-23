@@ -1,4 +1,5 @@
-import { Component, OnInit }          from '@angular/core';
+import { element } from 'protractor';
+import { Component, OnInit, Injectable }          from '@angular/core';
 import { Router }                     from '@angular/router';
 
 import { Observable, Subscription }   from 'rxjs/Rx';
@@ -12,6 +13,7 @@ import { TokenResponse }              from '../../interfaces/token-response';
 import { UsersResponse}               from '../../interfaces/users-response';
 import { MyUser }                     from '../../interfaces/my-user';
 import { Authority }                  from '../../interfaces/users-response';
+import { HeaderComponent } from '../header/header.component';
 
   ////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +28,7 @@ import { Authority }                  from '../../interfaces/users-response';
   ////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////
-
+// @Injectable()
 export class HomeComponent implements OnInit {
 
   subscription: Subscription;
@@ -41,17 +43,19 @@ export class HomeComponent implements OnInit {
 
   user_name    : string;
 
+
   constructor( private router               : Router, 
                private AuthorizationService : AuthorizationService, 
                private UserService          : UserService,
                private TrazaService         : TrazaService,
-               private MessageService       : MessageService
+               private MessageService       : MessageService,
+               private HeaderComponent      : HeaderComponent
              ) 
   { }
 
   ngOnInit() {
     this.islogged = this.AuthorizationService.is_logged();
-
+    
     this.whoami();
   }
 
@@ -83,13 +87,51 @@ export class HomeComponent implements OnInit {
           this.TrazaService.log("HOME", "API WHOAMI OK", "");
 
           this.miusuario           = JSON.parse(localStorage.getItem("USER"));
+         
           this.miusuario.firstname = this.mirespuesta.firstName;
           this.miusuario.lastname  = this.mirespuesta.lastName;
-
+          this.miusuario.authorities = this.mirespuesta.authorities;
+          
           localStorage.removeItem("USER");
           localStorage.setItem("USER", JSON.stringify(this.miusuario));
 
           this.user_name = this.miusuario.firstname + " " + this.miusuario.lastname
+          // console.log(this.miusuario.authorities.values);
+          
+          // if (this.contains(this.miusuario.authorities.values, 'ROLE_USER')){
+          //   this.isUser = true;
+          //   console.log("IS USER");
+          // }
+          // if (this.contains(this.miusuario.authorities.values, 'ROLE_ADMIN')){
+          //   this.isGestor = true;
+          //   console.log("IS ADMIN");
+          // }
+            
+          // if (this.contains(this.miusuario.authorities.values, 'ROLE_GESTOR')){
+          //   this.isAdmin = true;
+          //   console.log("IS gestor");
+          // }
+          
+          this.miusuario.authorities.forEach(element => {
+            // console.log(element.authority);
+            switch (element.authority) {
+              case 'ROLE_USER':
+                this.HeaderComponent.isUser = true;
+                break;
+
+              case 'ROLE_GESTOR':
+                this.HeaderComponent.isGestor = true;
+                break;
+
+              case 'ROLE_ADMIN':
+                this.HeaderComponent.isAdmin = true;
+                break;
+            
+              default:
+                break;
+            }
+          });
+          // console.log(this.isUser, this.isGestor, this.isAdmin);
         },
           error => { this.TrazaService.error("HOME", "API WHOAMI KO", error); }
         );
@@ -134,4 +176,12 @@ export class HomeComponent implements OnInit {
 
   ///////////////////////////////////////////////////////////////////////////////////////
 
+  contains(a, b) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === b) {
+            return true;
+        }
+    }
+    return false;
+  }
 }

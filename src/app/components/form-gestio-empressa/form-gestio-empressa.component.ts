@@ -7,6 +7,7 @@ import { ModalToAddEmpComponent } from '../modal-to-add-emp/modal-to-add-emp.com
 import { LiteralsRegistre } from '../../literals-registre.enum';
 import { InfoKeyClass } from '../../model/info-key-class';
 import { Estats } from '../../model/estats';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-gestio-empressa',
@@ -36,7 +37,10 @@ export class FormGestioEmpressaComponent implements OnInit {
   bsModalRef: BsModalRef;
   private literals = LiteralsRegistre;
   
-  constructor(private modalService : BsModalService) { }
+  constructor(private modalService : BsModalService,
+              private translate            : TranslateService) { 
+                translate.setDefaultLang('cat');
+              }
 
   ngOnInit() {
     
@@ -56,7 +60,10 @@ export class FormGestioEmpressaComponent implements OnInit {
     }
 
     console.log(params);
-    window.scrollTo(0, 320);
+    window.scrollTo({
+      top: 250,
+      behavior: "smooth"
+    });
     this.evento_filtroGestioEmpressa.emit(params);
   }
   

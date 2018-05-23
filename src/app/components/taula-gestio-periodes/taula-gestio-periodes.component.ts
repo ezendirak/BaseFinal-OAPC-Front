@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Periode } from '../../model/periode';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { LiteralsRegistre } from '../../literals-registre.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-taula-gestio-periodes',
@@ -15,7 +16,9 @@ export class TaulaGestioPeriodesComponent implements OnInit {
   
   private literals = LiteralsRegistre;
   
-  constructor() { }
+  constructor(private translate            : TranslateService) { 
+    translate.setDefaultLang('cat');
+  }
 
   ngOnInit() {
   }

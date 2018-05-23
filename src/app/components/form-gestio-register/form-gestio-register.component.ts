@@ -30,8 +30,10 @@ export class FormGestioRegisterComponent implements OnInit {
   bsModalRefClose: BsModalRef;
 
   private literals = LiteralsRegistre;
-  constructor(private traductorService: TranslateService,
-              private bsModalRef: BsModalService) { }
+  constructor(private translate            : TranslateService,
+              private bsModalRef: BsModalService) { 
+                translate.setDefaultLang('cat');
+              }
 
   ngOnInit() {
     // console.log(this.productes);
@@ -58,6 +60,10 @@ export class FormGestioRegisterComponent implements OnInit {
      
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
       console.log(params);
+      window.scrollTo({
+        top: 480,
+        behavior: "smooth"
+      });
     this.evento_Buscar.emit(params);
   }
 
@@ -83,9 +89,6 @@ export class FormGestioRegisterComponent implements OnInit {
     // this.bsModalRefAdd.content.periodesModal = this.periodesModal;
 
     // Get out
-
-
-
     this.bsModalRefClose.content.onClose
       .subscribe( result => { if (result == true)
                                 this.actionPutYES();                                

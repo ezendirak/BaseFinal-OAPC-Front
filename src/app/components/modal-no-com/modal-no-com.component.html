@@ -17,11 +17,11 @@
   <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
 
     <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
-      <div class="form-group row margin-bottom">
+      <div class="form-group row margin-bottom" style="display: inline-flex">
         
             
         
-            <label for="periode" class="col-md-2 col-xs-12">Productes</label>
+            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
             <!-- <ngx-select name="multiSel" style="width:200px; display:inline-block;" [multiple]="true"
                     [items]="productesNom"
                     [disabled]="ngxDisabled"
@@ -33,10 +33,7 @@
             <option *ngFor="let p of productesNom" [ngValue]="p">{{ p }} </option>
         </select>
           
-           
-
-          
-            <label for="id" class="col-md-2 col-xs-12">Periode</label>
+            <label for="id" class="col-md-2 col-xs-12" style="width: 13%;">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
             <select class="col-md-3 col-xs-12" style="width:260px;" name="periodeSelected" [(ngModel)]="periodeSelected">
                 <option *ngFor="let p of periodes" [ngValue]="p">{{ p?.numPeriode + " - " + p?.tipusPeriode + " ("}} {{p?.dataInici | date: 'dd/MM/yyyy'}} - {{ p?.dataFi | date: 'dd/MM/yyyy'}} )</option>
             </select> 
@@ -45,8 +42,8 @@
 
       <div class="form-group row margin-bottom">
         <div >
-          <label for="campoC" class="col-md-2 col-xs-12">Empresa</label>
-          <select class="col-md-3 col-xs-12" style="width:170px;" name="empresaSelected" [(ngModel)]="empresaSelected">
+          <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.emp | translate }}</label>
+          <select class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected">
               <option *ngFor="let e of empreses" [ngValue]="e">{{ e }} </option>
           </select>
         </div>

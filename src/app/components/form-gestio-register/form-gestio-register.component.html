@@ -1,3 +1,4 @@
+<h2 class="titolPlana">{{ 'TITOLS.' + literals.gesReg | translate }}</h2>
 <form #formulario="ngForm" (ngSubmit)="onclick($event)">
   
  <div class="jumbotron2" style="margin-bottom:  0; padding-bottom:  0;">  
@@ -5,14 +6,14 @@
     <div class="formCompradorGrande">
         <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
         
-        <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="periode" [(ngModel)]="periodeSelected">
+        <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="periode" [(ngModel)]="periodeSelected">
             <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
         </select>
       </div>
 
    <div class="formCompradorGrande">
        <label for="campoA" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.emp | translate }}</label>
-       <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="empresses" [(ngModel)]="empressaSelected">
+       <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="empresses" [(ngModel)]="empressaSelected">
         <option *ngFor="let e of empresses" [ngValue]="e">{{ e }}</option>
       </select>
    </div>
@@ -20,14 +21,14 @@
    <div class="formCompradorGrande">
      <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
      
-     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="producte" [(ngModel)]="producteSelected">
+     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="producte" [(ngModel)]="producteSelected">
       <option *ngFor="let p of productes" [ngValue]="p">{{ p?.nom }}</option>
     </select>
    </div>
 
    <div class="formCompradorGrande">
      <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.estat | translate }}</label> 
-      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="estat" [(ngModel)]="estatSelected">
+      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="estat" [(ngModel)]="estatSelected">
         <option [ngValue]="0">Tots</option>
         <option [ngValue]="1">Pendent</option>
         <option [ngValue]="2">Registrat</option>
@@ -38,7 +39,7 @@
 
   
  <div class="form-group row margin-bottom" style="text-align: right;">
-    <button  type="button" (click)="openModalToClose($event)" class="btnEnvio btn-custom">Tancar Periodes Actius</button>
+    <button  type="button" (click)="openModalToClose($event)" class="btnEnvio btn-custom">{{ 'BOTTON.' + literals.closePer | translate }}</button>
   
     <button  type="submit" class="btnEnvio btn-custom">{{ 'BOTTON.' + literals.searchB | translate }}</button>   
   

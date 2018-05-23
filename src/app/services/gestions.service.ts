@@ -46,7 +46,7 @@ export class GestionsService {
 getRegistresPage(page: number, per_page: number, filtro: any): Observable<InfoGestioProd[]>
 {
     return this.http.get( this.ApiUrlConfigService._atributsProdFiltrat + "?page=" + page + "&per_page=" + per_page, 
-    { params: filtro }
+                          {headers: this.AuthorizationService.header_tokenPol(), params: filtro }
   )
     .map(respuesta => respuesta)
   .catch((error: any) => Observable.throw(error)); 
@@ -55,13 +55,13 @@ getRegistresPage(page: number, per_page: number, filtro: any): Observable<InfoGe
 getRegistresCountFiltrat(filtre: any): Observable<number>
   {
     return this.http.get( this.ApiUrlConfigService._getAtributsProd_countFiltrat, 
-                          {params: filtre}
+                          {headers: this.AuthorizationService.header_tokenPol(), params: filtre}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));  
   }
 
-  putRegistre(registre: InfoGestioProd): Observable<InfoGestioProd>{
+  putRegistre(registre: InfoGestioProd){
 
     return this.http.put(  this.ApiUrlConfigService._putGestioProducteURL,
                            registre, this.AuthorizationService.header_token()
@@ -70,7 +70,7 @@ getRegistresCountFiltrat(filtre: any): Observable<number>
                     .catch((error: any) => Observable.throw(error));
 }
 
-  postNewAtribut(newAtribut:  any): Observable<any>
+  postNewAtribut(newAtribut:  any)
   {
     return this.http.post( this.ApiUrlConfigService._postNewAtribut, 
                         newAtribut, this.AuthorizationService.header_token()
@@ -79,10 +79,10 @@ getRegistresCountFiltrat(filtre: any): Observable<number>
                     .catch((error: any) => Observable.throw(error)); 
   }
 
-  postNewEmp(newEmp:  InfoEmpressa): Observable<any>
+  postNewEmp(newEmp:  InfoEmpressa)
   {
-    return this.http.post( this.ApiUrlConfigService._postNewEmp, 
-          newEmp, this.AuthorizationService.header_token()
+    return this.http.post(  this.ApiUrlConfigService._postNewEmp, 
+                            newEmp, this.AuthorizationService.header_token()
                           )
                           .map(respuesta => respuesta)
                           .catch((error: any) => Observable.throw(error)); 

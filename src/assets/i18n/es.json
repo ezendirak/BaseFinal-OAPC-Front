@@ -110,18 +110,25 @@
     },
 
     "BOTTON" : {
-        "searchB": "Buscar",
-        "afegirR": "Añadir nuevo registro",
-        "afegirE": "Añadir nueva empresa",
-        "afegirA": "Añadir nuevo atributo",
-        "afegirC": "Añadir nuevo calendario",
-        "afegirD":  "Añadir fechas"
+        "searchB"   :   "Buscar",
+        "afegirR"   :   "Añadir nuevo registro",
+        "afegirE"   :   "Añadir nueva empresa",
+        "afegirA"   :   "Añadir nuevo atributo",
+        "afegirC"   :   "Añadir nuevo calendario",
+        "afegirD"   :   "Añadir fechas",
+        "closePer"  :   "Cerrar Periodos Activos",
+        "perNoCom"  :   "Periodo No Comercialización"
     },
 
     "TITOLS" : {
         "OAPC":     "Observatorio Agroalimentario de Precios de Cataluña",
         "admin":    "Administración",
         "regPreus": "Registro de precios",
-        "gesReg":   "Gestión registros semanales"
+        "gesReg":   "Gestión registros semanales",
+        "gesEmp":   "Gestión de empresas",
+        "gesProd":  "Gestión de productos",
+        "gesDDMM":  "Gestión datos maestros",
+        "gesUser":  "Gestión de usuarios",
+        "gesPer":   "Gestión de periodos"
     }
 }

@@ -1,25 +1,26 @@
+<h2 class="titolPlana">{{ 'TITOLS.' + literals.regPreus | translate }}</h2>
 <form #formulario="ngForm" (ngSubmit)="onclick($event)">
    
   <div class="jumbotron2" style="margin-bottom:  0; padding-bottom:  0;">  
+    <div style="display: block; margin: 0 auto;">
+      <div class="formCompradorGrande">
+          <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
+          
+          <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="periode" [(ngModel)]="periode">
+              <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
+          </select>
+        </div>
     
-    <div class="formCompradorGrande">
-        <label for="campoB" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-        
-        <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="periode" [(ngModel)]="periode">
-            <option *ngFor="let h of periodes" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
+      <div class="formCompradorGrande">
+        <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
+        <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="eInformant" [(ngModel)]="eInformant">
+            <option *ngFor="let e of empresses" [ngValue]="e">{{ e }} </option>
         </select>
       </div>
-  
-    <div class="formCompradorGrande">
-      <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
-      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="eInformant" [(ngModel)]="eInformant">
-          <option *ngFor="let e of empresses" [ngValue]="e">{{ e }} </option>
-      </select>
-    </div>
-
+  </div>
     <div class="formCompradorGrande">
       <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.usuIn | translate }}</label> 
-      <input [attr.disabled]="true" name="usuariActual" style="width:400px; display:inline-block;"  type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"    id="uInformant"    name="uInformant" placeholder="{{ usuariActual | translate}}">
+      <input [attr.disabled]="true" name="usuariActual" style="width:300px; display:inline-block;"  type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"    id="uInformant"    name="uInformant" placeholder="{{ usuariActual | translate}}">
     </div>
   <!-- </div> -->
 <!-- <div class="form-group row margin-bottom"> -->
@@ -27,7 +28,7 @@
     <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tipPro | translate }}</label>
 
   
-    <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="productes" [(ngModel)]="selectedTipusProducte" (change) = "changeSelectedTipusProducte($event)" >
+    <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="productes" [(ngModel)]="selectedTipusProducte" (change) = "changeSelectedTipusProducte($event)" >
         <option *ngFor="let c of productes" [ngValue]="c">{{ c.nom }}</option>
     </select>
   </div>
@@ -39,7 +40,7 @@
     <!-- <input type="text"  class="col-md-3 col-xs-12"    id="varietat"    name="varietat"    [(ngModel)]="varietat"> -->
     
     
-    <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="colorsCarn" [(ngModel)]="selectedColorCarn" >
+    <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="colorsCarn" [(ngModel)]="selectedColorCarn" >
       <option *ngFor="let v of comboInfo.colorsCarn" [ngValue]="v.nom">{{ v.nom }}</option>
     </select>  
   </div>
@@ -52,7 +53,7 @@
     <!-- <input type="text"  class="col-md-3 col-xs-12"    id="varietat"    name="varietat"    [(ngModel)]="varietat"> -->
     
     
-    <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="varietat" [(ngModel)]="selectedVarietat" >
+    <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="varietat" [(ngModel)]="selectedVarietat" >
       <option *ngFor="let v of comboInfo.varietats" [ngValue]="v.nom">{{ v.nom }}</option>
     </select>  
   </div>
@@ -65,7 +66,7 @@
       <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.qual | translate }}</label>
     
     <!-- <input type="text"  class="col-md-3 col-xs-12"    id="qualitat"    name="qualitat"    [(ngModel)]="qualitat"> -->
-      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="qualitats" [(ngModel)]="selectedQualitat" >
+      <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="qualitats" [(ngModel)]="selectedQualitat" >
       <option *ngFor="let q of this.comboInfo.qualitats" [ngValue]="q.nom">{{ q.nom }}</option>
     </select>   
     </div>
@@ -77,7 +78,7 @@
   <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.cali | translate }}</label>
   
   <!-- <input type="text"  class="col-md-3 col-xs-12"    id="calibre"    name="calibre"    [(ngModel)]="calibre"> -->
-     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;" name="calibres" [(ngModel)]="selectedKalibre">
+     <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" name="calibres" [(ngModel)]="selectedKalibre">
     <option *ngFor="let k of this.comboInfo.calibres" [ngValue]="k.nom">{{ k.nom }}</option>
   </select> 
   </div>
@@ -87,29 +88,23 @@
 <!-- <div class="form-group row margin-bottom"> -->
   <div class="formCompradorGrande">
   <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.quVe | translate }}</label>
-  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:195px; display:inline-block;"   id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda">
-  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:195px; display:inline-block;"   id="qVenuda2"    name="qVenuda2"    [(ngModel)]="qVenuda2">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:95px; margin-left: 11%"   id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda" placeholder="Des de">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:95px; margin-left: 9%"   id="qVenuda2"    name="qVenuda2"    [(ngModel)]="qVenuda2" placeholder="Fins a">
 </div>
 <div class="formCompradorGrande">
   <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.peSo | translate }}</label>
-  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:195px; display:inline-block;"  id="pSortida"    name="pSortida"    [(ngModel)]="pSortida">
-  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:195px; display:inline-block;"  id="pSortida2"    name="pSortida2"    [(ngModel)]="pSortida2">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:95px; margin-left: 11%"  id="pSortida"    name="pSortida"    [(ngModel)]="pSortida" placeholder="Des de">
+  <input type="number"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"  style="width:95px; margin-left: 9%"  id="pSortida2"    name="pSortida2"    [(ngModel)]="pSortida2" placeholder="Fins a">
 </div>
-  <!-- </div> -->
-
-<!-- <div class="form-group row margin-bottom"> -->
-  <!-- <div class="formCompradorGrande">
-    <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tan | translate }}</label>
-    <input type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:400px; display:inline-block;"   id="tancada"    name="tancada"    [(ngModel)]="tancada">
-  </div> -->
-  <!-- </div> -->
-
-  <div class="form-group row margin-bottom" style="text-align: left;"> 
-      <button type="button" (click)="openModalToNoCom($event)" class="btnEnvio btn btn-custom">Periode No Comercialitzacio</button>
-</div> 
-    <div class="form-group row margin-bottom" style="text-align: right;"> 
-        <button type="button" (click)="openModalToAdd($event)" class="btnEnvio btn btn-custom">{{ 'BOTTON.' + literals.afegirR | translate }}</button>
-        <button type="submit" class="btnEnvio btn btn-custom">{{ 'BOTTON.' + literals.searchB | translate }}</button>   
-    </div>  
+ 
   </div> 
+  <div class="form-group row margin-bottom" style="display: flex;" > 
+      <div style="text-align: left; width: 50%">
+        <button type="button" style="text-align: left;" (click)="openModalToNoCom($event)" class="btnEnvio btn btn-custom">{{ 'BOTTON.' + literals.perNoCom | translate }}</button>
+      </div>
+      <div style="text-align: right; width: 93%;">
+        <button type="button" style="text-align: right;" (click)="openModalToAdd($event)" class="btnEnvio btn btn-custom">{{ 'BOTTON.' + literals.afegirR | translate }}</button>
+        <button type="submit" style="text-align: right;" class="btnEnvio btn btn-custom">{{ 'BOTTON.' + literals.searchB | translate }}</button>   
+      </div>
+  </div>
 </form>

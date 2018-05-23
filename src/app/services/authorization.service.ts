@@ -45,6 +45,7 @@ export class AuthorizationService {
   //////////////////////////////////////////////////////////////////////////////////////
 
   whoami(): Observable<any> {
+    console.log(this.header_token());
     return this.http.get(this.ApiUrlConfigService._whoamiURL,
       this.header_token())
       .map(respuesta => respuesta)
@@ -83,9 +84,11 @@ export class AuthorizationService {
 
   is_logged() {
     if (localStorage.getItem('USER')) {
+      // console.log(JSON.parse(localStorage.getItem('USER')));
       return true;
     }
     else {
+      // console.log("NO ESTAS LOGEADO");
       return false;
     }
   }
@@ -94,6 +97,7 @@ export class AuthorizationService {
 
   header_token() {
     if (this.is_logged()) {
+      
       this.myuser = JSON.parse(localStorage.getItem("USER"));
 
       return {
@@ -106,7 +110,18 @@ export class AuthorizationService {
     else
       return null;
   }
-
+  
+  header_tokenPol() {
+    if (this.is_logged()) {
+      this.myuser = JSON.parse(localStorage.getItem("USER"));
+      let headers = new HttpHeaders();
+      headers  = headers.append('Content-Type', 'application/json');
+      headers = headers.append('Authorization', 'Bearer ' + this.myuser.token);
+      return headers;
+    }
+    else
+      return null;
+  }
   //////////////////////////////////////////////////////////////////////////////////////
 
   user_name(): string {
@@ -115,4 +130,8 @@ export class AuthorizationService {
       return (this.myuser.firstname + " " + this.myuser.lastname);
     }
   }
+
+  // isUser(): boolean {
+  //   if ()
+  // }
 }

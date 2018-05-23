@@ -9,6 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { AuthorizationService } from '../../services/authorization.service';
 import { TrazaService } from '../../services/traza.service';
 import { EmpressaService } from '../../services/empressa.service';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-modal-to-add-emp',
@@ -43,8 +44,8 @@ export class ModalToAddEmpComponent implements OnInit {
   public doSelectOptions = (options: INgxSelectOption[]) => console.log('MultipleDemoComponent.doSelectOptions', options);
 
   public onClose: Subject<boolean>;
-  
-  constructor(private traductorService      :TranslateService,
+  private literals = LiteralsRegistre;
+  constructor(private translate            : TranslateService,
               public bsModalRef             :BsModalRef,
               private AuthorizationService  :AuthorizationService, 
               // private RegisterService     : RegisterService, 
@@ -82,7 +83,7 @@ export class ModalToAddEmpComponent implements OnInit {
 
   getProductesModalName()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModalName()
       .subscribe ( respuesta => { this.productesNom = respuesta;
                                   console.log("prrrrrrrrrrrrrrrrrrra");
@@ -92,5 +93,6 @@ export class ModalToAddEmpComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 }

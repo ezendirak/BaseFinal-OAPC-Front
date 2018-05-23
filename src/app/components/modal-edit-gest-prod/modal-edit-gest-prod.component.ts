@@ -29,7 +29,7 @@ export class ModalEditGestProdComponent implements OnInit {
   public onClose: Subject<boolean>;
   
   private literals = LiteralsRegistre;
-  constructor(private traductorService:     TranslateService,
+  constructor(private translate            : TranslateService,
               public bsModalRef:            BsModalRef,
               private AuthorizationService: AuthorizationService, 
               private RegisterService     : RegisterService, 
@@ -44,14 +44,14 @@ export class ModalEditGestProdComponent implements OnInit {
 
   public onConfirm(form) {
 
-    console.log(form);
+    // console.log(form);
 
     
     this.datos_salida.producte = this.producte;
     this.datos_salida.valor = this.valor;
     this.datos_salida.cont = this.estat;
-
-    console.log(this.datos_salida);
+// console.log(this.datos_entrada);
+//     console.log(this.datos_salida);
     this.onClose.next(true);
     
     this.bsModalRef.hide();

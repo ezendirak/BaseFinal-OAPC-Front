@@ -17,10 +17,12 @@ export class TaulaGestioRegisterComponent implements OnInit {
 
   private literals = LiteralsRegistre;
 
-  constructor(private traductorService: TranslateService) { }
+  constructor(private translate: TranslateService) { 
+    translate.setDefaultLang('cat');
+  }
 
   ngOnInit() {
-    this.traductorService.setDefaultLang('cat');
+    this.translate.setDefaultLang('cat');
     // console.log("undefined: ");
     // console.log(this.items);
   }
@@ -35,10 +37,10 @@ export class TaulaGestioRegisterComponent implements OnInit {
   
   
   testting($event){
-    console.log($event);
+    // console.log($event);
     $event.pendent = true;
-    console.log($event);
-    console.log("siuuu");
+    // console.log($event);
+    // console.log("siuuu");
   }
 
   updateTancat(item: InfoGestioReg)

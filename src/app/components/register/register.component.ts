@@ -116,6 +116,7 @@ export class RegisterComponent implements OnInit {
 
   putRegistre($event)
   {
+    // console.log($event);
     this.putRegistreToService($event);
   }
 
@@ -197,6 +198,7 @@ export class RegisterComponent implements OnInit {
 
   descarregarAXLS($event){
     console.log("Estem al pare");
+    console.log($event);
     this.downloadToExcel($event);
   }
 
@@ -206,6 +208,7 @@ export class RegisterComponent implements OnInit {
  
   downloadToExcel(items: RegisterResponse[]){
     if (this.AuthorizationService.is_logged())
+    
     this.RegisterService.getDownloadToExcel(items)
     .subscribe ( respuesta => { //this.items = respuesta;
                                 this.TrazaService.dato("ToExcel", "API GET ToExcel OK", this.items);
@@ -251,7 +254,7 @@ export class RegisterComponent implements OnInit {
   
   getRegistresCountFiltrat(filtro: any)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getRegistresCountFiltrat(filtro)
       .subscribe ( respuesta => { this.pagination.total_items = respuesta;
 
@@ -262,6 +265,7 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -270,7 +274,7 @@ export class RegisterComponent implements OnInit {
 
   deleteRegistre(id: number, refresh?:boolean)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.deleteRegistre(id)
       .subscribe ( respuesta => { this.item = respuesta;
 
@@ -283,6 +287,7 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API DELETE KO", error); }     
       );
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -291,7 +296,7 @@ export class RegisterComponent implements OnInit {
 
   getProductes()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getProductes()
       .subscribe ( respuesta => { this.productes = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
@@ -300,11 +305,12 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getProductesModal()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
 
@@ -312,11 +318,12 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
       );
+    }
   }
   
   getPeriodes()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodes()
       .subscribe ( respuesta => { this.periodes = respuesta;
 
@@ -324,11 +331,12 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); } 
       );
+    }
   }
   
   getPeriodesModal()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesDisponibles()
       .subscribe ( respuesta => { this.periodesModal = respuesta;
 
@@ -336,10 +344,11 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Periodes MODAL DISPONIBLES", "API GET PERIODES KO", error); } 
       );
+    }
   }
 
   getPeriodesByProd(subGrup: String){
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesByProd(subGrup)
       .subscribe ( respuesta => { this.periodes = respuesta;
 
@@ -347,11 +356,12 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
       );
+    }
   }
 
   getCombos(tipusProducte: String)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombos(tipusProducte)
       .subscribe ( respuesta => { this.comboInfo = respuesta;
                                   this.TrazaService.dato("Combos", "API GET Combo OK", this.comboInfo);
@@ -359,12 +369,13 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Combos", "API GET Combo KO", error); } 
       );   
+    }
   }
 
   getCombosModal(tipusProducte: String)
   {
     console.log("getcombosModal en pare: " + tipusProducte);
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombos(tipusProducte)
       .subscribe ( respuesta => { this.comboInfoModal = respuesta;
                                   this.TrazaService.dato("Combos", "API GET Combo OK", this.comboInfoModal);
@@ -372,6 +383,7 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Combos", "API GET Combo KO", error); } 
       );   
+    }
   }
 
   postRegistre(filtro: any)
@@ -408,12 +420,12 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  putRegistreToService(registre: RegisterResponse)
+  putRegistreToService(registre: any)
   { 
     if (this.AuthorizationService.is_logged()){
       console.log(registre);
       this.RegisterService.putRegistre(registre)
-      .subscribe ( respuesta => { this.item = respuesta;
+      .subscribe ( respuesta => { //this.item = respuesta;
 
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
                                   this.getRegistresPage(this.filtroFake);
@@ -468,7 +480,7 @@ export class RegisterComponent implements OnInit {
 
   getEmpresses()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getEmpressa()
       .subscribe ( respuesta => { this.empresses = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
@@ -477,6 +489,7 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
       );
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////////

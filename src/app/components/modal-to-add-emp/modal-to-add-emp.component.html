@@ -19,12 +19,12 @@
     <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
       <div class="form-group row margin-bottom">
         <div>
-            <label for="id" class="col-md-2 col-xs-12">Codi Empressa</label>
+            <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.codEmp | translate }}</label>
             <input type="text"  class="col-md-3 col-xs-12"    id="codiEmpressa"    name="codiEmpressa"    [(ngModel)]="codiEmpressa">
           </div>
             
         <div>
-            <label for="periode" class="col-md-2 col-xs-12">Producte</label>
+            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
             <ngx-select name="multiSel" style="width:200px; display:inline-block;" [multiple]="true"
                     [items]="productesNom"
                     [disabled]="ngxDisabled"
@@ -40,7 +40,7 @@
 
       <div class="form-group row margin-bottom">
         <div >
-          <label for="campoC" class="col-md-2 col-xs-12">Estat</label>
+          <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.estat | translate }}</label>
           <select class="col-md-3 col-xs-12" style="width:200px;" name="estat" [(ngModel)]="estat">
               <option *ngFor="let e of estats" [ngValue]="e">{{ e?.nom }} </option>
           </select>

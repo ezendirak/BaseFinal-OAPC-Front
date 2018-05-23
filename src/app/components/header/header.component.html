@@ -30,7 +30,6 @@
               </div>
 
               <div style="display:inline-block; float:right;">
-                  <!-- <a ng-click="logout()" href="index.html">Logout</a> -->
                   <a *ngIf="!(islogged)" routerLink="/login">Login</a>
                   <a *ngIf="(islogged)"  routerLink="/logout">Logout</a>
               </div>
@@ -54,21 +53,21 @@
           <div class="collapse navbar-collapse" [collapse]=isCollapsed>
 
             <ul class="nav navbar-nav" routerLinkActive="active">
-              
-              <li class="nav-item"><a class="nav-link" routerLink="/register">{{ 'TITOLS.' + literals.regPreus | translate }}<span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="/gestReg">{{ 'TITOLS.' + literals.gesReg | translate }}<span class="sr-only">(current)</span></a></li>
+              {{isUser}} {{isGestor}}
+              <li class="nav-item"><a *ngIf="(islogged) && isUser" class="nav-link" routerLink="/register">{{ 'TITOLS.' + literals.regPreus | translate }}<span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a *ngIf="(islogged) && isGestor" class="nav-link" routerLink="/gestReg">{{ 'TITOLS.' + literals.gesReg | translate }}<span class="sr-only">(current)</span></a></li>
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown" dropdown>
-                <a href="javascript:void(0)" dropdownToggle class="dropdown-toggle">{{ 'TITOLS.' + literals.admin | translate }} <span class="caret"></span></a>
+                <a *ngIf="(islogged) && isAdmin" href="javascript:void(0)" dropdownToggle class="dropdown-toggle">{{ 'TITOLS.' + literals.admin | translate }} <span class="caret"></span></a>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                    <li role="menuitem"><a class="dropdown-item" routerLink="/gestEmp">Gestió d'empreses<span class="sr-only">(current)</span></a></li>
-                    <li role="menuitem"><a class="dropdown-item" routerLink="/gestProd">Gestió de productes<span class="sr-only">(current)</span></a></li>
-                    <li role="menuitem"><a class="dropdown-item" routerLink="/tres">Gestió de dades mestres<span class="sr-only">(current)</span></a></li>
-                    <li role="menuitem"><a class="dropdown-item" routerLink="/cuatro">Gestió d'usuaris<span class="sr-only">(current)</span></a></li>
-                    <li role="menuitem"><a class="dropdown-item" routerLink="/gestPer">Gestió de Periodes<span class="sr-only">(current)</span></a></li>
+                    <li role="menuitem"><a class="dropdown-item" routerLink="/gestEmp">{{ 'TITOLS.' + literals.gesEmp | translate }}<span class="sr-only">(current)</span></a></li>
+                    <li role="menuitem"><a class="dropdown-item" routerLink="/gestProd">{{ 'TITOLS.' + literals.gesProd | translate }}<span class="sr-only">(current)</span></a></li>
+                    <li role="menuitem"><a class="dropdown-item" routerLink="/tres">{{ 'TITOLS.' + literals.gesDDMM | translate }}<span class="sr-only">(current)</span></a></li>
+                    <li role="menuitem"><a class="dropdown-item" routerLink="/cuatro">{{ 'TITOLS.' + literals.gesUser | translate }}<span class="sr-only">(current)</span></a></li>
+                    <li role="menuitem"><a class="dropdown-item" routerLink="/gestPer">{{ 'TITOLS.' + literals.gesPer | translate }}<span class="sr-only">(current)</span></a></li>
                   </ul>
               </li>
             </ul>

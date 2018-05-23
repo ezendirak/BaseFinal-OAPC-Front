@@ -7,6 +7,7 @@ import { TrazaService } from '../../services/traza.service';
 import { HttpParams } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { Periode } from '../../model/periode';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 type AOA = any [][];
 
@@ -23,8 +24,8 @@ export class ModalToAddCalendarComponent implements OnInit {
   public periodesNous:    Periode[] = new Array<Periode>();
 
   
-  
-  constructor(private traductorService      :TranslateService,
+  private literals = LiteralsRegistre;
+  constructor(private translate            : TranslateService,
               public bsModalRef             :BsModalRef,
               private AuthorizationService  :AuthorizationService,
               private TrazaService          :TrazaService) { }

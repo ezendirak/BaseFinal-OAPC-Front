@@ -20,7 +20,7 @@
         "atr": "Atribut",
         "val": "Valor",
         "estat": "Estat",
-        "emp": "Empressa",
+        "emp": "Empresa",
         "codEmp": "Codi d'empresa",
         "dates": "Dates"
 
@@ -111,18 +111,26 @@
     },
 
     "BOTTON" : {
-        "searchB": "Cercar",
-        "afegirR": "Afegir nou registre",
-        "afegirE": "Afegir nova empresa",
-        "afegirA": "Afegir nou atribut",
-        "afegirC": "Afegir nou calendari",
-        "afegirD":  "Afegir dates"
+        "searchB"   :   "Cercar",
+        "afegirR"   :   "Afegir nou registre",
+        "afegirE"   :   "Afegir nova empresa",
+        "afegirA"   :   "Afegir nou atribut",
+        "afegirC"   :   "Afegir nou calendari",
+        "afegirD"   :   "Afegir dates",
+        "closePer"  :   "Tancar Periodes Actius",
+        "perNoCom"  :   "Periode No Comercialització"
+        
     },
     
     "TITOLS" : {
         "OAPC":     "Observatori Agroalimentari de Preus de Catalunya",
         "admin":    "Administració",
         "regPreus": "Registre de preus",
-        "gesReg":   "Gestió registres setmanal"
+        "gesReg":   "Gestió registres setmanal",
+        "gesEmp":   "Gestió d'empreses",
+        "gesProd":  "Gestió de productes",
+        "gesDDMM":  "Gestió dades mestres",
+        "gesUser":  "Gestió d'usuaris",
+        "gesPer":   "Gestió de periodes"
     }
 }

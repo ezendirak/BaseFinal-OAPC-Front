@@ -72,10 +72,10 @@ export class FormRegisterComponent implements OnInit {
   usuariActual: String;
 
  private literals = LiteralsRegistre;
-  constructor(private traductorService: TranslateService,
+  constructor(private translate            : TranslateService,
               private BsModalRefAdd: BsModalService) {
     
-    traductorService.setDefaultLang('cat');
+    translate.setDefaultLang('cat');
     this.usuariActual = 'Administrador';
   }
 
@@ -85,9 +85,9 @@ export class FormRegisterComponent implements OnInit {
   }
 
 
-  switchLanguage(language: string){
-    this.traductorService.use(language);
-  }
+  // switchLanguage(language: string){
+  //   this.translate.use(language);
+  // }
 
   onclick($event)
   {
@@ -138,7 +138,11 @@ export class FormRegisterComponent implements OnInit {
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
     
     console.log(params);
-    window.scrollTo(0, 575);
+    // window.scrollTo(0, 560);
+    window.scrollTo({
+      top: 580,
+      behavior: "smooth"
+    });
     this.evento_form1.emit(params);
   }
 

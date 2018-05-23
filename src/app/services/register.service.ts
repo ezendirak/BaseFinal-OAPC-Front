@@ -31,8 +31,14 @@ getRegistres(): Observable<RegisterResponse[]>
 
   getRegistresPage(page: number, per_page: number, filtro: any): Observable<RegisterResponse[]>
   {
+    // let headers = new HttpHeaders();
+    console.log(this.AuthorizationService.header_token());
+    // headers  = headers.append('Authorization', 'Bearer '+ this.AuthorizationService.header_token());
+    // headers  = headers.append('Content-Type', 'application/json');
+    // console.log("Header: ");
+    // console.log(headers);
     return this.http.get( this.ApiUrlConfigService._getRegistresPageFiltratURL + "?page=" + page + "&per_page=" + per_page, 
-                          { params: filtro }
+                          { headers: this.AuthorizationService.header_tokenPol(), params: filtro }
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));
@@ -41,8 +47,12 @@ getRegistres(): Observable<RegisterResponse[]>
 
   getRegistresCountFiltrat(filtre: any): Observable<number>
   {
+    
+    console.log(this.AuthorizationService.header_token());
+    // console.log("Header: ");
+    // console.log(headers);
     return this.http.get( this.ApiUrlConfigService._getRegistresCountURLFiltrat, 
-                          {params: filtre}
+                          {headers: this.AuthorizationService.header_tokenPol(),params: filtre}
                         )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));  
@@ -97,14 +107,22 @@ getRegistres(): Observable<RegisterResponse[]>
 
   //////////////////////////////////////////////////////////////////////////////////////
 
-  putRegistre(registre: RegisterResponse): Observable<RegisterResponse>{
+  // putRegistre(registre: RegisterResponse): Observable<RegisterResponse>{
 
-      return this.http.put(  this.ApiUrlConfigService._putRegistreURL,
-                             registre, this.AuthorizationService.header_token()
-                          )
-                      .map(respuesta => respuesta)
-                      .catch((error: any) => Observable.throw(error));
-  }
+  //     return this.http.put(  this.ApiUrlConfigService._putRegistreURL, 
+  //                         {headers: this.AuthorizationService.header_tokenPol(), params: registre}
+  //                         )
+  //                     .map(respuesta => respuesta)
+  //                     .catch((error: any) => Observable.throw(error));
+  // }
+  putRegistre(registre: any)
+  {
+    return this.http.put(  this.ApiUrlConfigService._putRegistreURL, 
+                        registre, this.AuthorizationService.header_token()
+                        )
+                    .map(respuesta => respuesta)
+                    .catch((error: any) => Observable.throw(error));
+}
 
   putPerNoCom(nouRegistreNoCom: any)
   {
@@ -135,7 +153,8 @@ getProductesModal(): Observable<InfoKey[]>
 }
 getProductesModalByType(subGrup: String): Observable<InfoKey[]>
 {
-  return this.http.get( this.ApiUrlConfigService._getProductesModalByTypeURL + subGrup
+  return this.http.get( this.ApiUrlConfigService._getProductesModalByTypeURL + subGrup,
+                        this.AuthorizationService.header_token()
                       )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));  
@@ -175,11 +194,12 @@ getAllNamesCombos(){
 // https://stackoverflow.com/questions/47551458/how-to-pass-urlsearchparams-in-the-httpclient-get-method-angular-5
 getResultatFiltrat(filtre: any): Observable<RegisterResponse[]>
 {
-  console.log("Servei final: " + filtre);
-  return this.http.get( this.ApiUrlConfigService._resultatFiltrat, {params: filtre},
-  )
-  .map(respuesta => respuesta)
-                  .catch((error: any) => Observable.throw(error));  
+  // console.log("Servei final: " + filtre);
+  return this.http.get( this.ApiUrlConfigService._resultatFiltrat, 
+                        {headers: this.AuthorizationService.header_tokenPol(), params: filtre},
+                        )
+                        .map(respuesta => respuesta)
+                        .catch((error: any) => Observable.throw(error));  
 }
 
 getPeriodes(): Observable<Periode[]>
@@ -216,10 +236,9 @@ getPeriodes(): Observable<Periode[]>
 
   getDownloadToExcel(items: RegisterResponse[])
   {
-    console.log("Estem al servei");
-    console.log(items);
-    console.log(JSON.stringify(items));
-
+    // console.log("Estem al servei");
+    // console.log(items);
+    // console.log(JSON.stringify(items));
     // const frmData = new FormData();
     // frmData.append("frmData", JSON.stringify(items))
     return this.http.post( this.ApiUrlConfigService._downloadToExcel, JSON.stringify(items),

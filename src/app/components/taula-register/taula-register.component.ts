@@ -44,11 +44,10 @@ export class TaulaRegisterComponent implements OnInit {
 
   private literals = LiteralsRegistre;
 
-  constructor(
-    private traductorService: TranslateService,
+  constructor(private translate            : TranslateService,
               private modalService : BsModalService) {
 
-    traductorService.setDefaultLang('cat');
+    translate.setDefaultLang('cat');
    }
 
   ngOnInit() {

@@ -69,7 +69,7 @@ export class GestioRegisterComponent implements OnInit {
 
 getPeriodes()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestioRegisterService.getPeriodes()
       .subscribe ( respuesta => { this.periodes = respuesta;
 
@@ -77,11 +77,12 @@ getPeriodes()
                                 },
                   error =>      { this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); } 
       );
+    }
   }
   
 
   getPeriodesByProd(subGrup: String){
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestioRegisterService.getPeriodesByProd(subGrup)
       .subscribe ( respuesta => { this.periodes = respuesta;
 
@@ -89,24 +90,26 @@ getPeriodes()
                                 },
                   error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
       );
+    }
   }
 
 
   getProductesModal()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestioRegisterService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
                                   // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
                                 },
                   error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
       );
+    }
   }
 
 
   getProductes()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.RegisterService.getProductes()
       .subscribe ( respuesta => { this.productes = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
@@ -115,11 +118,12 @@ getPeriodes()
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getEmpresses()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getEmpressa()
       .subscribe ( respuesta => { this.empresses = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
@@ -128,6 +132,7 @@ getPeriodes()
                                 },
                   error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
       );
+    }
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -207,7 +212,7 @@ getPeriodes()
 
   getRegistresProdEmpPerCountFiltrat(filtro: any)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestioRegisterService.getRegistresProdEmpPerCountFiltrat(filtro)
       .subscribe ( respuesta => { this.pagination.total_items = respuesta;
 
@@ -218,6 +223,7 @@ getPeriodes()
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
+    }
   }
 
   onClickPutPEP($event){
@@ -230,7 +236,7 @@ getPeriodes()
     if (this.AuthorizationService.is_logged()){
       console.log(objPep);
       this.GestioRegisterService.putPep(objPep)
-      .subscribe ( respuesta => { this.item = respuesta;
+      .subscribe ( respuesta => { //this.item = respuesta;
 
                                   this.TrazaService.dato("Pep Update", "API GET Update Pep OK", this.items);
                                   // this.getProductes();

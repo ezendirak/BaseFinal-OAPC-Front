@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { EmpressaService } from '../../services/empressa.service';
 import { InfoKeyClass } from '../../model/info-key-class';
 import { INgxSelectOption } from 'ngx-select-ex';
+import { LiteralsRegistre } from '../../literals-registre.enum';
 
 @Component({
   selector: 'app-modal-edit-gest-emp',
@@ -43,8 +44,8 @@ export class ModalEditGestEmpComponent implements OnInit {
   public doSelectOptions = (options: INgxSelectOption[]) => console.log('MultipleDemoComponent.doSelectOptions', options);
 
   public onClose: Subject<boolean>;
-
-  constructor(private traductorService      :TranslateService,
+  private literals = LiteralsRegistre;
+  constructor(private translate            : TranslateService,
               public bsModalRef             :BsModalRef,
               private AuthorizationService  :AuthorizationService, 
               // private RegisterService     : RegisterService, 
@@ -72,18 +73,19 @@ export class ModalEditGestEmpComponent implements OnInit {
 
   getProductesModal()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   getProductesModalName()
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModalName()
       .subscribe ( respuesta => { this.productesNom = respuesta;
                                   console.log("prrrrrrrrrrrrrrrrrrra");
@@ -92,6 +94,7 @@ export class ModalEditGestEmpComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
+    }
   }
 
   public onConfirm(form) {

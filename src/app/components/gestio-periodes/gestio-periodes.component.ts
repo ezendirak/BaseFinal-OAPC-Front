@@ -5,6 +5,7 @@ import { RegisterService } from '../../services/register.service';
 import { Periode } from '../../model/periode';
 import { Pagination } from '../../model/pagination';
 import { GestioPeriodesService } from '../../services/gestio-periodes.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gestio-periodes',
@@ -24,7 +25,8 @@ export class GestioPeriodesComponent implements OnInit {
   constructor(private AuthorizationService:   AuthorizationService,
               private RegisterService:        RegisterService,
               private GestioPeriodesService:  GestioPeriodesService,
-              private TrazaService:           TrazaService) { }
+              private TrazaService:           TrazaService,
+              private translate            : TranslateService) { }
 
   ngOnInit() {
     this.getPeriodes();
@@ -47,19 +49,20 @@ export class GestioPeriodesComponent implements OnInit {
 
   getPeriodes()
   {
-    if (this.AuthorizationService.is_logged())
-      this.RegisterService.getPeriodes()
+    if (this.AuthorizationService.is_logged()) {
+        this.RegisterService.getPeriodes()
       .subscribe ( respuesta => { this.periodes = respuesta;
 
                                   this.TrazaService.dato("Periodes DISPONIBLES", "API GET PERIODES OK", this.periodes);
                                 },
                   error =>      { this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); } 
       );
+    }
   }
 
   postNewPeriodes(periodesNous:   Periode[])
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestioPeriodesService.postNewPeriodes(periodesNous)
       .subscribe ( respuesta => { this.periodes = respuesta;
 
@@ -67,6 +70,7 @@ export class GestioPeriodesComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Periodes nous DISPONIBLES", "API GET PERIODES KO", error); } 
       );
+    }
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +113,7 @@ onClickToAddPeriode($event)
   
   getRegistresCountFiltrat(filtro: any)
   {
-    if (this.AuthorizationService.is_logged())
+    if (this.AuthorizationService.is_logged()){
       this.GestioPeriodesService.getRegistresCountFiltrat(filtro)
       .subscribe ( respuesta => { this.pagination.total_items = respuesta;
 
@@ -120,6 +124,7 @@ onClickToAddPeriode($event)
                                 },
                   error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
       );
+    }
   }
 
   onClickPagination($event)
