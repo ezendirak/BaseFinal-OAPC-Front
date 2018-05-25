@@ -15,19 +15,19 @@
   
     <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
   
-      <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+      <form #f="ngForm" (ngSubmit)="onConfirm(f)">
         <div class="form-group row margin-bottom">
 
           <div>
             <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
-              <select class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="productes" [(ngModel)]="selectedProducte" (change) = "changeSelectedTipusProducte($event)" >
+              <select class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="productes" [(ngModel)]="selectedProducte" (change) = "changeSelectedTipusProducte($event)" #selectedProducteC = "ngModel" required>
                   <option *ngFor="let c of productes" [ngValue]="c">{{ c.nom }}</option>
               </select>
           </div>
 
           <div>
               <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.atr | translate }}</label>
-              <select [disabled]="atrDisabled" class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="atributs" [(ngModel)]="selectedAtribut" (change) = "changeSelectedAtribut($event)">
+              <select [disabled]="atrDisabled" class="col-md-2 col-xs-12" style="width:30%; display:inline-block;" name="atributs" [(ngModel)]="selectedAtribut" (change) = "changeSelectedAtribut($event)" #selectedAtributC = "ngModel" required>
                   <option *ngFor="let a of atributs" [ngValue]="a">{{ a }}</option>
               </select>
           </div> 
@@ -37,17 +37,17 @@
         <div class="form-group row margin-bottom">
           <div >
             <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.val | translate }}</label>
-            <input [disabled]="valorDisabled" type="text"  class="col-md-3 col-xs-12"    id="valor"    name="valor"    [(ngModel)]="selectedValor">
+            <input [disabled]="valorDisabled" type="text"  class="col-md-3 col-xs-12"    id="valor"    name="valor"    [(ngModel)]="selectedValor" #selectedValorC = "ngModel" required>
           </div>
         </div>
       
       
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">{{ 'BOTTON.' + literals.ok | translate }}</button>
   
         </form>
     
   </div>
   
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+    <button type="button" class="btn btn-default" (click)="onCancel(f)">{{botonCerrar}}</button>
   </div>

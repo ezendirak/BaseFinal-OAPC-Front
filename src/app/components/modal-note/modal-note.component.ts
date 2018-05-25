@@ -1,7 +1,7 @@
 import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
 import { RegisterResponse } from './../../interfaces/register-response';
-import { Component, OnInit, Output, EventEmitter }        from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild }        from '@angular/core';
 
 import { BsModalRef }               from "ngx-bootstrap";
 
@@ -64,6 +64,8 @@ export class ModalNoteComponent implements  OnInit  {
   isPinyol: boolean;
   isLlavor: boolean;
 
+  @ViewChild('f') form: any;
+  
   private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,

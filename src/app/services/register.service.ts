@@ -95,11 +95,11 @@ getRegistres(): Observable<RegisterResponse[]>
                     .catch((error: any) => Observable.throw(error));
   } 
 
-  postRegistreFromExcel(filtre: any, para: HttpParams): Observable<RegisterResponse> {
+  postRegistreFromExcel(filtre: any, familia: number): Observable<RegisterResponse> {
     console.log("Servei final EXCEL: " + filtre);
     
-    return this.http.post(  this.ApiUrlConfigService._postRegistreFromExcelURL,
-                            filtre , {params: para},
+    return this.http.post(  this.ApiUrlConfigService._postRegistreFromExcelURL + familia,
+                            filtre , this.AuthorizationService.header_token()
                           )
                     .map(respuesta => respuesta)
                     .catch((error: any) => Observable.throw(error));

@@ -75,7 +75,7 @@ export class AuthorizationService {
   //////////////////////////////////////////////////////////////////////////////////////
 
   logout() {
-    localStorage.removeItem('USER');
+    sessionStorage.removeItem("USER")
   }
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -83,12 +83,10 @@ export class AuthorizationService {
   //////////////////////////////////////////////////////////////////////////////////////
 
   is_logged() {
-    if (localStorage.getItem('USER')) {
-      // console.log(JSON.parse(localStorage.getItem('USER')));
+    if (sessionStorage.getItem('USER')) {
       return true;
     }
     else {
-      // console.log("NO ESTAS LOGEADO");
       return false;
     }
   }
@@ -98,8 +96,8 @@ export class AuthorizationService {
   header_token() {
     if (this.is_logged()) {
       
-      this.myuser = JSON.parse(localStorage.getItem("USER"));
-
+      // this.myuser = JSON.parse(localStorage.getItem("USER"));
+      this.myuser = JSON.parse(sessionStorage.getItem("USER"));
       return {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -113,7 +111,8 @@ export class AuthorizationService {
   
   header_tokenPol() {
     if (this.is_logged()) {
-      this.myuser = JSON.parse(localStorage.getItem("USER"));
+      // this.myuser = JSON.parse(localStorage.getItem("USER"));
+      this.myuser = JSON.parse(sessionStorage.getItem("USER"));
       let headers = new HttpHeaders();
       headers  = headers.append('Content-Type', 'application/json');
       headers = headers.append('Authorization', 'Bearer ' + this.myuser.token);
@@ -126,12 +125,10 @@ export class AuthorizationService {
 
   user_name(): string {
     if (this.is_logged()) {
-      this.myuser = JSON.parse(localStorage.getItem("USER"));
+      // this.myuser = JSON.parse(localStorage.getItem("USER"));
+      this.myuser = JSON.parse(sessionStorage.getItem("USER"));
       return (this.myuser.firstname + " " + this.myuser.lastname);
     }
   }
 
-  // isUser(): boolean {
-  //   if ()
-  // }
 }

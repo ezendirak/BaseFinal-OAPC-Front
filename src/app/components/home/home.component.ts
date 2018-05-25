@@ -86,31 +86,21 @@ export class HomeComponent implements OnInit {
           this.mirespuesta = respuesta;
           this.TrazaService.log("HOME", "API WHOAMI OK", "");
 
-          this.miusuario           = JSON.parse(localStorage.getItem("USER"));
+          // this.miusuario           = JSON.parse(localStorage.getItem("USER"));
+          this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
          
           this.miusuario.firstname = this.mirespuesta.firstName;
           this.miusuario.lastname  = this.mirespuesta.lastName;
           this.miusuario.authorities = this.mirespuesta.authorities;
           
-          localStorage.removeItem("USER");
-          localStorage.setItem("USER", JSON.stringify(this.miusuario));
+          // localStorage.removeItem("USER");
+          
+          sessionStorage.removeItem("USER");
+          // localStorage.setItem("USER", JSON.stringify(this.miusuario));
+          sessionStorage.setItem("USER", JSON.stringify(this.miusuario));
 
           this.user_name = this.miusuario.firstname + " " + this.miusuario.lastname
-          // console.log(this.miusuario.authorities.values);
           
-          // if (this.contains(this.miusuario.authorities.values, 'ROLE_USER')){
-          //   this.isUser = true;
-          //   console.log("IS USER");
-          // }
-          // if (this.contains(this.miusuario.authorities.values, 'ROLE_ADMIN')){
-          //   this.isGestor = true;
-          //   console.log("IS ADMIN");
-          // }
-            
-          // if (this.contains(this.miusuario.authorities.values, 'ROLE_GESTOR')){
-          //   this.isAdmin = true;
-          //   console.log("IS gestor");
-          // }
           
           this.miusuario.authorities.forEach(element => {
             // console.log(element.authority);
@@ -131,7 +121,7 @@ export class HomeComponent implements OnInit {
                 break;
             }
           });
-          // console.log(this.isUser, this.isGestor, this.isAdmin);
+          console.log(sessionStorage.getItem("USER"));
         },
           error => { this.TrazaService.error("HOME", "API WHOAMI KO", error); }
         );
@@ -149,10 +139,14 @@ export class HomeComponent implements OnInit {
           this.TrazaService.log("HOME", "API REFRESH OK", "");
 
           this.miusuario       = JSON.parse(localStorage.getItem("USER"));
+          this.miusuario       = JSON.parse(sessionStorage.getItem("USER"));
           this.miusuario.token = this.mitoken.access_token;
 
-          localStorage.removeItem("USER");
-          localStorage.setItem("USER", JSON.stringify(this.miusuario));
+          // localStorage.removeItem("USER");
+          // localStorage.setItem("USER", JSON.stringify(this.miusuario));
+
+          sessionStorage.removeItem("USER");
+          sessionStorage.setItem("USER", JSON.stringify(this.miusuario));
         },
           error => { this.TrazaService.error("HOME", "API REFRESH KO", error); }
         );

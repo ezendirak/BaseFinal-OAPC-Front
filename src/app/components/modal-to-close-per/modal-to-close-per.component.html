@@ -13,7 +13,7 @@
         <li *ngFor="let item of lista">{{item}}</li>
     </ul>  
   
-  <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+  <form #f="ngForm" (ngSubmit)="onConfirm(f)">
     <div class="form-group row margin-bottom">
 
       <div>
@@ -23,14 +23,14 @@
                 [disabled]="ngxDisabled"
                 [(ngModel)]="ngxValue"
                 
-                (selectionChanges)="doSelectOptions($event)">
+                (selectionChanges)="doSelectOptions($event)" #ngxValueC = "ngModel" required>
         </ngx-select>
       </div>
 
     
 
     </div>
-      <button type="submit" class="btn btn-primary">Acceptar</button>
+      <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">Acceptar</button>
   </form>
   </div>
   

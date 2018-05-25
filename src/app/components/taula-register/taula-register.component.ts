@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+import { HomeComponent } from './../home/home.component';
 import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboMap } from './../../interfaces/atributs-combo-map';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
@@ -36,6 +38,8 @@ export class TaulaRegisterComponent implements OnInit {
 
   @Output() evento_putRegistre:   EventEmitter<any> = new EventEmitter();
   @Output() evento_printItems:   EventEmitter<any> = new EventEmitter();
+
+  @Output() updatePeriodeModal: EventEmitter<any> = new EventEmitter();
   // productEdit:  RegisterResponse;
 
   bsModalRef: BsModalRef;
@@ -45,25 +49,18 @@ export class TaulaRegisterComponent implements OnInit {
   private literals = LiteralsRegistre;
 
   constructor(private translate            : TranslateService,
-              private modalService : BsModalService) {
+              private modalService : BsModalService,
+              private HomeComponent : HomeComponent) {
 
     translate.setDefaultLang('cat');
    }
 
   ngOnInit() {
-    // console.log("LIST-COMPONENT");
-
     
   }
 
-  // actionPut(item)
-  // {
-  //   console.log(item);
-  //   this.evento_list_put.emit(item);
-  // }
-
   openModalToEdit(item: RegisterResponse) {
-    
+    this.updatePeriodeModal.emit();
     // Pass in data directly before show method
     const initialState = {
       titulo: 'Modificació del registre',
@@ -75,7 +72,7 @@ export class TaulaRegisterComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ModalNoteComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    console.log(JSON.stringify(item));
+    // console.log(JSON.stringify(item));
     this.bsModalRef.content.datos_entrada = item;
     this.bsModalRef.content.datos_salida = item;
     this.bsModalRef.content.producteSelected = this.bsModalRef.content.datos_entrada.tipusProducte;
@@ -90,7 +87,17 @@ export class TaulaRegisterComponent implements OnInit {
     this.bsModalRef.content.nouPeriode      = this.bsModalRef.content.datos_entrada.periode
     this.bsModalRef.content.productesModal = this.productesModal;
     this.bsModalRef.content.periodesModal   = this.periodesModal;
-    // if ()
+
+    // comprovem les periodes a escollir, si esta el nostre, el sustituïm per que aparegui al desplegable, si no el tenim, l'afegim.
+    let control : Boolean = false;
+    this.bsModalRef.content.periodesModal.forEach(element => {
+      if (element.id == this.bsModalRef.content.datos_entrada.periode.id){
+        this.bsModalRef.content.periodesModal.splice(this.bsModalRef.content.periodesModal.indexOf(element),1);
+        this.bsModalRef.content.periodesModal.push(this.bsModalRef.content.datos_entrada.periode);
+        control = true;
+      }
+    });
+    if(!control){this.bsModalRef.content.periodesModal.push(this.bsModalRef.content.datos_entrada.periode);}
    
     // Get out
     
@@ -112,7 +119,7 @@ export class TaulaRegisterComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////////////
 
   actionPutNO(){
-    // console.log("ACTION NO PUT")
+    console.log("ACTION NO PUT")
     // console.log(this.bsModalRef.content.datos_salida);
   }
 

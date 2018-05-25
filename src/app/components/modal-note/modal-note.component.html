@@ -14,17 +14,17 @@
 
     <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
 
-      <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+      <form (ngSubmit)="onConfirm(f)" #f="ngForm">
         <div class="form-group row margin-bottom">
           
           <div>
               <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-             <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode">
+             <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode" #nouPeriodeC = "ngModel" required>
                 <option *ngFor="let np of periodesModal" [ngValue]="np">{{ np?.numPeriode + " - " + np?.tipusPeriode + " ("}} {{np?.dataInici | date: 'dd/MM/yyyy'}} - {{ np?.dataFi | date: 'dd/MM/yyyy'}} )</option>
             </select>
           </div> 
         </div>
-Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + " ("}} {{nouPeriode?.dataInici | date: 'dd/MM/yyyy'}} - {{ nouPeriode?.dataFi | date: 'dd/MM/yyyy'}} )
+<!-- Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + " ("}} {{nouPeriode?.dataInici | date: 'dd/MM/yyyy'}} - {{ nouPeriode?.dataFi | date: 'dd/MM/yyyy'}} ) -->
         <div class="form-group row margin-bottom">
           <div >
             <label for="empressa" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
@@ -40,7 +40,7 @@ Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + "
         <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.tipPro | translate }}</label>
         
 
-           <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="productes" [(ngModel)]="producteSelected" (change) = "changeSelesctedTipusProducteModal($event)">
+           <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="productes" [(ngModel)]="producteSelected" (change) = "changeSelesctedTipusProducteModal($event)" #producteSelectedC = "ngModel" required>
               <option *ngFor="let c of productesModal" [ngValue]="c.nom">{{ c.nom }}</option>
           </select>
         
@@ -48,7 +48,7 @@ Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + "
         <ng-template #content>
         <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.colCa | translate }}</label>
        
-            <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="colorsCarn" [(ngModel)]="colorCarnSelected" >
+            <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="colorsCarn" [(ngModel)]="colorCarnSelected" #colorCarnSelectedC = "ngModel" required>
               <option *ngFor="let v of comboInfoModal.colorsCarn" [ngValue]="v.nom">{{ v.nom }}</option>
             </select>  
         </ng-template> 
@@ -58,7 +58,7 @@ Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + "
     <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.vari | translate }}</label>
    
     
-    <select [disabled]="isDisabled" class="col-md-3 col-xs-12"  name="varietats" [(ngModel)]="varietatSelected" >
+    <select [disabled]="isDisabled" class="col-md-3 col-xs-12"  name="varietats" [(ngModel)]="varietatSelected" #varietatSelectedC = "ngModel" required>
       <option *ngFor="let y of comboInfoModal.varietats" [ngValue]="y.nom">{{ y.nom }}</option>
     </select>  
 </ng-template>
@@ -70,7 +70,7 @@ Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + "
           <ng-template #content2>
           <label for="qual" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.qual | translate }}</label>
           
-          <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="qualitats" [(ngModel)]="qualitatSelected" >
+          <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="qualitats" [(ngModel)]="qualitatSelected" #qualitatSelectedC = "ngModel" required>
             <option *ngFor="let q of comboInfoModal.qualitats" [ngValue]="q.nom">{{ q.nom }}</option>
           </select>   
       </ng-template>
@@ -78,7 +78,7 @@ Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + "
       <ng-template #content3>  
         <label for="cali" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.cali | translate }}</label>
         
-         <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="calibres" [(ngModel)]="calibreSelected">
+         <select [disabled]="isDisabled" class="col-md-3 col-xs-12" name="calibres" [(ngModel)]="calibreSelected" #calibreSelectedC = "ngModel" required>
           <option *ngFor="let k of comboInfoModal.calibres" [ngValue]="k.nom">{{ k.nom }}</option>
         </select> 
         </ng-template> 
@@ -86,20 +86,20 @@ Periode Actual : {{nouPeriode?.numPeriode + " - " + nouPeriode?.tipusPeriode + "
       
       <div class="form-group row margin-bottom">
         <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.quVe | translate }}</label>
-        <input [disabled]="isDisabled" type="number"  class="col-md-3 col-xs-12"    id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda" value="{{datos_entrada?.quantitatVenuda}}">
+        <input  type="number"  class="col-md-3 col-xs-12"    id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda" value="{{datos_entrada?.quantitatVenuda}}">
       
         <label for="pSortida" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.peSo | translate }}</label>
-        <input [disabled]="isDisabled" type="number"  class="col-md-3 col-xs-12"    id="pSortida"    name="pSortida"    [(ngModel)]="pSortida" value="{{datos_entrada?.preuSortida}}">
+        <input  type="number" min="0" class="col-md-3 col-xs-12"    id="pSortida"    name="pSortida"    [(ngModel)]="pSortida" value="{{datos_entrada?.preuSortida}}">
       </div>
       
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">{{ 'BOTTON.' + literals.ok | translate }}</button>
 
         </form>
     
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+    <button type="button" class="btn btn-default" (click)="onCancel(f)">{{botonCerrar}}</button>
     <!-- <button type="button" class="btn btn-default" (click)="test()">Habilitar Edició</button> -->
   </div>
 

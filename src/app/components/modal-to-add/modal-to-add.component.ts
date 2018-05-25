@@ -1,7 +1,7 @@
 import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
 import { RegisterResponse } from './../../interfaces/register-response';
-import { Component, OnInit, Output, EventEmitter }        from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild }        from '@angular/core';
 
 import { BsModalRef }               from "ngx-bootstrap";
 
@@ -15,6 +15,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 import { RegisterService } from '../../services/register.service';
 import { TrazaService } from '../../services/traza.service';
 import { Periode } from '../../model/periode';
+
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +68,8 @@ export class ModalToAddComponent implements  OnInit  {
   isPinyol: boolean;
   isLlavor: boolean;
 
+  @ViewChild('f') form: any;
+
   private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,
@@ -78,7 +81,7 @@ export class ModalToAddComponent implements  OnInit  {
  
 
   ngOnInit() {
-    console.log("MODAL MODAL: MODAL OBERT");
+    // console.log("MODAL MODAL: MODAL OBERT");
     // console.log(this.producteSelected);
     this.notErrorPeriode = true;
     this.onClose = new Subject();
@@ -90,8 +93,9 @@ export class ModalToAddComponent implements  OnInit  {
 
   public onConfirm(form) {
 
-    console.log(form);
-    console.log("wtf");
+    // console.log(form);
+    // console.log("wtf");
+    
     this.datos_salida.calibre = this.bsModalRef.content.calibreSelected;
     this.datos_salida.colorCarn = this.bsModalRef.content.colorCarnSelected;
     this.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected;
@@ -100,7 +104,7 @@ export class ModalToAddComponent implements  OnInit  {
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.nom;
     this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
-    console.log(this.datos_salida);
+    // console.log(this.datos_salida);
     this.onClose.next(true);
     
     this.bsModalRef.hide();
@@ -121,7 +125,7 @@ export class ModalToAddComponent implements  OnInit  {
   changeSelectedPeriodeModal($event){
     
     if (this.nouPeriode.tipusPeriode == 'S'){
-      console.log("ES PRODUCTE SETMANAL");
+      // console.log("ES PRODUCTE SETMANAL");
       this.getProductesModalByType(this.nouPeriode.tipusPeriode);
       this.colorCarnSelected="";
       this.qualitatSelected="";
@@ -130,7 +134,7 @@ export class ModalToAddComponent implements  OnInit  {
       this.isPinyol = false;
       this.isLlavor = false;
     }else if(this.nouPeriode.tipusPeriode == 'Q'){
-      console.log("ES PRODUCTE QUINZENAL");
+      // console.log("ES PRODUCTE QUINZENAL");
       this.getProductesModalByType(this.nouPeriode.tipusPeriode);
       this.colorCarnSelected="";
       this.qualitatSelected="";
@@ -162,7 +166,7 @@ export class ModalToAddComponent implements  OnInit  {
 
   getCombosModal(tipusProducte: String)
   {
-    console.log("getcombosModal en pare: (MODAL) " + tipusProducte);
+    // console.log("getcombosModal en pare: (MODAL) " + tipusProducte);
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombosModalToAdd(tipusProducte)
       .subscribe ( respuesta => { this.comboInfoModal = respuesta;

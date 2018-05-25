@@ -193,13 +193,19 @@ export class RegisterComponent implements OnInit {
   }
  
   SaveFromExcel($event){
-    this.postRegistreFromExcel($event.newRegistre, $event.params);
+    console.log($event.newRegistre);
+    console.log($event.familia);
+    this.postRegistreFromExcel($event.newRegistre, $event.familia);
   }
 
   descarregarAXLS($event){
     console.log("Estem al pare");
     console.log($event);
     this.downloadToExcel($event);
+  }
+
+  updatePeriodeModal(){
+    this.getPeriodesModal();
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -347,6 +353,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+
+
   getPeriodesByProd(subGrup: String){
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesByProd(subGrup)
@@ -403,12 +411,12 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  postRegistreFromExcel(filtro: any, params: HttpParams)
+  postRegistreFromExcel(filtro: any, familia: number)
   { 
     if (this.AuthorizationService.is_logged()){
-      console.log("a la funcio del controlador: " + filtro);
-      console.log("abans del service: " + filtro.tipusProducte);
-      this.RegisterService.postRegistreFromExcel(filtro, params)
+      // console.log("a la funcio del controlador: " + filtro);
+      // console.log("abans del service: " + filtro.tipusProducte);
+      this.RegisterService.postRegistreFromExcel(filtro, familia)
       .subscribe ( respuesta => { this.item = respuesta;
 
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);

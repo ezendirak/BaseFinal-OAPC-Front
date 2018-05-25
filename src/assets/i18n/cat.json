@@ -118,7 +118,8 @@
         "afegirC"   :   "Afegir nou calendari",
         "afegirD"   :   "Afegir dates",
         "closePer"  :   "Tancar Periodes Actius",
-        "perNoCom"  :   "Periode No Comercialització"
+        "perNoCom"  :   "Periode No Comercialització",
+        "ok"    :   "Acceptar"
         
     },
     

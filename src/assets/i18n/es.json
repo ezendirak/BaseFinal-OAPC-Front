@@ -117,7 +117,8 @@
         "afegirC"   :   "Añadir nuevo calendario",
         "afegirD"   :   "Añadir fechas",
         "closePer"  :   "Cerrar Periodos Activos",
-        "perNoCom"  :   "Periodo No Comercialización"
+        "perNoCom"  :   "Periodo No Comercialización",
+        "ok"        :   "Aceptar"
     },
 
     "TITOLS" : {

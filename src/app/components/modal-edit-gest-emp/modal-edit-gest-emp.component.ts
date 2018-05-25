@@ -55,8 +55,7 @@ export class ModalEditGestEmpComponent implements OnInit {
   ngOnInit() {
     this.onClose = new Subject();
     this.getProductesModalName()
-    // console.log(this.estats);
-    // console.log(this.options);
+
     this.estat = new Estats();
     setTimeout(() => {if(this.datos_entrada.estat.valor == '1')
                       { 
@@ -66,8 +65,7 @@ export class ModalEditGestEmpComponent implements OnInit {
                       { 
                         this.estat = {'nom':'Inactiu', 'valor': '0'}
                       }
-                    }, 1000);
-                    // console.log(this.estat);
+                    }, 0);
   }
 
 
@@ -76,7 +74,7 @@ export class ModalEditGestEmpComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getProductesModal()
       .subscribe ( respuesta => { this.productesModal = respuesta;
-                                  // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
+
                                 },
                   error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
       );
@@ -98,7 +96,7 @@ export class ModalEditGestEmpComponent implements OnInit {
   }
 
   public onConfirm(form) {
-    // console.log("ON CONFIRM");
+    
     console.log("confirmamos");
     console.log(JSON.stringify(this.ngxValue));
     if (this.codiEmpressa) this.datos_salida.codi = this.codiEmpressa;
@@ -106,9 +104,9 @@ export class ModalEditGestEmpComponent implements OnInit {
 
     this.datos_salida.tipusProductes = JSON.parse(JSON.stringify(this.ngxValue));
     console.log(this.datos_salida);
-    this.onClose.next(true);
+    // this.onClose.next(true);
    
-    this.bsModalRef.hide();
+    // this.bsModalRef.hide();
   }
 
   //////////////////////////////////////////////////////////////////////////////////////

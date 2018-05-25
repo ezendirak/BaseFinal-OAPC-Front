@@ -28,24 +28,27 @@ export class LogoutComponent implements OnInit {
   { }
 
   ngOnInit() {
-    this.logout();
+    
+
+    setTimeout(() => this.logout(), 0);
+    
   }
 
   //////////////////////////////////////////////////////////////////////////////////////
 
   logout() {
+    // setTimeout(() =>  this.HeaderComponent.isAdmin = false,
+    // this.HeaderComponent.isGestor = false,
+    // this.HeaderComponent.isUser = false, 0)
+    
     if (this.AuthorizationService.is_logged()) {
-
-      
       
       //https://github.com/xpoveda/oapc/blob/master/docs/multinotificacion_asincrona_entre_controles.pdf
       this.MessageService.logout();
 
       this.router.navigateByUrl("/login");
       this.AuthorizationService.logout();
-      setTimeout(() =>  this.HeaderComponent.isAdmin = false,
-                        this.HeaderComponent.isGestor = false,
-                        this.HeaderComponent.isUser = false, 100)
+      
     }
   }
 

@@ -35,7 +35,7 @@ export class ApiUrlConfigService {
 
   public _getRegistreURL         = '/api/v4/registres/';
   public _postRegistreURL        = '/api/v4/registres/';
-  public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres';
+  public _postRegistreFromExcelURL        = '/api/v4/fromExcelRegistres/';
 
   public _downloadToExcel   = 'api/v4/downloadToExcel/';
 

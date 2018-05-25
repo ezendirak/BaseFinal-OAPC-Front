@@ -1,5 +1,5 @@
 import { Estats } from './../../model/estats';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfoEmpressa } from '../../interfaces/info-empressa';
 import { InfoKeyClass } from '../../model/info-key-class';
 import { INgxSelectOption } from 'ngx-select-ex';
@@ -42,8 +42,9 @@ export class ModalToAddEmpComponent implements OnInit {
   public ngxDisabled = false;
 
   public doSelectOptions = (options: INgxSelectOption[]) => console.log('MultipleDemoComponent.doSelectOptions', options);
-
+  @ViewChild('t') form : any;
   public onClose: Subject<boolean>;
+  
   private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               public bsModalRef             :BsModalRef,

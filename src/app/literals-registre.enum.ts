@@ -47,6 +47,7 @@ export enum LiteralsRegistre {
     afegirR     =   "afegirR",
     closePer    =   "closePer",
     perNoCom    =   "perNoCom",
+    ok          =   "ok",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Titols /////////////////////////////

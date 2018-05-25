@@ -16,7 +16,7 @@
 
   <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
 
-    <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+    <form #f="ngForm" (ngSubmit)="onConfirm(f)">
       <div class="form-group row margin-bottom">
         <div>
             <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
@@ -30,7 +30,7 @@
                     [disabled]="ngxDisabled"
                     [(ngModel)]="ngxValue"
                     [defaultValue]="provaStrings"
-                    (selectionChanges)="doSelectOptions($event)">
+                    (selectionChanges)="doSelectOptions($event)" ngxValueC = "ngModel" required>
         </ngx-select>
 
         <!-- {{ngxValue | json}} -->
@@ -41,19 +41,18 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.estat | translate }}</label>
-          <select class="col-md-3 col-xs-12" style="width:260px;" name="estat" [(ngModel)]="estat">
+          <select class="col-md-3 col-xs-12" style="width:260px;" name="estat" [(ngModel)]="estat" estatC = "ngModel" required>
               <option *ngFor="let e of estats" [ngValue]="e">{{ e?.nom }} </option>
           </select>
         </div>
       </div>
-    {{estat?.nom}}
     
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">{{ 'BOTTON.' + literals.ok | translate }}</button>
 
       </form>
   
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+  <button type="button" class="btn btn-default" (click)="onCancel(f)">{{botonCerrar}}</button>
 </div>

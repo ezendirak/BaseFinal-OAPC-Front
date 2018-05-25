@@ -57,24 +57,37 @@ export class TaulaGestioEmpressaComponent implements OnInit {
   //     "Poma","Nectarina"
   // ]
     this.bsModalRef.content.provaStrings = item.tipusProductes;
-    this.bsModalRef.content.estats = [{'nom':'Actiu', 'valor':'1'},{'nom': 'Inactiu', 'valor': '0'}]
-    
-    console.log(item);
+    this.bsModalRef.content.estats = [{nom:'Actiu', valor:'1'},{nom: 'Inactiu', valor: '0'}]
+    console.log(this.bsModalRef.content.estats);
+    // console.log(item);
     this.bsModalRef.content.datos_entrada = item; 
     this.bsModalRef.content.datos_salida = item;
     if(this.bsModalRef.content.datos_entrada.estat == 1)
-                      { 
-                        this.bsModalRef.content.estat = {'nom':'Actiu', 'valor': '1'}
+    { 
+      this.bsModalRef.content.estats.splice(0,1); //eliminar ese estado y sustituirlo por el que tiene el registro
+      console.log(this.bsModalRef.content.estats);                  
+      this.bsModalRef.content.estat ={
+                          nom   : 'Actiu',
+                          valor : '1'
+                        }
                         console.log("Es Actiu");
-                      }
-                      if(this.bsModalRef.content.datos_entrada.estat == 0)
-                      { 
-                        this.bsModalRef.content.estat = {'nom':'Inactiu', 'valor': '0'}
-                        console.log("Es Inactiu");
-                      }  
-    // this.bsModalRef.content.datos_estrada.estat.valor = item.estat;
+                        this.bsModalRef.content.estats.push(this.bsModalRef.content.estat);
+                        console.log(this.bsModalRef.content.estats);  
+    }
 
-    // this.bsModalRef.content.productesModal = this.productesModal; //no s'utlitza
+    if(this.bsModalRef.content.datos_entrada.estat == 0)
+    { 
+      this.bsModalRef.content.estats.splice(1,1);
+      console.log(this.bsModalRef.content.estats);  
+                        this.bsModalRef.content.estat = {
+                          nom  :'Inactiu', 
+                          valor : '0'
+                        }
+                        console.log("Es Inactiu");
+                        this.bsModalRef.content.estats.push(this.bsModalRef.content.estat);
+                        console.log(this.bsModalRef.content.estats);  
+    }  
+
     
     this.bsModalRef.content.onClose
       .subscribe( result => { if (result == true)

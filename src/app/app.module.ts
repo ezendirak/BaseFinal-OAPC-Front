@@ -169,8 +169,8 @@ export function HttpLoaderFactory(http: HttpClient){
     EmpressaService,
     GestioRegisterService,
     GestioPeriodesService,
-    HeaderComponent
-    // HomeComponent
+    HeaderComponent,
+    HomeComponent
   ],
 
   bootstrap: [AppComponent]

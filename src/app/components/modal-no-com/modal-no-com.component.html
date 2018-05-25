@@ -16,7 +16,7 @@
 
   <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
 
-    <form #formulario="ngForm" (ngSubmit)="onConfirm(formulario)">
+    <form #f="ngForm" (ngSubmit)="onConfirm(f)">
       <div class="form-group row margin-bottom" style="display: inline-flex">
         
             
@@ -29,12 +29,12 @@
                     [defaultValue]="provaStrings"
                     (selectionChanges)="canviProdForPeriode($event)">
         </ngx-select> -->
-        <select class="col-md-3 col-xs-12" style="width:155px;" name="producteSelected" [(ngModel)]="producteSelected" (change) = "changeSelectedProd($event)">
+        <select class="col-md-3 col-xs-12" style="width:155px;" name="producteSelected" [(ngModel)]="producteSelected" (change) = "changeSelectedProd($event)" #producteSelectedC = "ngModel" required>
             <option *ngFor="let p of productesNom" [ngValue]="p">{{ p }} </option>
         </select>
           
             <label for="id" class="col-md-2 col-xs-12" style="width: 13%;">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-            <select class="col-md-3 col-xs-12" style="width:260px;" name="periodeSelected" [(ngModel)]="periodeSelected">
+            <select class="col-md-3 col-xs-12" style="width:260px;" name="periodeSelected" [(ngModel)]="periodeSelected" #periodeSelectedC = "ngModel" required>
                 <option *ngFor="let p of periodes" [ngValue]="p">{{ p?.numPeriode + " - " + p?.tipusPeriode + " ("}} {{p?.dataInici | date: 'dd/MM/yyyy'}} - {{ p?.dataFi | date: 'dd/MM/yyyy'}} )</option>
             </select> 
           
@@ -43,18 +43,18 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.emp | translate }}</label>
-          <select class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected">
+          <select class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected" #empresaSelectedC = "ngModel" required>
               <option *ngFor="let e of empreses" [ngValue]="e">{{ e }} </option>
           </select>
         </div>
       </div>
     
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">{{ 'BOTTON.' + literals.ok | translate }}</button>
 
       </form>
   
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" (click)="onCancel(formulario)">{{botonCerrar}}</button>
+  <button type="button" class="btn btn-default" (click)="onCancel(f)">{{botonCerrar}}</button>
 </div>

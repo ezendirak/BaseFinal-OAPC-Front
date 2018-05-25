@@ -3,6 +3,7 @@ import { LiteralsRegistre } from '../../literals-registre.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { InfoGestioReg } from '../../model/info-gestio-reg';
 import { FormGroup, FormControl } from '@angular/forms';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-taula-gestio-register',
@@ -17,7 +18,9 @@ export class TaulaGestioRegisterComponent implements OnInit {
 
   private literals = LiteralsRegistre;
 
-  constructor(private translate: TranslateService) { 
+  constructor(private translate: TranslateService
+              ) { 
+
     translate.setDefaultLang('cat');
   }
 

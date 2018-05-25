@@ -91,6 +91,10 @@ export class LectorExcelComponent {
             switch (posicio) {
               case 0:
                 newRegistre.periode = this.data[index][posicio];
+                if (newRegistre.periode[1]!= " "){newRegistre.periode = newRegistre.periode[0] + newRegistre.periode[1];}
+                else {newRegistre.periode = newRegistre.periode[0]}
+                
+                console.log(newRegistre.periode);
                 break;
             
               case 1:
@@ -133,15 +137,19 @@ export class LectorExcelComponent {
           // console.log(newRegistre);
           if (newRegistre.tipusProducte != null){
             let params = new HttpParams();
+            let familia: number;
             /////FAMILIA 1 => is PINYOL /////// FAMILIA 2 => is LLAVOR  ////// FAMILIA 3 => will be SECA
             if(isPinyol){
               params = params.set('Familia', "1");
+              familia = 1;
             }else if (isLlavor){
               params = params.set('Familia', "2");
+              familia = 2;
             }
             
      
-            this.saveFromExcel(newRegistre, params);
+            // this.saveFromExcel(newRegistre, params);
+            this.saveFromExcel(newRegistre, familia);
           }
           
         }
@@ -167,9 +175,9 @@ export class LectorExcelComponent {
     // this.evento_DescarregarXLS.emit();
   }
   
-  saveFromExcel(newRegistre: Register, params:  HttpParams){
-    console.log("Sortim del bucle");
-    this.evento_AfegirXLS.emit({newRegistre, params});
+  saveFromExcel(newRegistre: Register, familia:  number){
+    console.log("Sortim del lector");
+    this.evento_AfegirXLS.emit({newRegistre, familia});
   }
 
   contains(a, b) {
