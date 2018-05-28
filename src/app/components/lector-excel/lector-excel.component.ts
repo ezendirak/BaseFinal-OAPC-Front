@@ -13,14 +13,6 @@ type AOA = any [][];
   selector: 'app-lector-excel',
 	template: `
 	<input type="file" (change)="onFileChange($event)" multiple="false" />
-	<table class="sjs-table">
-		<tr *ngFor="let row of data">
-			<td *ngFor="let val of row">
-				{{val}}
-			</td>
-		</tr>
-	</table>
-	<button (click)="export()">Export!</button>
 	`
 })
 

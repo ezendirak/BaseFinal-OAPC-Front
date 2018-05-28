@@ -44,8 +44,34 @@ export class TaulaGestioProductesComponent implements OnInit {
     console.log(item);
     this.bsModalRef.content.datos_entrada = item;
     this.bsModalRef.content.datos_salida = item;
+
+    this.bsModalRef.content.estats = [{nom:'Actiu', valor:'1'},{nom: 'Inactiu', valor: '0'}]
     
-    
+    if(this.bsModalRef.content.datos_entrada.cont == 1)
+    { 
+      this.bsModalRef.content.estats.splice(0,1); //eliminar ese estado y sustituirlo por el que tiene el registro
+      console.log(this.bsModalRef.content.estats);                  
+      this.bsModalRef.content.estat ={
+                          nom   : 'Actiu',
+                          valor : '1'
+                        }
+                        console.log("Es Actiu");
+                        this.bsModalRef.content.estats.push(this.bsModalRef.content.estat);
+                        console.log(this.bsModalRef.content.estats);  
+    }
+
+    if(this.bsModalRef.content.datos_entrada.cont == 0)
+    { 
+      this.bsModalRef.content.estats.splice(1,1);
+      console.log(this.bsModalRef.content.estats);  
+                        this.bsModalRef.content.estat = {
+                          nom  :'Inactiu', 
+                          valor : '0'
+                        }
+                        console.log("Es Inactiu");
+                        this.bsModalRef.content.estats.push(this.bsModalRef.content.estat);
+                        console.log(this.bsModalRef.content.estats);  
+    } 
 
     
     this.bsModalRef.content.onClose

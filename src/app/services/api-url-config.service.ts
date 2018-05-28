@@ -77,6 +77,8 @@ export class ApiUrlConfigService {
   public _putGestioPeriodeURL         = '/api/v5/gestioPeriode/';
   public _putGestioPepURL         = '/api/v5/gestioPep/';
 
+  public _deleteGestioEmpressaURL = '/api/v5/deleteEmpresa/'
+
   public _empressesFiltrat                = 'api/v5/empressesFiltrat/';
 
   public _empresses_countFiltrat  = '/api/v5/empresses_countFiltrat';

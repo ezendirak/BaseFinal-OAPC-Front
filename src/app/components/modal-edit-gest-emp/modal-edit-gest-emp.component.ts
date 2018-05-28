@@ -56,16 +56,16 @@ export class ModalEditGestEmpComponent implements OnInit {
     this.onClose = new Subject();
     this.getProductesModalName()
 
-    this.estat = new Estats();
-    setTimeout(() => {if(this.datos_entrada.estat.valor == '1')
-                      { 
-                        this.estat = {'nom':'Actiu', 'valor': '1'}
-                      }
-                      if(this.datos_entrada.estat.valor == '0')
-                      { 
-                        this.estat = {'nom':'Inactiu', 'valor': '0'}
-                      }
-                    }, 0);
+    // this.estat = new Estats();
+    // setTimeout(() => {if(this.datos_entrada.estat.valor == '1')
+    //                   { 
+    //                     this.estat = {'nom':'Actiu', 'valor': '1'}
+    //                   }
+    //                   if(this.datos_entrada.estat.valor == '0')
+    //                   { 
+    //                     this.estat = {'nom':'Inactiu', 'valor': '0'}
+    //                   }
+    //                 }, 0);
   }
 
 
@@ -104,9 +104,9 @@ export class ModalEditGestEmpComponent implements OnInit {
 
     this.datos_salida.tipusProductes = JSON.parse(JSON.stringify(this.ngxValue));
     console.log(this.datos_salida);
-    // this.onClose.next(true);
+    this.onClose.next(true);
    
-    // this.bsModalRef.hide();
+    this.bsModalRef.hide();
   }
 
   //////////////////////////////////////////////////////////////////////////////////////

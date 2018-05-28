@@ -156,6 +156,21 @@ export class GestioEmpressaComponent implements OnInit {
 
   }
 
+  deleteEmpressa(registre: InfoEmpressa)
+  {
+    if (this.AuthorizationService.is_logged()){
+      console.log(registre);
+      this.EmpressaService.deleteEmpressa(registre)
+      .subscribe ( respuesta => { //this.item = respuesta;
+
+                                  this.TrazaService.dato("DELETE EMPRESSA", "API DEL EMPRESSA OK", this.items);
+                                  this.getRegistresPage(this.filtroFake);
+                                },
+                  error =>      { this.TrazaService.error("DELETE EMPRESSA", "API DEL EMPRESSA KO", error); } 
+      );
+    }
+  }
+
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// FROM EVENTS ///////////////////////////////////////////
 
@@ -171,6 +186,12 @@ export class GestioEmpressaComponent implements OnInit {
   onClickToEditEmp($event) {
     console.log($event);
     this.putEmpressa($event);
+  }
+
+  onClickToDeleteEmp($event)
+  {
+    console.log($event);
+    this.deleteEmpressa($event);
   }
 
   onClickAddNewEmp(newEmp: InfoEmpressa) 

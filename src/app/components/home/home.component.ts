@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
           this.miusuario.firstname = this.mirespuesta.firstName;
           this.miusuario.lastname  = this.mirespuesta.lastName;
           this.miusuario.authorities = this.mirespuesta.authorities;
-          
+          console.log(this.miusuario.authorities);
           // localStorage.removeItem("USER");
           
           sessionStorage.removeItem("USER");

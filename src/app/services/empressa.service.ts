@@ -63,6 +63,14 @@ export class EmpressaService {
                     .catch((error: any) => Observable.throw(error));
 }
 
+deleteEmpressa(registre: InfoEmpressa){
+    return this.http.put(  this.ApiUrlConfigService._deleteGestioEmpressaURL,
+                          registre, this.AuthorizationService.header_token()
+                      )
+                      .map(respuesta => respuesta)
+                      .catch((error: any) => Observable.throw(error));
+}
+
 getEmpresesByProd(producte: string): Observable<String[]>
 {
   return this.http.get( this.ApiUrlConfigService._getEmpresesByProd + producte, 

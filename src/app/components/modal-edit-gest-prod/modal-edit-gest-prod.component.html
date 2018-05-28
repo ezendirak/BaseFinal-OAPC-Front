@@ -32,11 +32,11 @@
         <div class="form-group row margin-bottom">
           <div >
             <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.val | translate }}</label>
-            <input  type="text"  class="col-md-3 col-xs-12"    id="valor"    name="valor"    [(ngModel)]="valor" value="{{datos_entrada?.valor}}" #valorC = "ngModel" required>
+            <input  type="text"  class="col-md-3 col-xs-12"    id="valor"    name="valor"    [(ngModel)]="valor" value="{{datos_entrada?.valor}}">
           </div>
             <div >
               <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.estat | translate }}</label>
-              <select class="col-md-3 col-xs-12" style="width:260px;" name="estat" [(ngModel)]="estat" estatC = "ngModel" required>
+              <select class="col-md-3 col-xs-12" style="width:110px;" name="estat" [(ngModel)]="estat" estatC = "ngModel" required>
                   <option *ngFor="let e of estats" [ngValue]="e">{{ e?.nom }} </option>
               </select>
             </div>

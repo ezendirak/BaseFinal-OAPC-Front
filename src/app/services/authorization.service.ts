@@ -76,6 +76,7 @@ export class AuthorizationService {
 
   logout() {
     sessionStorage.removeItem("USER")
+    // this.myuser = null;
   }
 
   //////////////////////////////////////////////////////////////////////////////////////

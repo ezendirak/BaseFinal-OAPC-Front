@@ -19,12 +19,12 @@
     <form #f="ngForm" (ngSubmit)="onConfirm(f)">
       <div class="form-group row margin-bottom">
         <div>
-            <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
+            <label for="id" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.codEmp | translate }}</label>
             <input type="text"  class="col-md-3 col-xs-12"    id="codiEmpressa"    name="codiEmpressa"    [(ngModel)]="codiEmpressa" value="{{datos_entrada?.codi}}">
           </div>
             
         <div>
-            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.codEmp | translate }}</label>
+            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.produ | translate }}</label>
             <ngx-select name="multiSel" style="width:200px; display:inline-block;" [multiple]="true"
                     [items]="productesNom"
                     [disabled]="ngxDisabled"
@@ -41,7 +41,7 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.estat | translate }}</label>
-          <select class="col-md-3 col-xs-12" style="width:260px;" name="estat" [(ngModel)]="estat" estatC = "ngModel" required>
+          <select class="col-md-3 col-xs-12" style="width:110px;" name="estat" [(ngModel)]="estat" estatC = "ngModel" required>
               <option *ngFor="let e of estats" [ngValue]="e">{{ e?.nom }} </option>
           </select>
         </div>

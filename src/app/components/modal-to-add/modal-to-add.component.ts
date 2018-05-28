@@ -1,3 +1,4 @@
+import { HomeComponent } from './../home/home.component';
 import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
 import { RegisterResponse } from './../../interfaces/register-response';
@@ -75,16 +76,19 @@ export class ModalToAddComponent implements  OnInit  {
               public bsModalRef: BsModalRef,
               private AuthorizationService: AuthorizationService, 
                private RegisterService     : RegisterService, 
-               private TrazaService        : TrazaService
+               private TrazaService        : TrazaService,
+               private HomeComponent        : HomeComponent
               ) 
   { }
  
 
   ngOnInit() {
     // console.log("MODAL MODAL: MODAL OBERT");
-    // console.log(this.producteSelected);
     this.notErrorPeriode = true;
     this.onClose = new Subject();
+    // console.log(this.HomeComponent.miusuario);
+    this.HomeComponent.whoami();
+    console.log(this.HomeComponent.miusuario);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////

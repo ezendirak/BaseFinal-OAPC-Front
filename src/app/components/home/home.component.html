@@ -1,11 +1,15 @@
 <div class="container">
-    <h1>Estás en home</h1>
+    <h1>Benvingut a la pàgina incial</h1>
 </div>
 
 <div *ngIf="islogged;else else_code" class="container">
-    <h2>Hola {{user_name}}</h2> {{isUser}} {{isGestor}} {{isAdmin}}
-
-    <button (click)="userall()">userall</button>
+    <p>Nom: {{this.miusuario?.firstname}}</p>
+    <p>Cognom: {{this.miusuario?.lastname}}</p>
+    <p>User: {{this.miusuario?.user}}</p>
+    <p *ngFor="let rol of miusuario?.authorities">
+        <li>{{rol?.authority}}</li>
+    </p>
+    <!-- <button (click)="userall()">userall</button>
     <button (click)="refresh()">refresh token</button>
 
     <hr>
@@ -17,7 +21,7 @@
         <li *ngFor="let mi2 of mi1.authorities">
             {{mi2.authority}}
         </li>
-    </p>
+    </p> -->
 </div>
 
 <ng-template #else_code>

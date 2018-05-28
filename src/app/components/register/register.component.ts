@@ -1,3 +1,5 @@
+import { MyUser } from './../../interfaces/my-user';
+import { HomeComponent } from './../home/home.component';
 import { HttpParams } from '@angular/common/http';
 import { LiteralsRegistre } from './../../literals-registre.enum';
 import { InfoKey } from './../../interfaces/info-key';
@@ -66,12 +68,12 @@ export class RegisterComponent implements OnInit {
                private TrazaService        : TrazaService,
                private modalService        : BsModalService,
                private translate            : TranslateService,
-               private EmpressaService      :EmpressaService) 
+               private EmpressaService      :EmpressaService,
+              private HomeComponent         :HomeComponent) 
                
   { }
 
   ngOnInit() {    
-    
     this.comboLleno = false;
     this.comboLlenoModal = false;
     this.getProductesModal();

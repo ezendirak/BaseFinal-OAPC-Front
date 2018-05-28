@@ -22,7 +22,9 @@ export class TaulaGestioEmpressaComponent implements OnInit {
   @Input() productesModal        :InfoKeyClass[];
   @Input()  estats          :Estats[];
   @Input()  estatsModal      :Estats[];
+
   @Output() evento_editEmpressa:    EventEmitter<any> = new EventEmitter();
+  @Output() evento_deleteEmpressa:    EventEmitter<any> = new EventEmitter();
   
   bsModalRef: BsModalRef;
   private literals = LiteralsRegistre;
@@ -109,5 +111,9 @@ export class TaulaGestioEmpressaComponent implements OnInit {
   actionPutNO(){
     // console.log("ACTION NO PUT")
     // console.log(this.bsModalRef.content.datos_salida);
+  }
+
+  deleteEmp(item){
+    this.evento_deleteEmpressa.emit(item);
   }
 }

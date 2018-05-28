@@ -7,6 +7,7 @@ import { RegisterService } from '../../services/register.service';
 import { TrazaService } from '../../services/traza.service';
 import { Subject } from 'rxjs';
 import { LiteralsRegistre } from '../../literals-registre.enum';
+import { Estats } from '../../model/estats';
 
 @Component({
   selector: 'app-modal-edit-gest-prod',
@@ -24,8 +25,9 @@ export class ModalEditGestProdComponent implements OnInit {
 
   producte: String;
   valor:    String;
-  estat:    number;
+  estat:    Estats;
 
+  estats:   Estats[];
   public onClose: Subject<boolean>;
   
   private literals = LiteralsRegistre;
@@ -38,7 +40,16 @@ export class ModalEditGestProdComponent implements OnInit {
   ngOnInit() {
 
     this.onClose = new Subject();
-
+    // this.estat = new Estats();
+    // setTimeout(() => {if(this.datos_entrada.cont == 1)
+    //                   { 
+    //                     this.estat = {'nom':'Actiu', 'valor': '1'}
+    //                   }
+    //                   if(this.datos_entrada.cont == 0)
+    //                   { 
+    //                     this.estat = {'nom':'Inactiu', 'valor': '0'}
+    //                   }
+    //                 }, 0);
   }
 
 
@@ -49,7 +60,7 @@ export class ModalEditGestProdComponent implements OnInit {
     
     this.datos_salida.producte = this.producte;
     this.datos_salida.valor = this.valor;
-    this.datos_salida.cont = this.estat;
+    this.datos_salida.subGrup = this.estat.valor;
 // console.log(this.datos_entrada);
 //     console.log(this.datos_salida);
     this.onClose.next(true);
