@@ -62,6 +62,7 @@ export class RegisterComponent implements OnInit {
   periodesModal:  Periode[];
   comboInfoModal: AtributsComboResponse;
 
+  miusuario:  MyUser;
   literal: LiteralsRegistre;
   constructor( private AuthorizationService: AuthorizationService, 
                private RegisterService     : RegisterService, 
@@ -82,7 +83,7 @@ export class RegisterComponent implements OnInit {
     this.getProductes();
     this.getPeriodes();
     this.getPeriodesModal();
-    this.getEmpresses();
+    // this.getEmpresses();
 
     this.filtroFake = "";
     this.paginacio = 10;
@@ -96,7 +97,7 @@ export class RegisterComponent implements OnInit {
     this.pagination.page_items  = this.paginacio;   
     
     this.getRegistresPage(this.filtroFake); 
-
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -347,7 +348,7 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesDisponibles()
       .subscribe ( respuesta => { this.periodesModal = respuesta;
-
+                                  console.log(this.periodesModal);
                                    this.TrazaService.dato("Periodes MODAL DISPONIBLES", "API GET PERIODES OK", this.periodesModal);
                                 },
                   error =>      { this.TrazaService.error("Periodes MODAL DISPONIBLES", "API GET PERIODES KO", error); } 
@@ -396,10 +397,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  postRegistre(filtro: any)
+  postRegistre(filtro: RegisterResponse)
   { 
     if (this.AuthorizationService.is_logged()){
-      console.log("a la funcio del controlador: " + filtro);
+      console.log(filtro);
       console.log("abans del service: " + filtro.tipusProducte);
       this.RegisterService.postRegistre(filtro)
       .subscribe ( respuesta => { this.item = respuesta;

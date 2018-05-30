@@ -85,8 +85,8 @@ getRegistres(): Observable<RegisterResponse[]>
                     .catch((error: any) => Observable.throw(error));  
   }
 
-  postRegistre(filtre: any): Observable<RegisterResponse> {
-    // console.log("Servei final: " + filtre);
+  postRegistre(filtre: RegisterResponse): Observable<RegisterResponse> {
+    console.log(filtre);
     
     return this.http.post(  this.ApiUrlConfigService._postRegistreURL,
                             filtre , this.AuthorizationService.header_token()

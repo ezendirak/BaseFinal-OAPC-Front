@@ -84,6 +84,7 @@ export class ApiUrlConfigService {
   public _empresses_countFiltrat  = '/api/v5/empresses_countFiltrat';
 
   public _getEmpresesByProd        = '/api/v5/empresesByProd/';
+  public _getEmpresesByUserId        = '/api/v5/empresesByUserId/';
 
   public _periodesFiltrat                = 'api/v5/periodesFiltrat/';
 

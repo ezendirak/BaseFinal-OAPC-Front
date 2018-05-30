@@ -1,3 +1,4 @@
+import { Empressa } from "../model/empressa";
 
 export interface UsersResponse {
     id: number;
@@ -9,6 +10,7 @@ export interface UsersResponse {
     enabled: boolean;
     lastPasswordResetDate: any;
     authorities: Authority[];
+    empresa:    Empressa;
 }
 
 export interface Authority {

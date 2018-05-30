@@ -12,6 +12,10 @@ import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
 import { ModalToAddComponent } from '../modal-to-add/modal-to-add.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ModalNoComComponent } from '../modal-no-com/modal-no-com.component';
+import { MyUser } from '../../interfaces/my-user';
+import { AuthorizationService } from '../../services/authorization.service';
+import { EmpressaService } from '../../services/empressa.service';
+import { TrazaService } from '../../services/traza.service';
 
 
 @Component({
@@ -36,7 +40,8 @@ export class FormRegisterComponent implements OnInit {
   @Input()  isLlavor:       Boolean;
   @Input()  periodes:       Periode[];
   @Input()  periodesModal:  Periode[];
-  @Input()  empresses:      String[];
+  
+  @Input()  miusuario:      MyUser;
 
   
   @Output() evento_form1: EventEmitter<any> = new EventEmitter();
@@ -61,6 +66,8 @@ export class FormRegisterComponent implements OnInit {
   pSortida2: number;
   tancada: string;
   
+  empresses:      String[];
+
   selectedTipusProducte:  InfoKey;
   selectedQualitat:       string;
   selectedKalibre:        string;
@@ -69,25 +76,26 @@ export class FormRegisterComponent implements OnInit {
 
   bsModalRefAdd: BsModalRef;
   
-  usuariActual: String;
+  usuariActual: MyUser;
 
  private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
-              private BsModalRefAdd: BsModalService) {
+              private BsModalRefAdd        : BsModalService,
+              private AuthorizationService  : AuthorizationService,
+              private EmpressaService       : EmpressaService,
+              private TrazaService          : TrazaService) {
     
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
     translate.setDefaultLang('cat');
-    this.usuariActual = 'Administrador';
+    this.usuariActual = this.miusuario;
+    this.eInformant = this.miusuario.empresa.codi;
   }
 
   
   
   ngOnInit() {    
+   this.getEmpresses();
   }
-
-
-  // switchLanguage(language: string){
-  //   this.translate.use(language);
-  // }
 
   onclick($event)
   {
@@ -132,11 +140,13 @@ export class FormRegisterComponent implements OnInit {
      if (this.pSortida2){
       params = params.set('pSortida2', this.pSortida2.toString());
      }
-     if (this.eInformant && this.eInformant != 'Totes'){
-      params = params.set('eInformant', this.eInformant);
-     }
+    //  if (this.eInformant && this.eInformant != 'Totes'){
+    //   params = params.set('eInformant', this.eInformant);
+    //  }
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
-    
+    // if(this.usuariActual.user){
+    //   params = params.set('uInformant', this.usuariActual.user);
+    // }
     console.log(params);
     // window.scrollTo(0, 560);
     window.scrollTo({
@@ -160,12 +170,11 @@ export class FormRegisterComponent implements OnInit {
       botonCerrar: "Tancar"  
     };
  
-    console.log(this.item);
     this.bsModalRefAdd = this.BsModalRefAdd.show(ModalToAddComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : null, eInformant : null, colorCarn : null, calibre : null, qualitat : null, varietat : null, quantitatVenuda: null, preuSortida: null};
-    
+    this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : null, uInformant : this.usuariActual.user, colorCarn : null, calibre : null, qualitat : null, varietat : null, quantitatVenuda: null, preuSortida: null};
+    // 
     this.bsModalRefAdd.content.comboGeneral = this.comboGeneralModalToAdd;
     this.bsModalRefAdd.content.comboInfoModal = this.comboInfoModal;
     this.bsModalRefAdd.content.productesModal = this.productesModal;
@@ -186,6 +195,7 @@ export class FormRegisterComponent implements OnInit {
 
   actionPutYES(){
     console.log("ACTION PUT YES")
+    console.log(this.bsModalRefAdd.content.datos_salida);
     this.actionToAdd(this.bsModalRefAdd.content.datos_salida);
   }
 
@@ -255,5 +265,19 @@ export class FormRegisterComponent implements OnInit {
 
   actionPutNONoCom(){
 
+  }
+
+  getEmpresses()
+  {
+    if (this.AuthorizationService.is_logged()){
+      this.EmpressaService.getEmpressa()
+      .subscribe ( respuesta => { this.empresses = respuesta;
+                                  // console.log("prrrrrrrrrrrrrrrrrrra");
+                                  console.log(this.empresses);
+                                   this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
+                                },
+                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+      );
+    }
   }
 }

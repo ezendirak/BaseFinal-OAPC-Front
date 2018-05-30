@@ -1,27 +1,16 @@
 <div class="container">
-    <h1>Benvingut a la pàgina incial</h1>
+    <h1>Benvingut</h1>
 </div>
 
 <div *ngIf="islogged;else else_code" class="container">
     <p>Nom: {{this.miusuario?.firstname}}</p>
     <p>Cognom: {{this.miusuario?.lastname}}</p>
     <p>User: {{this.miusuario?.user}}</p>
+    <p>Empresa: {{this.miusuario?.empresa?.codi}}</p>
     <p *ngFor="let rol of miusuario?.authorities">
         <li>{{rol?.authority}}</li>
     </p>
-    <!-- <button (click)="userall()">userall</button>
-    <button (click)="refresh()">refresh token</button>
-
-    <hr>
-    <p> {{mitoken?.access_token}} </p>
-
-    <hr>
-    <p *ngFor="let mi1 of miuserall">
-        {{mi1.id}} - {{mi1.username}} - {{mi1.firstName}} - {{mi1.lastName}} - {{mi1.email}}
-        <li *ngFor="let mi2 of mi1.authorities">
-            {{mi2.authority}}
-        </li>
-    </p> -->
+    
 </div>
 
 <ng-template #else_code>

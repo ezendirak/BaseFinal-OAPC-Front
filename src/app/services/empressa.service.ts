@@ -80,6 +80,15 @@ getEmpresesByProd(producte: string): Observable<String[]>
                       .catch((error: any) => Observable.throw(error));
 }
 
+getEmpByUserId(userId: number): Observable<String>
+{
+  return this.http.get( this.ApiUrlConfigService._getEmpresesByUserId + userId, 
+                        this.AuthorizationService.header_tokenNoContent()
+                      )
+                      .map(respuesta => respuesta)
+                      .catch((error: any) => Observable.throw(error));
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// PAGINATION ///////////////////////////////////////////////////////
 

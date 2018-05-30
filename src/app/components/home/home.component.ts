@@ -14,6 +14,7 @@ import { UsersResponse}               from '../../interfaces/users-response';
 import { MyUser }                     from '../../interfaces/my-user';
 import { Authority }                  from '../../interfaces/users-response';
 import { HeaderComponent } from '../header/header.component';
+import { EmpressaService } from '../../services/empressa.service';
 
   ////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
 
   private islogged: boolean;
 
-  mirespuesta  : any;
+  mirespuesta  : UsersResponse;
 
   mitoken      : TokenResponse;
   miuserall    : UsersResponse[];
@@ -43,13 +44,15 @@ export class HomeComponent implements OnInit {
 
   user_name    : string;
 
+  myEmp        :  String;
 
   constructor( private router               : Router, 
                private AuthorizationService : AuthorizationService, 
                private UserService          : UserService,
                private TrazaService         : TrazaService,
                private MessageService       : MessageService,
-               private HeaderComponent      : HeaderComponent
+               private HeaderComponent      : HeaderComponent,
+               private EmpressaService      : EmpressaService
              ) 
   { }
 
@@ -82,23 +85,31 @@ export class HomeComponent implements OnInit {
     if (this.AuthorizationService.is_logged()) {
       this.AuthorizationService.whoami()
         .subscribe(respuesta => {
-
+          // console.log(respuesta);
           this.mirespuesta = respuesta;
+          console.log(this.mirespuesta);
+          console.log(this.mirespuesta.empresa);
           this.TrazaService.log("HOME", "API WHOAMI OK", "");
 
           // this.miusuario           = JSON.parse(localStorage.getItem("USER"));
           this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
-         
+
           this.miusuario.firstname = this.mirespuesta.firstName;
           this.miusuario.lastname  = this.mirespuesta.lastName;
           this.miusuario.authorities = this.mirespuesta.authorities;
-          console.log(this.miusuario.authorities);
+          this.miusuario.id = this.mirespuesta.id;
+          
+          this.getEmpCodeById(this.miusuario.id);
+          
+          console.log(this.miusuario);
+          console.log(JSON.parse(sessionStorage.getItem("USER")));
+          // console.log(this.miusuario.authorities);
           // localStorage.removeItem("USER");
           
           sessionStorage.removeItem("USER");
           // localStorage.setItem("USER", JSON.stringify(this.miusuario));
           sessionStorage.setItem("USER", JSON.stringify(this.miusuario));
-
+          console.log(JSON.parse(sessionStorage.getItem("USER")));
           this.user_name = this.miusuario.firstname + " " + this.miusuario.lastname
           
           
@@ -177,5 +188,23 @@ export class HomeComponent implements OnInit {
         }
     }
     return false;
+  }
+
+  getEmpCodeById(idUser:  number){
+    if (this.AuthorizationService.is_logged()){
+      this.EmpressaService.getEmpByUserId(idUser)
+      .subscribe ( respuesta => { this.myEmp = respuesta;
+                                  // this.miusuario.empresa = this.myEmp;
+                                  console.log(this.myEmp);
+                                  this.miusuario.empresa = this.myEmp;
+                                  // console.log(this.miusuario);
+                                  sessionStorage.removeItem("USER");
+                                  sessionStorage.setItem("USER", JSON.stringify(this.miusuario));
+                                  // this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  
+                                },
+                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+      );
+    }
   }
 }

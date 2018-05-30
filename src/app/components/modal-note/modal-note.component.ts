@@ -12,6 +12,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateService } from '@ngx-translate/core';
 import { AtributsComboMap } from '../../interfaces/atributs-combo-map';
 import { Periode } from '../../model/periode';
+import { MyUser } from '../../interfaces/my-user';
+import { HomeComponent } from '../home/home.component';
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -64,11 +66,14 @@ export class ModalNoteComponent implements  OnInit  {
   isPinyol: boolean;
   isLlavor: boolean;
 
+  miusuario : MyUser;
+
   @ViewChild('f') form: any;
   
   private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,
+              private HomeComponent        : HomeComponent
               ) 
   { }
  
@@ -76,6 +81,7 @@ export class ModalNoteComponent implements  OnInit  {
   ngOnInit() {
     this.isDisabled = true;
     this.onClose = new Subject();
+    this.miusuario       = JSON.parse(sessionStorage.getItem("USER"));
     
     setTimeout(() => this.test(), 0);
   }

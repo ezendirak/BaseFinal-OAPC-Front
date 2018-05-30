@@ -14,6 +14,7 @@ import { TrazaService }             from './traza.service';
 
 import { TokenResponse }            from '../interfaces/token-response';
 import { MyUser }                   from './../interfaces/my-user';
+import { UsersResponse } from '../interfaces/users-response';
 
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +45,7 @@ export class AuthorizationService {
 
   //////////////////////////////////////////////////////////////////////////////////////
 
-  whoami(): Observable<any> {
+  whoami(): Observable<UsersResponse> {
     console.log(this.header_token());
     return this.http.get(this.ApiUrlConfigService._whoamiURL,
       this.header_token())
@@ -102,6 +103,22 @@ export class AuthorizationService {
       return {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.myuser.token
+        })
+      };
+    }
+    else
+      return null;
+  }
+
+  header_tokenNoContent() {
+    if (this.is_logged()) {
+      
+      // this.myuser = JSON.parse(localStorage.getItem("USER"));
+      this.myuser = JSON.parse(sessionStorage.getItem("USER"));
+      return {
+        headers: new HttpHeaders({
+          'Content-Type': 'text/plain',
           'Authorization': 'Bearer ' + this.myuser.token
         })
       };

@@ -19,7 +19,7 @@
                 <td>{{ item?.codiEmpresa }}</td>
                 <td>{{ item?.empressaProducte }}</td>
                 <ng-container *ngIf="item?.dataUltimRegistre;then content1 else other_content1"></ng-container>
-                <ng-template #content1><td >{{ item?.dataUltimRegistre }}</td></ng-template>
+                <ng-template #content1><td >{{ item?.dataUltimRegistre | date: 'dd/MM/yyyy' }}</td></ng-template>
                 <ng-template #other_content1><td >-</td></ng-template>
                 <!-- <ng-container *ngIf="item?.pendent;then content2"></ng-container>
                 <ng-template #content2> -->

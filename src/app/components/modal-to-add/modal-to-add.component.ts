@@ -16,6 +16,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 import { RegisterService } from '../../services/register.service';
 import { TrazaService } from '../../services/traza.service';
 import { Periode } from '../../model/periode';
+import { MyUser } from '../../interfaces/my-user';
 
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +70,7 @@ export class ModalToAddComponent implements  OnInit  {
   isPinyol: boolean;
   isLlavor: boolean;
 
-  @ViewChild('f') form: any;
-
+  miusuario:  MyUser;
   private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,
@@ -87,8 +87,10 @@ export class ModalToAddComponent implements  OnInit  {
     this.notErrorPeriode = true;
     this.onClose = new Subject();
     // console.log(this.HomeComponent.miusuario);
-    this.HomeComponent.whoami();
-    console.log(this.HomeComponent.miusuario);
+    // this.HomeComponent.whoami();
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
+    console.log(this.miusuario);
+    // console.log(this.HomeComponent.miusuario);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +110,7 @@ export class ModalToAddComponent implements  OnInit  {
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.nom;
     this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
+    this.datos_salida.usuName = this.miusuario.user;
     // console.log(this.datos_salida);
     this.onClose.next(true);
     

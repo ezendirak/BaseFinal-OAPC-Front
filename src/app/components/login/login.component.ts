@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         // setTimeout(() => console.log(this.mitoken.expires_in), 10000)
         this.TrazaService.log("LOGIN", "API LOGIN OK", "")
 
-        this.miusuario = { "user": user, "firstname": "", "lastname": "", "token": this.mitoken.access_token , "authorities": null};
+        this.miusuario = { "id":  null, "user": user, "firstname": "", "lastname": "", "token": this.mitoken.access_token , "authorities": null, "empresa":null};
         // localStorage.setItem("USER", JSON.stringify(this.miusuario));
         sessionStorage.setItem("USER", JSON.stringify(this.miusuario));
         console.log(this.miusuario);
