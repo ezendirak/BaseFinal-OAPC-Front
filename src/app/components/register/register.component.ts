@@ -77,15 +77,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {    
     this.comboLleno = false;
     this.comboLlenoModal = false;
-    this.getProductesModal();
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
+    this.getProductesModal(this.miusuario.user);
     this.getAllCombos();
     this.getAllNamesCombos();
     this.getProductes();
     this.getPeriodes();
-    this.getPeriodesModal();
+    this.getPeriodesModal(this.miusuario.user);
     // this.getEmpresses();
 
-    this.filtroFake = "";
+    
     this.paginacio = 10;
 
     this.pagination = new Pagination;
@@ -95,9 +96,18 @@ export class RegisterComponent implements OnInit {
     this.pagination.page_list   = [];
     // CONFIGURABLE
     this.pagination.page_items  = this.paginacio;   
+    if(this.miusuario.empresa.codi=='Administració'){
+      this.filtroFake = "";
+      this.getRegistresPage(this.filtroFake);
+    }else {
+      let params = new HttpParams();
+      params = params.set('eInformant', this.miusuario.empresa.codi);
+      this.getRegistresPage(params); 
+    }
     
-    this.getRegistresPage(this.filtroFake); 
-    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
+    
+    
+    
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -207,10 +217,6 @@ export class RegisterComponent implements OnInit {
     this.downloadToExcel($event);
   }
 
-  updatePeriodeModal(){
-    this.getPeriodesModal();
-  }
-
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////  
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -290,7 +296,14 @@ export class RegisterComponent implements OnInit {
                                   if ((this.pagination.page_actual_items == 1) && (this.pagination.page_actual > 1))
                                     this.pagination.page_actual--;
 
-                                  this.getRegistresPage(this.filtroFake);
+                                  if(this.miusuario.empresa.codi=='Administració'){
+                                    this.filtroFake = "";
+                                    this.getRegistresPage(this.filtroFake);
+                                  }else {
+                                    let params = new HttpParams();
+                                    params = params.set('eInformant', this.miusuario.empresa.codi);
+                                    this.getRegistresPage(params); 
+                                  }
 
                                   this.TrazaService.dato("NOTES", "API DELETE OK", this.item);                                  
                                 },
@@ -317,10 +330,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  getProductesModal()
+  getProductesModal(userName:  string)
   {
     if (this.AuthorizationService.is_logged()){
-      this.RegisterService.getProductesModal()
+      this.RegisterService.getProductesModalByUserName(userName)
       .subscribe ( respuesta => { this.productesModal = respuesta;
 
                                   // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
@@ -343,10 +356,11 @@ export class RegisterComponent implements OnInit {
     }
   }
   
-  getPeriodesModal()
+  getPeriodesModal(userName:  string)
   {
+    console.log(userName);
     if (this.AuthorizationService.is_logged()){
-      this.RegisterService.getPeriodesDisponibles()
+      this.RegisterService.getPeriodesDisponibles(userName)
       .subscribe ( respuesta => { this.periodesModal = respuesta;
                                   console.log(this.periodesModal);
                                    this.TrazaService.dato("Periodes MODAL DISPONIBLES", "API GET PERIODES OK", this.periodesModal);
@@ -355,8 +369,6 @@ export class RegisterComponent implements OnInit {
       );
     }
   }
-
-
 
   getPeriodesByProd(subGrup: String){
     if (this.AuthorizationService.is_logged()){
@@ -406,7 +418,14 @@ export class RegisterComponent implements OnInit {
       .subscribe ( respuesta => { this.item = respuesta;
 
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
-                                  this.getRegistresPage(this.filtroFake);
+                                  if(this.miusuario.empresa.codi=='Administració'){
+                                    this.filtroFake = "";
+                                    this.getRegistresPage(this.filtroFake);
+                                  }else {
+                                    let params = new HttpParams();
+                                    params = params.set('eInformant', this.miusuario.empresa.codi);
+                                    this.getRegistresPage(params); 
+                                  }
                                 },
                   error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
       );
@@ -437,14 +456,19 @@ export class RegisterComponent implements OnInit {
       console.log(registre);
       this.RegisterService.putRegistre(registre)
       .subscribe ( respuesta => { //this.item = respuesta;
-
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
-                                  this.getRegistresPage(this.filtroFake);
+                                  if(this.miusuario.empresa.codi=='Administració'){
+                                    this.filtroFake = "";
+                                    this.getRegistresPage(this.filtroFake);
+                                  }else {
+                                    let params = new HttpParams();
+                                    params = params.set('eInformant', this.miusuario.empresa.codi);
+                                    this.getRegistresPage(params); 
+                                  }
                                 },
                   error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
       );
     }
-
   }
 
   putPerNoCom(nouRegistre:  any)

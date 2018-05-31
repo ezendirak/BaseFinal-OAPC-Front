@@ -87,8 +87,6 @@ export class HomeComponent implements OnInit {
         .subscribe(respuesta => {
           // console.log(respuesta);
           this.mirespuesta = respuesta;
-          console.log(this.mirespuesta);
-          console.log(this.mirespuesta.empresa);
           this.TrazaService.log("HOME", "API WHOAMI OK", "");
 
           // this.miusuario           = JSON.parse(localStorage.getItem("USER"));
@@ -194,8 +192,6 @@ export class HomeComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.EmpressaService.getEmpByUserId(idUser)
       .subscribe ( respuesta => { this.myEmp = respuesta;
-                                  // this.miusuario.empresa = this.myEmp;
-                                  console.log(this.myEmp);
                                   this.miusuario.empresa = this.myEmp;
                                   // console.log(this.miusuario);
                                   sessionStorage.removeItem("USER");

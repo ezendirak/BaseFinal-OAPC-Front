@@ -130,23 +130,25 @@ export class ModalToAddComponent implements  OnInit  {
   }
 
   changeSelectedPeriodeModal($event){
-    
-    if (this.nouPeriode.tipusPeriode == 'S'){
-      // console.log("ES PRODUCTE SETMANAL");
-      this.getProductesModalByType(this.nouPeriode.tipusPeriode);
+    console.log(this.producteSelected);
+    if (this.nouPeriode.tipusPeriode == 'S' && this.producteSelected.subGrup != 'PI'){
+      console.log("ES PRODUCTE SETMANAL");
+      // this.getProductesModalByType(this.nouPeriode.tipusPeriode);
       this.colorCarnSelected="";
       this.qualitatSelected="";
       this.calibreSelected="";
       this.varietatSelected="";
+      this.producteSelected =null;
       this.isPinyol = false;
       this.isLlavor = false;
-    }else if(this.nouPeriode.tipusPeriode == 'Q'){
-      // console.log("ES PRODUCTE QUINZENAL");
-      this.getProductesModalByType(this.nouPeriode.tipusPeriode);
+    }else if(this.nouPeriode.tipusPeriode == 'Q' && this.producteSelected.subGrup != 'LL'){
+      console.log("ES PRODUCTE QUINZENAL");
+      // this.getProductesModalByType(this.nouPeriode.tipusPeriode);
       this.colorCarnSelected="";
       this.qualitatSelected="";
       this.calibreSelected="";
       this.varietatSelected="";
+      this.producteSelected =null;
       this.isPinyol = false;
       this.isLlavor = false;
     }

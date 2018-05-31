@@ -151,6 +151,16 @@ getProductesModal(): Observable<InfoKey[]>
                   .map(respuesta => respuesta)
                   .catch((error: any) => Observable.throw(error));  
 }
+
+getProductesModalByUserName(userName: string): Observable<InfoKey[]>
+{
+  return this.http.get( this.ApiUrlConfigService._getProductesModalURL + userName, 
+                        this.AuthorizationService.header_token()
+                      )
+                  .map(respuesta => respuesta)
+                  .catch((error: any) => Observable.throw(error));  
+}
+
 getProductesModalByType(subGrup: String): Observable<InfoKey[]>
 {
   return this.http.get( this.ApiUrlConfigService._getProductesModalByTypeURL + subGrup,
@@ -210,9 +220,9 @@ getPeriodes(): Observable<Periode[]>
     .catch((error: any) => Observable.throw(error));
   }
 
-  getPeriodesDisponibles(): Observable<Periode[]>
+  getPeriodesDisponibles(userName:  string): Observable<Periode[]>
   {
-  return this.http.get(this.ApiUrlConfigService._periodesDisponibles,
+  return this.http.get(this.ApiUrlConfigService._periodesDisponibles + userName,
                         this.AuthorizationService.header_token()
     )
     .catch((error: any) => Observable.throw(error));
@@ -226,10 +236,10 @@ getPeriodes(): Observable<Periode[]>
                         .catch((error: any) => Observable.throw(error));
   }
 
-  getPeriodesByProductes(productes: string): Observable<Periode[]>
+  getPeriodesByProductes(productes: HttpParams): Observable<Periode[]>
   {
-    return this.http.get( this.ApiUrlConfigService._periodesByProductes + productes,
-                          this.AuthorizationService.header_token()
+    return this.http.get( this.ApiUrlConfigService._periodesByProductes,
+                          {headers: this.AuthorizationService.header_tokenPol(), params: productes}
                         )
                         .catch((error: any) => Observable.throw(error));
   }

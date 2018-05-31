@@ -13,7 +13,7 @@
     
       <div class="formCompradorGrande">
         <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
-        <select class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" [(ngModel)]="eInformant" name="eInformant" [(ngModel)]="eInformant">
+        <select [attr.disabled]="isUser" class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" [(ngModel)]="eInformant" name="eInformant" [(ngModel)]="eInformant">
             <option *ngFor="let e of empresses" [ngValue]="e">{{ e }} </option>
         </select>
       </div>

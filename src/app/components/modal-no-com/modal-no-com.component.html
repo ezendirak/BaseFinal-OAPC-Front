@@ -29,10 +29,12 @@
                     [defaultValue]="provaStrings"
                     (selectionChanges)="canviProdForPeriode($event)">
         </ngx-select> -->
-        <select class="col-md-3 col-xs-12" style="width:155px;" name="producteSelected" [(ngModel)]="producteSelected" (change) = "changeSelectedProd($event)" #producteSelectedC = "ngModel" required>
+        <!-- <select class="col-md-3 col-xs-12" style="width:155px;" name="producteSelected" [(ngModel)]="producteSelected" (change) = "changeSelectedProd($event)" #producteSelectedC = "ngModel" required>
             <option *ngFor="let p of productesNom" [ngValue]="p">{{ p }} </option>
-        </select>
-          
+        </select> -->
+        <select class="col-md-3 col-xs-12" name="productes" [(ngModel)]="producteSelected" #producteSelectedC = "ngModel" (change) = "changeSelectedProd($event)" required>
+          <option *ngFor="let c of productesModal" [ngValue]="c">{{ c.nom }}</option>
+      </select>
             <label for="id" class="col-md-2 col-xs-12" style="width: 13%;">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
             <select class="col-md-3 col-xs-12" style="width:260px;" name="periodeSelected" [(ngModel)]="periodeSelected" #periodeSelectedC = "ngModel" required>
                 <option *ngFor="let p of periodes" [ngValue]="p">{{ p?.numPeriode + " - " + p?.tipusPeriode + " ("}} {{p?.dataInici | date: 'dd/MM/yyyy'}} - {{ p?.dataFi | date: 'dd/MM/yyyy'}} )</option>
@@ -43,12 +45,11 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.emp | translate }}</label>
-          <select class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected" #empresaSelectedC = "ngModel" required>
+          <select [attr.disabled]="isUser" class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected" #empresaSelectedC = "ngModel" required>
               <option *ngFor="let e of empreses" [ngValue]="e">{{ e }} </option>
           </select>
         </div>
       </div>
-    
         <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">{{ 'BOTTON.' + literals.ok | translate }}</button>
 
       </form>

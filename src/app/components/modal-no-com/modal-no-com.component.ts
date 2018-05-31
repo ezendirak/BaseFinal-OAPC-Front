@@ -12,6 +12,8 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { HttpParams } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { LiteralsRegistre } from '../../literals-registre.enum';
+import { MyUser } from '../../interfaces/my-user';
+import { InfoKey } from '../../interfaces/info-key';
 
 @Component({
   selector: 'app-modal-no-com',
@@ -21,15 +23,15 @@ import { LiteralsRegistre } from '../../literals-registre.enum';
 export class ModalNoComComponent implements OnInit {
 productesNom    : String[];
 periodes        : Periode[];
-producteSelected: string;
+producteSelected: InfoKey;
 empresaSelected : string;
 periodeSelected : Periode;
 empreses        : String[];
 
-params = new HttpParams();
-
 registreNoCom   :any;
-
+miusuario:  MyUser;
+productesModal: InfoKey[];
+isUser: Boolean = false;
 public ngxValue: any = [];
 public ngxDisabled = false;
 
@@ -46,26 +48,38 @@ constructor(  private AuthorizationService: AuthorizationService,
 
   ngOnInit() {
     this.onClose = new Subject();
-    this.getProductesModalName();
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
+    console.log(this.miusuario);
+    if (this.miusuario.empresa.codi != "Administració"){
+      this.empreses = new Array<String>();
+      this.empreses.push(this.miusuario.empresa.codi);
+      this.isUser = true;
+    }else{
+      this.isUser = false;
+      //Si no es administrador, busquem totes les empreses
+    }
+    this.empresaSelected = this.miusuario.empresa.codi;
+    // this.getProductesModalName();
+
   }
 
 
   
 
-  canviProdForPeriode(options: INgxSelectOption[])
-  {
-    // console.log(options);
-    // console.log(this.ngxValue);
-    // console.log(JSON.parse(JSON.stringify(this.ngxValue)));
-    setTimeout(() => this.getPeriodesByProductes(JSON.parse(JSON.stringify(this.ngxValue))), 1000)
-  }
+  // canviProdForPeriode(options: INgxSelectOption[])
+  // {
+  //   // console.log(options);
+  //   // console.log(this.ngxValue);
+  //   // console.log(JSON.parse(JSON.stringify(this.ngxValue)));
+  //   setTimeout(() => this.getPeriodesByProductes(JSON.parse(JSON.stringify(this.ngxValue))), 1000)
+  // }
   
   public onConfirm(formulario)
   {
     console.log(this.producteSelected);
     console.log(this.periodeSelected);
     console.log(this.empresaSelected);
-    this.registreNoCom = {'producte': this.producteSelected, 'periode': this.periodeSelected.id, 'empresa' : this.empresaSelected}
+    this.registreNoCom = {'producte': this.producteSelected.nom, 'periode': this.periodeSelected.id, 'empresa' : this.empresaSelected}
      
     // let params = new HttpParams();
     // this.params = this.params.set('producte', this.producteSelected);
@@ -88,8 +102,15 @@ constructor(  private AuthorizationService: AuthorizationService,
 
   changeSelectedProd($event)
   {
-    this.getPeriodesByProductes(this.producteSelected);
-    this.getEmpresesByProducte(this.producteSelected);
+    let params = new HttpParams();
+     if(this.producteSelected){
+      params = params.set('tipusProducte', this.producteSelected.nom);
+     }
+     if(this.empresaSelected){
+      params = params.set('empresa', this.empresaSelected);
+     }
+     console.log(params);
+    this.getPeriodesByProductesAndEmp(params);
   }
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,10 +126,10 @@ constructor(  private AuthorizationService: AuthorizationService,
     }
   }
 
-  getPeriodesByProductes(productes  :string)
+getPeriodesByProductesAndEmp(params  :HttpParams)
   {
     if (this.AuthorizationService.is_logged()){
-      this.RegisterService.getPeriodesByProductes(productes)
+      this.RegisterService.getPeriodesByProductes(params)
       .subscribe ( respuesta => { this.periodes = respuesta;
                                   console.log(this.periodes);
                                 },

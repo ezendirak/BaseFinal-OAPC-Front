@@ -49,7 +49,8 @@ export class ApiUrlConfigService {
   public _periodesByProductes   = 'api/v4/periByProductes/';
 
   public _getProductesURL        = '/api/v3/pdu/productes/';
-  public _getProductesModalURL        = '/api/v3/pdu/productesModal/';
+  public _getProductesModalURL        = '/api/v3/pdu/productesModalByUserName/';
+  public _getProductesModalByUserNameURL        = '/api/v3/pdu/productesModalByUserName/';
   public _getProductesModalByTypeURL        = '/api/v3/productesModalByType/';
   public _getCombosProd          = '/api/v3/pdu/combos/';
   public _getCombosProdModalToAdd         = '/api/v3/pdu/ModalCombosToAdd/';

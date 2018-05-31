@@ -78,6 +78,7 @@ export class FormRegisterComponent implements OnInit {
   
   usuariActual: MyUser;
 
+  isUser: Boolean=true;
  private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               private BsModalRefAdd        : BsModalService,
@@ -93,8 +94,14 @@ export class FormRegisterComponent implements OnInit {
 
   
   
-  ngOnInit() {    
-   this.getEmpresses();
+  ngOnInit() {
+    if (this.eInformant == 'Administració'){
+      this.isUser = false;
+    }else{
+      this.isUser = true;
+      this.getEmpresses();
+    }    
+   
   }
 
   onclick($event)
@@ -140,9 +147,9 @@ export class FormRegisterComponent implements OnInit {
      if (this.pSortida2){
       params = params.set('pSortida2', this.pSortida2.toString());
      }
-    //  if (this.eInformant && this.eInformant != 'Totes'){
-    //   params = params.set('eInformant', this.eInformant);
-    //  }
+     if (this.eInformant){
+      params = params.set('eInformant', this.eInformant);
+     }
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
     // if(this.usuariActual.user){
     //   params = params.set('uInformant', this.usuariActual.user);
