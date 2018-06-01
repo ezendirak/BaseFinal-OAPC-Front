@@ -154,7 +154,7 @@ getProductesModal(): Observable<InfoKey[]>
 
 getProductesModalByUserName(userName: string): Observable<InfoKey[]>
 {
-  return this.http.get( this.ApiUrlConfigService._getProductesModalURL + userName, 
+  return this.http.get( this.ApiUrlConfigService._getProductesModalByUserNameURL + userName, 
                         this.AuthorizationService.header_token()
                       )
                   .map(respuesta => respuesta)
@@ -255,5 +255,13 @@ getPeriodes(): Observable<Periode[]>
                           this.AuthorizationService.header_token()
     )
     .catch((error: any) => Observable.throw(error));
+  }
+
+  getUsersByEmp(params: HttpParams):  Observable<String[]>
+  {
+    return this.http.get( this.ApiUrlConfigService._usersByCodiEmp,
+                          {headers: this.AuthorizationService.header_tokenPol(), params: params}
+                        )
+                        .catch((error: any) => Observable.throw(error));
   }
 }

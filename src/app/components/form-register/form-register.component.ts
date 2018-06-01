@@ -40,6 +40,7 @@ export class FormRegisterComponent implements OnInit {
   @Input()  isLlavor:       Boolean;
   @Input()  periodes:       Periode[];
   @Input()  periodesModal:  Periode[];
+  @Input()  usersList:      String[];
   
   @Input()  miusuario:      MyUser;
 
@@ -49,6 +50,7 @@ export class FormRegisterComponent implements OnInit {
   @Output() evento_form_afegir: EventEmitter<any> = new EventEmitter();
   @Output() evento_getCombos: EventEmitter<any> = new EventEmitter();
   @Output() evento_postNoComPer: EventEmitter<any> = new EventEmitter();
+  @Output() evento_changeEmp:    EventEmitter<any> = new EventEmitter();
   
   filtros: any;
 
@@ -88,7 +90,7 @@ export class FormRegisterComponent implements OnInit {
     
     this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
     translate.setDefaultLang('cat');
-    this.usuariActual = this.miusuario;
+    
     this.eInformant = this.miusuario.empresa.codi;
   }
 
@@ -96,10 +98,16 @@ export class FormRegisterComponent implements OnInit {
   
   ngOnInit() {
     if (this.eInformant == 'Administració'){
-      this.isUser = false;
-    }else{
-      this.isUser = true;
       this.getEmpresses();
+      this.isUser=false;
+      this.eInformant = '';
+      let params = new HttpParams();
+      this.evento_changeEmp.emit(params);
+    }else{
+      this.empresses = new Array<String>();
+      this.empresses.push(this.eInformant = this.miusuario.empresa.codi);
+      this.uInformant = this.miusuario.user;
+      this.isUser=true;
     }    
    
   }
@@ -147,13 +155,13 @@ export class FormRegisterComponent implements OnInit {
      if (this.pSortida2){
       params = params.set('pSortida2', this.pSortida2.toString());
      }
-     if (this.eInformant){
+     if (this.eInformant && this.eInformant != 'Totes'){
       params = params.set('eInformant', this.eInformant);
      }
-      //  this.evento_form1.emit(JSON.stringify(this.filtros));
-    // if(this.usuariActual.user){
-    //   params = params.set('uInformant', this.usuariActual.user);
-    // }
+     if (this.uInformant && this.uInformant != ''){
+      params = params.set('uInformant', this.uInformant);
+     }
+
     console.log(params);
     // window.scrollTo(0, 560);
     window.scrollTo({
@@ -221,10 +229,19 @@ export class FormRegisterComponent implements OnInit {
   {
     console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte.subGrup);
     this.evento_tProduct.emit(this.selectedTipusProducte);
+    
     this.selectedColorCarn="";
     this.selectedQualitat="";
     this.selectedKalibre="";
     
+  }
+
+  changeSelectedEmpresa($event: string)
+  {
+    let params = new HttpParams();
+    if (this.eInformant && this.eInformant != 'Totes'){params = params.set('eInformant', this.eInformant);}
+    this.uInformant="";
+    this.evento_changeEmp.emit(params);
   }
 
   getCombos(tipusProducte: string){

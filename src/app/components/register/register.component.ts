@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
   filtre: any;
   periodesModal:  Periode[];
   comboInfoModal: AtributsComboResponse;
-
+  usersList:  String[];
   miusuario:  MyUser;
   literal: LiteralsRegistre;
   constructor( private AuthorizationService: AuthorizationService, 
@@ -77,8 +77,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {    
     this.comboLleno = false;
     this.comboLlenoModal = false;
+    this.filtroFake = "";
     this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
-    this.getProductesModal(this.miusuario.user);
+    if(this.miusuario.empresa.codi!= "Administració"){this.getProductesModal(this.miusuario.user);}else{this.getProductesModal("admin");}
     this.getAllCombos();
     this.getAllNamesCombos();
     this.getProductes();
@@ -97,7 +98,7 @@ export class RegisterComponent implements OnInit {
     // CONFIGURABLE
     this.pagination.page_items  = this.paginacio;   
     if(this.miusuario.empresa.codi=='Administració'){
-      this.filtroFake = "";
+      
       this.getRegistresPage(this.filtroFake);
     }else {
       let params = new HttpParams();
@@ -217,6 +218,11 @@ export class RegisterComponent implements OnInit {
     this.downloadToExcel($event);
   }
 
+  onClickChangeEmp($event)
+  {
+    console.log($event);
+    this.getUsersByEmp($event);
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////  
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -241,6 +247,20 @@ export class RegisterComponent implements OnInit {
                                 },
                   error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
       );
+  }
+
+  getUsersByEmp(params: HttpParams)
+  {
+    if (this.AuthorizationService.is_logged())
+    {
+      this.RegisterService.getUsersByEmp(params)
+      .subscribe ( respuesta => { this.usersList = respuesta;  
+                                  console.log(this.usersList);
+                                  this.TrazaService.dato("USERS", "API USERS OK(",this.usersList); 
+                                },
+                  error =>      { this.TrazaService.error("USERS", "API USERS KO", error); } 
+      );
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////

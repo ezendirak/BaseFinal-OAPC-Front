@@ -13,14 +13,17 @@
     
       <div class="formCompradorGrande">
         <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
-        <select [attr.disabled]="isUser" class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" [(ngModel)]="eInformant" name="eInformant" [(ngModel)]="eInformant">
+        <select [disabled]="isUser" class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" [(ngModel)]="eInformant" name="eInformant" (change) = "changeSelectedEmpresa(eInformant)">
             <option *ngFor="let e of empresses" [ngValue]="e">{{ e }} </option>
         </select>
       </div>
   </div>
     <div class="formCompradorGrande">
       <label for="campoC" class="labelEstadoComprador col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.usuIn | translate }}</label> 
-      <input [attr.disabled]="true" name="usuariActual" style="width:300px; display:inline-block;"  type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"    id="uInformant"    name="uInformant" placeholder="{{ usuariActual.user }}">
+      <!-- <input [attr.disabled]="isUser" name="usuariActual" style="width:300px; display:inline-block;"  type="text"  class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12"    id="uInformant"    name="uInformant" placeholder="{{ usuariActual.user }}"> -->
+      <select [disabled]="isUser" name="uInformant" class="form-control ng-pristine ng-untouched ng-valid ng-empty col-md-3 col-xs-12" style="width:300px; display:inline-block;" [(ngModel)]="uInformant" name="uInformant">
+        <option *ngFor="let u of usersList" [ngValue]="u">{{ u }} </option>
+    </select>
     </div>
   <!-- </div> -->
 <!-- <div class="form-group row margin-bottom"> -->
