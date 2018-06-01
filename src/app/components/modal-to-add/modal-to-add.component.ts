@@ -1,3 +1,4 @@
+import { Empressa } from './../../model/empressa';
 import { HomeComponent } from './../home/home.component';
 import { InfoKey } from './../../interfaces/info-key';
 import { AtributsComboResponse } from './../../interfaces/atributs-combo-response';
@@ -17,6 +18,8 @@ import { RegisterService } from '../../services/register.service';
 import { TrazaService } from '../../services/traza.service';
 import { Periode } from '../../model/periode';
 import { MyUser } from '../../interfaces/my-user';
+import { EmpressaService } from '../../services/empressa.service';
+import { HttpParams } from '@angular/common/http';
 
   //////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +60,7 @@ export class ModalToAddComponent implements  OnInit  {
 
   notErrorPeriode: boolean;
 
+  
   comboLlenoModal: boolean;
   nouRegistre: RegisterResponse;
   productesModal: InfoKey[];
@@ -69,28 +73,52 @@ export class ModalToAddComponent implements  OnInit  {
 
   isPinyol: boolean;
   isLlavor: boolean;
-
+  eInformant: string;
+  uInformant: string;
   miusuario:  MyUser;
+  isUser: Boolean=true;
+
+  empresses:  String[];
+  usersList:  String[];
   private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               public bsModalRef: BsModalRef,
               private AuthorizationService: AuthorizationService, 
                private RegisterService     : RegisterService, 
                private TrazaService        : TrazaService,
-               private HomeComponent        : HomeComponent
+               private HomeComponent        : HomeComponent,
+               private EmpressaService      :EmpressaService
               ) 
-  { }
+  { 
+
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
+    
+    this.eInformant = this.miusuario.empresa.codi;
+  }
  
 
   ngOnInit() {
-    // console.log("MODAL MODAL: MODAL OBERT");
+
     this.notErrorPeriode = true;
     this.onClose = new Subject();
-    // console.log(this.HomeComponent.miusuario);
-    // this.HomeComponent.whoami();
+
     this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
     console.log(this.miusuario);
-    // console.log(this.HomeComponent.miusuario);
+
+    if (this.eInformant == 'Administració'){
+      this.getEmpresses();
+      this.isUser=false;
+      this.eInformant = '';
+      let params = new HttpParams();
+      this.getUsersByEmp(params);
+    }else{
+      this.empresses = new Array<String>();
+      this.usersList = new Array<String>();
+      this.empresses.push(this.miusuario.empresa.codi);
+      this.uInformant = this.miusuario.user;
+      this.usersList.push(this.miusuario.user);
+      this.isUser=true;
+    }
   }
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -99,9 +127,7 @@ export class ModalToAddComponent implements  OnInit  {
 
   public onConfirm(form) {
 
-    // console.log(form);
-    // console.log("wtf");
-    
+
     this.datos_salida.calibre = this.bsModalRef.content.calibreSelected;
     this.datos_salida.colorCarn = this.bsModalRef.content.colorCarnSelected;
     this.datos_salida.qualitat = this.bsModalRef.content.qualitatSelected;
@@ -110,8 +136,8 @@ export class ModalToAddComponent implements  OnInit  {
     this.datos_salida.preuSortida = this.bsModalRef.content.pSortida;
     this.datos_salida.tipusProducte = this.bsModalRef.content.producteSelected.nom;
     this.datos_salida.periode = this.bsModalRef.content.nouPeriode;
-    this.datos_salida.usuName = this.miusuario.user;
-    // console.log(this.datos_salida);
+    this.datos_salida.usuName = this.uInformant;
+
     this.onClose.next(true);
     
     this.bsModalRef.hide();
@@ -120,10 +146,7 @@ export class ModalToAddComponent implements  OnInit  {
   //////////////////////////////////////////////////////////////////////////////////////
 
   public onCancel(form) {
-    //console.log("ON CANCEL");    
-    //console.log(form);
     
-    // this.datos_salida = "DATOS SALIDA ON CANCEL";
     this.onClose.next(false);
 
     this.bsModalRef.hide();
@@ -133,7 +156,7 @@ export class ModalToAddComponent implements  OnInit  {
     console.log(this.producteSelected);
     if (this.nouPeriode.tipusPeriode == 'S' && this.producteSelected.subGrup != 'PI'){
       console.log("ES PRODUCTE SETMANAL");
-      // this.getProductesModalByType(this.nouPeriode.tipusPeriode);
+
       this.colorCarnSelected="";
       this.qualitatSelected="";
       this.calibreSelected="";
@@ -143,7 +166,7 @@ export class ModalToAddComponent implements  OnInit  {
       this.isLlavor = false;
     }else if(this.nouPeriode.tipusPeriode == 'Q' && this.producteSelected.subGrup != 'LL'){
       console.log("ES PRODUCTE QUINZENAL");
-      // this.getProductesModalByType(this.nouPeriode.tipusPeriode);
+
       this.colorCarnSelected="";
       this.qualitatSelected="";
       this.calibreSelected="";
@@ -164,6 +187,8 @@ export class ModalToAddComponent implements  OnInit  {
     this.qualitatSelected="";
     this.calibreSelected="";
     this.varietatSelected="";
+    console.log(this.eInformant);
+    
     if (test.subGrup == 'PI'){
       this.isPinyol = true;
       this.isLlavor = false;
@@ -171,11 +196,24 @@ export class ModalToAddComponent implements  OnInit  {
       this.isPinyol = false;
       this.isLlavor = true;
     }
+    let params = new HttpParams();
+    params = params.set('empresa', this.eInformant);
+    params = params.set('tipusProducte', test.nom);
+    console.log(params);
+    this.getPeriodesByProdAndEmp(params);
+    
   }
 
+  changeSelectedEmpresa(eInformant)
+  {
+    let params = new HttpParams();
+    if (this.eInformant && this.eInformant != 'Totes'){params = params.set('eInformant', this.eInformant);}
+    this.uInformant="";
+    this.getProductesModal(this.eInformant);
+    this.getUsersByEmp(params);
+  }
   getCombosModal(tipusProducte: String)
   {
-    // console.log("getcombosModal en pare: (MODAL) " + tipusProducte);
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombosModalToAdd(tipusProducte)
       .subscribe ( respuesta => { this.comboInfoModal = respuesta;
@@ -187,9 +225,9 @@ export class ModalToAddComponent implements  OnInit  {
     }
   }
 
-  getPeriodesByProd(subGrup: String){
+  getPeriodesByProdAndEmp(params: HttpParams){
     if (this.AuthorizationService.is_logged()){
-      this.RegisterService.getPeriodesByProd(subGrup)
+      this.RegisterService.getPeriodesDisponiblesByProdAndEmp(params)
       .subscribe ( respuesta => { this.periodesModal = respuesta;
 
                                    this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodesModal);
@@ -203,6 +241,47 @@ export class ModalToAddComponent implements  OnInit  {
   {
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getProductesModalByType(subGrup)
+      .subscribe ( respuesta => { this.productesModal = respuesta;
+
+                                  this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productesModal);
+                                },
+                  error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
+      );
+    }
+  }
+
+  getEmpresses()
+  {
+    if (this.AuthorizationService.is_logged()){
+      this.EmpressaService.getEmpressaActivaNoTotes()
+      .subscribe ( respuesta => { this.empresses = respuesta;
+
+                                  // console.log(this.empresses);
+                                   this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.empresses);
+                                },
+                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+      );
+    }
+  }
+
+  getUsersByEmp(params: HttpParams)
+  {
+    if (this.AuthorizationService.is_logged())
+    {
+      this.RegisterService.getUsersByEmp(params)
+      .subscribe ( respuesta => { this.usersList = respuesta;  
+                                  // console.log(this.usersList);
+                                  this.TrazaService.dato("USERS", "API USERS OK(",this.usersList); 
+                                },
+                  error =>      { this.TrazaService.error("USERS", "API USERS KO", error); } 
+      );
+    }
+  }
+
+  getProductesModal(codiEmp:  string)
+  {
+    if (this.AuthorizationService.is_logged()){
+      this.RegisterService.getProductesModalByEmp(codiEmp)
       .subscribe ( respuesta => { this.productesModal = respuesta;
 
                                   this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productesModal);

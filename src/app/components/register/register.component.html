@@ -25,11 +25,11 @@
   >
   </app-form-register>
 
-  <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
+  <!-- <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
                     [items]="items"
                     (evento_DescarregarXLS)="descarregarAXLS($event)"
   >
-  </app-lector-excel>
+  </app-lector-excel> -->
   
   <app-taula-register [items]="items" 
                   
@@ -47,7 +47,6 @@
                   (evento_canviProduct)="onClickParams($event)"
                   (evento_printItems)="printItems($event)"
                   [periodesModal]="periodesModal"
-                  (updatePeriodeModal)="updatePeriodeModal()"
   >
   </app-taula-register>
 

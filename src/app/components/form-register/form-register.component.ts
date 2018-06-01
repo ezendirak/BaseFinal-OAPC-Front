@@ -16,6 +16,7 @@ import { MyUser } from '../../interfaces/my-user';
 import { AuthorizationService } from '../../services/authorization.service';
 import { EmpressaService } from '../../services/empressa.service';
 import { TrazaService } from '../../services/traza.service';
+import { RegisterService } from '../../services/register.service';
 
 
 @Component({
@@ -79,14 +80,14 @@ export class FormRegisterComponent implements OnInit {
   bsModalRefAdd: BsModalRef;
   
   usuariActual: MyUser;
-
   isUser: Boolean=true;
  private literals = LiteralsRegistre;
   constructor(private translate            : TranslateService,
               private BsModalRefAdd        : BsModalService,
               private AuthorizationService  : AuthorizationService,
               private EmpressaService       : EmpressaService,
-              private TrazaService          : TrazaService) {
+              private TrazaService          : TrazaService,
+              private RegisterService       : RegisterService) {
     
     this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
     translate.setDefaultLang('cat');
@@ -105,8 +106,10 @@ export class FormRegisterComponent implements OnInit {
       this.evento_changeEmp.emit(params);
     }else{
       this.empresses = new Array<String>();
-      this.empresses.push(this.eInformant = this.miusuario.empresa.codi);
+      this.usersList = new Array<String>();
+      this.empresses.push(this.miusuario.empresa.codi);
       this.uInformant = this.miusuario.user;
+      this.usersList.push(this.miusuario.user);
       this.isUser=true;
     }    
    
@@ -188,7 +191,7 @@ export class FormRegisterComponent implements OnInit {
     this.bsModalRefAdd = this.BsModalRefAdd.show(ModalToAddComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : null, uInformant : this.usuariActual.user, colorCarn : null, calibre : null, qualitat : null, varietat : null, quantitatVenuda: null, preuSortida: null};
+    this.bsModalRefAdd.content.datos_salida = {id : null, periode : null, tipusProducte : null, uInformant : this.miusuario.user, colorCarn : null, calibre : null, qualitat : null, varietat : null, quantitatVenuda: null, preuSortida: null};
     // 
     this.bsModalRefAdd.content.comboGeneral = this.comboGeneralModalToAdd;
     this.bsModalRefAdd.content.comboInfoModal = this.comboInfoModal;
@@ -241,6 +244,7 @@ export class FormRegisterComponent implements OnInit {
     let params = new HttpParams();
     if (this.eInformant && this.eInformant != 'Totes'){params = params.set('eInformant', this.eInformant);}
     this.uInformant="";
+    // this.getProductesModal(this.eInformant);
     this.evento_changeEmp.emit(params);
   }
 
@@ -304,4 +308,6 @@ export class FormRegisterComponent implements OnInit {
       );
     }
   }
+
+  
 }

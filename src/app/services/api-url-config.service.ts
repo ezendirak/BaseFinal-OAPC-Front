@@ -47,6 +47,7 @@ export class ApiUrlConfigService {
   public _periodesTotals        =  'api/v4/periodesTotals/';
   public _periodesByProd   = 'api/v4/periodesByProd/';
   public _periodesByProductes   = 'api/v4/periByProductes/';
+  public _periodesByProdAndEmp   = 'api/v4/periByProdAndEmp/';
 
   public _usersByCodiEmp   = 'api/v5/usersByCodiEmp/';
 
@@ -54,6 +55,7 @@ export class ApiUrlConfigService {
   public _getProductesModalURL        = '/api/v3/pdu/productesModal/';
   public _getProductesModalByUserNameURL        = '/api/v3/pdu/productesModalByUserName/';
   public _getProductesModalByTypeURL        = '/api/v3/productesModalByType/';
+  public _getProductesModalByEmpURL         = '/api/v3/productesModalByEmp/'
   public _getCombosProd          = '/api/v3/pdu/combos/';
   public _getCombosProdModalToAdd         = '/api/v3/pdu/ModalCombosToAdd/';
   public _getAllCombos          = '/api/v3/pduCombos/';
@@ -94,6 +96,8 @@ export class ApiUrlConfigService {
   public _periodes_countFiltrat  = '/api/v5/periodes_countFiltrat';
 
   public _allEmpresses             = '/api/v5/allEmpresses/';
+  public _allEmpressesNoTotes     = '/api/v5/allEmpressesNoTotes/'
+  public _allEmpressesActivaNoTotes     = '/api/v5/allEmpressesActivaNoTotes/'
   public _getProductesModal        = '/api/v5/productesModal/';
   public _getProductesModalNom        = '/api/v5/nomProductesModal/';
   public _postNewAtribut             = '/api/v3/newAtribut/';

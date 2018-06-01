@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
     this.comboLlenoModal = false;
     this.filtroFake = "";
     this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
-    if(this.miusuario.empresa.codi!= "Administració"){this.getProductesModal(this.miusuario.user);}else{this.getProductesModal("admin");}
+    if(this.miusuario.empresa.codi!= "Administració"){this.getProductesModal(this.miusuario.user);}
     this.getAllCombos();
     this.getAllNamesCombos();
     this.getProductes();
@@ -362,6 +362,7 @@ export class RegisterComponent implements OnInit {
       );
     }
   }
+  
   
   getPeriodes()
   {

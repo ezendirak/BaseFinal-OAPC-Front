@@ -45,7 +45,7 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.emp | translate }}</label>
-          <select [attr.disabled]="isUser" class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected" #empresaSelectedC = "ngModel" required>
+          <select [disabled]="isUser" class="col-md-3 col-xs-12" name="empresaSelected" [(ngModel)]="empresaSelected" #empresaSelectedC = "ngModel" (change) = "changeSelectedEmp($event)" required>
               <option *ngFor="let e of empreses" [ngValue]="e">{{ e }} </option>
           </select>
         </div>

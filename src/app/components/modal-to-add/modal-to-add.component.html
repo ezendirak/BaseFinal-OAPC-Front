@@ -30,12 +30,18 @@
       <div class="form-group row margin-bottom">
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.empIn | translate }}</label>
-          <input [attr.disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="eInformant"    name="eInformant"  placeholder="{{ miusuario?.empresa.codi }}">
+          <!-- <input [attr.disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="eInformant"    name="eInformant"  placeholder="{{ miusuario?.empresa.codi }}"> -->
+          <select [disabled]="isUser" class="col-md-3 col-xs-12" [(ngModel)]="eInformant" name="eInformant" (change) = "changeSelectedEmpresa(eInformant)">
+            <option *ngFor="let e of empresses" [ngValue]="e">{{ e }} </option>
+          </select>
         </div>
     
         <div >
           <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.usuIn | translate }}</label> 
-          <input [attr.disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="uInformant"  name="uInformant" placeholder="{{ miusuario?.user }}">
+          <!-- <input [attr.disabled]="true" type="text"  class="col-md-3 col-xs-12"    id="uInformant"  name="uInformant" placeholder="{{ miusuario?.user }}"> -->
+          <select [disabled]="isUser" name="uInformant" class="col-md-3 col-xs-12" [(ngModel)]="uInformant" name="uInformant">
+            <option *ngFor="let u of usersList" [ngValue]="u">{{ u }} </option>
+          </select>
         </div>
       </div>
     <div class="form-group row margin-bottom">

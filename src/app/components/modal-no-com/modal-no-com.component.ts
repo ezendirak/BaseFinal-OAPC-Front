@@ -56,7 +56,9 @@ constructor(  private AuthorizationService: AuthorizationService,
       this.isUser = true;
     }else{
       this.isUser = false;
-      //Si no es administrador, busquem totes les empreses
+      this.getEmpresses();
+      //Si es administrador, busquem totes les empreses
+
     }
     this.empresaSelected = this.miusuario.empresa.codi;
     // this.getProductesModalName();
@@ -112,19 +114,29 @@ constructor(  private AuthorizationService: AuthorizationService,
      console.log(params);
     this.getPeriodesByProductesAndEmp(params);
   }
+
+  changeSelectedEmp($event)
+  {
+    // let params = new HttpParams();
+    //  if(this.empresaSelected){
+    //   params = params.set('empresa', this.empresaSelected);
+    //  }
+    //  console.log(params);
+    this.getProductesByEmp(this.empresaSelected);
+  }
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-  getProductesModalName()
-  {
-    if (this.AuthorizationService.is_logged()){
-      this.EmpressaService.getProductesModalName()
-      .subscribe ( respuesta => { this.productesNom = respuesta;
-                                },
-                  error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
-      );
-    }
-  }
+  // getProductesModalName()
+  // {
+  //   if (this.AuthorizationService.is_logged()){
+  //     this.EmpressaService.getProductesModalName()
+  //     .subscribe ( respuesta => { this.productesNom = respuesta;
+  //                               },
+  //                 error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
+  //     );
+  //   }
+  // }
 
 getPeriodesByProductesAndEmp(params  :HttpParams)
   {
@@ -138,15 +150,41 @@ getPeriodesByProductesAndEmp(params  :HttpParams)
     }
   }
 
-  getEmpresesByProducte(producte :string)
+  // getEmpresesByProducte(producte :string)
+  // {
+  //   if (this.AuthorizationService.is_logged()){
+  //     this.EmpressaService.getEmpresesByProd(producte)
+  //     .subscribe ( respuesta => { this.empreses = respuesta;
+  //                               },
+  //                 error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
+  //     );
+  //   }
+  // }
+
+  getProductesByEmp(codiEmp :string)
   {
     if (this.AuthorizationService.is_logged()){
-    this.EmpressaService.getEmpresesByProd(producte)
-    .subscribe ( respuesta => { this.empreses = respuesta;
-                              },
-                error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
-    );
+      this.RegisterService.getProductesModalByEmp(codiEmp)
+      .subscribe ( respuesta => { this.productesModal = respuesta;
+                                },
+                  error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
+      );
+    }
   }
+
+  getEmpresses()
+  {
+    if (this.AuthorizationService.is_logged()){
+      this.EmpressaService.getEmpressaNoTotes()
+      .subscribe ( respuesta => { this.empreses = respuesta;
+                                  // console.log("prrrrrrrrrrrrrrrrrrra");
+                                  
+                                  console.log(this.empreses);
+                                   this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.empreses);
+                                },
+                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+      );
+    }
   }
 
 }

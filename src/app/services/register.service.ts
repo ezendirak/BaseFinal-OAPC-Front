@@ -170,6 +170,15 @@ getProductesModalByType(subGrup: String): Observable<InfoKey[]>
                     .catch((error: any) => Observable.throw(error));  
 }
 
+getProductesModalByEmp(codiEmp: string): Observable<InfoKey[]>
+{
+  return this.http.get( this.ApiUrlConfigService._getProductesModalByEmpURL + codiEmp, 
+                        this.AuthorizationService.header_token()
+                      )
+                  .map(respuesta => respuesta)
+                  .catch((error: any) => Observable.throw(error));  
+}
+
 getCombos(tipusProducte: String): Observable<AtributsComboResponse>
 {
   return this.http.get( this.ApiUrlConfigService._getCombosProd + tipusProducte, 
@@ -240,6 +249,14 @@ getPeriodes(): Observable<Periode[]>
   {
     return this.http.get( this.ApiUrlConfigService._periodesByProductes,
                           {headers: this.AuthorizationService.header_tokenPol(), params: productes}
+                        )
+                        .catch((error: any) => Observable.throw(error));
+  }
+
+  getPeriodesDisponiblesByProdAndEmp(params: HttpParams): Observable<Periode[]>
+  {
+    return this.http.get( this.ApiUrlConfigService._periodesByProdAndEmp,
+                          {headers: this.AuthorizationService.header_tokenPol(), params: params}
                         )
                         .catch((error: any) => Observable.throw(error));
   }

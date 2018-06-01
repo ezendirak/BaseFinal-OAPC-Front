@@ -26,6 +26,23 @@ export class EmpressaService {
       .catch((error: any) => Observable.throw(error));
   }
 
+  getEmpressaNoTotes():  Observable<String[]>
+  {
+    return this.http.get( this.ApiUrlConfigService._allEmpressesNoTotes, 
+      this.AuthorizationService.header_token()
+      )
+      .map(respuesta => respuesta)
+      .catch((error: any) => Observable.throw(error));
+  }
+
+  getEmpressaActivaNoTotes():  Observable<String[]>
+  {
+    return this.http.get( this.ApiUrlConfigService._allEmpressesActivaNoTotes, 
+      this.AuthorizationService.header_token()
+      )
+      .map(respuesta => respuesta)
+      .catch((error: any) => Observable.throw(error));
+  }
 
   getProductes(): Observable<InfoKey[]>
   {

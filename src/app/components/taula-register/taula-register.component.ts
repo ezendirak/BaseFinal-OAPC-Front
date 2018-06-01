@@ -39,7 +39,7 @@ export class TaulaRegisterComponent implements OnInit {
   @Output() evento_putRegistre:   EventEmitter<any> = new EventEmitter();
   @Output() evento_printItems:   EventEmitter<any> = new EventEmitter();
 
-  @Output() updatePeriodeModal: EventEmitter<any> = new EventEmitter();
+  // @Output() updatePeriodeModal: EventEmitter<any> = new EventEmitter();
   // productEdit:  RegisterResponse;
 
   bsModalRef: BsModalRef;
@@ -60,7 +60,7 @@ export class TaulaRegisterComponent implements OnInit {
   }
 
   openModalToEdit(item: RegisterResponse) {
-    this.updatePeriodeModal.emit();
+    // this.updatePeriodeModal.emit();
     // Pass in data directly before show method
     const initialState = {
       titulo: 'Modificació del registre',
