@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
   usersList:  String[];
   miusuario:  MyUser;
   literal: LiteralsRegistre;
+  isUser: Boolean = false;
   constructor( private AuthorizationService: AuthorizationService, 
                private RegisterService     : RegisterService, 
                private TrazaService        : TrazaService,
@@ -79,7 +80,7 @@ export class RegisterComponent implements OnInit {
     this.comboLlenoModal = false;
     this.filtroFake = "";
     this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
-    if(this.miusuario.empresa.codi!= "Administració"){this.getProductesModal(this.miusuario.user);}
+    if(this.miusuario.empresa.codi!= "Administració"){this.getProductesModal(this.miusuario.user), this.isUser = true;}
     this.getAllCombos();
     this.getAllNamesCombos();
     this.getProductes();
@@ -463,7 +464,14 @@ export class RegisterComponent implements OnInit {
       .subscribe ( respuesta => { this.item = respuesta;
 
                                   this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
-                                  this.getRegistresPage(this.filtroFake);
+                                  if(this.miusuario.empresa.codi=='Administració'){
+                                    this.filtroFake = "";
+                                    this.getRegistresPage(this.filtroFake);
+                                  }else {
+                                    let params = new HttpParams();
+                                    params = params.set('eInformant', this.miusuario.empresa.codi);
+                                    this.getRegistresPage(params); 
+                                  }
                                 },
                   error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
       );

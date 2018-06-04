@@ -16,16 +16,7 @@
   <!-- https://v4-alpha.getbootstrap.com/components/forms/#form-controls -->
 
     <form  (ngSubmit)="onConfirm(f)" #f="ngForm">
-      <div class="form-group row margin-bottom">
-        
-        <div>
-            <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
-            
-            <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode" #nouPeriodeC = "ngModel" (change) = "changeSelectedPeriodeModal($event)" required>
-              <option *ngFor="let h of periodesModal" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
-          </select>
-          </div> 
-      </div>
+      
 
       <div class="form-group row margin-bottom">
         <div >
@@ -90,6 +81,17 @@
       </ng-template> 
     </div>
     
+    <div class="form-group row margin-bottom">
+        
+      <div>
+          <label for="periode" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.per | translate }}</label>
+          
+          <select class="col-md-3 col-xs-12" style="width:260px;" name="periode" [(ngModel)]="nouPeriode" #nouPeriodeC = "ngModel" (change) = "changeSelectedPeriodeModal($event)" required>
+            <option *ngFor="let h of periodesModal" [ngValue]="h">{{ h.numPeriode + " - " + h.tipusPeriode + " ("}} {{h.dataInici | date: 'dd/MM/yyyy'}} - {{ h.dataFi | date: 'dd/MM/yyyy'}} )</option>
+        </select>
+        </div> 
+    </div>
+
     <div [ngClass]="{'has-danger': f.form.qVenudaC?.invalid && (f.form.qVenudaC?.dirty || f.form.qVenudaC?.touched)}" class="form-group row margin-bottom">
       <label for="campoC" class="col-md-2 col-xs-12">{{ 'LITERALS_FORM.' + literals.quVe | translate }}</label>
       <input type="number"  class="col-md-3 col-xs-12"  #qVenudaC = "ngModel"  id="qVenuda"    name="qVenuda"    [(ngModel)]="qVenuda" required>

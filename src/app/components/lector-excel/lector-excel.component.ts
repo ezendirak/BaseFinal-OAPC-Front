@@ -4,6 +4,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import * as XLSX from 'xlsx';
 import { HttpParams } from '@angular/common/http';
+import { MyUser } from '../../interfaces/my-user';
 
 
 
@@ -11,14 +12,17 @@ type AOA = any [][];
 
 @Component({
   selector: 'app-lector-excel',
-	template: `
-	<input type="file" (change)="onFileChange($event)" multiple="false" />
+  template: `
+  <ng-container *ngIf="miusuario.empresa.codi!='Administració';then content"></ng-container>
+  <ng-template #content>
+    <input type="file" (change)="onFileChange($event)" multiple="false" />
+  </ng-template>
 	`
 })
 
 export class LectorExcelComponent {
 
-  @Input() items          :RegisterResponse[];
+  // @Input() items          :RegisterResponse[];
   
   @Output() evento_AfegirXLS: EventEmitter<any> = new EventEmitter();
   @Output() evento_DescarregarXLS: EventEmitter<any> = new EventEmitter();
@@ -26,7 +30,10 @@ export class LectorExcelComponent {
   data: AOA = [ [1, 2], [3, 4] ];
   // data: AOA = JSON.stringify(this.items);
 	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-	fileName: string = 'SheetJS.xlsx';
+  fileName: string = 'SheetJS.xlsx';
+
+  miusuario:  MyUser = JSON.parse(sessionStorage.getItem("USER"));
+  
 
 	onFileChange(evt: any) {
 		/* wire up file reader */
@@ -74,6 +81,7 @@ export class LectorExcelComponent {
         
         let newRegistre = new Register();
         index += 1;
+        newRegistre.uInformant = this.miusuario.user;
         for (fila in row){
           posicio = 0;
           // console.log(this.data[index]);
@@ -163,7 +171,7 @@ export class LectorExcelComponent {
 
 		// /* save to file */
     // XLSX.writeFile(wb, this.fileName);
-    console.log(this.items);
+    // console.log(this.items);
     // this.evento_DescarregarXLS.emit();
   }
   

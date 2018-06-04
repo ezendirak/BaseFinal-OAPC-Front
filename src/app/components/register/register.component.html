@@ -25,11 +25,11 @@
   >
   </app-form-register>
 
-  <!-- <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
-                    [items]="items"
-                    (evento_DescarregarXLS)="descarregarAXLS($event)"
-  >
-  </app-lector-excel> -->
+  <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
+                      (evento_DescarregarXLS)="descarregarAXLS($event)">
+  </app-lector-excel>
+  
+  
   
   <app-taula-register [items]="items" 
                   
