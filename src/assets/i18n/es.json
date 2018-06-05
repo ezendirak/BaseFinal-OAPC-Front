@@ -118,7 +118,8 @@
         "afegirD"   :   "Añadir fechas",
         "closePer"  :   "Cerrar Periodos Activos",
         "perNoCom"  :   "Periodo No Comercialización",
-        "ok"        :   "Aceptar"
+        "ok"        :   "Aceptar",
+        "carMas"    :   "Carga masiva"
     },
 
     "TITOLS" : {

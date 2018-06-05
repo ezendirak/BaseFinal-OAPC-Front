@@ -22,12 +22,13 @@
                   [miusuario]="miusuario"
                   (evento_changeEmp)="onClickChangeEmp($event)"
                   [usersList]="usersList"
+                  (evento_AfegirXLS)="SaveFromExcel($event)"
   >
   </app-form-register>
 
-  <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
+  <!-- <app-lector-excel (evento_AfegirXLS)="SaveFromExcel($event)"
                       (evento_DescarregarXLS)="descarregarAXLS($event)">
-  </app-lector-excel>
+  </app-lector-excel> -->
   
   
   
@@ -47,6 +48,7 @@
                   (evento_canviProduct)="onClickParams($event)"
                   (evento_printItems)="printItems($event)"
                   [periodesModal]="periodesModal"
+                  
   >
   </app-taula-register>
 

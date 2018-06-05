@@ -48,6 +48,7 @@ export enum LiteralsRegistre {
     closePer    =   "closePer",
     perNoCom    =   "perNoCom",
     ok          =   "ok",
+    carMas      =   "carMas",
 
     //////////////////////////////////////////////////////////
     ///////////////////// Titols /////////////////////////////

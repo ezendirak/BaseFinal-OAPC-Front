@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   subscription:        Subscription;
 
-  private islogged;
+  islogged;
   private isCollapsed: boolean;
 
   private literals = LiteralsRegistre;

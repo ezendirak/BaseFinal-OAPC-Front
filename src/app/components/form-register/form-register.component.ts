@@ -17,6 +17,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 import { EmpressaService } from '../../services/empressa.service';
 import { TrazaService } from '../../services/traza.service';
 import { RegisterService } from '../../services/register.service';
+import { ModalToAddMasivoComponent } from '../modal-to-add-masivo/modal-to-add-masivo.component';
 
 
 @Component({
@@ -53,6 +54,10 @@ export class FormRegisterComponent implements OnInit {
   @Output() evento_postNoComPer: EventEmitter<any> = new EventEmitter();
   @Output() evento_changeEmp:    EventEmitter<any> = new EventEmitter();
   
+
+  @Output() evento_AfegirXLS: EventEmitter<any> = new EventEmitter();
+  // @Output() evento_DescarregarXLS: EventEmitter<any> = new EventEmitter();
+
   filtros: any;
 
   referencia: number;
@@ -117,13 +122,9 @@ export class FormRegisterComponent implements OnInit {
 
   onclick($event)
   {
-    console.log("CAPTURADO CLICK EN FORMULARIO");
-    console.log("EMITIMOS EVENTO eventoRegistreClicked");
-    // this.filtros = { "referencia": this.referencia, "periode" : this.periode, "eInformant" : this.eInformant, "uInformant" : this.uInformant, "tipusProducte" : this.selectedTipusProducte,  "varietat" : this.varietat, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre, "qVenuda" : this.qVenuda, "pSortida" : this.pSortida, "tancada" : this.tancada};
-    //  this.filtros = {"tipusProducte" : this.selectedTipusProducte,  "colorCarn" : this.selectedColorCarn, "qualitat" : this.selectedQualitat, "calibre" : this.selectedKalibre};
-     
-    console.log(this.qVenuda);
-    console.log(this.qVenuda2);
+    // console.log("CAPTURADO CLICK EN FORMULARIO");
+    // console.log("EMITIMOS EVENTO eventoRegistreClicked");
+    
      let params = new HttpParams();
      if(this.selectedTipusProducte && this.selectedTipusProducte.nom != 'Tots'){
       params = params.set('tipusProducte', this.selectedTipusProducte.nom);
@@ -309,5 +310,43 @@ export class FormRegisterComponent implements OnInit {
     }
   }
 
+  
+
+  openModalToAddMas($event){
+    // Pass in data directly before show method
+    const initialState = {
+      titulo: 'Càrrega massiva',
+      lista: [],
+      botonCerrar: "Tancar"  
+    };
+ 
+    // console.log(this.item);
+    this.bsModalRefAdd = this.BsModalRefAdd.show(ModalToAddMasivoComponent, {initialState});
+    
+    // Pass in data directly content atribute after show
+    this.bsModalRefAdd.content.isUser = this.isUser;
+
+    // Get out
+    
+
+    
+    this.bsModalRefAdd.content.onClose
+      .subscribe( result => { if (result == true)
+                                this.actionPutYESMas();                                
+                              else  
+                                this.actionPutNOMas();                                
+      })
+  }
+
+  actionPutYESMas(){
+    console.log(this.bsModalRefAdd.content.registres);
+    let registres: any = this.bsModalRefAdd.content.registres;
+    let familia: any = this.bsModalRefAdd.content.familia;
+    this.evento_AfegirXLS.emit({registres, familia});
+  }
+
+  actionPutNOMas(){
+
+  }
   
 }

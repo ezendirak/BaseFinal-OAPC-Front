@@ -208,9 +208,10 @@ export class RegisterComponent implements OnInit {
   }
  
   SaveFromExcel($event){
-    console.log($event.newRegistre);
+    console.log($event);
+    console.log($event.registres);
     console.log($event.familia);
-    this.postRegistreFromExcel($event.newRegistre, $event.familia);
+    this.postRegistreFromExcel($event.registres, $event.familia);
   }
 
   descarregarAXLS($event){
@@ -318,8 +319,8 @@ export class RegisterComponent implements OnInit {
                                     this.pagination.page_actual--;
 
                                   if(this.miusuario.empresa.codi=='Administració'){
-                                    this.filtroFake = "";
-                                    this.getRegistresPage(this.filtroFake);
+                                    if(this.filtre){this.getRegistresPage(this.filtre);}else{this.filtroFake = "";this.getRegistresPage(this.filtroFake);}
+                                    
                                   }else {
                                     let params = new HttpParams();
                                     params = params.set('eInformant', this.miusuario.empresa.codi);
@@ -566,9 +567,16 @@ export class RegisterComponent implements OnInit {
 
     parte_resto  = this.pagination.total_items % this.pagination.page_items;
     parte_entera = (this.pagination.total_items - parte_resto) / this.pagination.page_items;
-
-    if (parte_resto == 0)
+    
+    console.log("ralf");
+    console.log(parte_resto);
+    console.log(this.pagination.page_max);
+    console.log(parte_entera);
+    if (parte_resto == 0){
+      console.log(this.pagination.page_max);
       this.pagination.page_max = parte_entera;
+      console.log(parte_entera);
+    }
     else
       this.pagination.page_max = parte_entera + 1;
 

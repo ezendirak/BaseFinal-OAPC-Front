@@ -32,7 +32,7 @@ getRegistres(): Observable<RegisterResponse[]>
   getRegistresPage(page: number, per_page: number, filtro: any): Observable<RegisterResponse[]>
   {
     // let headers = new HttpHeaders();
-    console.log(this.AuthorizationService.header_token());
+    // console.log(this.AuthorizationService.header_token());
     // headers  = headers.append('Authorization', 'Bearer '+ this.AuthorizationService.header_token());
     // headers  = headers.append('Content-Type', 'application/json');
     // console.log("Header: ");

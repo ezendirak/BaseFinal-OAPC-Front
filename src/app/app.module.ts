@@ -75,6 +75,7 @@ import { TaulaGestioPeriodesComponent } from './components/taula-gestio-periodes
 import { ButtonTaulaGestioPeriodesComponent } from './components/button-taula-gestio-periodes/button-taula-gestio-periodes.component';
 import { ModalToAddCalendarComponent } from './components/modal-to-add-calendar/modal-to-add-calendar.component';
 import { ModalNoComComponent } from './components/modal-no-com/modal-no-com.component';
+import { ModalToAddMasivoComponent } from './components/modal-to-add-masivo/modal-to-add-masivo.component';
 
 
   //////////////////////////////////////////////////////////////////////////////////////
@@ -129,10 +130,11 @@ export function HttpLoaderFactory(http: HttpClient){
     TaulaGestioPeriodesComponent,
     ButtonTaulaGestioPeriodesComponent,
     ModalToAddCalendarComponent,
-    ModalNoComComponent
+    ModalNoComComponent,
+    ModalToAddMasivoComponent
   ],
 
-  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent, ModalToAddCalendarComponent, ModalNoComComponent],
+  entryComponents: [ModalNoteComponent, ModalToAddComponent, ModalEditGestProdComponent, ModalEditGestEmpComponent, ModalToAddProdComponent, ModalToAddEmpComponent, ModalToClosePerComponent, ModalToAddCalendarComponent, ModalNoComComponent, ModalToAddMasivoComponent],
 
   imports: [
     BrowserModule,

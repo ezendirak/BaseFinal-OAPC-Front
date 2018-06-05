@@ -28,10 +28,10 @@
                       <li><a (click)="switchLanguage('es')">es</a></li>
                   </ul>
               </div>
-
+              
               <div style="display:inline-block; float:right;">
-                  <a *ngIf="!(islogged)" routerLink="/login">Login</a>
-                  <a *ngIf="(islogged)"  routerLink="/logout">Logout</a>
+                  <a *ngIf="!islogged" routerLink="/login">Login</a>
+                  <a *ngIf="islogged"  routerLink="/logout">Logout</a>
               </div>
               <h3>
                 <span class="label ng-scope" translate="">{{ 'TITOLS.' + literals.OAPC | translate }}</span>
@@ -53,12 +53,10 @@
           <div class="collapse navbar-collapse" [collapse]=isCollapsed>
 
             <ul class="nav navbar-nav" routerLinkActive="active">
-              {{isUser}} {{isGestor}}
               <li class="nav-item"><a *ngIf="(islogged) && isUser" class="nav-link" routerLink="/register">{{ 'TITOLS.' + literals.regPreus | translate }}<span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a *ngIf="(islogged) && isGestor" class="nav-link" routerLink="/gestReg">{{ 'TITOLS.' + literals.gesReg | translate }}<span class="sr-only">(current)</span></a></li>
 
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown" dropdown>
                 <a *ngIf="(islogged) && isAdmin" href="javascript:void(0)" dropdownToggle class="dropdown-toggle">{{ 'TITOLS.' + literals.admin | translate }} <span class="caret"></span></a>

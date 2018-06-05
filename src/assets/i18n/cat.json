@@ -119,7 +119,8 @@
         "afegirD"   :   "Afegir dates",
         "closePer"  :   "Tancar Periodes Actius",
         "perNoCom"  :   "Periode No Comercialització",
-        "ok"    :   "Acceptar"
+        "ok"    :   "Acceptar",
+        "carMas"    :   "Càrrega massiva"
         
     },
     
