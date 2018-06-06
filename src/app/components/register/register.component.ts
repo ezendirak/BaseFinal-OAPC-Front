@@ -118,7 +118,7 @@ export class RegisterComponent implements OnInit {
 
   onClickBuscarForm($event)
   {
-    console.log("controller: onClickBuscarForm " + $event);
+    // console.log("controller: onClickBuscarForm " + $event);
     this.pagination.page_actual = 1;
     this.filtre = $event;
     this.getRegistresPage($event);    
@@ -137,8 +137,8 @@ export class RegisterComponent implements OnInit {
 
   printItems($event)
   {
-    console.log("lets see");
-    console.log($event);
+    // console.log("lets see");
+    // console.log($event);
     this.downloadToExcel($event);
   }
 
@@ -196,33 +196,33 @@ export class RegisterComponent implements OnInit {
   }
 
   onClickGetCombos($event){
-   console.log("onclickgetcombosModal: " + $event);
+  //  console.log("onclickgetcombosModal: " + $event);
     // console.log($event);
     this.getCombosModal($event);
   }
 
   onClickPostNoComPer($event)
   {
-    console.log($event);
+    // console.log($event);
     this.putPerNoCom($event);
   }
  
   SaveFromExcel($event){
-    console.log($event);
-    console.log($event.registres);
-    console.log($event.familia);
+    // console.log($event);
+    // console.log($event.registres);
+    // console.log($event.familia);
     this.postRegistreFromExcel($event.registres, $event.familia);
   }
 
   descarregarAXLS($event){
-    console.log("Estem al pare");
-    console.log($event);
+    // console.log("Estem al pare");
+    // console.log($event);
     this.downloadToExcel($event);
   }
 
   onClickChangeEmp($event)
   {
-    console.log($event);
+    // console.log($event);
     this.getUsersByEmp($event);
   }
   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -234,9 +234,9 @@ export class RegisterComponent implements OnInit {
     
     this.RegisterService.getDownloadToExcel(items)
     .subscribe ( respuesta => { //this.items = respuesta;
-                                this.TrazaService.dato("ToExcel", "API GET ToExcel OK", this.items);
+                               /* this.TrazaService.dato("ToExcel", "API GET ToExcel OK", this.items);*/
                               },
-                error =>      { this.TrazaService.error("ToExcel", "API GET ToExcel KO", error); } 
+                error =>      { /*this.TrazaService.error("ToExcel", "API GET ToExcel KO", error); */} 
     );
   }
 
@@ -245,9 +245,9 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged())
       this.RegisterService.getRegistres()
       .subscribe ( respuesta => { this.items = respuesta;
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  /*this.TrazaService.dato("Registres", "API GET Registres OK", this.items);*/
                                 },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+                  error =>      {/* this.TrazaService.error("Registres", "API GET Registres KO", error); */} 
       );
   }
 
@@ -257,10 +257,10 @@ export class RegisterComponent implements OnInit {
     {
       this.RegisterService.getUsersByEmp(params)
       .subscribe ( respuesta => { this.usersList = respuesta;  
-                                  console.log(this.usersList);
-                                  this.TrazaService.dato("USERS", "API USERS OK(",this.usersList); 
+                                  /*console.log(this.usersList);
+                                  this.TrazaService.dato("USERS", "API USERS OK(",this.usersList); */
                                 },
-                  error =>      { this.TrazaService.error("USERS", "API USERS KO", error); } 
+                  error =>      { /*this.TrazaService.error("USERS", "API USERS KO", error);*/ } 
       );
     }
   }
@@ -277,10 +277,10 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.getRegistresPage(this.pagination.page_actual, this.pagination.page_items, filtro)
       .subscribe ( respuesta => { this.items = respuesta;  
                                   this.pagination.page_actual_items = this.items.length;
-                                  console.log(this.items);
-                                  this.TrazaService.dato("REGISTRES", "API GETREGISTRESPAGE OK(" + this.pagination.page_actual + ")",this.items.length); 
+                                 /* console.log(this.items);*/
+                                 /* this.TrazaService.dato("REGISTRES", "API GETREGISTRESPAGE OK(" + this.pagination.page_actual + ")",this.items.length); */
                                 },
-                  error =>      { this.TrazaService.error("REGISTRES", "API GETREGISTRESPAGE KO", error); } 
+                  error =>      { /*this.TrazaService.error("REGISTRES", "API GETREGISTRESPAGE KO", error); */} 
       );
     }
   }
@@ -300,7 +300,7 @@ export class RegisterComponent implements OnInit {
 
                                   // this.TrazaService.dato("NOTES", "API GETNOTESCOUNT OK", this.items);                                    
                                 },
-                  error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
+                  error =>      { /*this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); */} 
       );
     }
   }
@@ -327,9 +327,9 @@ export class RegisterComponent implements OnInit {
                                     this.getRegistresPage(params); 
                                   }
 
-                                  this.TrazaService.dato("NOTES", "API DELETE OK", this.item);                                  
+                                  /*this.TrazaService.dato("NOTES", "API DELETE OK", this.item);*/                                  
                                 },
-                  error =>      { this.TrazaService.error("NOTES", "API DELETE KO", error); }     
+                  error =>      { /*this.TrazaService.error("NOTES", "API DELETE KO", error); */}     
       );
     }
   }
@@ -347,7 +347,7 @@ export class RegisterComponent implements OnInit {
                                   // console.log(this.productes);
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error);*/ } 
       );
     }
   }
@@ -360,7 +360,7 @@ export class RegisterComponent implements OnInit {
 
                                   // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); */} 
       );
     }
   }
@@ -372,9 +372,9 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.getPeriodes()
       .subscribe ( respuesta => { this.periodes = respuesta;
 
-                                   this.TrazaService.dato("Periodes DISPONIBLES", "API GET PERIODES OK", this.periodes);
+                                  /* this.TrazaService.dato("Periodes DISPONIBLES", "API GET PERIODES OK", this.periodes)*/;
                                 },
-                  error =>      { this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); } 
+                  error =>      { /*this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); */} 
       );
     }
   }
@@ -385,10 +385,10 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getPeriodesDisponibles(userName)
       .subscribe ( respuesta => { this.periodesModal = respuesta;
-                                  console.log(this.periodesModal);
-                                   this.TrazaService.dato("Periodes MODAL DISPONIBLES", "API GET PERIODES OK", this.periodesModal);
+                                  /*console.log(this.periodesModal);
+                                   this.TrazaService.dato("Periodes MODAL DISPONIBLES", "API GET PERIODES OK", this.periodesModal);*/
                                 },
-                  error =>      { this.TrazaService.error("Periodes MODAL DISPONIBLES", "API GET PERIODES KO", error); } 
+                  error =>      { /*this.TrazaService.error("Periodes MODAL DISPONIBLES", "API GET PERIODES KO", error); */} 
       );
     }
   }
@@ -398,9 +398,9 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.getPeriodesByProd(subGrup)
       .subscribe ( respuesta => { this.periodes = respuesta;
 
-                                   this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodes);
+                                   /*this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodes);*/
                                 },
-                  error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
+                  error =>      { /*this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error);*/ } 
       );
     }
   }
@@ -410,10 +410,10 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombos(tipusProducte)
       .subscribe ( respuesta => { this.comboInfo = respuesta;
-                                  this.TrazaService.dato("Combos", "API GET Combo OK", this.comboInfo);
+                                  /*this.TrazaService.dato("Combos", "API GET Combo OK", this.comboInfo);*/
                                   this.comboLleno = true;
                                 },
-                  error =>      { this.TrazaService.error("Combos", "API GET Combo KO", error); } 
+                  error =>      { /*this.TrazaService.error("Combos", "API GET Combo KO", error);*/ } 
       );   
     }
   }
@@ -424,10 +424,10 @@ export class RegisterComponent implements OnInit {
     if (this.AuthorizationService.is_logged()){
       this.RegisterService.getCombos(tipusProducte)
       .subscribe ( respuesta => { this.comboInfoModal = respuesta;
-                                  this.TrazaService.dato("Combos", "API GET Combo OK", this.comboInfoModal);
+                                  /*this.TrazaService.dato("Combos", "API GET Combo OK", this.comboInfoModal);*/
                                   this.comboLlenoModal = true;
                                 },
-                  error =>      { this.TrazaService.error("Combos", "API GET Combo KO", error); } 
+                  error =>      { /*this.TrazaService.error("Combos", "API GET Combo KO", error); */} 
       );   
     }
   }
@@ -440,7 +440,7 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.postRegistre(filtro)
       .subscribe ( respuesta => { this.item = respuesta;
 
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  /*this.TrazaService.dato("Registres", "API GET Registres OK", this.items);*/
                                   if(this.miusuario.empresa.codi=='Administració'){
                                     this.filtroFake = "";
                                     this.getRegistresPage(this.filtroFake);
@@ -450,7 +450,7 @@ export class RegisterComponent implements OnInit {
                                     this.getRegistresPage(params); 
                                   }
                                 },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Registres", "API GET Registres KO", error); */} 
       );
     }
 
@@ -464,7 +464,7 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.postRegistreFromExcel(filtro, familia)
       .subscribe ( respuesta => { this.item = respuesta;
 
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  /*this.TrazaService.dato("Registres", "API GET Registres OK", this.items);*/
                                   if(this.miusuario.empresa.codi=='Administració'){
                                     this.filtroFake = "";
                                     this.getRegistresPage(this.filtroFake);
@@ -474,7 +474,7 @@ export class RegisterComponent implements OnInit {
                                     this.getRegistresPage(params); 
                                   }
                                 },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Registres", "API GET Registres KO", error); */} 
       );
     }
 
@@ -486,7 +486,7 @@ export class RegisterComponent implements OnInit {
       console.log(registre);
       this.RegisterService.putRegistre(registre)
       .subscribe ( respuesta => { //this.item = respuesta;
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  /*this.TrazaService.dato("Registres", "API GET Registres OK", this.items);*/
                                   if(this.miusuario.empresa.codi=='Administració'){
                                     this.filtroFake = "";
                                     this.getRegistresPage(this.filtroFake);
@@ -496,7 +496,7 @@ export class RegisterComponent implements OnInit {
                                     this.getRegistresPage(params); 
                                   }
                                 },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Registres", "API GET Registres KO", error); */} 
       );
     }
   }
@@ -507,10 +507,10 @@ export class RegisterComponent implements OnInit {
       this.RegisterService.putPerNoCom(nouRegistre)
       .subscribe ( respuesta => { //this.item = respuesta;
 
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  /*this.TrazaService.dato("Registres", "API GET Registres OK", this.items)*/;
                                   // this.getRegistresPage(this.filtroFake);
                                 },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+                              error =>      { /*this.TrazaService.error("Registres", "API GET Registres KO", error); */} 
       );
     }
   }
@@ -524,7 +524,7 @@ export class RegisterComponent implements OnInit {
                                   // console.log(this.comboGeneral);
                                   // console.log(this.comboGeneral["PR01"].Calibres);
                                 },
-                  error =>      { this.TrazaService.error("Combo GENERALS", "API GET COMBOGENERALS KO", error); } 
+                  error =>      { /*this.TrazaService.error("Combo GENERALS", "API GET COMBOGENERALS KO", error);*/ } 
       );
     }
   }
@@ -538,7 +538,7 @@ export class RegisterComponent implements OnInit {
                                   console.log(this.comboGeneralNoms);
                                   // console.log(this.comboGeneral["PR01"].Calibres);
                                 },
-                  error =>      { this.TrazaService.error("Combo GENERALS NOMS", "API GET COMBOGENERALS KO", error); } 
+                  error =>      { /*this.TrazaService.error("Combo GENERALS NOMS", "API GET COMBOGENERALS KO", error);*/ } 
       );
     }
   }
@@ -552,7 +552,7 @@ export class RegisterComponent implements OnInit {
                                   // console.log(this.productes);
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+                  error =>      { /*this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error);*/ } 
       );
     }
   }
@@ -568,14 +568,9 @@ export class RegisterComponent implements OnInit {
     parte_resto  = this.pagination.total_items % this.pagination.page_items;
     parte_entera = (this.pagination.total_items - parte_resto) / this.pagination.page_items;
     
-    console.log("ralf");
-    console.log(parte_resto);
-    console.log(this.pagination.page_max);
-    console.log(parte_entera);
+    
     if (parte_resto == 0){
-      console.log(this.pagination.page_max);
       this.pagination.page_max = parte_entera;
-      console.log(parte_entera);
     }
     else
       this.pagination.page_max = parte_entera + 1;

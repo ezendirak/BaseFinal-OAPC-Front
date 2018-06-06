@@ -20,9 +20,8 @@ getRegistresPage(page: number, per_page: number, filtro: any): Observable<Period
 {
   return this.http.get( this.ApiUrlConfigService._periodesFiltrat + "?page=" + page + "&per_page=" + per_page, 
                         {headers: this.AuthorizationService.header_tokenPol() ,params: filtro }
-                      )
-                  .map(respuesta => respuesta)
-                  .catch((error: any) => Observable.throw(error));
+                        )
+                        .catch((error: any) => Observable.throw(error));
 }
 
 
@@ -30,18 +29,16 @@ getRegistresCountFiltrat(filtre: any): Observable<number>
 {
   return this.http.get( this.ApiUrlConfigService._periodes_countFiltrat, 
                         {headers: this.AuthorizationService.header_tokenPol(), params: filtre}
-                      )
-                  .map(respuesta => respuesta)
-                  .catch((error: any) => Observable.throw(error));  
+                        )
+                        .catch((error: any) => Observable.throw(error));  
 }
 
 postNewPeriodes(periodesNous:   Periode[])
 {
   return this.http.post(  this.ApiUrlConfigService._postNewPeriodes, 
                           periodesNous, this.AuthorizationService.header_token()
-                        )
-                        .map(respuesta => respuesta)
-                        .catch((error: any) => Observable.throw(error)); 
+                          )
+                          .catch((error: any) => Observable.throw(error)); 
 }
 
 }

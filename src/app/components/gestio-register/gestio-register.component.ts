@@ -75,7 +75,7 @@ getPeriodes()
 
                                   //  this.TrazaService.dato("Periodes DISPONIBLES", "API GET PERIODES OK", this.periodes);
                                 },
-                  error =>      { this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error); } 
+                  error =>      { /*this.TrazaService.error("Periodes DISPONIBLES", "API GET PERIODES KO", error);*/ } 
       );
     }
   }
@@ -88,7 +88,7 @@ getPeriodes()
 
                                   //  this.TrazaService.dato("Periodes per producte", "API GET PERIODES OK", this.periodes);
                                 },
-                  error =>      { this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error); } 
+                  error =>      { /*this.TrazaService.error("Periodes per producte", "API GET PERIODES KO", error);*/ } 
       );
     }
   }
@@ -101,7 +101,7 @@ getPeriodes()
       .subscribe ( respuesta => { this.productesModal = respuesta;
                                   // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Productes MODAL", "API GET Registres KO", error);*/ } 
       );
     }
   }
@@ -116,7 +116,7 @@ getPeriodes()
                                   // console.log(this.productes);
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Productes CLAU + NOM", "API GET Registres KO", error);*/ } 
       );
     }
   }
@@ -130,7 +130,7 @@ getPeriodes()
                                   // console.log(this.productes);
                                   // this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
                                 },
-                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+                  error =>      { /*this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error);*/ } 
       );
     }
   }
@@ -140,7 +140,7 @@ getPeriodes()
 /////////////////////////////////////////////////////////////////////////////////////////////
 
   OnClickSearch($event){
-    console.log("controller: onClickBuscarForm " + $event);
+    // console.log("controller: onClickBuscarForm " + $event);
     this.pagination.page_actual = 1;
     this.filtre = $event;
     this.getRegistresPage($event); 
@@ -148,16 +148,16 @@ getPeriodes()
 
   closePeriode(productes: String[]){
     if (this.AuthorizationService.is_logged()){
-      console.log("a la funcio del controlador: ");
-      console.log(productes);
+      // console.log("a la funcio del controlador: ");
+      // console.log(productes);
       // console.log("abans del service: " + filtro.tipusProducte);
       this.GestioRegisterService.closePeriodeByProduct(productes)
       .subscribe ( respuesta => { //this.item = respuesta;
 
-                                  this.TrazaService.dato("Registres", "API GET Registres OK", this.items);
+                                  /*this.TrazaService.dato("Registres", "API GET Registres OK", this.items);*/
                                   this.getRegistresPage(this.filtroFake);
                                 },
-                  error =>      { this.TrazaService.error("Registres", "API GET Registres KO", error); } 
+                  error =>      { /*this.TrazaService.error("Registres", "API GET Registres KO", error);*/ } 
       );
     }
   }
@@ -201,11 +201,11 @@ getPeriodes()
       .subscribe ( respuesta => { this.items = respuesta;  
                                   this.pagination.page_actual_items = this.items.length;
 
-                                  console.log(this.items);
+                                  /*console.log(this.items);
 
-                                  this.TrazaService.dato("REGISTRES", "API GETREGISTRESPAGE OK(" + this.pagination.page_actual + ")",this.items.length); 
+                                  this.TrazaService.dato("REGISTRES", "API GETREGISTRESPAGE OK(" + this.pagination.page_actual + ")",this.items.length); */
                                 },
-                  error =>      { this.TrazaService.error("REGISTRES", "API GETREGISTRESPAGE KO", error); } 
+                  error =>      { /*this.TrazaService.error("REGISTRES", "API GETREGISTRESPAGE KO", error);*/ } 
       );
     }
   }
@@ -221,7 +221,7 @@ getPeriodes()
 
                                   // this.TrazaService.dato("NOTES", "API GETNOTESCOUNT OK", this.items);                                    
                                 },
-                  error =>      { this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error); } 
+                  error =>      { /*this.TrazaService.error("NOTES", "API GETNOTESCOUNT KO", error);*/ } 
       );
     }
   }
@@ -234,15 +234,15 @@ getPeriodes()
   putPep(objPep: InfoGestioReg)
   { 
     if (this.AuthorizationService.is_logged()){
-      console.log(objPep);
+      // console.log(objPep);
       this.GestioRegisterService.putPep(objPep)
       .subscribe ( respuesta => { //this.item = respuesta;
 
-                                  this.TrazaService.dato("Pep Update", "API GET Update Pep OK", this.items);
+                                 /* this.TrazaService.dato("Pep Update", "API GET Update Pep OK", this.items);*/
                                   // this.getProductes();
                                   // this.getRegistresPage(this.filtroFake);
                                 },
-                  error =>      { this.TrazaService.error("Pep Update", "API GET Update Pep KO", error); } 
+                              error =>      { /*this.TrazaService.error("Pep Update", "API GET Update Pep KO", error);*/ } 
       );
     }
   }

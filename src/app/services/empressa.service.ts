@@ -20,90 +20,80 @@ export class EmpressaService {
   getEmpressa():  Observable<String[]>
   {
     return this.http.get( this.ApiUrlConfigService._allEmpresses, 
-      this.AuthorizationService.header_token()
-      )
-      .map(respuesta => respuesta)
-      .catch((error: any) => Observable.throw(error));
+                          this.AuthorizationService.header_token()
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
 
   getEmpressaNoTotes():  Observable<String[]>
   {
     return this.http.get( this.ApiUrlConfigService._allEmpressesNoTotes, 
-      this.AuthorizationService.header_token()
-      )
-      .map(respuesta => respuesta)
-      .catch((error: any) => Observable.throw(error));
+                          this.AuthorizationService.header_token()
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
 
   getEmpressaActivaNoTotes():  Observable<String[]>
   {
     return this.http.get( this.ApiUrlConfigService._allEmpressesActivaNoTotes, 
-      this.AuthorizationService.header_token()
-      )
-      .map(respuesta => respuesta)
-      .catch((error: any) => Observable.throw(error));
+                          this.AuthorizationService.header_token()
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
 
   getProductes(): Observable<InfoKey[]>
   {
     return this.http.get( this.ApiUrlConfigService._provaTest, 
                           this.AuthorizationService.header_token()
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));  
+                          )
+                          .catch((error: any) => Observable.throw(error));  
   }
 
   getProductesModal(): Observable<InfoKeyClass[]>
   {
     return this.http.get( this.ApiUrlConfigService._getProductesModal, 
                           this.AuthorizationService.header_token()
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
 
   getProductesModalName(): Observable<string[]>
   {
     return this.http.get( this.ApiUrlConfigService._getProductesModalNom, 
                           this.AuthorizationService.header_token()
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
 
   putEmpressa(registre: InfoEmpressa){
 
     return this.http.put(  this.ApiUrlConfigService._putGestioEmpressaURL,
                            registre, this.AuthorizationService.header_token()
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
 }
 
 deleteEmpressa(registre: InfoEmpressa){
     return this.http.put(  this.ApiUrlConfigService._deleteGestioEmpressaURL,
                           registre, this.AuthorizationService.header_token()
-                      )
-                      .map(respuesta => respuesta)
-                      .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
 }
 
 getEmpresesByProd(producte: string): Observable<String[]>
 {
   return this.http.get( this.ApiUrlConfigService._getEmpresesByProd + producte, 
                         this.AuthorizationService.header_token()
-                      )
-                      .map(respuesta => respuesta)
-                      .catch((error: any) => Observable.throw(error));
+                        )
+                        .catch((error: any) => Observable.throw(error));
 }
 
 getEmpByUserId(userId: number): Observable<String>
 {
   return this.http.get( this.ApiUrlConfigService._getEmpresesByUserId + userId, 
                         this.AuthorizationService.header_tokenNoContent()
-                      )
-                      .map(respuesta => respuesta)
-                      .catch((error: any) => Observable.throw(error));
+                        )
+                        .catch((error: any) => Observable.throw(error));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,9 +103,8 @@ getEmpByUserId(userId: number): Observable<String>
   {
     return this.http.get( this.ApiUrlConfigService._empressesFiltrat + "?page=" + page + "&per_page=" + per_page, 
                           {headers: this.AuthorizationService.header_tokenPol(), params: filtro }
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
   
 
@@ -123,8 +112,7 @@ getEmpByUserId(userId: number): Observable<String>
   {
     return this.http.get( this.ApiUrlConfigService._empresses_countFiltrat, 
                           {headers: this.AuthorizationService.header_tokenPol(), params: filtre}
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));  
+                          )
+                          .catch((error: any) => Observable.throw(error));  
   }
 }

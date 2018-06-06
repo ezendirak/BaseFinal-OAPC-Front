@@ -28,10 +28,10 @@ export class UserService {
   //////////////////////////////////////////////////////////////////////////////////////
 
   userall(): Observable<UsersResponse[]> {
-    return this.http.get(this.ApiUrlConfigService._userallURL,
-      this.AuthorizationService.header_token())
-      .map(respuesta => respuesta)
-      .catch((error: any) => Observable.throw(error));
+    return this.http.get( this.ApiUrlConfigService._userallURL,
+                          this.AuthorizationService.header_token()
+                        )
+                        .catch((error: any) => Observable.throw(error));
   }
 
   //////////////////////////////////////////////////////////////////////////////////////

@@ -108,9 +108,9 @@ export class ModalNoteComponent implements  OnInit  {
     this.datos_salida.varietat = this.varietatSelected;
 
     this.datos_salida.periode = this.nouPeriode;
-    console.log("********************************");
-    console.log(this.datos_salida);
-    console.log("********************************");
+    // console.log("********************************");
+    // console.log(this.datos_salida);
+    // console.log("********************************");
     this.onClose.next(true);
     
     this.bsModalRef.hide();

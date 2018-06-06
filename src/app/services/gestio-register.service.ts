@@ -41,9 +41,8 @@ getPeriodes(): Observable<Periode[]>
   {//no s'ha canviat la url ja que es necessita exactament el mateix objecte. Evitem duplicacions.
     return this.http.get( this.ApiUrlConfigService._getProductesModalURL, 
                           this.AuthorizationService.header_token()
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));  
+                          )
+                          .catch((error: any) => Observable.throw(error));  
   }
 
 
@@ -51,18 +50,16 @@ getPeriodes(): Observable<Periode[]>
   {
     return this.http.put(   this.ApiUrlConfigService._putGestioPeriodeURL,
                             productes, this.AuthorizationService.header_token()
-                        )
-                      .map(respuesta => respuesta)
-                      .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
 
   putPep(objPep: InfoGestioReg){
 
     return this.http.put(  this.ApiUrlConfigService._putGestioPepURL,
                            objPep, this.AuthorizationService.header_token()
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
 }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,9 +69,8 @@ getPeriodes(): Observable<Periode[]>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresPageFiltratURL + "?page=" + page + "&per_page=" + per_page, 
                           {headers: this.AuthorizationService.header_tokenPol(),params: filtro}
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
   
 
@@ -82,9 +78,8 @@ getPeriodes(): Observable<Periode[]>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresCountURLFiltrat, 
                           {headers: this.AuthorizationService.header_tokenPol(),params: filtre}
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));  
+                          )
+                          .catch((error: any) => Observable.throw(error));  
   }
 
 
@@ -92,9 +87,8 @@ getPeriodes(): Observable<Periode[]>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresPEPPageFiltratURL + "?page=" + page + "&per_page=" + per_page, 
                           {headers: this.AuthorizationService.header_tokenPol(),params: filtro}
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));
+                          )
+                          .catch((error: any) => Observable.throw(error));
   }
   
 
@@ -102,8 +96,7 @@ getPeriodes(): Observable<Periode[]>
   {
     return this.http.get( this.ApiUrlConfigService._getRegistresPEPCountURL, 
                           {headers: this.AuthorizationService.header_tokenPol(),params: filtre}
-                        )
-                    .map(respuesta => respuesta)
-                    .catch((error: any) => Observable.throw(error));  
+                          )
+                          .catch((error: any) => Observable.throw(error));  
   }
 }

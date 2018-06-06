@@ -59,7 +59,7 @@ export class FormGestioRegisterComponent implements OnInit {
      }
      
       //  this.evento_form1.emit(JSON.stringify(this.filtros));
-      console.log(params);
+      // console.log(params);
       window.scrollTo({
         top: 480,
         behavior: "smooth"
@@ -98,15 +98,15 @@ export class FormGestioRegisterComponent implements OnInit {
   }
 
   actionPutYES(){
-    console.log("ACTION PUT YES")
+    // console.log("ACTION PUT YES")
     this.evento_actionToClosePeriode.emit(this.bsModalRefClose.content.productesSelected);
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////
 
   actionPutNO(){
-    console.log("ACTION NO PUT")
-    console.log(this.bsModalRefClose.content.datos_salida);
+    // console.log("ACTION NO PUT")
+    // console.log(this.bsModalRefClose.content.datos_salida);
   }
 
 }

@@ -166,7 +166,7 @@ export class FormRegisterComponent implements OnInit {
       params = params.set('uInformant', this.uInformant);
      }
 
-    console.log(params);
+    // console.log(params);
     // window.scrollTo(0, 560);
     window.scrollTo({
       top: 580,
@@ -213,16 +213,16 @@ export class FormRegisterComponent implements OnInit {
   }
 
   actionPutYES(){
-    console.log("ACTION PUT YES")
-    console.log(this.bsModalRefAdd.content.datos_salida);
+    // console.log("ACTION PUT YES")
+    // console.log(this.bsModalRefAdd.content.datos_salida);
     this.actionToAdd(this.bsModalRefAdd.content.datos_salida);
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////
 
   actionPutNO(){
-    console.log("ACTION NO PUT")
-    console.log(this.bsModalRefAdd.content.datos_salida);
+    // console.log("ACTION NO PUT")
+    // console.log(this.bsModalRefAdd.content.datos_salida);
   }
 
   actionToAdd(registro: RegisterResponse){
@@ -231,7 +231,7 @@ export class FormRegisterComponent implements OnInit {
 
   changeSelectedTipusProducte($event: InfoKey)
   {
-    console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte.subGrup);
+    // console.log("EMITIMOS EVENTO Cambio de tipusPro: " + $event + this.selectedTipusProducte.subGrup);
     this.evento_tProduct.emit(this.selectedTipusProducte);
     
     this.selectedColorCarn="";
@@ -250,7 +250,7 @@ export class FormRegisterComponent implements OnInit {
   }
 
   getCombos(tipusProducte: string){
-    console.log("getcombos al obrir modal del prod: " + tipusProducte);
+    // console.log("getcombos al obrir modal del prod: " + tipusProducte);
 
     this.evento_getCombos.emit(tipusProducte);
   }
@@ -287,7 +287,7 @@ export class FormRegisterComponent implements OnInit {
   }
 
   actionPutYESNoCom(){
-    console.log(this.bsModalRefAdd.content.registreNoCom);
+    // console.log(this.bsModalRefAdd.content.registreNoCom);
     this.evento_postNoComPer.emit(this.bsModalRefAdd.content.registreNoCom);
     // this.evento_postNoComPer.emit(this.bsModalRefAdd.content.params);
   }
@@ -302,10 +302,10 @@ export class FormRegisterComponent implements OnInit {
       this.EmpressaService.getEmpressa()
       .subscribe ( respuesta => { this.empresses = respuesta;
                                   // console.log("prrrrrrrrrrrrrrrrrrra");
-                                  console.log(this.empresses);
-                                   this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);
+                                  // console.log(this.empresses);
+                                  /* this.TrazaService.dato("Productes CLAU + NOM", "API GET Registres OK", this.productes);*/
                                 },
-                  error =>      { this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error); } 
+                              error =>      { /*this.TrazaService.error("EMPRESSES NOM", "API GET EMPRESSES KO", error);*/ } 
       );
     }
   }
@@ -327,9 +327,6 @@ export class FormRegisterComponent implements OnInit {
     this.bsModalRefAdd.content.isUser = this.isUser;
 
     // Get out
-    
-
-    
     this.bsModalRefAdd.content.onClose
       .subscribe( result => { if (result == true)
                                 this.actionPutYESMas();                                
@@ -339,7 +336,7 @@ export class FormRegisterComponent implements OnInit {
   }
 
   actionPutYESMas(){
-    console.log(this.bsModalRefAdd.content.registres);
+    // console.log(this.bsModalRefAdd.content.registres);
     let registres: any = this.bsModalRefAdd.content.registres;
     let familia: any = this.bsModalRefAdd.content.familia;
     this.evento_AfegirXLS.emit({registres, familia});

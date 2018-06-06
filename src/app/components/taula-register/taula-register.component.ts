@@ -10,6 +10,9 @@ import { LiteralsRegistre } from './../../literals-registre.enum';
 import { ModalNoteComponent } from '../modal-note/modal-note.component';
 import { BsModalService, BsModalRef }                     from 'ngx-bootstrap';
 import { Periode } from '../../model/periode';
+import { MyUser } from '../../interfaces/my-user';
+import { AuthorizationService } from '../../services/authorization.service';
+import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'app-taula-register',
@@ -41,7 +44,7 @@ export class TaulaRegisterComponent implements OnInit {
 
   // @Output() updatePeriodeModal: EventEmitter<any> = new EventEmitter();
   // productEdit:  RegisterResponse;
-
+  miusuario:  MyUser;
   bsModalRef: BsModalRef;
   registreToEdit: RegisterResponse;
   // productEdit: RegisterResponse;
@@ -50,13 +53,15 @@ export class TaulaRegisterComponent implements OnInit {
 
   constructor(private translate            : TranslateService,
               private modalService : BsModalService,
-              private HomeComponent : HomeComponent) {
+              private HomeComponent : HomeComponent,
+              private AuthorizationService: AuthorizationService,
+              private RegisterService:      RegisterService) {
 
     translate.setDefaultLang('cat');
    }
 
   ngOnInit() {
-    
+    this.miusuario            = JSON.parse(sessionStorage.getItem("USER"));
   }
 
   openModalToEdit(item: RegisterResponse) {
@@ -68,11 +73,10 @@ export class TaulaRegisterComponent implements OnInit {
       botonCerrar: "Tancar"  
     };
 
-
     this.bsModalRef = this.modalService.show(ModalNoteComponent, {initialState});
     
     // Pass in data directly content atribute after show
-    // console.log(JSON.stringify(item));
+    console.log(JSON.stringify(item));
     this.bsModalRef.content.datos_entrada = item;
     this.bsModalRef.content.datos_salida = item;
     this.bsModalRef.content.producteSelected = this.bsModalRef.content.datos_entrada.tipusProducte;
@@ -85,7 +89,10 @@ export class TaulaRegisterComponent implements OnInit {
     
     this.bsModalRef.content.comboInfoModal = this.comboGeneralNoms[this.bsModalRef.content.producteSelected.nom];
     this.bsModalRef.content.nouPeriode      = this.bsModalRef.content.datos_entrada.periode
-    this.bsModalRef.content.productesModal = this.productesModal;
+    this.getProductesModal(this.bsModalRef.content.datos_salida.usuName); 
+    
+    console.log(this.bsModalRef.content.productesModal);
+    // this.bsModalRef.content.productesModal = this.productesModal;
     this.bsModalRef.content.periodesModal   = this.periodesModal;
 
     // comprovem les periodes a escollir, si esta el nostre, el sustituïm per que aparegui al desplegable, si no el tenim, l'afegim.
@@ -119,7 +126,7 @@ export class TaulaRegisterComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////////////
 
   actionPutNO(){
-    console.log("ACTION NO PUT")
+    // console.log("ACTION NO PUT")
     // console.log(this.bsModalRef.content.datos_salida);
   }
 
@@ -128,23 +135,37 @@ export class TaulaRegisterComponent implements OnInit {
   }
 
   actionPrintItems(items: RegisterResponse[]){
-    console.log("Sortim de Taula");
-    console.log(items);
+    // console.log("Sortim de Taula");
+    // console.log(items);
     this.evento_printItems.emit(items);
   }
 
   actionDelete(item)
   {
-    console.log("///////////////////////////////////////");
-    console.log(item);
+    // console.log("///////////////////////////////////////");
+    // console.log(item);
     
     this.evento_list_delete.emit(item);
   }
 
   getCombos(tipusProducte: string){
-    console.log("getcombos al obrir modal del prod: " + tipusProducte);
+    // console.log("getcombos al obrir modal del prod: " + tipusProducte);
 
     this.evento_getCombos.emit(tipusProducte);
   }
 
+
+///PASAR A REGISTER
+  getProductesModal(userName:  string)
+  {
+    if (this.AuthorizationService.is_logged()){
+      this.RegisterService.getProductesModalByUserName(userName)
+      .subscribe ( respuesta => { this.productesModal = respuesta;
+                                  this.bsModalRef.content.productesModal = this.productesModal;
+                                  // this.TrazaService.dato("Productes MODAL", "API GET Registres OK", this.productes);
+                                },
+                  error =>      { /*this.TrazaService.error("Productes MODAL", "API GET Registres KO", error); */} 
+      );
+    }
+  }
 }
